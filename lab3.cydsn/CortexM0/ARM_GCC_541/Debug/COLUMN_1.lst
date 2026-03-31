@@ -1,0 +1,1176 @@
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cctzsnxq.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"COLUMN_1.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.COLUMN_1_SetDriveMode,"ax",%progbits
+  20              		.align	2
+  21              		.global	COLUMN_1_SetDriveMode
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	COLUMN_1_SetDriveMode, %function
+  25              	COLUMN_1_SetDriveMode:
+  26              	.LFB0:
+  27              		.file 1 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\LWO3.cydsn\\Generat
+   1:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** /*******************************************************************************
+   2:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * File Name: COLUMN_1.c  
+   3:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * Version 2.20
+   4:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+   5:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * Description:
+   6:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  This file contains API to enable firmware control of a Pins component.
+   7:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+   8:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** ********************************************************************************
+   9:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  10:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  11:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  12:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * the software package with which this file was provided.
+  13:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *******************************************************************************/
+  14:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** 
+  15:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** #include "cytypes.h"
+  16:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** #include "COLUMN_1.h"
+  17:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** 
+  18:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** 
+  19:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** #if defined(COLUMN_1__PC)
+  20:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     #define COLUMN_1_SetP4PinDriveMode(shift, mode)  \
+  21:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     do { \
+  22:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****         COLUMN_1_PC =   (COLUMN_1_PC & \
+  23:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****                                 (uint32)(~(uint32)(COLUMN_1_DRIVE_MODE_IND_MASK << \
+  24:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****                                 (COLUMN_1_DRIVE_MODE_BITS * (shift))))) | \
+  25:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****                                 (uint32)((uint32)(mode) << \
+  26:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****                                 (COLUMN_1_DRIVE_MODE_BITS * (shift))); \
+  27:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     } while (0)
+  28:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** #else
+  29:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     #if (CY_PSOC4_4200L)
+  30:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****         #define COLUMN_1_SetP4PinDriveMode(shift, mode)  \
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cctzsnxq.s 			page 2
+
+
+  31:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****         do { \
+  32:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****             COLUMN_1_USBIO_CTRL_REG = (COLUMN_1_USBIO_CTRL_REG & \
+  33:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****                                     (uint32)(~(uint32)(COLUMN_1_DRIVE_MODE_IND_MASK << \
+  34:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****                                     (COLUMN_1_DRIVE_MODE_BITS * (shift))))) | \
+  35:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****                                     (uint32)((uint32)(mode) << \
+  36:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****                                     (COLUMN_1_DRIVE_MODE_BITS * (shift))); \
+  37:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****         } while (0)
+  38:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     #endif
+  39:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** #endif
+  40:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****   
+  41:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** 
+  42:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** #if defined(COLUMN_1__PC) || (CY_PSOC4_4200L) 
+  43:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     /*******************************************************************************
+  44:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     * Function Name: COLUMN_1_SetDriveMode
+  45:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     ****************************************************************************//**
+  46:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     *
+  47:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     * \brief Sets the drive mode for each of the Pins component's pins.
+  48:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     * 
+  49:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     * <b>Note</b> This affects all pins in the Pins component instance. Use the
+  50:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     * Per-Pin APIs if you wish to control individual pin's drive modes.
+  51:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     *
+  52:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     * <b>Note</b> USBIOs have limited drive functionality. Refer to the Drive Mode
+  53:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     * parameter for more information.
+  54:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     *
+  55:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     * \param mode
+  56:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     *  Mode for the selected signals. Valid options are documented in 
+  57:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     *  \ref driveMode.
+  58:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     *
+  59:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     * \return
+  60:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     *  None
+  61:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     *
+  62:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     * \sideeffect
+  63:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     *  If you use read-modify-write operations that are not atomic, the ISR can
+  64:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     *  cause corruption of this function. An ISR that interrupts this function 
+  65:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     *  and performs writes to the Pins component Drive Mode registers can cause 
+  66:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     *  corrupted port data. To avoid this issue, you should either use the Per-Pin
+  67:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     *  APIs (primary method) or disable interrupts around this function.
+  68:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     *
+  69:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     * \funcusage
+  70:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     *  \snippet COLUMN_1_SUT.c usage_COLUMN_1_SetDriveMode
+  71:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     *******************************************************************************/
+  72:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     void COLUMN_1_SetDriveMode(uint8 mode)
+  73:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     {
+  28              		.loc 1 73 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  74:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** 		COLUMN_1_SetP4PinDriveMode(COLUMN_1__0__SHIFT, mode);
+  34              		.loc 1 74 0
+  35 0000 034A     		ldr	r2, .L2
+  36 0002 1368     		ldr	r3, [r2]
+  37 0004 3821     		movs	r1, #56
+  38 0006 8B43     		bics	r3, r1
+  39 0008 C000     		lsls	r0, r0, #3
+  40              	.LVL1:
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cctzsnxq.s 			page 3
+
+
+  41 000a 1843     		orrs	r0, r3
+  42 000c 1060     		str	r0, [r2]
+  75:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     }
+  43              		.loc 1 75 0
+  44              		@ sp needed
+  45 000e 7047     		bx	lr
+  46              	.L3:
+  47              		.align	2
+  48              	.L2:
+  49 0010 08000440 		.word	1074003976
+  50              		.cfi_endproc
+  51              	.LFE0:
+  52              		.size	COLUMN_1_SetDriveMode, .-COLUMN_1_SetDriveMode
+  53              		.section	.text.COLUMN_1_Write,"ax",%progbits
+  54              		.align	2
+  55              		.global	COLUMN_1_Write
+  56              		.code	16
+  57              		.thumb_func
+  58              		.type	COLUMN_1_Write, %function
+  59              	COLUMN_1_Write:
+  60              	.LFB1:
+  76:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** #endif
+  77:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** 
+  78:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** 
+  79:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** /*******************************************************************************
+  80:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * Function Name: COLUMN_1_Write
+  81:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** ****************************************************************************//**
+  82:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+  83:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \brief Writes the value to the physical port (data output register), masking
+  84:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  and shifting the bits appropriately. 
+  85:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+  86:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * The data output register controls the signal applied to the physical pin in 
+  87:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * conjunction with the drive mode parameter. This function avoids changing 
+  88:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * other bits in the port by using the appropriate method (read-modify-write or
+  89:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * bit banding).
+  90:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+  91:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * <b>Note</b> This function should not be used on a hardware digital output pin 
+  92:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * as it is driven by the hardware signal attached to it.
+  93:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+  94:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \param value
+  95:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  Value to write to the component instance.
+  96:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+  97:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \return 
+  98:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  None 
+  99:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+ 100:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \sideeffect
+ 101:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  If you use read-modify-write operations that are not atomic; the Interrupt 
+ 102:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  Service Routines (ISR) can cause corruption of this function. An ISR that 
+ 103:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  interrupts this function and performs writes to the Pins component data 
+ 104:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  register can cause corrupted port data. To avoid this issue, you should 
+ 105:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  either use the Per-Pin APIs (primary method) or disable interrupts around 
+ 106:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  this function.
+ 107:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+ 108:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \funcusage
+ 109:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  \snippet COLUMN_1_SUT.c usage_COLUMN_1_Write
+ 110:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *******************************************************************************/
+ 111:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** void COLUMN_1_Write(uint8 value)
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cctzsnxq.s 			page 4
+
+
+ 112:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** {
+  61              		.loc 1 112 0
+  62              		.cfi_startproc
+  63              		@ args = 0, pretend = 0, frame = 0
+  64              		@ frame_needed = 0, uses_anonymous_args = 0
+  65              		@ link register save eliminated.
+  66              	.LVL2:
+ 113:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     uint8 drVal = (uint8)(COLUMN_1_DR & (uint8)(~COLUMN_1_MASK));
+  67              		.loc 1 113 0
+  68 0000 0449     		ldr	r1, .L5
+  69 0002 0A68     		ldr	r2, [r1]
+  70 0004 D2B2     		uxtb	r2, r2
+  71 0006 0223     		movs	r3, #2
+  72 0008 9A43     		bics	r2, r3
+  73              	.LVL3:
+ 114:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     drVal = (drVal | ((uint8)(value << COLUMN_1_SHIFT) & COLUMN_1_MASK));
+  74              		.loc 1 114 0
+  75 000a 4000     		lsls	r0, r0, #1
+  76              	.LVL4:
+  77 000c 1840     		ands	r0, r3
+  78 000e 1043     		orrs	r0, r2
+  79              	.LVL5:
+ 115:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     COLUMN_1_DR = (uint32)drVal;
+  80              		.loc 1 115 0
+  81 0010 0860     		str	r0, [r1]
+ 116:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** }
+  82              		.loc 1 116 0
+  83              		@ sp needed
+  84 0012 7047     		bx	lr
+  85              	.L6:
+  86              		.align	2
+  87              	.L5:
+  88 0014 00000440 		.word	1074003968
+  89              		.cfi_endproc
+  90              	.LFE1:
+  91              		.size	COLUMN_1_Write, .-COLUMN_1_Write
+  92              		.section	.text.COLUMN_1_Read,"ax",%progbits
+  93              		.align	2
+  94              		.global	COLUMN_1_Read
+  95              		.code	16
+  96              		.thumb_func
+  97              		.type	COLUMN_1_Read, %function
+  98              	COLUMN_1_Read:
+  99              	.LFB2:
+ 117:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** 
+ 118:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** 
+ 119:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** /*******************************************************************************
+ 120:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * Function Name: COLUMN_1_Read
+ 121:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** ****************************************************************************//**
+ 122:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+ 123:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \brief Reads the associated physical port (pin status register) and masks 
+ 124:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  the required bits according to the width and bit position of the component
+ 125:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  instance. 
+ 126:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+ 127:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * The pin's status register returns the current logic level present on the 
+ 128:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * physical pin.
+ 129:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cctzsnxq.s 			page 5
+
+
+ 130:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \return 
+ 131:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  The current value for the pins in the component as a right justified number.
+ 132:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+ 133:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \funcusage
+ 134:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  \snippet COLUMN_1_SUT.c usage_COLUMN_1_Read  
+ 135:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *******************************************************************************/
+ 136:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** uint8 COLUMN_1_Read(void)
+ 137:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** {
+ 100              		.loc 1 137 0
+ 101              		.cfi_startproc
+ 102              		@ args = 0, pretend = 0, frame = 0
+ 103              		@ frame_needed = 0, uses_anonymous_args = 0
+ 104              		@ link register save eliminated.
+ 138:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     return (uint8)((COLUMN_1_PS & COLUMN_1_MASK) >> COLUMN_1_SHIFT);
+ 105              		.loc 1 138 0
+ 106 0000 024B     		ldr	r3, .L8
+ 107 0002 1868     		ldr	r0, [r3]
+ 108 0004 4008     		lsrs	r0, r0, #1
+ 109 0006 0123     		movs	r3, #1
+ 110 0008 1840     		ands	r0, r3
+ 139:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** }
+ 111              		.loc 1 139 0
+ 112              		@ sp needed
+ 113 000a 7047     		bx	lr
+ 114              	.L9:
+ 115              		.align	2
+ 116              	.L8:
+ 117 000c 04000440 		.word	1074003972
+ 118              		.cfi_endproc
+ 119              	.LFE2:
+ 120              		.size	COLUMN_1_Read, .-COLUMN_1_Read
+ 121              		.section	.text.COLUMN_1_ReadDataReg,"ax",%progbits
+ 122              		.align	2
+ 123              		.global	COLUMN_1_ReadDataReg
+ 124              		.code	16
+ 125              		.thumb_func
+ 126              		.type	COLUMN_1_ReadDataReg, %function
+ 127              	COLUMN_1_ReadDataReg:
+ 128              	.LFB3:
+ 140:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** 
+ 141:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** 
+ 142:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** /*******************************************************************************
+ 143:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * Function Name: COLUMN_1_ReadDataReg
+ 144:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** ****************************************************************************//**
+ 145:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+ 146:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \brief Reads the associated physical port's data output register and masks 
+ 147:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  the correct bits according to the width and bit position of the component 
+ 148:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  instance. 
+ 149:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+ 150:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * The data output register controls the signal applied to the physical pin in 
+ 151:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * conjunction with the drive mode parameter. This is not the same as the 
+ 152:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * preferred COLUMN_1_Read() API because the 
+ 153:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * COLUMN_1_ReadDataReg() reads the data register instead of the status 
+ 154:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * register. For output pins this is a useful function to determine the value 
+ 155:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * just written to the pin.
+ 156:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+ 157:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \return 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cctzsnxq.s 			page 6
+
+
+ 158:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  The current value of the data register masked and shifted into a right 
+ 159:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  justified number for the component instance.
+ 160:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+ 161:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \funcusage
+ 162:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  \snippet COLUMN_1_SUT.c usage_COLUMN_1_ReadDataReg 
+ 163:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *******************************************************************************/
+ 164:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** uint8 COLUMN_1_ReadDataReg(void)
+ 165:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** {
+ 129              		.loc 1 165 0
+ 130              		.cfi_startproc
+ 131              		@ args = 0, pretend = 0, frame = 0
+ 132              		@ frame_needed = 0, uses_anonymous_args = 0
+ 133              		@ link register save eliminated.
+ 166:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     return (uint8)((COLUMN_1_DR & COLUMN_1_MASK) >> COLUMN_1_SHIFT);
+ 134              		.loc 1 166 0
+ 135 0000 024B     		ldr	r3, .L11
+ 136 0002 1868     		ldr	r0, [r3]
+ 137 0004 4008     		lsrs	r0, r0, #1
+ 138 0006 0123     		movs	r3, #1
+ 139 0008 1840     		ands	r0, r3
+ 167:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** }
+ 140              		.loc 1 167 0
+ 141              		@ sp needed
+ 142 000a 7047     		bx	lr
+ 143              	.L12:
+ 144              		.align	2
+ 145              	.L11:
+ 146 000c 00000440 		.word	1074003968
+ 147              		.cfi_endproc
+ 148              	.LFE3:
+ 149              		.size	COLUMN_1_ReadDataReg, .-COLUMN_1_ReadDataReg
+ 150              		.section	.text.COLUMN_1_SetInterruptMode,"ax",%progbits
+ 151              		.align	2
+ 152              		.global	COLUMN_1_SetInterruptMode
+ 153              		.code	16
+ 154              		.thumb_func
+ 155              		.type	COLUMN_1_SetInterruptMode, %function
+ 156              	COLUMN_1_SetInterruptMode:
+ 157              	.LFB4:
+ 168:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** 
+ 169:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** 
+ 170:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** /*******************************************************************************
+ 171:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * Function Name: COLUMN_1_SetInterruptMode
+ 172:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** ****************************************************************************//**
+ 173:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+ 174:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \brief Configures the interrupt mode for each of the Pins component's
+ 175:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  pins. Alternatively you may set the interrupt mode for all the pins
+ 176:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  specified in the Pins component.
+ 177:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+ 178:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  <b>Note</b> The interrupt is port-wide and therefore any enabled pin
+ 179:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  interrupt may trigger it.
+ 180:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+ 181:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \param position
+ 182:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  The pin position as listed in the Pins component. You may OR these to be 
+ 183:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  able to configure the interrupt mode of multiple pins within a Pins 
+ 184:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  component. Or you may use COLUMN_1_INTR_ALL to configure the
+ 185:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  interrupt mode of all the pins in the Pins component.       
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cctzsnxq.s 			page 7
+
+
+ 186:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  - COLUMN_1_0_INTR       (First pin in the list)
+ 187:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  - COLUMN_1_1_INTR       (Second pin in the list)
+ 188:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  - ...
+ 189:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  - COLUMN_1_INTR_ALL     (All pins in Pins component)
+ 190:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+ 191:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \param mode
+ 192:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  Interrupt mode for the selected pins. Valid options are documented in
+ 193:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  \ref intrMode.
+ 194:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+ 195:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \return 
+ 196:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  None
+ 197:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  
+ 198:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \sideeffect
+ 199:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  It is recommended that the interrupt be disabled before calling this 
+ 200:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  function to avoid unintended interrupt requests. Note that the interrupt
+ 201:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  type is port wide, and therefore will trigger for any enabled pin on the 
+ 202:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  port.
+ 203:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+ 204:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \funcusage
+ 205:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  \snippet COLUMN_1_SUT.c usage_COLUMN_1_SetInterruptMode
+ 206:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *******************************************************************************/
+ 207:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** void COLUMN_1_SetInterruptMode(uint16 position, uint16 mode)
+ 208:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** {
+ 158              		.loc 1 208 0
+ 159              		.cfi_startproc
+ 160              		@ args = 0, pretend = 0, frame = 0
+ 161              		@ frame_needed = 0, uses_anonymous_args = 0
+ 162              		@ link register save eliminated.
+ 163              	.LVL6:
+ 209:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     uint32 intrCfg;
+ 210:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     
+ 211:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     intrCfg =  COLUMN_1_INTCFG & (uint32)(~(uint32)position);
+ 164              		.loc 1 211 0
+ 165 0000 034A     		ldr	r2, .L14
+ 166 0002 1368     		ldr	r3, [r2]
+ 167 0004 8343     		bics	r3, r0
+ 168              	.LVL7:
+ 212:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     COLUMN_1_INTCFG = intrCfg | ((uint32)position & (uint32)mode);
+ 169              		.loc 1 212 0
+ 170 0006 0840     		ands	r0, r1
+ 171              	.LVL8:
+ 172 0008 1843     		orrs	r0, r3
+ 173 000a 1060     		str	r0, [r2]
+ 213:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** }
+ 174              		.loc 1 213 0
+ 175              		@ sp needed
+ 176 000c 7047     		bx	lr
+ 177              	.L15:
+ 178 000e C046     		.align	2
+ 179              	.L14:
+ 180 0010 0C000440 		.word	1074003980
+ 181              		.cfi_endproc
+ 182              	.LFE4:
+ 183              		.size	COLUMN_1_SetInterruptMode, .-COLUMN_1_SetInterruptMode
+ 184              		.section	.text.COLUMN_1_ClearInterrupt,"ax",%progbits
+ 185              		.align	2
+ 186              		.global	COLUMN_1_ClearInterrupt
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cctzsnxq.s 			page 8
+
+
+ 187              		.code	16
+ 188              		.thumb_func
+ 189              		.type	COLUMN_1_ClearInterrupt, %function
+ 190              	COLUMN_1_ClearInterrupt:
+ 191              	.LFB5:
+ 214:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** 
+ 215:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** 
+ 216:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** /*******************************************************************************
+ 217:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * Function Name: COLUMN_1_ClearInterrupt
+ 218:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** ****************************************************************************//**
+ 219:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+ 220:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \brief Clears any active interrupts attached with the component and returns 
+ 221:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  the value of the interrupt status register allowing determination of which
+ 222:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  pins generated an interrupt event.
+ 223:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+ 224:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \return 
+ 225:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  The right-shifted current value of the interrupt status register. Each pin 
+ 226:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  has one bit set if it generated an interrupt event. For example, bit 0 is 
+ 227:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  for pin 0 and bit 1 is for pin 1 of the Pins component.
+ 228:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  
+ 229:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \sideeffect
+ 230:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  Clears all bits of the physical port's interrupt status register, not just
+ 231:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  those associated with the Pins component.
+ 232:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *
+ 233:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** * \funcusage
+ 234:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *  \snippet COLUMN_1_SUT.c usage_COLUMN_1_ClearInterrupt
+ 235:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** *******************************************************************************/
+ 236:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** uint8 COLUMN_1_ClearInterrupt(void)
+ 237:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** {
+ 192              		.loc 1 237 0
+ 193              		.cfi_startproc
+ 194              		@ args = 0, pretend = 0, frame = 0
+ 195              		@ frame_needed = 0, uses_anonymous_args = 0
+ 196              		@ link register save eliminated.
+ 238:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** 	uint8 maskedStatus = (uint8)(COLUMN_1_INTSTAT & COLUMN_1_MASK);
+ 197              		.loc 1 238 0
+ 198 0000 034A     		ldr	r2, .L17
+ 199 0002 1068     		ldr	r0, [r2]
+ 200 0004 0223     		movs	r3, #2
+ 201 0006 1840     		ands	r0, r3
+ 202              	.LVL9:
+ 239:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** 	COLUMN_1_INTSTAT = maskedStatus;
+ 203              		.loc 1 239 0
+ 204 0008 1060     		str	r0, [r2]
+ 240:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c ****     return maskedStatus >> COLUMN_1_SHIFT;
+ 205              		.loc 1 240 0
+ 206 000a 4008     		lsrs	r0, r0, #1
+ 207              	.LVL10:
+ 208 000c C0B2     		uxtb	r0, r0
+ 241:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\COLUMN_1.c **** }
+ 209              		.loc 1 241 0
+ 210              		@ sp needed
+ 211 000e 7047     		bx	lr
+ 212              	.L18:
+ 213              		.align	2
+ 214              	.L17:
+ 215 0010 10000440 		.word	1074003984
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cctzsnxq.s 			page 9
+
+
+ 216              		.cfi_endproc
+ 217              	.LFE5:
+ 218              		.size	COLUMN_1_ClearInterrupt, .-COLUMN_1_ClearInterrupt
+ 219              		.text
+ 220              	.Letext0:
+ 221              		.file 2 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\LWO3.cydsn\\Generat
+ 222              		.section	.debug_info,"",%progbits
+ 223              	.Ldebug_info0:
+ 224 0000 95010000 		.4byte	0x195
+ 225 0004 0400     		.2byte	0x4
+ 226 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 227 000a 04       		.byte	0x4
+ 228 000b 01       		.uleb128 0x1
+ 229 000c 44010000 		.4byte	.LASF28
+ 230 0010 0C       		.byte	0xc
+ 231 0011 90000000 		.4byte	.LASF29
+ 232 0015 00000000 		.4byte	.Ldebug_ranges0+0
+ 233 0019 00000000 		.4byte	0
+ 234 001d 00000000 		.4byte	.Ldebug_line0
+ 235 0021 02       		.uleb128 0x2
+ 236 0022 01       		.byte	0x1
+ 237 0023 06       		.byte	0x6
+ 238 0024 47020000 		.4byte	.LASF0
+ 239 0028 02       		.uleb128 0x2
+ 240 0029 01       		.byte	0x1
+ 241 002a 08       		.byte	0x8
+ 242 002b 50000000 		.4byte	.LASF1
+ 243 002f 02       		.uleb128 0x2
+ 244 0030 02       		.byte	0x2
+ 245 0031 05       		.byte	0x5
+ 246 0032 01020000 		.4byte	.LASF2
+ 247 0036 02       		.uleb128 0x2
+ 248 0037 02       		.byte	0x2
+ 249 0038 07       		.byte	0x7
+ 250 0039 76000000 		.4byte	.LASF3
+ 251 003d 02       		.uleb128 0x2
+ 252 003e 04       		.byte	0x4
+ 253 003f 05       		.byte	0x5
+ 254 0040 26020000 		.4byte	.LASF4
+ 255 0044 02       		.uleb128 0x2
+ 256 0045 04       		.byte	0x4
+ 257 0046 07       		.byte	0x7
+ 258 0047 64000000 		.4byte	.LASF5
+ 259 004b 02       		.uleb128 0x2
+ 260 004c 08       		.byte	0x8
+ 261 004d 05       		.byte	0x5
+ 262 004e E1010000 		.4byte	.LASF6
+ 263 0052 02       		.uleb128 0x2
+ 264 0053 08       		.byte	0x8
+ 265 0054 07       		.byte	0x7
+ 266 0055 28010000 		.4byte	.LASF7
+ 267 0059 03       		.uleb128 0x3
+ 268 005a 04       		.byte	0x4
+ 269 005b 05       		.byte	0x5
+ 270 005c 696E7400 		.ascii	"int\000"
+ 271 0060 02       		.uleb128 0x2
+ 272 0061 04       		.byte	0x4
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cctzsnxq.s 			page 10
+
+
+ 273 0062 07       		.byte	0x7
+ 274 0063 1B010000 		.4byte	.LASF8
+ 275 0067 04       		.uleb128 0x4
+ 276 0068 0B020000 		.4byte	.LASF9
+ 277 006c 02       		.byte	0x2
+ 278 006d FB01     		.2byte	0x1fb
+ 279 006f 28000000 		.4byte	0x28
+ 280 0073 04       		.uleb128 0x4
+ 281 0074 FC000000 		.4byte	.LASF10
+ 282 0078 02       		.byte	0x2
+ 283 0079 FC01     		.2byte	0x1fc
+ 284 007b 36000000 		.4byte	0x36
+ 285 007f 04       		.uleb128 0x4
+ 286 0080 0C010000 		.4byte	.LASF11
+ 287 0084 02       		.byte	0x2
+ 288 0085 FD01     		.2byte	0x1fd
+ 289 0087 44000000 		.4byte	0x44
+ 290 008b 02       		.uleb128 0x2
+ 291 008c 04       		.byte	0x4
+ 292 008d 04       		.byte	0x4
+ 293 008e 34000000 		.4byte	.LASF12
+ 294 0092 02       		.uleb128 0x2
+ 295 0093 08       		.byte	0x8
+ 296 0094 04       		.byte	0x4
+ 297 0095 89000000 		.4byte	.LASF13
+ 298 0099 02       		.uleb128 0x2
+ 299 009a 01       		.byte	0x1
+ 300 009b 08       		.byte	0x8
+ 301 009c FC010000 		.4byte	.LASF14
+ 302 00a0 04       		.uleb128 0x4
+ 303 00a1 00000000 		.4byte	.LASF15
+ 304 00a5 02       		.byte	0x2
+ 305 00a6 A702     		.2byte	0x2a7
+ 306 00a8 AC000000 		.4byte	0xac
+ 307 00ac 05       		.uleb128 0x5
+ 308 00ad 7F000000 		.4byte	0x7f
+ 309 00b1 06       		.uleb128 0x6
+ 310 00b2 3A000000 		.4byte	.LASF16
+ 311 00b6 01       		.byte	0x1
+ 312 00b7 48       		.byte	0x48
+ 313 00b8 00000000 		.4byte	.LFB0
+ 314 00bc 14000000 		.4byte	.LFE0-.LFB0
+ 315 00c0 01       		.uleb128 0x1
+ 316 00c1 9C       		.byte	0x9c
+ 317 00c2 D6000000 		.4byte	0xd6
+ 318 00c6 07       		.uleb128 0x7
+ 319 00c7 3F010000 		.4byte	.LASF18
+ 320 00cb 01       		.byte	0x1
+ 321 00cc 48       		.byte	0x48
+ 322 00cd 67000000 		.4byte	0x67
+ 323 00d1 00000000 		.4byte	.LLST0
+ 324 00d5 00       		.byte	0
+ 325 00d6 06       		.uleb128 0x6
+ 326 00d7 D2010000 		.4byte	.LASF17
+ 327 00db 01       		.byte	0x1
+ 328 00dc 6F       		.byte	0x6f
+ 329 00dd 00000000 		.4byte	.LFB1
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cctzsnxq.s 			page 11
+
+
+ 330 00e1 18000000 		.4byte	.LFE1-.LFB1
+ 331 00e5 01       		.uleb128 0x1
+ 332 00e6 9C       		.byte	0x9c
+ 333 00e7 0A010000 		.4byte	0x10a
+ 334 00eb 07       		.uleb128 0x7
+ 335 00ec 06000000 		.4byte	.LASF19
+ 336 00f0 01       		.byte	0x1
+ 337 00f1 6F       		.byte	0x6f
+ 338 00f2 67000000 		.4byte	0x67
+ 339 00f6 21000000 		.4byte	.LLST1
+ 340 00fa 08       		.uleb128 0x8
+ 341 00fb 5E000000 		.4byte	.LASF24
+ 342 00ff 01       		.byte	0x1
+ 343 0100 71       		.byte	0x71
+ 344 0101 67000000 		.4byte	0x67
+ 345 0105 42000000 		.4byte	.LLST2
+ 346 0109 00       		.byte	0
+ 347 010a 09       		.uleb128 0x9
+ 348 010b 26000000 		.4byte	.LASF20
+ 349 010f 01       		.byte	0x1
+ 350 0110 88       		.byte	0x88
+ 351 0111 67000000 		.4byte	0x67
+ 352 0115 00000000 		.4byte	.LFB2
+ 353 0119 10000000 		.4byte	.LFE2-.LFB2
+ 354 011d 01       		.uleb128 0x1
+ 355 011e 9C       		.byte	0x9c
+ 356 011f 09       		.uleb128 0x9
+ 357 0120 11020000 		.4byte	.LASF21
+ 358 0124 01       		.byte	0x1
+ 359 0125 A4       		.byte	0xa4
+ 360 0126 67000000 		.4byte	0x67
+ 361 012a 00000000 		.4byte	.LFB3
+ 362 012e 10000000 		.4byte	.LFE3-.LFB3
+ 363 0132 01       		.uleb128 0x1
+ 364 0133 9C       		.byte	0x9c
+ 365 0134 06       		.uleb128 0x6
+ 366 0135 0C000000 		.4byte	.LASF22
+ 367 0139 01       		.byte	0x1
+ 368 013a CF       		.byte	0xcf
+ 369 013b 00000000 		.4byte	.LFB4
+ 370 013f 14000000 		.4byte	.LFE4-.LFB4
+ 371 0143 01       		.uleb128 0x1
+ 372 0144 9C       		.byte	0x9c
+ 373 0145 73010000 		.4byte	0x173
+ 374 0149 07       		.uleb128 0x7
+ 375 014a 03010000 		.4byte	.LASF23
+ 376 014e 01       		.byte	0x1
+ 377 014f CF       		.byte	0xcf
+ 378 0150 73000000 		.4byte	0x73
+ 379 0154 60000000 		.4byte	.LLST3
+ 380 0158 0A       		.uleb128 0xa
+ 381 0159 3F010000 		.4byte	.LASF18
+ 382 015d 01       		.byte	0x1
+ 383 015e CF       		.byte	0xcf
+ 384 015f 73000000 		.4byte	0x73
+ 385 0163 01       		.uleb128 0x1
+ 386 0164 51       		.byte	0x51
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cctzsnxq.s 			page 12
+
+
+ 387 0165 0B       		.uleb128 0xb
+ 388 0166 13010000 		.4byte	.LASF25
+ 389 016a 01       		.byte	0x1
+ 390 016b D1       		.byte	0xd1
+ 391 016c 7F000000 		.4byte	0x7f
+ 392 0170 01       		.uleb128 0x1
+ 393 0171 53       		.byte	0x53
+ 394 0172 00       		.byte	0
+ 395 0173 0C       		.uleb128 0xc
+ 396 0174 2F020000 		.4byte	.LASF26
+ 397 0178 01       		.byte	0x1
+ 398 0179 EC       		.byte	0xec
+ 399 017a 67000000 		.4byte	0x67
+ 400 017e 00000000 		.4byte	.LFB5
+ 401 0182 14000000 		.4byte	.LFE5-.LFB5
+ 402 0186 01       		.uleb128 0x1
+ 403 0187 9C       		.byte	0x9c
+ 404 0188 08       		.uleb128 0x8
+ 405 0189 EF010000 		.4byte	.LASF27
+ 406 018d 01       		.byte	0x1
+ 407 018e EE       		.byte	0xee
+ 408 018f 67000000 		.4byte	0x67
+ 409 0193 81000000 		.4byte	.LLST4
+ 410 0197 00       		.byte	0
+ 411 0198 00       		.byte	0
+ 412              		.section	.debug_abbrev,"",%progbits
+ 413              	.Ldebug_abbrev0:
+ 414 0000 01       		.uleb128 0x1
+ 415 0001 11       		.uleb128 0x11
+ 416 0002 01       		.byte	0x1
+ 417 0003 25       		.uleb128 0x25
+ 418 0004 0E       		.uleb128 0xe
+ 419 0005 13       		.uleb128 0x13
+ 420 0006 0B       		.uleb128 0xb
+ 421 0007 03       		.uleb128 0x3
+ 422 0008 0E       		.uleb128 0xe
+ 423 0009 55       		.uleb128 0x55
+ 424 000a 17       		.uleb128 0x17
+ 425 000b 11       		.uleb128 0x11
+ 426 000c 01       		.uleb128 0x1
+ 427 000d 10       		.uleb128 0x10
+ 428 000e 17       		.uleb128 0x17
+ 429 000f 00       		.byte	0
+ 430 0010 00       		.byte	0
+ 431 0011 02       		.uleb128 0x2
+ 432 0012 24       		.uleb128 0x24
+ 433 0013 00       		.byte	0
+ 434 0014 0B       		.uleb128 0xb
+ 435 0015 0B       		.uleb128 0xb
+ 436 0016 3E       		.uleb128 0x3e
+ 437 0017 0B       		.uleb128 0xb
+ 438 0018 03       		.uleb128 0x3
+ 439 0019 0E       		.uleb128 0xe
+ 440 001a 00       		.byte	0
+ 441 001b 00       		.byte	0
+ 442 001c 03       		.uleb128 0x3
+ 443 001d 24       		.uleb128 0x24
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cctzsnxq.s 			page 13
+
+
+ 444 001e 00       		.byte	0
+ 445 001f 0B       		.uleb128 0xb
+ 446 0020 0B       		.uleb128 0xb
+ 447 0021 3E       		.uleb128 0x3e
+ 448 0022 0B       		.uleb128 0xb
+ 449 0023 03       		.uleb128 0x3
+ 450 0024 08       		.uleb128 0x8
+ 451 0025 00       		.byte	0
+ 452 0026 00       		.byte	0
+ 453 0027 04       		.uleb128 0x4
+ 454 0028 16       		.uleb128 0x16
+ 455 0029 00       		.byte	0
+ 456 002a 03       		.uleb128 0x3
+ 457 002b 0E       		.uleb128 0xe
+ 458 002c 3A       		.uleb128 0x3a
+ 459 002d 0B       		.uleb128 0xb
+ 460 002e 3B       		.uleb128 0x3b
+ 461 002f 05       		.uleb128 0x5
+ 462 0030 49       		.uleb128 0x49
+ 463 0031 13       		.uleb128 0x13
+ 464 0032 00       		.byte	0
+ 465 0033 00       		.byte	0
+ 466 0034 05       		.uleb128 0x5
+ 467 0035 35       		.uleb128 0x35
+ 468 0036 00       		.byte	0
+ 469 0037 49       		.uleb128 0x49
+ 470 0038 13       		.uleb128 0x13
+ 471 0039 00       		.byte	0
+ 472 003a 00       		.byte	0
+ 473 003b 06       		.uleb128 0x6
+ 474 003c 2E       		.uleb128 0x2e
+ 475 003d 01       		.byte	0x1
+ 476 003e 3F       		.uleb128 0x3f
+ 477 003f 19       		.uleb128 0x19
+ 478 0040 03       		.uleb128 0x3
+ 479 0041 0E       		.uleb128 0xe
+ 480 0042 3A       		.uleb128 0x3a
+ 481 0043 0B       		.uleb128 0xb
+ 482 0044 3B       		.uleb128 0x3b
+ 483 0045 0B       		.uleb128 0xb
+ 484 0046 27       		.uleb128 0x27
+ 485 0047 19       		.uleb128 0x19
+ 486 0048 11       		.uleb128 0x11
+ 487 0049 01       		.uleb128 0x1
+ 488 004a 12       		.uleb128 0x12
+ 489 004b 06       		.uleb128 0x6
+ 490 004c 40       		.uleb128 0x40
+ 491 004d 18       		.uleb128 0x18
+ 492 004e 9742     		.uleb128 0x2117
+ 493 0050 19       		.uleb128 0x19
+ 494 0051 01       		.uleb128 0x1
+ 495 0052 13       		.uleb128 0x13
+ 496 0053 00       		.byte	0
+ 497 0054 00       		.byte	0
+ 498 0055 07       		.uleb128 0x7
+ 499 0056 05       		.uleb128 0x5
+ 500 0057 00       		.byte	0
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cctzsnxq.s 			page 14
+
+
+ 501 0058 03       		.uleb128 0x3
+ 502 0059 0E       		.uleb128 0xe
+ 503 005a 3A       		.uleb128 0x3a
+ 504 005b 0B       		.uleb128 0xb
+ 505 005c 3B       		.uleb128 0x3b
+ 506 005d 0B       		.uleb128 0xb
+ 507 005e 49       		.uleb128 0x49
+ 508 005f 13       		.uleb128 0x13
+ 509 0060 02       		.uleb128 0x2
+ 510 0061 17       		.uleb128 0x17
+ 511 0062 00       		.byte	0
+ 512 0063 00       		.byte	0
+ 513 0064 08       		.uleb128 0x8
+ 514 0065 34       		.uleb128 0x34
+ 515 0066 00       		.byte	0
+ 516 0067 03       		.uleb128 0x3
+ 517 0068 0E       		.uleb128 0xe
+ 518 0069 3A       		.uleb128 0x3a
+ 519 006a 0B       		.uleb128 0xb
+ 520 006b 3B       		.uleb128 0x3b
+ 521 006c 0B       		.uleb128 0xb
+ 522 006d 49       		.uleb128 0x49
+ 523 006e 13       		.uleb128 0x13
+ 524 006f 02       		.uleb128 0x2
+ 525 0070 17       		.uleb128 0x17
+ 526 0071 00       		.byte	0
+ 527 0072 00       		.byte	0
+ 528 0073 09       		.uleb128 0x9
+ 529 0074 2E       		.uleb128 0x2e
+ 530 0075 00       		.byte	0
+ 531 0076 3F       		.uleb128 0x3f
+ 532 0077 19       		.uleb128 0x19
+ 533 0078 03       		.uleb128 0x3
+ 534 0079 0E       		.uleb128 0xe
+ 535 007a 3A       		.uleb128 0x3a
+ 536 007b 0B       		.uleb128 0xb
+ 537 007c 3B       		.uleb128 0x3b
+ 538 007d 0B       		.uleb128 0xb
+ 539 007e 27       		.uleb128 0x27
+ 540 007f 19       		.uleb128 0x19
+ 541 0080 49       		.uleb128 0x49
+ 542 0081 13       		.uleb128 0x13
+ 543 0082 11       		.uleb128 0x11
+ 544 0083 01       		.uleb128 0x1
+ 545 0084 12       		.uleb128 0x12
+ 546 0085 06       		.uleb128 0x6
+ 547 0086 40       		.uleb128 0x40
+ 548 0087 18       		.uleb128 0x18
+ 549 0088 9742     		.uleb128 0x2117
+ 550 008a 19       		.uleb128 0x19
+ 551 008b 00       		.byte	0
+ 552 008c 00       		.byte	0
+ 553 008d 0A       		.uleb128 0xa
+ 554 008e 05       		.uleb128 0x5
+ 555 008f 00       		.byte	0
+ 556 0090 03       		.uleb128 0x3
+ 557 0091 0E       		.uleb128 0xe
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cctzsnxq.s 			page 15
+
+
+ 558 0092 3A       		.uleb128 0x3a
+ 559 0093 0B       		.uleb128 0xb
+ 560 0094 3B       		.uleb128 0x3b
+ 561 0095 0B       		.uleb128 0xb
+ 562 0096 49       		.uleb128 0x49
+ 563 0097 13       		.uleb128 0x13
+ 564 0098 02       		.uleb128 0x2
+ 565 0099 18       		.uleb128 0x18
+ 566 009a 00       		.byte	0
+ 567 009b 00       		.byte	0
+ 568 009c 0B       		.uleb128 0xb
+ 569 009d 34       		.uleb128 0x34
+ 570 009e 00       		.byte	0
+ 571 009f 03       		.uleb128 0x3
+ 572 00a0 0E       		.uleb128 0xe
+ 573 00a1 3A       		.uleb128 0x3a
+ 574 00a2 0B       		.uleb128 0xb
+ 575 00a3 3B       		.uleb128 0x3b
+ 576 00a4 0B       		.uleb128 0xb
+ 577 00a5 49       		.uleb128 0x49
+ 578 00a6 13       		.uleb128 0x13
+ 579 00a7 02       		.uleb128 0x2
+ 580 00a8 18       		.uleb128 0x18
+ 581 00a9 00       		.byte	0
+ 582 00aa 00       		.byte	0
+ 583 00ab 0C       		.uleb128 0xc
+ 584 00ac 2E       		.uleb128 0x2e
+ 585 00ad 01       		.byte	0x1
+ 586 00ae 3F       		.uleb128 0x3f
+ 587 00af 19       		.uleb128 0x19
+ 588 00b0 03       		.uleb128 0x3
+ 589 00b1 0E       		.uleb128 0xe
+ 590 00b2 3A       		.uleb128 0x3a
+ 591 00b3 0B       		.uleb128 0xb
+ 592 00b4 3B       		.uleb128 0x3b
+ 593 00b5 0B       		.uleb128 0xb
+ 594 00b6 27       		.uleb128 0x27
+ 595 00b7 19       		.uleb128 0x19
+ 596 00b8 49       		.uleb128 0x49
+ 597 00b9 13       		.uleb128 0x13
+ 598 00ba 11       		.uleb128 0x11
+ 599 00bb 01       		.uleb128 0x1
+ 600 00bc 12       		.uleb128 0x12
+ 601 00bd 06       		.uleb128 0x6
+ 602 00be 40       		.uleb128 0x40
+ 603 00bf 18       		.uleb128 0x18
+ 604 00c0 9742     		.uleb128 0x2117
+ 605 00c2 19       		.uleb128 0x19
+ 606 00c3 00       		.byte	0
+ 607 00c4 00       		.byte	0
+ 608 00c5 00       		.byte	0
+ 609              		.section	.debug_loc,"",%progbits
+ 610              	.Ldebug_loc0:
+ 611              	.LLST0:
+ 612 0000 00000000 		.4byte	.LVL0
+ 613 0004 0A000000 		.4byte	.LVL1
+ 614 0008 0100     		.2byte	0x1
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cctzsnxq.s 			page 16
+
+
+ 615 000a 50       		.byte	0x50
+ 616 000b 0A000000 		.4byte	.LVL1
+ 617 000f 14000000 		.4byte	.LFE0
+ 618 0013 0400     		.2byte	0x4
+ 619 0015 F3       		.byte	0xf3
+ 620 0016 01       		.uleb128 0x1
+ 621 0017 50       		.byte	0x50
+ 622 0018 9F       		.byte	0x9f
+ 623 0019 00000000 		.4byte	0
+ 624 001d 00000000 		.4byte	0
+ 625              	.LLST1:
+ 626 0021 00000000 		.4byte	.LVL2
+ 627 0025 0C000000 		.4byte	.LVL4
+ 628 0029 0100     		.2byte	0x1
+ 629 002b 50       		.byte	0x50
+ 630 002c 0C000000 		.4byte	.LVL4
+ 631 0030 18000000 		.4byte	.LFE1
+ 632 0034 0400     		.2byte	0x4
+ 633 0036 F3       		.byte	0xf3
+ 634 0037 01       		.uleb128 0x1
+ 635 0038 50       		.byte	0x50
+ 636 0039 9F       		.byte	0x9f
+ 637 003a 00000000 		.4byte	0
+ 638 003e 00000000 		.4byte	0
+ 639              	.LLST2:
+ 640 0042 0A000000 		.4byte	.LVL3
+ 641 0046 10000000 		.4byte	.LVL5
+ 642 004a 0100     		.2byte	0x1
+ 643 004c 52       		.byte	0x52
+ 644 004d 10000000 		.4byte	.LVL5
+ 645 0051 18000000 		.4byte	.LFE1
+ 646 0055 0100     		.2byte	0x1
+ 647 0057 50       		.byte	0x50
+ 648 0058 00000000 		.4byte	0
+ 649 005c 00000000 		.4byte	0
+ 650              	.LLST3:
+ 651 0060 00000000 		.4byte	.LVL6
+ 652 0064 08000000 		.4byte	.LVL8
+ 653 0068 0100     		.2byte	0x1
+ 654 006a 50       		.byte	0x50
+ 655 006b 08000000 		.4byte	.LVL8
+ 656 006f 14000000 		.4byte	.LFE4
+ 657 0073 0400     		.2byte	0x4
+ 658 0075 F3       		.byte	0xf3
+ 659 0076 01       		.uleb128 0x1
+ 660 0077 50       		.byte	0x50
+ 661 0078 9F       		.byte	0x9f
+ 662 0079 00000000 		.4byte	0
+ 663 007d 00000000 		.4byte	0
+ 664              	.LLST4:
+ 665 0081 08000000 		.4byte	.LVL9
+ 666 0085 0C000000 		.4byte	.LVL10
+ 667 0089 0100     		.2byte	0x1
+ 668 008b 50       		.byte	0x50
+ 669 008c 0C000000 		.4byte	.LVL10
+ 670 0090 14000000 		.4byte	.LFE5
+ 671 0094 0400     		.2byte	0x4
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cctzsnxq.s 			page 17
+
+
+ 672 0096 72       		.byte	0x72
+ 673 0097 00       		.sleb128 0
+ 674 0098 06       		.byte	0x6
+ 675 0099 9F       		.byte	0x9f
+ 676 009a 00000000 		.4byte	0
+ 677 009e 00000000 		.4byte	0
+ 678              		.section	.debug_aranges,"",%progbits
+ 679 0000 44000000 		.4byte	0x44
+ 680 0004 0200     		.2byte	0x2
+ 681 0006 00000000 		.4byte	.Ldebug_info0
+ 682 000a 04       		.byte	0x4
+ 683 000b 00       		.byte	0
+ 684 000c 0000     		.2byte	0
+ 685 000e 0000     		.2byte	0
+ 686 0010 00000000 		.4byte	.LFB0
+ 687 0014 14000000 		.4byte	.LFE0-.LFB0
+ 688 0018 00000000 		.4byte	.LFB1
+ 689 001c 18000000 		.4byte	.LFE1-.LFB1
+ 690 0020 00000000 		.4byte	.LFB2
+ 691 0024 10000000 		.4byte	.LFE2-.LFB2
+ 692 0028 00000000 		.4byte	.LFB3
+ 693 002c 10000000 		.4byte	.LFE3-.LFB3
+ 694 0030 00000000 		.4byte	.LFB4
+ 695 0034 14000000 		.4byte	.LFE4-.LFB4
+ 696 0038 00000000 		.4byte	.LFB5
+ 697 003c 14000000 		.4byte	.LFE5-.LFB5
+ 698 0040 00000000 		.4byte	0
+ 699 0044 00000000 		.4byte	0
+ 700              		.section	.debug_ranges,"",%progbits
+ 701              	.Ldebug_ranges0:
+ 702 0000 00000000 		.4byte	.LFB0
+ 703 0004 14000000 		.4byte	.LFE0
+ 704 0008 00000000 		.4byte	.LFB1
+ 705 000c 18000000 		.4byte	.LFE1
+ 706 0010 00000000 		.4byte	.LFB2
+ 707 0014 10000000 		.4byte	.LFE2
+ 708 0018 00000000 		.4byte	.LFB3
+ 709 001c 10000000 		.4byte	.LFE3
+ 710 0020 00000000 		.4byte	.LFB4
+ 711 0024 14000000 		.4byte	.LFE4
+ 712 0028 00000000 		.4byte	.LFB5
+ 713 002c 14000000 		.4byte	.LFE5
+ 714 0030 00000000 		.4byte	0
+ 715 0034 00000000 		.4byte	0
+ 716              		.section	.debug_line,"",%progbits
+ 717              	.Ldebug_line0:
+ 718 0000 06010000 		.section	.debug_str,"MS",%progbits,1
+ 718      02008F00 
+ 718      00000201 
+ 718      FB0E0D00 
+ 718      01010101 
+ 719              	.LASF15:
+ 720 0000 72656733 		.ascii	"reg32\000"
+ 720      3200
+ 721              	.LASF19:
+ 722 0006 76616C75 		.ascii	"value\000"
+ 722      6500
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cctzsnxq.s 			page 18
+
+
+ 723              	.LASF22:
+ 724 000c 434F4C55 		.ascii	"COLUMN_1_SetInterruptMode\000"
+ 724      4D4E5F31 
+ 724      5F536574 
+ 724      496E7465 
+ 724      72727570 
+ 725              	.LASF20:
+ 726 0026 434F4C55 		.ascii	"COLUMN_1_Read\000"
+ 726      4D4E5F31 
+ 726      5F526561 
+ 726      6400
+ 727              	.LASF12:
+ 728 0034 666C6F61 		.ascii	"float\000"
+ 728      7400
+ 729              	.LASF16:
+ 730 003a 434F4C55 		.ascii	"COLUMN_1_SetDriveMode\000"
+ 730      4D4E5F31 
+ 730      5F536574 
+ 730      44726976 
+ 730      654D6F64 
+ 731              	.LASF1:
+ 732 0050 756E7369 		.ascii	"unsigned char\000"
+ 732      676E6564 
+ 732      20636861 
+ 732      7200
+ 733              	.LASF24:
+ 734 005e 64725661 		.ascii	"drVal\000"
+ 734      6C00
+ 735              	.LASF5:
+ 736 0064 6C6F6E67 		.ascii	"long unsigned int\000"
+ 736      20756E73 
+ 736      69676E65 
+ 736      6420696E 
+ 736      7400
+ 737              	.LASF3:
+ 738 0076 73686F72 		.ascii	"short unsigned int\000"
+ 738      7420756E 
+ 738      7369676E 
+ 738      65642069 
+ 738      6E7400
+ 739              	.LASF13:
+ 740 0089 646F7562 		.ascii	"double\000"
+ 740      6C6500
+ 741              	.LASF29:
+ 742 0090 433A5C50 		.ascii	"C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4"
+ 742      726F6772 
+ 742      616D2046 
+ 742      696C6573 
+ 742      20287838 
+ 743 00bf 5C50536F 		.ascii	"\\PSoC Creator\\1\\LWO3.cydsn\\Generated_Source\\PS"
+ 743      43204372 
+ 743      6561746F 
+ 743      725C315C 
+ 743      4C574F33 
+ 744 00ed 6F43345C 		.ascii	"oC4\\COLUMN_1.c\000"
+ 744      434F4C55 
+ 744      4D4E5F31 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cctzsnxq.s 			page 19
+
+
+ 744      2E6300
+ 745              	.LASF10:
+ 746 00fc 75696E74 		.ascii	"uint16\000"
+ 746      313600
+ 747              	.LASF23:
+ 748 0103 706F7369 		.ascii	"position\000"
+ 748      74696F6E 
+ 748      00
+ 749              	.LASF11:
+ 750 010c 75696E74 		.ascii	"uint32\000"
+ 750      333200
+ 751              	.LASF25:
+ 752 0113 696E7472 		.ascii	"intrCfg\000"
+ 752      43666700 
+ 753              	.LASF8:
+ 754 011b 756E7369 		.ascii	"unsigned int\000"
+ 754      676E6564 
+ 754      20696E74 
+ 754      00
+ 755              	.LASF7:
+ 756 0128 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 756      206C6F6E 
+ 756      6720756E 
+ 756      7369676E 
+ 756      65642069 
+ 757              	.LASF18:
+ 758 013f 6D6F6465 		.ascii	"mode\000"
+ 758      00
+ 759              	.LASF28:
+ 760 0144 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 760      43313120 
+ 760      352E342E 
+ 760      31203230 
+ 760      31363036 
+ 761 0177 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 761      20726576 
+ 761      6973696F 
+ 761      6E203233 
+ 761      37373135 
+ 762 01aa 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 762      66756E63 
+ 762      74696F6E 
+ 762      2D736563 
+ 762      74696F6E 
+ 763              	.LASF17:
+ 764 01d2 434F4C55 		.ascii	"COLUMN_1_Write\000"
+ 764      4D4E5F31 
+ 764      5F577269 
+ 764      746500
+ 765              	.LASF6:
+ 766 01e1 6C6F6E67 		.ascii	"long long int\000"
+ 766      206C6F6E 
+ 766      6720696E 
+ 766      7400
+ 767              	.LASF27:
+ 768 01ef 6D61736B 		.ascii	"maskedStatus\000"
+ 768      65645374 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cctzsnxq.s 			page 20
+
+
+ 768      61747573 
+ 768      00
+ 769              	.LASF14:
+ 770 01fc 63686172 		.ascii	"char\000"
+ 770      00
+ 771              	.LASF2:
+ 772 0201 73686F72 		.ascii	"short int\000"
+ 772      7420696E 
+ 772      7400
+ 773              	.LASF9:
+ 774 020b 75696E74 		.ascii	"uint8\000"
+ 774      3800
+ 775              	.LASF21:
+ 776 0211 434F4C55 		.ascii	"COLUMN_1_ReadDataReg\000"
+ 776      4D4E5F31 
+ 776      5F526561 
+ 776      64446174 
+ 776      61526567 
+ 777              	.LASF4:
+ 778 0226 6C6F6E67 		.ascii	"long int\000"
+ 778      20696E74 
+ 778      00
+ 779              	.LASF26:
+ 780 022f 434F4C55 		.ascii	"COLUMN_1_ClearInterrupt\000"
+ 780      4D4E5F31 
+ 780      5F436C65 
+ 780      6172496E 
+ 780      74657272 
+ 781              	.LASF0:
+ 782 0247 7369676E 		.ascii	"signed char\000"
+ 782      65642063 
+ 782      68617200 
+ 783              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

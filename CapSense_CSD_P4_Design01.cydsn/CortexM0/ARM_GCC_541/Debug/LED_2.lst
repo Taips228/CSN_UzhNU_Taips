@@ -1,0 +1,1187 @@
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cciPEVRR.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"LED_2.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.LED_2_SetDriveMode,"ax",%progbits
+  20              		.align	2
+  21              		.global	LED_2_SetDriveMode
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	LED_2_SetDriveMode, %function
+  25              	LED_2_SetDriveMode:
+  26              	.LFB0:
+  27              		.file 1 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\CapSense_CSD_P4_Des
+   1:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** /*******************************************************************************
+   2:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * File Name: LED_2.c  
+   3:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * Version 2.20
+   4:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+   5:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * Description:
+   6:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  This file contains API to enable firmware control of a Pins component.
+   7:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+   8:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** ********************************************************************************
+   9:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  10:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  11:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  12:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * the software package with which this file was provided.
+  13:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *******************************************************************************/
+  14:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** 
+  15:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** #include "cytypes.h"
+  16:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** #include "LED_2.h"
+  17:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** 
+  18:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** 
+  19:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** #if defined(LED_2__PC)
+  20:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     #define LED_2_SetP4PinDriveMode(shift, mode)  \
+  21:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     do { \
+  22:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****         LED_2_PC =   (LED_2_PC & \
+  23:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****                                 (uint32)(~(uint32)(LED_2_DRIVE_MODE_IND_MASK << \
+  24:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****                                 (LED_2_DRIVE_MODE_BITS * (shift))))) | \
+  25:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****                                 (uint32)((uint32)(mode) << \
+  26:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****                                 (LED_2_DRIVE_MODE_BITS * (shift))); \
+  27:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     } while (0)
+  28:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** #else
+  29:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     #if (CY_PSOC4_4200L)
+  30:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****         #define LED_2_SetP4PinDriveMode(shift, mode)  \
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cciPEVRR.s 			page 2
+
+
+  31:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****         do { \
+  32:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****             LED_2_USBIO_CTRL_REG = (LED_2_USBIO_CTRL_REG & \
+  33:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****                                     (uint32)(~(uint32)(LED_2_DRIVE_MODE_IND_MASK << \
+  34:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****                                     (LED_2_DRIVE_MODE_BITS * (shift))))) | \
+  35:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****                                     (uint32)((uint32)(mode) << \
+  36:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****                                     (LED_2_DRIVE_MODE_BITS * (shift))); \
+  37:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****         } while (0)
+  38:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     #endif
+  39:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** #endif
+  40:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****   
+  41:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** 
+  42:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** #if defined(LED_2__PC) || (CY_PSOC4_4200L) 
+  43:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     /*******************************************************************************
+  44:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     * Function Name: LED_2_SetDriveMode
+  45:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     ****************************************************************************//**
+  46:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     *
+  47:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     * \brief Sets the drive mode for each of the Pins component's pins.
+  48:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     * 
+  49:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     * <b>Note</b> This affects all pins in the Pins component instance. Use the
+  50:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     * Per-Pin APIs if you wish to control individual pin's drive modes.
+  51:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     *
+  52:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     * <b>Note</b> USBIOs have limited drive functionality. Refer to the Drive Mode
+  53:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     * parameter for more information.
+  54:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     *
+  55:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     * \param mode
+  56:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     *  Mode for the selected signals. Valid options are documented in 
+  57:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     *  \ref driveMode.
+  58:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     *
+  59:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     * \return
+  60:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     *  None
+  61:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     *
+  62:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     * \sideeffect
+  63:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     *  If you use read-modify-write operations that are not atomic, the ISR can
+  64:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     *  cause corruption of this function. An ISR that interrupts this function 
+  65:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     *  and performs writes to the Pins component Drive Mode registers can cause 
+  66:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     *  corrupted port data. To avoid this issue, you should either use the Per-Pin
+  67:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     *  APIs (primary method) or disable interrupts around this function.
+  68:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     *
+  69:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     * \funcusage
+  70:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     *  \snippet LED_2_SUT.c usage_LED_2_SetDriveMode
+  71:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     *******************************************************************************/
+  72:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     void LED_2_SetDriveMode(uint8 mode)
+  73:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     {
+  28              		.loc 1 73 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 7, -8
+  35              		.cfi_offset 14, -4
+  36 0002 82B0     		sub	sp, sp, #8
+  37              		.cfi_def_cfa_offset 16
+  38 0004 00AF     		add	r7, sp, #0
+  39              		.cfi_def_cfa_register 7
+  40 0006 0200     		movs	r2, r0
+  41 0008 FB1D     		adds	r3, r7, #7
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cciPEVRR.s 			page 3
+
+
+  42 000a 1A70     		strb	r2, [r3]
+  74:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** 		LED_2_SetP4PinDriveMode(LED_2__0__SHIFT, mode);
+  43              		.loc 1 74 0
+  44 000c 064B     		ldr	r3, .L2
+  45 000e 064A     		ldr	r2, .L2
+  46 0010 1268     		ldr	r2, [r2]
+  47 0012 0649     		ldr	r1, .L2+4
+  48 0014 1140     		ands	r1, r2
+  49 0016 FA1D     		adds	r2, r7, #7
+  50 0018 1278     		ldrb	r2, [r2]
+  51 001a 5202     		lsls	r2, r2, #9
+  52 001c 0A43     		orrs	r2, r1
+  53 001e 1A60     		str	r2, [r3]
+  75:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     }
+  54              		.loc 1 75 0
+  55 0020 C046     		nop
+  56 0022 BD46     		mov	sp, r7
+  57 0024 02B0     		add	sp, sp, #8
+  58              		@ sp needed
+  59 0026 80BD     		pop	{r7, pc}
+  60              	.L3:
+  61              		.align	2
+  62              	.L2:
+  63 0028 08000440 		.word	1074003976
+  64 002c FFF1FFFF 		.word	-3585
+  65              		.cfi_endproc
+  66              	.LFE0:
+  67              		.size	LED_2_SetDriveMode, .-LED_2_SetDriveMode
+  68              		.section	.text.LED_2_Write,"ax",%progbits
+  69              		.align	2
+  70              		.global	LED_2_Write
+  71              		.code	16
+  72              		.thumb_func
+  73              		.type	LED_2_Write, %function
+  74              	LED_2_Write:
+  75              	.LFB1:
+  76:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** #endif
+  77:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** 
+  78:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** 
+  79:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** /*******************************************************************************
+  80:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * Function Name: LED_2_Write
+  81:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** ****************************************************************************//**
+  82:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+  83:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \brief Writes the value to the physical port (data output register), masking
+  84:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  and shifting the bits appropriately. 
+  85:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+  86:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * The data output register controls the signal applied to the physical pin in 
+  87:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * conjunction with the drive mode parameter. This function avoids changing 
+  88:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * other bits in the port by using the appropriate method (read-modify-write or
+  89:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * bit banding).
+  90:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+  91:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * <b>Note</b> This function should not be used on a hardware digital output pin 
+  92:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * as it is driven by the hardware signal attached to it.
+  93:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+  94:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \param value
+  95:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  Value to write to the component instance.
+  96:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cciPEVRR.s 			page 4
+
+
+  97:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \return 
+  98:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  None 
+  99:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+ 100:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \sideeffect
+ 101:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  If you use read-modify-write operations that are not atomic; the Interrupt 
+ 102:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  Service Routines (ISR) can cause corruption of this function. An ISR that 
+ 103:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  interrupts this function and performs writes to the Pins component data 
+ 104:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  register can cause corrupted port data. To avoid this issue, you should 
+ 105:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  either use the Per-Pin APIs (primary method) or disable interrupts around 
+ 106:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  this function.
+ 107:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+ 108:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \funcusage
+ 109:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  \snippet LED_2_SUT.c usage_LED_2_Write
+ 110:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *******************************************************************************/
+ 111:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** void LED_2_Write(uint8 value)
+ 112:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** {
+  76              		.loc 1 112 0
+  77              		.cfi_startproc
+  78              		@ args = 0, pretend = 0, frame = 16
+  79              		@ frame_needed = 1, uses_anonymous_args = 0
+  80 0000 80B5     		push	{r7, lr}
+  81              		.cfi_def_cfa_offset 8
+  82              		.cfi_offset 7, -8
+  83              		.cfi_offset 14, -4
+  84 0002 84B0     		sub	sp, sp, #16
+  85              		.cfi_def_cfa_offset 24
+  86 0004 00AF     		add	r7, sp, #0
+  87              		.cfi_def_cfa_register 7
+  88 0006 0200     		movs	r2, r0
+  89 0008 FB1D     		adds	r3, r7, #7
+  90 000a 1A70     		strb	r2, [r3]
+ 113:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     uint8 drVal = (uint8)(LED_2_DR & (uint8)(~LED_2_MASK));
+  91              		.loc 1 113 0
+  92 000c 0F4B     		ldr	r3, .L5
+  93 000e 1B68     		ldr	r3, [r3]
+  94 0010 DAB2     		uxtb	r2, r3
+  95 0012 0F23     		movs	r3, #15
+  96 0014 FB18     		adds	r3, r7, r3
+  97 0016 0821     		movs	r1, #8
+  98 0018 8A43     		bics	r2, r1
+  99 001a 1A70     		strb	r2, [r3]
+ 114:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     drVal = (drVal | ((uint8)(value << LED_2_SHIFT) & LED_2_MASK));
+ 100              		.loc 1 114 0
+ 101 001c FB1D     		adds	r3, r7, #7
+ 102 001e 1B78     		ldrb	r3, [r3]
+ 103 0020 DB00     		lsls	r3, r3, #3
+ 104 0022 DBB2     		uxtb	r3, r3
+ 105 0024 0822     		movs	r2, #8
+ 106 0026 1340     		ands	r3, r2
+ 107 0028 D9B2     		uxtb	r1, r3
+ 108 002a 0F23     		movs	r3, #15
+ 109 002c FB18     		adds	r3, r7, r3
+ 110 002e 0F22     		movs	r2, #15
+ 111 0030 BA18     		adds	r2, r7, r2
+ 112 0032 1278     		ldrb	r2, [r2]
+ 113 0034 0A43     		orrs	r2, r1
+ 114 0036 1A70     		strb	r2, [r3]
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cciPEVRR.s 			page 5
+
+
+ 115:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     LED_2_DR = (uint32)drVal;
+ 115              		.loc 1 115 0
+ 116 0038 044B     		ldr	r3, .L5
+ 117 003a 0F22     		movs	r2, #15
+ 118 003c BA18     		adds	r2, r7, r2
+ 119 003e 1278     		ldrb	r2, [r2]
+ 120 0040 1A60     		str	r2, [r3]
+ 116:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** }
+ 121              		.loc 1 116 0
+ 122 0042 C046     		nop
+ 123 0044 BD46     		mov	sp, r7
+ 124 0046 04B0     		add	sp, sp, #16
+ 125              		@ sp needed
+ 126 0048 80BD     		pop	{r7, pc}
+ 127              	.L6:
+ 128 004a C046     		.align	2
+ 129              	.L5:
+ 130 004c 00000440 		.word	1074003968
+ 131              		.cfi_endproc
+ 132              	.LFE1:
+ 133              		.size	LED_2_Write, .-LED_2_Write
+ 134              		.section	.text.LED_2_Read,"ax",%progbits
+ 135              		.align	2
+ 136              		.global	LED_2_Read
+ 137              		.code	16
+ 138              		.thumb_func
+ 139              		.type	LED_2_Read, %function
+ 140              	LED_2_Read:
+ 141              	.LFB2:
+ 117:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** 
+ 118:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** 
+ 119:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** /*******************************************************************************
+ 120:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * Function Name: LED_2_Read
+ 121:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** ****************************************************************************//**
+ 122:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+ 123:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \brief Reads the associated physical port (pin status register) and masks 
+ 124:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  the required bits according to the width and bit position of the component
+ 125:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  instance. 
+ 126:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+ 127:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * The pin's status register returns the current logic level present on the 
+ 128:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * physical pin.
+ 129:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+ 130:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \return 
+ 131:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  The current value for the pins in the component as a right justified number.
+ 132:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+ 133:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \funcusage
+ 134:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  \snippet LED_2_SUT.c usage_LED_2_Read  
+ 135:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *******************************************************************************/
+ 136:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** uint8 LED_2_Read(void)
+ 137:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** {
+ 142              		.loc 1 137 0
+ 143              		.cfi_startproc
+ 144              		@ args = 0, pretend = 0, frame = 0
+ 145              		@ frame_needed = 1, uses_anonymous_args = 0
+ 146 0000 80B5     		push	{r7, lr}
+ 147              		.cfi_def_cfa_offset 8
+ 148              		.cfi_offset 7, -8
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cciPEVRR.s 			page 6
+
+
+ 149              		.cfi_offset 14, -4
+ 150 0002 00AF     		add	r7, sp, #0
+ 151              		.cfi_def_cfa_register 7
+ 138:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     return (uint8)((LED_2_PS & LED_2_MASK) >> LED_2_SHIFT);
+ 152              		.loc 1 138 0
+ 153 0004 044B     		ldr	r3, .L9
+ 154 0006 1B68     		ldr	r3, [r3]
+ 155 0008 0822     		movs	r2, #8
+ 156 000a 1340     		ands	r3, r2
+ 157 000c DB08     		lsrs	r3, r3, #3
+ 158 000e DBB2     		uxtb	r3, r3
+ 139:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** }
+ 159              		.loc 1 139 0
+ 160 0010 1800     		movs	r0, r3
+ 161 0012 BD46     		mov	sp, r7
+ 162              		@ sp needed
+ 163 0014 80BD     		pop	{r7, pc}
+ 164              	.L10:
+ 165 0016 C046     		.align	2
+ 166              	.L9:
+ 167 0018 04000440 		.word	1074003972
+ 168              		.cfi_endproc
+ 169              	.LFE2:
+ 170              		.size	LED_2_Read, .-LED_2_Read
+ 171              		.section	.text.LED_2_ReadDataReg,"ax",%progbits
+ 172              		.align	2
+ 173              		.global	LED_2_ReadDataReg
+ 174              		.code	16
+ 175              		.thumb_func
+ 176              		.type	LED_2_ReadDataReg, %function
+ 177              	LED_2_ReadDataReg:
+ 178              	.LFB3:
+ 140:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** 
+ 141:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** 
+ 142:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** /*******************************************************************************
+ 143:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * Function Name: LED_2_ReadDataReg
+ 144:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** ****************************************************************************//**
+ 145:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+ 146:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \brief Reads the associated physical port's data output register and masks 
+ 147:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  the correct bits according to the width and bit position of the component 
+ 148:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  instance. 
+ 149:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+ 150:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * The data output register controls the signal applied to the physical pin in 
+ 151:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * conjunction with the drive mode parameter. This is not the same as the 
+ 152:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * preferred LED_2_Read() API because the 
+ 153:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * LED_2_ReadDataReg() reads the data register instead of the status 
+ 154:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * register. For output pins this is a useful function to determine the value 
+ 155:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * just written to the pin.
+ 156:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+ 157:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \return 
+ 158:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  The current value of the data register masked and shifted into a right 
+ 159:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  justified number for the component instance.
+ 160:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+ 161:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \funcusage
+ 162:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  \snippet LED_2_SUT.c usage_LED_2_ReadDataReg 
+ 163:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *******************************************************************************/
+ 164:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** uint8 LED_2_ReadDataReg(void)
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cciPEVRR.s 			page 7
+
+
+ 165:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** {
+ 179              		.loc 1 165 0
+ 180              		.cfi_startproc
+ 181              		@ args = 0, pretend = 0, frame = 0
+ 182              		@ frame_needed = 1, uses_anonymous_args = 0
+ 183 0000 80B5     		push	{r7, lr}
+ 184              		.cfi_def_cfa_offset 8
+ 185              		.cfi_offset 7, -8
+ 186              		.cfi_offset 14, -4
+ 187 0002 00AF     		add	r7, sp, #0
+ 188              		.cfi_def_cfa_register 7
+ 166:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     return (uint8)((LED_2_DR & LED_2_MASK) >> LED_2_SHIFT);
+ 189              		.loc 1 166 0
+ 190 0004 044B     		ldr	r3, .L13
+ 191 0006 1B68     		ldr	r3, [r3]
+ 192 0008 0822     		movs	r2, #8
+ 193 000a 1340     		ands	r3, r2
+ 194 000c DB08     		lsrs	r3, r3, #3
+ 195 000e DBB2     		uxtb	r3, r3
+ 167:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** }
+ 196              		.loc 1 167 0
+ 197 0010 1800     		movs	r0, r3
+ 198 0012 BD46     		mov	sp, r7
+ 199              		@ sp needed
+ 200 0014 80BD     		pop	{r7, pc}
+ 201              	.L14:
+ 202 0016 C046     		.align	2
+ 203              	.L13:
+ 204 0018 00000440 		.word	1074003968
+ 205              		.cfi_endproc
+ 206              	.LFE3:
+ 207              		.size	LED_2_ReadDataReg, .-LED_2_ReadDataReg
+ 208              		.section	.text.LED_2_SetInterruptMode,"ax",%progbits
+ 209              		.align	2
+ 210              		.global	LED_2_SetInterruptMode
+ 211              		.code	16
+ 212              		.thumb_func
+ 213              		.type	LED_2_SetInterruptMode, %function
+ 214              	LED_2_SetInterruptMode:
+ 215              	.LFB4:
+ 168:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** 
+ 169:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** 
+ 170:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** /*******************************************************************************
+ 171:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * Function Name: LED_2_SetInterruptMode
+ 172:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** ****************************************************************************//**
+ 173:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+ 174:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \brief Configures the interrupt mode for each of the Pins component's
+ 175:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  pins. Alternatively you may set the interrupt mode for all the pins
+ 176:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  specified in the Pins component.
+ 177:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+ 178:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  <b>Note</b> The interrupt is port-wide and therefore any enabled pin
+ 179:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  interrupt may trigger it.
+ 180:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+ 181:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \param position
+ 182:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  The pin position as listed in the Pins component. You may OR these to be 
+ 183:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  able to configure the interrupt mode of multiple pins within a Pins 
+ 184:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  component. Or you may use LED_2_INTR_ALL to configure the
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cciPEVRR.s 			page 8
+
+
+ 185:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  interrupt mode of all the pins in the Pins component.       
+ 186:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  - LED_2_0_INTR       (First pin in the list)
+ 187:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  - LED_2_1_INTR       (Second pin in the list)
+ 188:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  - ...
+ 189:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  - LED_2_INTR_ALL     (All pins in Pins component)
+ 190:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+ 191:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \param mode
+ 192:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  Interrupt mode for the selected pins. Valid options are documented in
+ 193:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  \ref intrMode.
+ 194:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+ 195:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \return 
+ 196:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  None
+ 197:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  
+ 198:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \sideeffect
+ 199:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  It is recommended that the interrupt be disabled before calling this 
+ 200:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  function to avoid unintended interrupt requests. Note that the interrupt
+ 201:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  type is port wide, and therefore will trigger for any enabled pin on the 
+ 202:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  port.
+ 203:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+ 204:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \funcusage
+ 205:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  \snippet LED_2_SUT.c usage_LED_2_SetInterruptMode
+ 206:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *******************************************************************************/
+ 207:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** void LED_2_SetInterruptMode(uint16 position, uint16 mode)
+ 208:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** {
+ 216              		.loc 1 208 0
+ 217              		.cfi_startproc
+ 218              		@ args = 0, pretend = 0, frame = 16
+ 219              		@ frame_needed = 1, uses_anonymous_args = 0
+ 220 0000 80B5     		push	{r7, lr}
+ 221              		.cfi_def_cfa_offset 8
+ 222              		.cfi_offset 7, -8
+ 223              		.cfi_offset 14, -4
+ 224 0002 84B0     		sub	sp, sp, #16
+ 225              		.cfi_def_cfa_offset 24
+ 226 0004 00AF     		add	r7, sp, #0
+ 227              		.cfi_def_cfa_register 7
+ 228 0006 0200     		movs	r2, r0
+ 229 0008 BB1D     		adds	r3, r7, #6
+ 230 000a 1A80     		strh	r2, [r3]
+ 231 000c 3B1D     		adds	r3, r7, #4
+ 232 000e 0A1C     		adds	r2, r1, #0
+ 233 0010 1A80     		strh	r2, [r3]
+ 209:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     uint32 intrCfg;
+ 210:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     
+ 211:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     intrCfg =  LED_2_INTCFG & (uint32)(~(uint32)position);
+ 234              		.loc 1 211 0
+ 235 0012 0B4B     		ldr	r3, .L16
+ 236 0014 1B68     		ldr	r3, [r3]
+ 237 0016 BA1D     		adds	r2, r7, #6
+ 238 0018 1288     		ldrh	r2, [r2]
+ 239 001a D243     		mvns	r2, r2
+ 240 001c 1340     		ands	r3, r2
+ 241 001e FB60     		str	r3, [r7, #12]
+ 212:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     LED_2_INTCFG = intrCfg | ((uint32)position & (uint32)mode);
+ 242              		.loc 1 212 0
+ 243 0020 074B     		ldr	r3, .L16
+ 244 0022 BA1D     		adds	r2, r7, #6
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cciPEVRR.s 			page 9
+
+
+ 245 0024 391D     		adds	r1, r7, #4
+ 246 0026 1288     		ldrh	r2, [r2]
+ 247 0028 0988     		ldrh	r1, [r1]
+ 248 002a 0A40     		ands	r2, r1
+ 249 002c 92B2     		uxth	r2, r2
+ 250 002e 1100     		movs	r1, r2
+ 251 0030 FA68     		ldr	r2, [r7, #12]
+ 252 0032 0A43     		orrs	r2, r1
+ 253 0034 1A60     		str	r2, [r3]
+ 213:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** }
+ 254              		.loc 1 213 0
+ 255 0036 C046     		nop
+ 256 0038 BD46     		mov	sp, r7
+ 257 003a 04B0     		add	sp, sp, #16
+ 258              		@ sp needed
+ 259 003c 80BD     		pop	{r7, pc}
+ 260              	.L17:
+ 261 003e C046     		.align	2
+ 262              	.L16:
+ 263 0040 0C000440 		.word	1074003980
+ 264              		.cfi_endproc
+ 265              	.LFE4:
+ 266              		.size	LED_2_SetInterruptMode, .-LED_2_SetInterruptMode
+ 267              		.section	.text.LED_2_ClearInterrupt,"ax",%progbits
+ 268              		.align	2
+ 269              		.global	LED_2_ClearInterrupt
+ 270              		.code	16
+ 271              		.thumb_func
+ 272              		.type	LED_2_ClearInterrupt, %function
+ 273              	LED_2_ClearInterrupt:
+ 274              	.LFB5:
+ 214:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** 
+ 215:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** 
+ 216:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** /*******************************************************************************
+ 217:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * Function Name: LED_2_ClearInterrupt
+ 218:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** ****************************************************************************//**
+ 219:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+ 220:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \brief Clears any active interrupts attached with the component and returns 
+ 221:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  the value of the interrupt status register allowing determination of which
+ 222:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  pins generated an interrupt event.
+ 223:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+ 224:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \return 
+ 225:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  The right-shifted current value of the interrupt status register. Each pin 
+ 226:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  has one bit set if it generated an interrupt event. For example, bit 0 is 
+ 227:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  for pin 0 and bit 1 is for pin 1 of the Pins component.
+ 228:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  
+ 229:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \sideeffect
+ 230:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  Clears all bits of the physical port's interrupt status register, not just
+ 231:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  those associated with the Pins component.
+ 232:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *
+ 233:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** * \funcusage
+ 234:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *  \snippet LED_2_SUT.c usage_LED_2_ClearInterrupt
+ 235:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** *******************************************************************************/
+ 236:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** uint8 LED_2_ClearInterrupt(void)
+ 237:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** {
+ 275              		.loc 1 237 0
+ 276              		.cfi_startproc
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cciPEVRR.s 			page 10
+
+
+ 277              		@ args = 0, pretend = 0, frame = 8
+ 278              		@ frame_needed = 1, uses_anonymous_args = 0
+ 279 0000 80B5     		push	{r7, lr}
+ 280              		.cfi_def_cfa_offset 8
+ 281              		.cfi_offset 7, -8
+ 282              		.cfi_offset 14, -4
+ 283 0002 82B0     		sub	sp, sp, #8
+ 284              		.cfi_def_cfa_offset 16
+ 285 0004 00AF     		add	r7, sp, #0
+ 286              		.cfi_def_cfa_register 7
+ 238:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** 	uint8 maskedStatus = (uint8)(LED_2_INTSTAT & LED_2_MASK);
+ 287              		.loc 1 238 0
+ 288 0006 094B     		ldr	r3, .L20
+ 289 0008 1B68     		ldr	r3, [r3]
+ 290 000a DAB2     		uxtb	r2, r3
+ 291 000c FB1D     		adds	r3, r7, #7
+ 292 000e 0821     		movs	r1, #8
+ 293 0010 0A40     		ands	r2, r1
+ 294 0012 1A70     		strb	r2, [r3]
+ 239:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** 	LED_2_INTSTAT = maskedStatus;
+ 295              		.loc 1 239 0
+ 296 0014 054B     		ldr	r3, .L20
+ 297 0016 FA1D     		adds	r2, r7, #7
+ 298 0018 1278     		ldrb	r2, [r2]
+ 299 001a 1A60     		str	r2, [r3]
+ 240:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c ****     return maskedStatus >> LED_2_SHIFT;
+ 300              		.loc 1 240 0
+ 301 001c FB1D     		adds	r3, r7, #7
+ 302 001e 1B78     		ldrb	r3, [r3]
+ 303 0020 DB08     		lsrs	r3, r3, #3
+ 304 0022 DBB2     		uxtb	r3, r3
+ 241:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_2.c **** }
+ 305              		.loc 1 241 0
+ 306 0024 1800     		movs	r0, r3
+ 307 0026 BD46     		mov	sp, r7
+ 308 0028 02B0     		add	sp, sp, #8
+ 309              		@ sp needed
+ 310 002a 80BD     		pop	{r7, pc}
+ 311              	.L21:
+ 312              		.align	2
+ 313              	.L20:
+ 314 002c 10000440 		.word	1074003984
+ 315              		.cfi_endproc
+ 316              	.LFE5:
+ 317              		.size	LED_2_ClearInterrupt, .-LED_2_ClearInterrupt
+ 318              		.text
+ 319              	.Letext0:
+ 320              		.file 2 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\CapSense_CSD_P4_Des
+ 321              		.section	.debug_info,"",%progbits
+ 322              	.Ldebug_info0:
+ 323 0000 92010000 		.4byte	0x192
+ 324 0004 0400     		.2byte	0x4
+ 325 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 326 000a 04       		.byte	0x4
+ 327 000b 01       		.uleb128 0x1
+ 328 000c 13010000 		.4byte	.LASF28
+ 329 0010 0C       		.byte	0xc
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cciPEVRR.s 			page 11
+
+
+ 330 0011 42000000 		.4byte	.LASF29
+ 331 0015 00000000 		.4byte	.Ldebug_ranges0+0
+ 332 0019 00000000 		.4byte	0
+ 333 001d 00000000 		.4byte	.Ldebug_line0
+ 334 0021 02       		.uleb128 0x2
+ 335 0022 01       		.byte	0x1
+ 336 0023 06       		.byte	0x6
+ 337 0024 46020000 		.4byte	.LASF0
+ 338 0028 02       		.uleb128 0x2
+ 339 0029 01       		.byte	0x1
+ 340 002a 08       		.byte	0x8
+ 341 002b C5000000 		.4byte	.LASF1
+ 342 002f 02       		.uleb128 0x2
+ 343 0030 02       		.byte	0x2
+ 344 0031 05       		.byte	0x5
+ 345 0032 2D020000 		.4byte	.LASF2
+ 346 0036 02       		.uleb128 0x2
+ 347 0037 02       		.byte	0x2
+ 348 0038 07       		.byte	0x7
+ 349 0039 00010000 		.4byte	.LASF3
+ 350 003d 02       		.uleb128 0x2
+ 351 003e 04       		.byte	0x4
+ 352 003f 05       		.byte	0x5
+ 353 0040 3D020000 		.4byte	.LASF4
+ 354 0044 02       		.uleb128 0x2
+ 355 0045 04       		.byte	0x4
+ 356 0046 07       		.byte	0x7
+ 357 0047 EE000000 		.4byte	.LASF5
+ 358 004b 02       		.uleb128 0x2
+ 359 004c 08       		.byte	0x8
+ 360 004d 05       		.byte	0x5
+ 361 004e FB010000 		.4byte	.LASF6
+ 362 0052 02       		.uleb128 0x2
+ 363 0053 08       		.byte	0x8
+ 364 0054 07       		.byte	0x7
+ 365 0055 D4010000 		.4byte	.LASF7
+ 366 0059 03       		.uleb128 0x3
+ 367 005a 04       		.byte	0x4
+ 368 005b 05       		.byte	0x5
+ 369 005c 696E7400 		.ascii	"int\000"
+ 370 0060 02       		.uleb128 0x2
+ 371 0061 04       		.byte	0x4
+ 372 0062 07       		.byte	0x7
+ 373 0063 C7010000 		.4byte	.LASF8
+ 374 0067 04       		.uleb128 0x4
+ 375 0068 37020000 		.4byte	.LASF9
+ 376 006c 02       		.byte	0x2
+ 377 006d D201     		.2byte	0x1d2
+ 378 006f 28000000 		.4byte	0x28
+ 379 0073 04       		.uleb128 0x4
+ 380 0074 A8010000 		.4byte	.LASF10
+ 381 0078 02       		.byte	0x2
+ 382 0079 D301     		.2byte	0x1d3
+ 383 007b 36000000 		.4byte	0x36
+ 384 007f 04       		.uleb128 0x4
+ 385 0080 B8010000 		.4byte	.LASF11
+ 386 0084 02       		.byte	0x2
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cciPEVRR.s 			page 12
+
+
+ 387 0085 D401     		.2byte	0x1d4
+ 388 0087 44000000 		.4byte	0x44
+ 389 008b 02       		.uleb128 0x2
+ 390 008c 04       		.byte	0x4
+ 391 008d 04       		.byte	0x4
+ 392 008e BF000000 		.4byte	.LASF12
+ 393 0092 02       		.uleb128 0x2
+ 394 0093 08       		.byte	0x8
+ 395 0094 04       		.byte	0x4
+ 396 0095 A1010000 		.4byte	.LASF13
+ 397 0099 02       		.uleb128 0x2
+ 398 009a 01       		.byte	0x1
+ 399 009b 08       		.byte	0x8
+ 400 009c 16020000 		.4byte	.LASF14
+ 401 00a0 04       		.uleb128 0x4
+ 402 00a1 1F000000 		.4byte	.LASF15
+ 403 00a5 02       		.byte	0x2
+ 404 00a6 7E02     		.2byte	0x27e
+ 405 00a8 AC000000 		.4byte	0xac
+ 406 00ac 05       		.uleb128 0x5
+ 407 00ad 7F000000 		.4byte	0x7f
+ 408 00b1 06       		.uleb128 0x6
+ 409 00b2 00000000 		.4byte	.LASF16
+ 410 00b6 01       		.byte	0x1
+ 411 00b7 48       		.byte	0x48
+ 412 00b8 00000000 		.4byte	.LFB0
+ 413 00bc 30000000 		.4byte	.LFE0-.LFB0
+ 414 00c0 01       		.uleb128 0x1
+ 415 00c1 9C       		.byte	0x9c
+ 416 00c2 D5000000 		.4byte	0xd5
+ 417 00c6 07       		.uleb128 0x7
+ 418 00c7 EB010000 		.4byte	.LASF18
+ 419 00cb 01       		.byte	0x1
+ 420 00cc 48       		.byte	0x48
+ 421 00cd 67000000 		.4byte	0x67
+ 422 00d1 02       		.uleb128 0x2
+ 423 00d2 91       		.byte	0x91
+ 424 00d3 77       		.sleb128 -9
+ 425 00d4 00       		.byte	0
+ 426 00d5 06       		.uleb128 0x6
+ 427 00d6 13000000 		.4byte	.LASF17
+ 428 00da 01       		.byte	0x1
+ 429 00db 6F       		.byte	0x6f
+ 430 00dc 00000000 		.4byte	.LFB1
+ 431 00e0 50000000 		.4byte	.LFE1-.LFB1
+ 432 00e4 01       		.uleb128 0x1
+ 433 00e5 9C       		.byte	0x9c
+ 434 00e6 07010000 		.4byte	0x107
+ 435 00ea 07       		.uleb128 0x7
+ 436 00eb 25000000 		.4byte	.LASF19
+ 437 00ef 01       		.byte	0x1
+ 438 00f0 6F       		.byte	0x6f
+ 439 00f1 67000000 		.4byte	0x67
+ 440 00f5 02       		.uleb128 0x2
+ 441 00f6 91       		.byte	0x91
+ 442 00f7 6F       		.sleb128 -17
+ 443 00f8 08       		.uleb128 0x8
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cciPEVRR.s 			page 13
+
+
+ 444 00f9 D3000000 		.4byte	.LASF24
+ 445 00fd 01       		.byte	0x1
+ 446 00fe 71       		.byte	0x71
+ 447 00ff 67000000 		.4byte	0x67
+ 448 0103 02       		.uleb128 0x2
+ 449 0104 91       		.byte	0x91
+ 450 0105 77       		.sleb128 -9
+ 451 0106 00       		.byte	0
+ 452 0107 09       		.uleb128 0x9
+ 453 0108 F0010000 		.4byte	.LASF20
+ 454 010c 01       		.byte	0x1
+ 455 010d 88       		.byte	0x88
+ 456 010e 67000000 		.4byte	0x67
+ 457 0112 00000000 		.4byte	.LFB2
+ 458 0116 1C000000 		.4byte	.LFE2-.LFB2
+ 459 011a 01       		.uleb128 0x1
+ 460 011b 9C       		.byte	0x9c
+ 461 011c 09       		.uleb128 0x9
+ 462 011d 1B020000 		.4byte	.LASF21
+ 463 0121 01       		.byte	0x1
+ 464 0122 A4       		.byte	0xa4
+ 465 0123 67000000 		.4byte	0x67
+ 466 0127 00000000 		.4byte	.LFB3
+ 467 012b 1C000000 		.4byte	.LFE3-.LFB3
+ 468 012f 01       		.uleb128 0x1
+ 469 0130 9C       		.byte	0x9c
+ 470 0131 06       		.uleb128 0x6
+ 471 0132 2B000000 		.4byte	.LASF22
+ 472 0136 01       		.byte	0x1
+ 473 0137 CF       		.byte	0xcf
+ 474 0138 00000000 		.4byte	.LFB4
+ 475 013c 44000000 		.4byte	.LFE4-.LFB4
+ 476 0140 01       		.uleb128 0x1
+ 477 0141 9C       		.byte	0x9c
+ 478 0142 71010000 		.4byte	0x171
+ 479 0146 07       		.uleb128 0x7
+ 480 0147 AF010000 		.4byte	.LASF23
+ 481 014b 01       		.byte	0x1
+ 482 014c CF       		.byte	0xcf
+ 483 014d 73000000 		.4byte	0x73
+ 484 0151 02       		.uleb128 0x2
+ 485 0152 91       		.byte	0x91
+ 486 0153 6E       		.sleb128 -18
+ 487 0154 07       		.uleb128 0x7
+ 488 0155 EB010000 		.4byte	.LASF18
+ 489 0159 01       		.byte	0x1
+ 490 015a CF       		.byte	0xcf
+ 491 015b 73000000 		.4byte	0x73
+ 492 015f 02       		.uleb128 0x2
+ 493 0160 91       		.byte	0x91
+ 494 0161 6C       		.sleb128 -20
+ 495 0162 08       		.uleb128 0x8
+ 496 0163 BF010000 		.4byte	.LASF25
+ 497 0167 01       		.byte	0x1
+ 498 0168 D1       		.byte	0xd1
+ 499 0169 7F000000 		.4byte	0x7f
+ 500 016d 02       		.uleb128 0x2
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cciPEVRR.s 			page 14
+
+
+ 501 016e 91       		.byte	0x91
+ 502 016f 74       		.sleb128 -12
+ 503 0170 00       		.byte	0
+ 504 0171 0A       		.uleb128 0xa
+ 505 0172 D9000000 		.4byte	.LASF26
+ 506 0176 01       		.byte	0x1
+ 507 0177 EC       		.byte	0xec
+ 508 0178 67000000 		.4byte	0x67
+ 509 017c 00000000 		.4byte	.LFB5
+ 510 0180 30000000 		.4byte	.LFE5-.LFB5
+ 511 0184 01       		.uleb128 0x1
+ 512 0185 9C       		.byte	0x9c
+ 513 0186 08       		.uleb128 0x8
+ 514 0187 09020000 		.4byte	.LASF27
+ 515 018b 01       		.byte	0x1
+ 516 018c EE       		.byte	0xee
+ 517 018d 67000000 		.4byte	0x67
+ 518 0191 02       		.uleb128 0x2
+ 519 0192 91       		.byte	0x91
+ 520 0193 77       		.sleb128 -9
+ 521 0194 00       		.byte	0
+ 522 0195 00       		.byte	0
+ 523              		.section	.debug_abbrev,"",%progbits
+ 524              	.Ldebug_abbrev0:
+ 525 0000 01       		.uleb128 0x1
+ 526 0001 11       		.uleb128 0x11
+ 527 0002 01       		.byte	0x1
+ 528 0003 25       		.uleb128 0x25
+ 529 0004 0E       		.uleb128 0xe
+ 530 0005 13       		.uleb128 0x13
+ 531 0006 0B       		.uleb128 0xb
+ 532 0007 03       		.uleb128 0x3
+ 533 0008 0E       		.uleb128 0xe
+ 534 0009 55       		.uleb128 0x55
+ 535 000a 17       		.uleb128 0x17
+ 536 000b 11       		.uleb128 0x11
+ 537 000c 01       		.uleb128 0x1
+ 538 000d 10       		.uleb128 0x10
+ 539 000e 17       		.uleb128 0x17
+ 540 000f 00       		.byte	0
+ 541 0010 00       		.byte	0
+ 542 0011 02       		.uleb128 0x2
+ 543 0012 24       		.uleb128 0x24
+ 544 0013 00       		.byte	0
+ 545 0014 0B       		.uleb128 0xb
+ 546 0015 0B       		.uleb128 0xb
+ 547 0016 3E       		.uleb128 0x3e
+ 548 0017 0B       		.uleb128 0xb
+ 549 0018 03       		.uleb128 0x3
+ 550 0019 0E       		.uleb128 0xe
+ 551 001a 00       		.byte	0
+ 552 001b 00       		.byte	0
+ 553 001c 03       		.uleb128 0x3
+ 554 001d 24       		.uleb128 0x24
+ 555 001e 00       		.byte	0
+ 556 001f 0B       		.uleb128 0xb
+ 557 0020 0B       		.uleb128 0xb
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cciPEVRR.s 			page 15
+
+
+ 558 0021 3E       		.uleb128 0x3e
+ 559 0022 0B       		.uleb128 0xb
+ 560 0023 03       		.uleb128 0x3
+ 561 0024 08       		.uleb128 0x8
+ 562 0025 00       		.byte	0
+ 563 0026 00       		.byte	0
+ 564 0027 04       		.uleb128 0x4
+ 565 0028 16       		.uleb128 0x16
+ 566 0029 00       		.byte	0
+ 567 002a 03       		.uleb128 0x3
+ 568 002b 0E       		.uleb128 0xe
+ 569 002c 3A       		.uleb128 0x3a
+ 570 002d 0B       		.uleb128 0xb
+ 571 002e 3B       		.uleb128 0x3b
+ 572 002f 05       		.uleb128 0x5
+ 573 0030 49       		.uleb128 0x49
+ 574 0031 13       		.uleb128 0x13
+ 575 0032 00       		.byte	0
+ 576 0033 00       		.byte	0
+ 577 0034 05       		.uleb128 0x5
+ 578 0035 35       		.uleb128 0x35
+ 579 0036 00       		.byte	0
+ 580 0037 49       		.uleb128 0x49
+ 581 0038 13       		.uleb128 0x13
+ 582 0039 00       		.byte	0
+ 583 003a 00       		.byte	0
+ 584 003b 06       		.uleb128 0x6
+ 585 003c 2E       		.uleb128 0x2e
+ 586 003d 01       		.byte	0x1
+ 587 003e 3F       		.uleb128 0x3f
+ 588 003f 19       		.uleb128 0x19
+ 589 0040 03       		.uleb128 0x3
+ 590 0041 0E       		.uleb128 0xe
+ 591 0042 3A       		.uleb128 0x3a
+ 592 0043 0B       		.uleb128 0xb
+ 593 0044 3B       		.uleb128 0x3b
+ 594 0045 0B       		.uleb128 0xb
+ 595 0046 27       		.uleb128 0x27
+ 596 0047 19       		.uleb128 0x19
+ 597 0048 11       		.uleb128 0x11
+ 598 0049 01       		.uleb128 0x1
+ 599 004a 12       		.uleb128 0x12
+ 600 004b 06       		.uleb128 0x6
+ 601 004c 40       		.uleb128 0x40
+ 602 004d 18       		.uleb128 0x18
+ 603 004e 9742     		.uleb128 0x2117
+ 604 0050 19       		.uleb128 0x19
+ 605 0051 01       		.uleb128 0x1
+ 606 0052 13       		.uleb128 0x13
+ 607 0053 00       		.byte	0
+ 608 0054 00       		.byte	0
+ 609 0055 07       		.uleb128 0x7
+ 610 0056 05       		.uleb128 0x5
+ 611 0057 00       		.byte	0
+ 612 0058 03       		.uleb128 0x3
+ 613 0059 0E       		.uleb128 0xe
+ 614 005a 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cciPEVRR.s 			page 16
+
+
+ 615 005b 0B       		.uleb128 0xb
+ 616 005c 3B       		.uleb128 0x3b
+ 617 005d 0B       		.uleb128 0xb
+ 618 005e 49       		.uleb128 0x49
+ 619 005f 13       		.uleb128 0x13
+ 620 0060 02       		.uleb128 0x2
+ 621 0061 18       		.uleb128 0x18
+ 622 0062 00       		.byte	0
+ 623 0063 00       		.byte	0
+ 624 0064 08       		.uleb128 0x8
+ 625 0065 34       		.uleb128 0x34
+ 626 0066 00       		.byte	0
+ 627 0067 03       		.uleb128 0x3
+ 628 0068 0E       		.uleb128 0xe
+ 629 0069 3A       		.uleb128 0x3a
+ 630 006a 0B       		.uleb128 0xb
+ 631 006b 3B       		.uleb128 0x3b
+ 632 006c 0B       		.uleb128 0xb
+ 633 006d 49       		.uleb128 0x49
+ 634 006e 13       		.uleb128 0x13
+ 635 006f 02       		.uleb128 0x2
+ 636 0070 18       		.uleb128 0x18
+ 637 0071 00       		.byte	0
+ 638 0072 00       		.byte	0
+ 639 0073 09       		.uleb128 0x9
+ 640 0074 2E       		.uleb128 0x2e
+ 641 0075 00       		.byte	0
+ 642 0076 3F       		.uleb128 0x3f
+ 643 0077 19       		.uleb128 0x19
+ 644 0078 03       		.uleb128 0x3
+ 645 0079 0E       		.uleb128 0xe
+ 646 007a 3A       		.uleb128 0x3a
+ 647 007b 0B       		.uleb128 0xb
+ 648 007c 3B       		.uleb128 0x3b
+ 649 007d 0B       		.uleb128 0xb
+ 650 007e 27       		.uleb128 0x27
+ 651 007f 19       		.uleb128 0x19
+ 652 0080 49       		.uleb128 0x49
+ 653 0081 13       		.uleb128 0x13
+ 654 0082 11       		.uleb128 0x11
+ 655 0083 01       		.uleb128 0x1
+ 656 0084 12       		.uleb128 0x12
+ 657 0085 06       		.uleb128 0x6
+ 658 0086 40       		.uleb128 0x40
+ 659 0087 18       		.uleb128 0x18
+ 660 0088 9742     		.uleb128 0x2117
+ 661 008a 19       		.uleb128 0x19
+ 662 008b 00       		.byte	0
+ 663 008c 00       		.byte	0
+ 664 008d 0A       		.uleb128 0xa
+ 665 008e 2E       		.uleb128 0x2e
+ 666 008f 01       		.byte	0x1
+ 667 0090 3F       		.uleb128 0x3f
+ 668 0091 19       		.uleb128 0x19
+ 669 0092 03       		.uleb128 0x3
+ 670 0093 0E       		.uleb128 0xe
+ 671 0094 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cciPEVRR.s 			page 17
+
+
+ 672 0095 0B       		.uleb128 0xb
+ 673 0096 3B       		.uleb128 0x3b
+ 674 0097 0B       		.uleb128 0xb
+ 675 0098 27       		.uleb128 0x27
+ 676 0099 19       		.uleb128 0x19
+ 677 009a 49       		.uleb128 0x49
+ 678 009b 13       		.uleb128 0x13
+ 679 009c 11       		.uleb128 0x11
+ 680 009d 01       		.uleb128 0x1
+ 681 009e 12       		.uleb128 0x12
+ 682 009f 06       		.uleb128 0x6
+ 683 00a0 40       		.uleb128 0x40
+ 684 00a1 18       		.uleb128 0x18
+ 685 00a2 9742     		.uleb128 0x2117
+ 686 00a4 19       		.uleb128 0x19
+ 687 00a5 00       		.byte	0
+ 688 00a6 00       		.byte	0
+ 689 00a7 00       		.byte	0
+ 690              		.section	.debug_aranges,"",%progbits
+ 691 0000 44000000 		.4byte	0x44
+ 692 0004 0200     		.2byte	0x2
+ 693 0006 00000000 		.4byte	.Ldebug_info0
+ 694 000a 04       		.byte	0x4
+ 695 000b 00       		.byte	0
+ 696 000c 0000     		.2byte	0
+ 697 000e 0000     		.2byte	0
+ 698 0010 00000000 		.4byte	.LFB0
+ 699 0014 30000000 		.4byte	.LFE0-.LFB0
+ 700 0018 00000000 		.4byte	.LFB1
+ 701 001c 50000000 		.4byte	.LFE1-.LFB1
+ 702 0020 00000000 		.4byte	.LFB2
+ 703 0024 1C000000 		.4byte	.LFE2-.LFB2
+ 704 0028 00000000 		.4byte	.LFB3
+ 705 002c 1C000000 		.4byte	.LFE3-.LFB3
+ 706 0030 00000000 		.4byte	.LFB4
+ 707 0034 44000000 		.4byte	.LFE4-.LFB4
+ 708 0038 00000000 		.4byte	.LFB5
+ 709 003c 30000000 		.4byte	.LFE5-.LFB5
+ 710 0040 00000000 		.4byte	0
+ 711 0044 00000000 		.4byte	0
+ 712              		.section	.debug_ranges,"",%progbits
+ 713              	.Ldebug_ranges0:
+ 714 0000 00000000 		.4byte	.LFB0
+ 715 0004 30000000 		.4byte	.LFE0
+ 716 0008 00000000 		.4byte	.LFB1
+ 717 000c 50000000 		.4byte	.LFE1
+ 718 0010 00000000 		.4byte	.LFB2
+ 719 0014 1C000000 		.4byte	.LFE2
+ 720 0018 00000000 		.4byte	.LFB3
+ 721 001c 1C000000 		.4byte	.LFE3
+ 722 0020 00000000 		.4byte	.LFB4
+ 723 0024 44000000 		.4byte	.LFE4
+ 724 0028 00000000 		.4byte	.LFB5
+ 725 002c 30000000 		.4byte	.LFE5
+ 726 0030 00000000 		.4byte	0
+ 727 0034 00000000 		.4byte	0
+ 728              		.section	.debug_line,"",%progbits
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cciPEVRR.s 			page 18
+
+
+ 729              	.Ldebug_line0:
+ 730 0000 17010000 		.section	.debug_str,"MS",%progbits,1
+ 730      0200A000 
+ 730      00000201 
+ 730      FB0E0D00 
+ 730      01010101 
+ 731              	.LASF16:
+ 732 0000 4C45445F 		.ascii	"LED_2_SetDriveMode\000"
+ 732      325F5365 
+ 732      74447269 
+ 732      76654D6F 
+ 732      646500
+ 733              	.LASF17:
+ 734 0013 4C45445F 		.ascii	"LED_2_Write\000"
+ 734      325F5772 
+ 734      69746500 
+ 735              	.LASF15:
+ 736 001f 72656733 		.ascii	"reg32\000"
+ 736      3200
+ 737              	.LASF19:
+ 738 0025 76616C75 		.ascii	"value\000"
+ 738      6500
+ 739              	.LASF22:
+ 740 002b 4C45445F 		.ascii	"LED_2_SetInterruptMode\000"
+ 740      325F5365 
+ 740      74496E74 
+ 740      65727275 
+ 740      70744D6F 
+ 741              	.LASF29:
+ 742 0042 433A5C50 		.ascii	"C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4"
+ 742      726F6772 
+ 742      616D2046 
+ 742      696C6573 
+ 742      20287838 
+ 743 0071 5C50536F 		.ascii	"\\PSoC Creator\\1\\CapSense_CSD_P4_Design01.cydsn\\"
+ 743      43204372 
+ 743      6561746F 
+ 743      725C315C 
+ 743      43617053 
+ 744 00a0 47656E65 		.ascii	"Generated_Source\\PSoC4\\LED_2.c\000"
+ 744      72617465 
+ 744      645F536F 
+ 744      75726365 
+ 744      5C50536F 
+ 745              	.LASF12:
+ 746 00bf 666C6F61 		.ascii	"float\000"
+ 746      7400
+ 747              	.LASF1:
+ 748 00c5 756E7369 		.ascii	"unsigned char\000"
+ 748      676E6564 
+ 748      20636861 
+ 748      7200
+ 749              	.LASF24:
+ 750 00d3 64725661 		.ascii	"drVal\000"
+ 750      6C00
+ 751              	.LASF26:
+ 752 00d9 4C45445F 		.ascii	"LED_2_ClearInterrupt\000"
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cciPEVRR.s 			page 19
+
+
+ 752      325F436C 
+ 752      65617249 
+ 752      6E746572 
+ 752      72757074 
+ 753              	.LASF5:
+ 754 00ee 6C6F6E67 		.ascii	"long unsigned int\000"
+ 754      20756E73 
+ 754      69676E65 
+ 754      6420696E 
+ 754      7400
+ 755              	.LASF3:
+ 756 0100 73686F72 		.ascii	"short unsigned int\000"
+ 756      7420756E 
+ 756      7369676E 
+ 756      65642069 
+ 756      6E7400
+ 757              	.LASF28:
+ 758 0113 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 758      43313120 
+ 758      352E342E 
+ 758      31203230 
+ 758      31363036 
+ 759 0146 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 759      20726576 
+ 759      6973696F 
+ 759      6E203233 
+ 759      37373135 
+ 760 0179 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 760      66756E63 
+ 760      74696F6E 
+ 760      2D736563 
+ 760      74696F6E 
+ 761              	.LASF13:
+ 762 01a1 646F7562 		.ascii	"double\000"
+ 762      6C6500
+ 763              	.LASF10:
+ 764 01a8 75696E74 		.ascii	"uint16\000"
+ 764      313600
+ 765              	.LASF23:
+ 766 01af 706F7369 		.ascii	"position\000"
+ 766      74696F6E 
+ 766      00
+ 767              	.LASF11:
+ 768 01b8 75696E74 		.ascii	"uint32\000"
+ 768      333200
+ 769              	.LASF25:
+ 770 01bf 696E7472 		.ascii	"intrCfg\000"
+ 770      43666700 
+ 771              	.LASF8:
+ 772 01c7 756E7369 		.ascii	"unsigned int\000"
+ 772      676E6564 
+ 772      20696E74 
+ 772      00
+ 773              	.LASF7:
+ 774 01d4 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 774      206C6F6E 
+ 774      6720756E 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cciPEVRR.s 			page 20
+
+
+ 774      7369676E 
+ 774      65642069 
+ 775              	.LASF18:
+ 776 01eb 6D6F6465 		.ascii	"mode\000"
+ 776      00
+ 777              	.LASF20:
+ 778 01f0 4C45445F 		.ascii	"LED_2_Read\000"
+ 778      325F5265 
+ 778      616400
+ 779              	.LASF6:
+ 780 01fb 6C6F6E67 		.ascii	"long long int\000"
+ 780      206C6F6E 
+ 780      6720696E 
+ 780      7400
+ 781              	.LASF27:
+ 782 0209 6D61736B 		.ascii	"maskedStatus\000"
+ 782      65645374 
+ 782      61747573 
+ 782      00
+ 783              	.LASF14:
+ 784 0216 63686172 		.ascii	"char\000"
+ 784      00
+ 785              	.LASF21:
+ 786 021b 4C45445F 		.ascii	"LED_2_ReadDataReg\000"
+ 786      325F5265 
+ 786      61644461 
+ 786      74615265 
+ 786      6700
+ 787              	.LASF2:
+ 788 022d 73686F72 		.ascii	"short int\000"
+ 788      7420696E 
+ 788      7400
+ 789              	.LASF9:
+ 790 0237 75696E74 		.ascii	"uint8\000"
+ 790      3800
+ 791              	.LASF4:
+ 792 023d 6C6F6E67 		.ascii	"long int\000"
+ 792      20696E74 
+ 792      00
+ 793              	.LASF0:
+ 794 0246 7369676E 		.ascii	"signed char\000"
+ 794      65642063 
+ 794      68617200 
+ 795              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

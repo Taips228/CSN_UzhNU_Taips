@@ -1,0 +1,1175 @@
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cce99zh3.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"Button.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.Button_SetDriveMode,"ax",%progbits
+  20              		.align	2
+  21              		.global	Button_SetDriveMode
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	Button_SetDriveMode, %function
+  25              	Button_SetDriveMode:
+  26              	.LFB0:
+  27              		.file 1 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\LWO3.cydsn\\Generat
+   1:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** /*******************************************************************************
+   2:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * File Name: Button.c  
+   3:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * Version 2.20
+   4:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+   5:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * Description:
+   6:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  This file contains API to enable firmware control of a Pins component.
+   7:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+   8:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** ********************************************************************************
+   9:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  10:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  11:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  12:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * the software package with which this file was provided.
+  13:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *******************************************************************************/
+  14:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** 
+  15:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** #include "cytypes.h"
+  16:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** #include "Button.h"
+  17:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** 
+  18:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** 
+  19:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** #if defined(Button__PC)
+  20:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     #define Button_SetP4PinDriveMode(shift, mode)  \
+  21:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     do { \
+  22:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****         Button_PC =   (Button_PC & \
+  23:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****                                 (uint32)(~(uint32)(Button_DRIVE_MODE_IND_MASK << \
+  24:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****                                 (Button_DRIVE_MODE_BITS * (shift))))) | \
+  25:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****                                 (uint32)((uint32)(mode) << \
+  26:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****                                 (Button_DRIVE_MODE_BITS * (shift))); \
+  27:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     } while (0)
+  28:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** #else
+  29:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     #if (CY_PSOC4_4200L)
+  30:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****         #define Button_SetP4PinDriveMode(shift, mode)  \
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cce99zh3.s 			page 2
+
+
+  31:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****         do { \
+  32:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****             Button_USBIO_CTRL_REG = (Button_USBIO_CTRL_REG & \
+  33:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****                                     (uint32)(~(uint32)(Button_DRIVE_MODE_IND_MASK << \
+  34:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****                                     (Button_DRIVE_MODE_BITS * (shift))))) | \
+  35:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****                                     (uint32)((uint32)(mode) << \
+  36:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****                                     (Button_DRIVE_MODE_BITS * (shift))); \
+  37:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****         } while (0)
+  38:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     #endif
+  39:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** #endif
+  40:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****   
+  41:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** 
+  42:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** #if defined(Button__PC) || (CY_PSOC4_4200L) 
+  43:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     /*******************************************************************************
+  44:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     * Function Name: Button_SetDriveMode
+  45:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     ****************************************************************************//**
+  46:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     *
+  47:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     * \brief Sets the drive mode for each of the Pins component's pins.
+  48:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     * 
+  49:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     * <b>Note</b> This affects all pins in the Pins component instance. Use the
+  50:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     * Per-Pin APIs if you wish to control individual pin's drive modes.
+  51:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     *
+  52:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     * <b>Note</b> USBIOs have limited drive functionality. Refer to the Drive Mode
+  53:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     * parameter for more information.
+  54:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     *
+  55:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     * \param mode
+  56:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     *  Mode for the selected signals. Valid options are documented in 
+  57:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     *  \ref driveMode.
+  58:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     *
+  59:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     * \return
+  60:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     *  None
+  61:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     *
+  62:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     * \sideeffect
+  63:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     *  If you use read-modify-write operations that are not atomic, the ISR can
+  64:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     *  cause corruption of this function. An ISR that interrupts this function 
+  65:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     *  and performs writes to the Pins component Drive Mode registers can cause 
+  66:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     *  corrupted port data. To avoid this issue, you should either use the Per-Pin
+  67:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     *  APIs (primary method) or disable interrupts around this function.
+  68:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     *
+  69:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     * \funcusage
+  70:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     *  \snippet Button_SUT.c usage_Button_SetDriveMode
+  71:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     *******************************************************************************/
+  72:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     void Button_SetDriveMode(uint8 mode)
+  73:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     {
+  28              		.loc 1 73 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  74:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** 		Button_SetP4PinDriveMode(Button__0__SHIFT, mode);
+  34              		.loc 1 74 0
+  35 0000 034A     		ldr	r2, .L2
+  36 0002 1168     		ldr	r1, [r2]
+  37 0004 034B     		ldr	r3, .L2+4
+  38 0006 0B40     		ands	r3, r1
+  39 0008 4005     		lsls	r0, r0, #21
+  40              	.LVL1:
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cce99zh3.s 			page 3
+
+
+  41 000a 1843     		orrs	r0, r3
+  42 000c 1060     		str	r0, [r2]
+  75:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     }
+  43              		.loc 1 75 0
+  44              		@ sp needed
+  45 000e 7047     		bx	lr
+  46              	.L3:
+  47              		.align	2
+  48              	.L2:
+  49 0010 08000440 		.word	1074003976
+  50 0014 FFFF1FFF 		.word	-14680065
+  51              		.cfi_endproc
+  52              	.LFE0:
+  53              		.size	Button_SetDriveMode, .-Button_SetDriveMode
+  54              		.section	.text.Button_Write,"ax",%progbits
+  55              		.align	2
+  56              		.global	Button_Write
+  57              		.code	16
+  58              		.thumb_func
+  59              		.type	Button_Write, %function
+  60              	Button_Write:
+  61              	.LFB1:
+  76:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** #endif
+  77:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** 
+  78:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** 
+  79:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** /*******************************************************************************
+  80:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * Function Name: Button_Write
+  81:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** ****************************************************************************//**
+  82:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+  83:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \brief Writes the value to the physical port (data output register), masking
+  84:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  and shifting the bits appropriately. 
+  85:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+  86:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * The data output register controls the signal applied to the physical pin in 
+  87:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * conjunction with the drive mode parameter. This function avoids changing 
+  88:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * other bits in the port by using the appropriate method (read-modify-write or
+  89:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * bit banding).
+  90:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+  91:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * <b>Note</b> This function should not be used on a hardware digital output pin 
+  92:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * as it is driven by the hardware signal attached to it.
+  93:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+  94:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \param value
+  95:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  Value to write to the component instance.
+  96:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+  97:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \return 
+  98:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  None 
+  99:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+ 100:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \sideeffect
+ 101:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  If you use read-modify-write operations that are not atomic; the Interrupt 
+ 102:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  Service Routines (ISR) can cause corruption of this function. An ISR that 
+ 103:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  interrupts this function and performs writes to the Pins component data 
+ 104:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  register can cause corrupted port data. To avoid this issue, you should 
+ 105:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  either use the Per-Pin APIs (primary method) or disable interrupts around 
+ 106:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  this function.
+ 107:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+ 108:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \funcusage
+ 109:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  \snippet Button_SUT.c usage_Button_Write
+ 110:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *******************************************************************************/
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cce99zh3.s 			page 4
+
+
+ 111:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** void Button_Write(uint8 value)
+ 112:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** {
+  62              		.loc 1 112 0
+  63              		.cfi_startproc
+  64              		@ args = 0, pretend = 0, frame = 0
+  65              		@ frame_needed = 0, uses_anonymous_args = 0
+  66              		@ link register save eliminated.
+  67              	.LVL2:
+ 113:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     uint8 drVal = (uint8)(Button_DR & (uint8)(~Button_MASK));
+  68              		.loc 1 113 0
+  69 0000 0449     		ldr	r1, .L5
+  70 0002 0A68     		ldr	r2, [r1]
+  71 0004 7F23     		movs	r3, #127
+  72 0006 1A40     		ands	r2, r3
+  73              	.LVL3:
+ 114:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     drVal = (drVal | ((uint8)(value << Button_SHIFT) & Button_MASK));
+  74              		.loc 1 114 0
+  75 0008 C301     		lsls	r3, r0, #7
+  76 000a D8B2     		uxtb	r0, r3
+  77              	.LVL4:
+  78 000c 1043     		orrs	r0, r2
+  79              	.LVL5:
+ 115:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     Button_DR = (uint32)drVal;
+  80              		.loc 1 115 0
+  81 000e 0860     		str	r0, [r1]
+ 116:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** }
+  82              		.loc 1 116 0
+  83              		@ sp needed
+  84 0010 7047     		bx	lr
+  85              	.L6:
+  86 0012 C046     		.align	2
+  87              	.L5:
+  88 0014 00000440 		.word	1074003968
+  89              		.cfi_endproc
+  90              	.LFE1:
+  91              		.size	Button_Write, .-Button_Write
+  92              		.section	.text.Button_Read,"ax",%progbits
+  93              		.align	2
+  94              		.global	Button_Read
+  95              		.code	16
+  96              		.thumb_func
+  97              		.type	Button_Read, %function
+  98              	Button_Read:
+  99              	.LFB2:
+ 117:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** 
+ 118:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** 
+ 119:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** /*******************************************************************************
+ 120:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * Function Name: Button_Read
+ 121:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** ****************************************************************************//**
+ 122:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+ 123:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \brief Reads the associated physical port (pin status register) and masks 
+ 124:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  the required bits according to the width and bit position of the component
+ 125:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  instance. 
+ 126:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+ 127:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * The pin's status register returns the current logic level present on the 
+ 128:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * physical pin.
+ 129:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cce99zh3.s 			page 5
+
+
+ 130:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \return 
+ 131:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  The current value for the pins in the component as a right justified number.
+ 132:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+ 133:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \funcusage
+ 134:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  \snippet Button_SUT.c usage_Button_Read  
+ 135:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *******************************************************************************/
+ 136:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** uint8 Button_Read(void)
+ 137:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** {
+ 100              		.loc 1 137 0
+ 101              		.cfi_startproc
+ 102              		@ args = 0, pretend = 0, frame = 0
+ 103              		@ frame_needed = 0, uses_anonymous_args = 0
+ 104              		@ link register save eliminated.
+ 138:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     return (uint8)((Button_PS & Button_MASK) >> Button_SHIFT);
+ 105              		.loc 1 138 0
+ 106 0000 024B     		ldr	r3, .L8
+ 107 0002 1868     		ldr	r0, [r3]
+ 108 0004 C009     		lsrs	r0, r0, #7
+ 109 0006 0123     		movs	r3, #1
+ 110 0008 1840     		ands	r0, r3
+ 139:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** }
+ 111              		.loc 1 139 0
+ 112              		@ sp needed
+ 113 000a 7047     		bx	lr
+ 114              	.L9:
+ 115              		.align	2
+ 116              	.L8:
+ 117 000c 04000440 		.word	1074003972
+ 118              		.cfi_endproc
+ 119              	.LFE2:
+ 120              		.size	Button_Read, .-Button_Read
+ 121              		.section	.text.Button_ReadDataReg,"ax",%progbits
+ 122              		.align	2
+ 123              		.global	Button_ReadDataReg
+ 124              		.code	16
+ 125              		.thumb_func
+ 126              		.type	Button_ReadDataReg, %function
+ 127              	Button_ReadDataReg:
+ 128              	.LFB3:
+ 140:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** 
+ 141:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** 
+ 142:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** /*******************************************************************************
+ 143:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * Function Name: Button_ReadDataReg
+ 144:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** ****************************************************************************//**
+ 145:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+ 146:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \brief Reads the associated physical port's data output register and masks 
+ 147:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  the correct bits according to the width and bit position of the component 
+ 148:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  instance. 
+ 149:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+ 150:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * The data output register controls the signal applied to the physical pin in 
+ 151:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * conjunction with the drive mode parameter. This is not the same as the 
+ 152:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * preferred Button_Read() API because the 
+ 153:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * Button_ReadDataReg() reads the data register instead of the status 
+ 154:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * register. For output pins this is a useful function to determine the value 
+ 155:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * just written to the pin.
+ 156:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+ 157:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \return 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cce99zh3.s 			page 6
+
+
+ 158:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  The current value of the data register masked and shifted into a right 
+ 159:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  justified number for the component instance.
+ 160:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+ 161:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \funcusage
+ 162:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  \snippet Button_SUT.c usage_Button_ReadDataReg 
+ 163:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *******************************************************************************/
+ 164:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** uint8 Button_ReadDataReg(void)
+ 165:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** {
+ 129              		.loc 1 165 0
+ 130              		.cfi_startproc
+ 131              		@ args = 0, pretend = 0, frame = 0
+ 132              		@ frame_needed = 0, uses_anonymous_args = 0
+ 133              		@ link register save eliminated.
+ 166:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     return (uint8)((Button_DR & Button_MASK) >> Button_SHIFT);
+ 134              		.loc 1 166 0
+ 135 0000 024B     		ldr	r3, .L11
+ 136 0002 1868     		ldr	r0, [r3]
+ 137 0004 C009     		lsrs	r0, r0, #7
+ 138 0006 0123     		movs	r3, #1
+ 139 0008 1840     		ands	r0, r3
+ 167:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** }
+ 140              		.loc 1 167 0
+ 141              		@ sp needed
+ 142 000a 7047     		bx	lr
+ 143              	.L12:
+ 144              		.align	2
+ 145              	.L11:
+ 146 000c 00000440 		.word	1074003968
+ 147              		.cfi_endproc
+ 148              	.LFE3:
+ 149              		.size	Button_ReadDataReg, .-Button_ReadDataReg
+ 150              		.section	.text.Button_SetInterruptMode,"ax",%progbits
+ 151              		.align	2
+ 152              		.global	Button_SetInterruptMode
+ 153              		.code	16
+ 154              		.thumb_func
+ 155              		.type	Button_SetInterruptMode, %function
+ 156              	Button_SetInterruptMode:
+ 157              	.LFB4:
+ 168:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** 
+ 169:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** 
+ 170:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** /*******************************************************************************
+ 171:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * Function Name: Button_SetInterruptMode
+ 172:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** ****************************************************************************//**
+ 173:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+ 174:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \brief Configures the interrupt mode for each of the Pins component's
+ 175:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  pins. Alternatively you may set the interrupt mode for all the pins
+ 176:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  specified in the Pins component.
+ 177:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+ 178:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  <b>Note</b> The interrupt is port-wide and therefore any enabled pin
+ 179:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  interrupt may trigger it.
+ 180:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+ 181:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \param position
+ 182:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  The pin position as listed in the Pins component. You may OR these to be 
+ 183:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  able to configure the interrupt mode of multiple pins within a Pins 
+ 184:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  component. Or you may use Button_INTR_ALL to configure the
+ 185:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  interrupt mode of all the pins in the Pins component.       
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cce99zh3.s 			page 7
+
+
+ 186:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  - Button_0_INTR       (First pin in the list)
+ 187:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  - Button_1_INTR       (Second pin in the list)
+ 188:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  - ...
+ 189:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  - Button_INTR_ALL     (All pins in Pins component)
+ 190:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+ 191:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \param mode
+ 192:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  Interrupt mode for the selected pins. Valid options are documented in
+ 193:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  \ref intrMode.
+ 194:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+ 195:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \return 
+ 196:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  None
+ 197:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  
+ 198:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \sideeffect
+ 199:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  It is recommended that the interrupt be disabled before calling this 
+ 200:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  function to avoid unintended interrupt requests. Note that the interrupt
+ 201:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  type is port wide, and therefore will trigger for any enabled pin on the 
+ 202:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  port.
+ 203:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+ 204:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \funcusage
+ 205:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  \snippet Button_SUT.c usage_Button_SetInterruptMode
+ 206:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *******************************************************************************/
+ 207:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** void Button_SetInterruptMode(uint16 position, uint16 mode)
+ 208:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** {
+ 158              		.loc 1 208 0
+ 159              		.cfi_startproc
+ 160              		@ args = 0, pretend = 0, frame = 0
+ 161              		@ frame_needed = 0, uses_anonymous_args = 0
+ 162              		@ link register save eliminated.
+ 163              	.LVL6:
+ 209:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     uint32 intrCfg;
+ 210:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     
+ 211:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     intrCfg =  Button_INTCFG & (uint32)(~(uint32)position);
+ 164              		.loc 1 211 0
+ 165 0000 034A     		ldr	r2, .L14
+ 166 0002 1368     		ldr	r3, [r2]
+ 167 0004 8343     		bics	r3, r0
+ 168              	.LVL7:
+ 212:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     Button_INTCFG = intrCfg | ((uint32)position & (uint32)mode);
+ 169              		.loc 1 212 0
+ 170 0006 0840     		ands	r0, r1
+ 171              	.LVL8:
+ 172 0008 1843     		orrs	r0, r3
+ 173 000a 1060     		str	r0, [r2]
+ 213:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** }
+ 174              		.loc 1 213 0
+ 175              		@ sp needed
+ 176 000c 7047     		bx	lr
+ 177              	.L15:
+ 178 000e C046     		.align	2
+ 179              	.L14:
+ 180 0010 0C000440 		.word	1074003980
+ 181              		.cfi_endproc
+ 182              	.LFE4:
+ 183              		.size	Button_SetInterruptMode, .-Button_SetInterruptMode
+ 184              		.section	.text.Button_ClearInterrupt,"ax",%progbits
+ 185              		.align	2
+ 186              		.global	Button_ClearInterrupt
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cce99zh3.s 			page 8
+
+
+ 187              		.code	16
+ 188              		.thumb_func
+ 189              		.type	Button_ClearInterrupt, %function
+ 190              	Button_ClearInterrupt:
+ 191              	.LFB5:
+ 214:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** 
+ 215:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** 
+ 216:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** /*******************************************************************************
+ 217:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * Function Name: Button_ClearInterrupt
+ 218:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** ****************************************************************************//**
+ 219:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+ 220:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \brief Clears any active interrupts attached with the component and returns 
+ 221:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  the value of the interrupt status register allowing determination of which
+ 222:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  pins generated an interrupt event.
+ 223:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+ 224:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \return 
+ 225:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  The right-shifted current value of the interrupt status register. Each pin 
+ 226:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  has one bit set if it generated an interrupt event. For example, bit 0 is 
+ 227:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  for pin 0 and bit 1 is for pin 1 of the Pins component.
+ 228:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  
+ 229:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \sideeffect
+ 230:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  Clears all bits of the physical port's interrupt status register, not just
+ 231:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  those associated with the Pins component.
+ 232:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *
+ 233:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** * \funcusage
+ 234:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *  \snippet Button_SUT.c usage_Button_ClearInterrupt
+ 235:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** *******************************************************************************/
+ 236:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** uint8 Button_ClearInterrupt(void)
+ 237:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** {
+ 192              		.loc 1 237 0
+ 193              		.cfi_startproc
+ 194              		@ args = 0, pretend = 0, frame = 0
+ 195              		@ frame_needed = 0, uses_anonymous_args = 0
+ 196              		@ link register save eliminated.
+ 238:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** 	uint8 maskedStatus = (uint8)(Button_INTSTAT & Button_MASK);
+ 197              		.loc 1 238 0
+ 198 0000 034B     		ldr	r3, .L17
+ 199 0002 1868     		ldr	r0, [r3]
+ 200 0004 C0B2     		uxtb	r0, r0
+ 201 0006 7F22     		movs	r2, #127
+ 202 0008 9043     		bics	r0, r2
+ 203              	.LVL9:
+ 239:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** 	Button_INTSTAT = maskedStatus;
+ 204              		.loc 1 239 0
+ 205 000a 1860     		str	r0, [r3]
+ 240:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c ****     return maskedStatus >> Button_SHIFT;
+ 206              		.loc 1 240 0
+ 207 000c C009     		lsrs	r0, r0, #7
+ 208              	.LVL10:
+ 241:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\Generated_Source\PSoC4\Button.c **** }
+ 209              		.loc 1 241 0
+ 210              		@ sp needed
+ 211 000e 7047     		bx	lr
+ 212              	.L18:
+ 213              		.align	2
+ 214              	.L17:
+ 215 0010 10000440 		.word	1074003984
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cce99zh3.s 			page 9
+
+
+ 216              		.cfi_endproc
+ 217              	.LFE5:
+ 218              		.size	Button_ClearInterrupt, .-Button_ClearInterrupt
+ 219              		.text
+ 220              	.Letext0:
+ 221              		.file 2 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\LWO3.cydsn\\Generat
+ 222              		.section	.debug_info,"",%progbits
+ 223              	.Ldebug_info0:
+ 224 0000 95010000 		.4byte	0x195
+ 225 0004 0400     		.2byte	0x4
+ 226 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 227 000a 04       		.byte	0x4
+ 228 000b 01       		.uleb128 0x1
+ 229 000c 59010000 		.4byte	.LASF28
+ 230 0010 0C       		.byte	0xc
+ 231 0011 EF000000 		.4byte	.LASF29
+ 232 0015 00000000 		.4byte	.Ldebug_ranges0+0
+ 233 0019 00000000 		.4byte	0
+ 234 001d 00000000 		.4byte	.Ldebug_line0
+ 235 0021 02       		.uleb128 0x2
+ 236 0022 01       		.byte	0x1
+ 237 0023 06       		.byte	0x6
+ 238 0024 39020000 		.4byte	.LASF0
+ 239 0028 02       		.uleb128 0x2
+ 240 0029 01       		.byte	0x1
+ 241 002a 08       		.byte	0x8
+ 242 002b 51000000 		.4byte	.LASF1
+ 243 002f 02       		.uleb128 0x2
+ 244 0030 02       		.byte	0x2
+ 245 0031 05       		.byte	0x5
+ 246 0032 20020000 		.4byte	.LASF2
+ 247 0036 02       		.uleb128 0x2
+ 248 0037 02       		.byte	0x2
+ 249 0038 07       		.byte	0x7
+ 250 0039 77000000 		.4byte	.LASF3
+ 251 003d 02       		.uleb128 0x2
+ 252 003e 04       		.byte	0x4
+ 253 003f 05       		.byte	0x5
+ 254 0040 30020000 		.4byte	.LASF4
+ 255 0044 02       		.uleb128 0x2
+ 256 0045 04       		.byte	0x4
+ 257 0046 07       		.byte	0x7
+ 258 0047 65000000 		.4byte	.LASF5
+ 259 004b 02       		.uleb128 0x2
+ 260 004c 08       		.byte	0x8
+ 261 004d 05       		.byte	0x5
+ 262 004e F3010000 		.4byte	.LASF6
+ 263 0052 02       		.uleb128 0x2
+ 264 0053 08       		.byte	0x8
+ 265 0054 07       		.byte	0x7
+ 266 0055 BD000000 		.4byte	.LASF7
+ 267 0059 03       		.uleb128 0x3
+ 268 005a 04       		.byte	0x4
+ 269 005b 05       		.byte	0x5
+ 270 005c 696E7400 		.ascii	"int\000"
+ 271 0060 02       		.uleb128 0x2
+ 272 0061 04       		.byte	0x4
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cce99zh3.s 			page 10
+
+
+ 273 0062 07       		.byte	0x7
+ 274 0063 B0000000 		.4byte	.LASF8
+ 275 0067 04       		.uleb128 0x4
+ 276 0068 2A020000 		.4byte	.LASF9
+ 277 006c 02       		.byte	0x2
+ 278 006d FB01     		.2byte	0x1fb
+ 279 006f 28000000 		.4byte	0x28
+ 280 0073 04       		.uleb128 0x4
+ 281 0074 91000000 		.4byte	.LASF10
+ 282 0078 02       		.byte	0x2
+ 283 0079 FC01     		.2byte	0x1fc
+ 284 007b 36000000 		.4byte	0x36
+ 285 007f 04       		.uleb128 0x4
+ 286 0080 A1000000 		.4byte	.LASF11
+ 287 0084 02       		.byte	0x2
+ 288 0085 FD01     		.2byte	0x1fd
+ 289 0087 44000000 		.4byte	0x44
+ 290 008b 02       		.uleb128 0x2
+ 291 008c 04       		.byte	0x4
+ 292 008d 04       		.byte	0x4
+ 293 008e 37000000 		.4byte	.LASF12
+ 294 0092 02       		.uleb128 0x2
+ 295 0093 08       		.byte	0x8
+ 296 0094 04       		.byte	0x4
+ 297 0095 8A000000 		.4byte	.LASF13
+ 298 0099 02       		.uleb128 0x2
+ 299 009a 01       		.byte	0x1
+ 300 009b 08       		.byte	0x8
+ 301 009c 0E020000 		.4byte	.LASF14
+ 302 00a0 04       		.uleb128 0x4
+ 303 00a1 00000000 		.4byte	.LASF15
+ 304 00a5 02       		.byte	0x2
+ 305 00a6 A702     		.2byte	0x2a7
+ 306 00a8 AC000000 		.4byte	0xac
+ 307 00ac 05       		.uleb128 0x5
+ 308 00ad 7F000000 		.4byte	0x7f
+ 309 00b1 06       		.uleb128 0x6
+ 310 00b2 3D000000 		.4byte	.LASF16
+ 311 00b6 01       		.byte	0x1
+ 312 00b7 48       		.byte	0x48
+ 313 00b8 00000000 		.4byte	.LFB0
+ 314 00bc 18000000 		.4byte	.LFE0-.LFB0
+ 315 00c0 01       		.uleb128 0x1
+ 316 00c1 9C       		.byte	0x9c
+ 317 00c2 D6000000 		.4byte	0xd6
+ 318 00c6 07       		.uleb128 0x7
+ 319 00c7 D4000000 		.4byte	.LASF18
+ 320 00cb 01       		.byte	0x1
+ 321 00cc 48       		.byte	0x48
+ 322 00cd 67000000 		.4byte	0x67
+ 323 00d1 00000000 		.4byte	.LLST0
+ 324 00d5 00       		.byte	0
+ 325 00d6 06       		.uleb128 0x6
+ 326 00d7 13020000 		.4byte	.LASF17
+ 327 00db 01       		.byte	0x1
+ 328 00dc 6F       		.byte	0x6f
+ 329 00dd 00000000 		.4byte	.LFB1
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cce99zh3.s 			page 11
+
+
+ 330 00e1 18000000 		.4byte	.LFE1-.LFB1
+ 331 00e5 01       		.uleb128 0x1
+ 332 00e6 9C       		.byte	0x9c
+ 333 00e7 0A010000 		.4byte	0x10a
+ 334 00eb 07       		.uleb128 0x7
+ 335 00ec 06000000 		.4byte	.LASF19
+ 336 00f0 01       		.byte	0x1
+ 337 00f1 6F       		.byte	0x6f
+ 338 00f2 67000000 		.4byte	0x67
+ 339 00f6 21000000 		.4byte	.LLST1
+ 340 00fa 08       		.uleb128 0x8
+ 341 00fb 5F000000 		.4byte	.LASF24
+ 342 00ff 01       		.byte	0x1
+ 343 0100 71       		.byte	0x71
+ 344 0101 67000000 		.4byte	0x67
+ 345 0105 42000000 		.4byte	.LLST2
+ 346 0109 00       		.byte	0
+ 347 010a 09       		.uleb128 0x9
+ 348 010b E7010000 		.4byte	.LASF20
+ 349 010f 01       		.byte	0x1
+ 350 0110 88       		.byte	0x88
+ 351 0111 67000000 		.4byte	0x67
+ 352 0115 00000000 		.4byte	.LFB2
+ 353 0119 10000000 		.4byte	.LFE2-.LFB2
+ 354 011d 01       		.uleb128 0x1
+ 355 011e 9C       		.byte	0x9c
+ 356 011f 09       		.uleb128 0x9
+ 357 0120 0C000000 		.4byte	.LASF21
+ 358 0124 01       		.byte	0x1
+ 359 0125 A4       		.byte	0xa4
+ 360 0126 67000000 		.4byte	0x67
+ 361 012a 00000000 		.4byte	.LFB3
+ 362 012e 10000000 		.4byte	.LFE3-.LFB3
+ 363 0132 01       		.uleb128 0x1
+ 364 0133 9C       		.byte	0x9c
+ 365 0134 06       		.uleb128 0x6
+ 366 0135 1F000000 		.4byte	.LASF22
+ 367 0139 01       		.byte	0x1
+ 368 013a CF       		.byte	0xcf
+ 369 013b 00000000 		.4byte	.LFB4
+ 370 013f 14000000 		.4byte	.LFE4-.LFB4
+ 371 0143 01       		.uleb128 0x1
+ 372 0144 9C       		.byte	0x9c
+ 373 0145 73010000 		.4byte	0x173
+ 374 0149 07       		.uleb128 0x7
+ 375 014a 98000000 		.4byte	.LASF23
+ 376 014e 01       		.byte	0x1
+ 377 014f CF       		.byte	0xcf
+ 378 0150 73000000 		.4byte	0x73
+ 379 0154 60000000 		.4byte	.LLST3
+ 380 0158 0A       		.uleb128 0xa
+ 381 0159 D4000000 		.4byte	.LASF18
+ 382 015d 01       		.byte	0x1
+ 383 015e CF       		.byte	0xcf
+ 384 015f 73000000 		.4byte	0x73
+ 385 0163 01       		.uleb128 0x1
+ 386 0164 51       		.byte	0x51
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cce99zh3.s 			page 12
+
+
+ 387 0165 0B       		.uleb128 0xb
+ 388 0166 A8000000 		.4byte	.LASF25
+ 389 016a 01       		.byte	0x1
+ 390 016b D1       		.byte	0xd1
+ 391 016c 7F000000 		.4byte	0x7f
+ 392 0170 01       		.uleb128 0x1
+ 393 0171 53       		.byte	0x53
+ 394 0172 00       		.byte	0
+ 395 0173 0C       		.uleb128 0xc
+ 396 0174 D9000000 		.4byte	.LASF26
+ 397 0178 01       		.byte	0x1
+ 398 0179 EC       		.byte	0xec
+ 399 017a 67000000 		.4byte	0x67
+ 400 017e 00000000 		.4byte	.LFB5
+ 401 0182 14000000 		.4byte	.LFE5-.LFB5
+ 402 0186 01       		.uleb128 0x1
+ 403 0187 9C       		.byte	0x9c
+ 404 0188 08       		.uleb128 0x8
+ 405 0189 01020000 		.4byte	.LASF27
+ 406 018d 01       		.byte	0x1
+ 407 018e EE       		.byte	0xee
+ 408 018f 67000000 		.4byte	0x67
+ 409 0193 81000000 		.4byte	.LLST4
+ 410 0197 00       		.byte	0
+ 411 0198 00       		.byte	0
+ 412              		.section	.debug_abbrev,"",%progbits
+ 413              	.Ldebug_abbrev0:
+ 414 0000 01       		.uleb128 0x1
+ 415 0001 11       		.uleb128 0x11
+ 416 0002 01       		.byte	0x1
+ 417 0003 25       		.uleb128 0x25
+ 418 0004 0E       		.uleb128 0xe
+ 419 0005 13       		.uleb128 0x13
+ 420 0006 0B       		.uleb128 0xb
+ 421 0007 03       		.uleb128 0x3
+ 422 0008 0E       		.uleb128 0xe
+ 423 0009 55       		.uleb128 0x55
+ 424 000a 17       		.uleb128 0x17
+ 425 000b 11       		.uleb128 0x11
+ 426 000c 01       		.uleb128 0x1
+ 427 000d 10       		.uleb128 0x10
+ 428 000e 17       		.uleb128 0x17
+ 429 000f 00       		.byte	0
+ 430 0010 00       		.byte	0
+ 431 0011 02       		.uleb128 0x2
+ 432 0012 24       		.uleb128 0x24
+ 433 0013 00       		.byte	0
+ 434 0014 0B       		.uleb128 0xb
+ 435 0015 0B       		.uleb128 0xb
+ 436 0016 3E       		.uleb128 0x3e
+ 437 0017 0B       		.uleb128 0xb
+ 438 0018 03       		.uleb128 0x3
+ 439 0019 0E       		.uleb128 0xe
+ 440 001a 00       		.byte	0
+ 441 001b 00       		.byte	0
+ 442 001c 03       		.uleb128 0x3
+ 443 001d 24       		.uleb128 0x24
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cce99zh3.s 			page 13
+
+
+ 444 001e 00       		.byte	0
+ 445 001f 0B       		.uleb128 0xb
+ 446 0020 0B       		.uleb128 0xb
+ 447 0021 3E       		.uleb128 0x3e
+ 448 0022 0B       		.uleb128 0xb
+ 449 0023 03       		.uleb128 0x3
+ 450 0024 08       		.uleb128 0x8
+ 451 0025 00       		.byte	0
+ 452 0026 00       		.byte	0
+ 453 0027 04       		.uleb128 0x4
+ 454 0028 16       		.uleb128 0x16
+ 455 0029 00       		.byte	0
+ 456 002a 03       		.uleb128 0x3
+ 457 002b 0E       		.uleb128 0xe
+ 458 002c 3A       		.uleb128 0x3a
+ 459 002d 0B       		.uleb128 0xb
+ 460 002e 3B       		.uleb128 0x3b
+ 461 002f 05       		.uleb128 0x5
+ 462 0030 49       		.uleb128 0x49
+ 463 0031 13       		.uleb128 0x13
+ 464 0032 00       		.byte	0
+ 465 0033 00       		.byte	0
+ 466 0034 05       		.uleb128 0x5
+ 467 0035 35       		.uleb128 0x35
+ 468 0036 00       		.byte	0
+ 469 0037 49       		.uleb128 0x49
+ 470 0038 13       		.uleb128 0x13
+ 471 0039 00       		.byte	0
+ 472 003a 00       		.byte	0
+ 473 003b 06       		.uleb128 0x6
+ 474 003c 2E       		.uleb128 0x2e
+ 475 003d 01       		.byte	0x1
+ 476 003e 3F       		.uleb128 0x3f
+ 477 003f 19       		.uleb128 0x19
+ 478 0040 03       		.uleb128 0x3
+ 479 0041 0E       		.uleb128 0xe
+ 480 0042 3A       		.uleb128 0x3a
+ 481 0043 0B       		.uleb128 0xb
+ 482 0044 3B       		.uleb128 0x3b
+ 483 0045 0B       		.uleb128 0xb
+ 484 0046 27       		.uleb128 0x27
+ 485 0047 19       		.uleb128 0x19
+ 486 0048 11       		.uleb128 0x11
+ 487 0049 01       		.uleb128 0x1
+ 488 004a 12       		.uleb128 0x12
+ 489 004b 06       		.uleb128 0x6
+ 490 004c 40       		.uleb128 0x40
+ 491 004d 18       		.uleb128 0x18
+ 492 004e 9742     		.uleb128 0x2117
+ 493 0050 19       		.uleb128 0x19
+ 494 0051 01       		.uleb128 0x1
+ 495 0052 13       		.uleb128 0x13
+ 496 0053 00       		.byte	0
+ 497 0054 00       		.byte	0
+ 498 0055 07       		.uleb128 0x7
+ 499 0056 05       		.uleb128 0x5
+ 500 0057 00       		.byte	0
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cce99zh3.s 			page 14
+
+
+ 501 0058 03       		.uleb128 0x3
+ 502 0059 0E       		.uleb128 0xe
+ 503 005a 3A       		.uleb128 0x3a
+ 504 005b 0B       		.uleb128 0xb
+ 505 005c 3B       		.uleb128 0x3b
+ 506 005d 0B       		.uleb128 0xb
+ 507 005e 49       		.uleb128 0x49
+ 508 005f 13       		.uleb128 0x13
+ 509 0060 02       		.uleb128 0x2
+ 510 0061 17       		.uleb128 0x17
+ 511 0062 00       		.byte	0
+ 512 0063 00       		.byte	0
+ 513 0064 08       		.uleb128 0x8
+ 514 0065 34       		.uleb128 0x34
+ 515 0066 00       		.byte	0
+ 516 0067 03       		.uleb128 0x3
+ 517 0068 0E       		.uleb128 0xe
+ 518 0069 3A       		.uleb128 0x3a
+ 519 006a 0B       		.uleb128 0xb
+ 520 006b 3B       		.uleb128 0x3b
+ 521 006c 0B       		.uleb128 0xb
+ 522 006d 49       		.uleb128 0x49
+ 523 006e 13       		.uleb128 0x13
+ 524 006f 02       		.uleb128 0x2
+ 525 0070 17       		.uleb128 0x17
+ 526 0071 00       		.byte	0
+ 527 0072 00       		.byte	0
+ 528 0073 09       		.uleb128 0x9
+ 529 0074 2E       		.uleb128 0x2e
+ 530 0075 00       		.byte	0
+ 531 0076 3F       		.uleb128 0x3f
+ 532 0077 19       		.uleb128 0x19
+ 533 0078 03       		.uleb128 0x3
+ 534 0079 0E       		.uleb128 0xe
+ 535 007a 3A       		.uleb128 0x3a
+ 536 007b 0B       		.uleb128 0xb
+ 537 007c 3B       		.uleb128 0x3b
+ 538 007d 0B       		.uleb128 0xb
+ 539 007e 27       		.uleb128 0x27
+ 540 007f 19       		.uleb128 0x19
+ 541 0080 49       		.uleb128 0x49
+ 542 0081 13       		.uleb128 0x13
+ 543 0082 11       		.uleb128 0x11
+ 544 0083 01       		.uleb128 0x1
+ 545 0084 12       		.uleb128 0x12
+ 546 0085 06       		.uleb128 0x6
+ 547 0086 40       		.uleb128 0x40
+ 548 0087 18       		.uleb128 0x18
+ 549 0088 9742     		.uleb128 0x2117
+ 550 008a 19       		.uleb128 0x19
+ 551 008b 00       		.byte	0
+ 552 008c 00       		.byte	0
+ 553 008d 0A       		.uleb128 0xa
+ 554 008e 05       		.uleb128 0x5
+ 555 008f 00       		.byte	0
+ 556 0090 03       		.uleb128 0x3
+ 557 0091 0E       		.uleb128 0xe
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cce99zh3.s 			page 15
+
+
+ 558 0092 3A       		.uleb128 0x3a
+ 559 0093 0B       		.uleb128 0xb
+ 560 0094 3B       		.uleb128 0x3b
+ 561 0095 0B       		.uleb128 0xb
+ 562 0096 49       		.uleb128 0x49
+ 563 0097 13       		.uleb128 0x13
+ 564 0098 02       		.uleb128 0x2
+ 565 0099 18       		.uleb128 0x18
+ 566 009a 00       		.byte	0
+ 567 009b 00       		.byte	0
+ 568 009c 0B       		.uleb128 0xb
+ 569 009d 34       		.uleb128 0x34
+ 570 009e 00       		.byte	0
+ 571 009f 03       		.uleb128 0x3
+ 572 00a0 0E       		.uleb128 0xe
+ 573 00a1 3A       		.uleb128 0x3a
+ 574 00a2 0B       		.uleb128 0xb
+ 575 00a3 3B       		.uleb128 0x3b
+ 576 00a4 0B       		.uleb128 0xb
+ 577 00a5 49       		.uleb128 0x49
+ 578 00a6 13       		.uleb128 0x13
+ 579 00a7 02       		.uleb128 0x2
+ 580 00a8 18       		.uleb128 0x18
+ 581 00a9 00       		.byte	0
+ 582 00aa 00       		.byte	0
+ 583 00ab 0C       		.uleb128 0xc
+ 584 00ac 2E       		.uleb128 0x2e
+ 585 00ad 01       		.byte	0x1
+ 586 00ae 3F       		.uleb128 0x3f
+ 587 00af 19       		.uleb128 0x19
+ 588 00b0 03       		.uleb128 0x3
+ 589 00b1 0E       		.uleb128 0xe
+ 590 00b2 3A       		.uleb128 0x3a
+ 591 00b3 0B       		.uleb128 0xb
+ 592 00b4 3B       		.uleb128 0x3b
+ 593 00b5 0B       		.uleb128 0xb
+ 594 00b6 27       		.uleb128 0x27
+ 595 00b7 19       		.uleb128 0x19
+ 596 00b8 49       		.uleb128 0x49
+ 597 00b9 13       		.uleb128 0x13
+ 598 00ba 11       		.uleb128 0x11
+ 599 00bb 01       		.uleb128 0x1
+ 600 00bc 12       		.uleb128 0x12
+ 601 00bd 06       		.uleb128 0x6
+ 602 00be 40       		.uleb128 0x40
+ 603 00bf 18       		.uleb128 0x18
+ 604 00c0 9742     		.uleb128 0x2117
+ 605 00c2 19       		.uleb128 0x19
+ 606 00c3 00       		.byte	0
+ 607 00c4 00       		.byte	0
+ 608 00c5 00       		.byte	0
+ 609              		.section	.debug_loc,"",%progbits
+ 610              	.Ldebug_loc0:
+ 611              	.LLST0:
+ 612 0000 00000000 		.4byte	.LVL0
+ 613 0004 0A000000 		.4byte	.LVL1
+ 614 0008 0100     		.2byte	0x1
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cce99zh3.s 			page 16
+
+
+ 615 000a 50       		.byte	0x50
+ 616 000b 0A000000 		.4byte	.LVL1
+ 617 000f 18000000 		.4byte	.LFE0
+ 618 0013 0400     		.2byte	0x4
+ 619 0015 F3       		.byte	0xf3
+ 620 0016 01       		.uleb128 0x1
+ 621 0017 50       		.byte	0x50
+ 622 0018 9F       		.byte	0x9f
+ 623 0019 00000000 		.4byte	0
+ 624 001d 00000000 		.4byte	0
+ 625              	.LLST1:
+ 626 0021 00000000 		.4byte	.LVL2
+ 627 0025 0C000000 		.4byte	.LVL4
+ 628 0029 0100     		.2byte	0x1
+ 629 002b 50       		.byte	0x50
+ 630 002c 0C000000 		.4byte	.LVL4
+ 631 0030 18000000 		.4byte	.LFE1
+ 632 0034 0400     		.2byte	0x4
+ 633 0036 F3       		.byte	0xf3
+ 634 0037 01       		.uleb128 0x1
+ 635 0038 50       		.byte	0x50
+ 636 0039 9F       		.byte	0x9f
+ 637 003a 00000000 		.4byte	0
+ 638 003e 00000000 		.4byte	0
+ 639              	.LLST2:
+ 640 0042 08000000 		.4byte	.LVL3
+ 641 0046 0E000000 		.4byte	.LVL5
+ 642 004a 0100     		.2byte	0x1
+ 643 004c 52       		.byte	0x52
+ 644 004d 0E000000 		.4byte	.LVL5
+ 645 0051 18000000 		.4byte	.LFE1
+ 646 0055 0100     		.2byte	0x1
+ 647 0057 50       		.byte	0x50
+ 648 0058 00000000 		.4byte	0
+ 649 005c 00000000 		.4byte	0
+ 650              	.LLST3:
+ 651 0060 00000000 		.4byte	.LVL6
+ 652 0064 08000000 		.4byte	.LVL8
+ 653 0068 0100     		.2byte	0x1
+ 654 006a 50       		.byte	0x50
+ 655 006b 08000000 		.4byte	.LVL8
+ 656 006f 14000000 		.4byte	.LFE4
+ 657 0073 0400     		.2byte	0x4
+ 658 0075 F3       		.byte	0xf3
+ 659 0076 01       		.uleb128 0x1
+ 660 0077 50       		.byte	0x50
+ 661 0078 9F       		.byte	0x9f
+ 662 0079 00000000 		.4byte	0
+ 663 007d 00000000 		.4byte	0
+ 664              	.LLST4:
+ 665 0081 0A000000 		.4byte	.LVL9
+ 666 0085 0E000000 		.4byte	.LVL10
+ 667 0089 0100     		.2byte	0x1
+ 668 008b 50       		.byte	0x50
+ 669 008c 0E000000 		.4byte	.LVL10
+ 670 0090 14000000 		.4byte	.LFE5
+ 671 0094 0400     		.2byte	0x4
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cce99zh3.s 			page 17
+
+
+ 672 0096 73       		.byte	0x73
+ 673 0097 00       		.sleb128 0
+ 674 0098 06       		.byte	0x6
+ 675 0099 9F       		.byte	0x9f
+ 676 009a 00000000 		.4byte	0
+ 677 009e 00000000 		.4byte	0
+ 678              		.section	.debug_aranges,"",%progbits
+ 679 0000 44000000 		.4byte	0x44
+ 680 0004 0200     		.2byte	0x2
+ 681 0006 00000000 		.4byte	.Ldebug_info0
+ 682 000a 04       		.byte	0x4
+ 683 000b 00       		.byte	0
+ 684 000c 0000     		.2byte	0
+ 685 000e 0000     		.2byte	0
+ 686 0010 00000000 		.4byte	.LFB0
+ 687 0014 18000000 		.4byte	.LFE0-.LFB0
+ 688 0018 00000000 		.4byte	.LFB1
+ 689 001c 18000000 		.4byte	.LFE1-.LFB1
+ 690 0020 00000000 		.4byte	.LFB2
+ 691 0024 10000000 		.4byte	.LFE2-.LFB2
+ 692 0028 00000000 		.4byte	.LFB3
+ 693 002c 10000000 		.4byte	.LFE3-.LFB3
+ 694 0030 00000000 		.4byte	.LFB4
+ 695 0034 14000000 		.4byte	.LFE4-.LFB4
+ 696 0038 00000000 		.4byte	.LFB5
+ 697 003c 14000000 		.4byte	.LFE5-.LFB5
+ 698 0040 00000000 		.4byte	0
+ 699 0044 00000000 		.4byte	0
+ 700              		.section	.debug_ranges,"",%progbits
+ 701              	.Ldebug_ranges0:
+ 702 0000 00000000 		.4byte	.LFB0
+ 703 0004 18000000 		.4byte	.LFE0
+ 704 0008 00000000 		.4byte	.LFB1
+ 705 000c 18000000 		.4byte	.LFE1
+ 706 0010 00000000 		.4byte	.LFB2
+ 707 0014 10000000 		.4byte	.LFE2
+ 708 0018 00000000 		.4byte	.LFB3
+ 709 001c 10000000 		.4byte	.LFE3
+ 710 0020 00000000 		.4byte	.LFB4
+ 711 0024 14000000 		.4byte	.LFE4
+ 712 0028 00000000 		.4byte	.LFB5
+ 713 002c 14000000 		.4byte	.LFE5
+ 714 0030 00000000 		.4byte	0
+ 715 0034 00000000 		.4byte	0
+ 716              		.section	.debug_line,"",%progbits
+ 717              	.Ldebug_line0:
+ 718 0000 04010000 		.section	.debug_str,"MS",%progbits,1
+ 718      02008D00 
+ 718      00000201 
+ 718      FB0E0D00 
+ 718      01010101 
+ 719              	.LASF15:
+ 720 0000 72656733 		.ascii	"reg32\000"
+ 720      3200
+ 721              	.LASF19:
+ 722 0006 76616C75 		.ascii	"value\000"
+ 722      6500
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cce99zh3.s 			page 18
+
+
+ 723              	.LASF21:
+ 724 000c 42757474 		.ascii	"Button_ReadDataReg\000"
+ 724      6F6E5F52 
+ 724      65616444 
+ 724      61746152 
+ 724      656700
+ 725              	.LASF22:
+ 726 001f 42757474 		.ascii	"Button_SetInterruptMode\000"
+ 726      6F6E5F53 
+ 726      6574496E 
+ 726      74657272 
+ 726      7570744D 
+ 727              	.LASF12:
+ 728 0037 666C6F61 		.ascii	"float\000"
+ 728      7400
+ 729              	.LASF16:
+ 730 003d 42757474 		.ascii	"Button_SetDriveMode\000"
+ 730      6F6E5F53 
+ 730      65744472 
+ 730      6976654D 
+ 730      6F646500 
+ 731              	.LASF1:
+ 732 0051 756E7369 		.ascii	"unsigned char\000"
+ 732      676E6564 
+ 732      20636861 
+ 732      7200
+ 733              	.LASF24:
+ 734 005f 64725661 		.ascii	"drVal\000"
+ 734      6C00
+ 735              	.LASF5:
+ 736 0065 6C6F6E67 		.ascii	"long unsigned int\000"
+ 736      20756E73 
+ 736      69676E65 
+ 736      6420696E 
+ 736      7400
+ 737              	.LASF3:
+ 738 0077 73686F72 		.ascii	"short unsigned int\000"
+ 738      7420756E 
+ 738      7369676E 
+ 738      65642069 
+ 738      6E7400
+ 739              	.LASF13:
+ 740 008a 646F7562 		.ascii	"double\000"
+ 740      6C6500
+ 741              	.LASF10:
+ 742 0091 75696E74 		.ascii	"uint16\000"
+ 742      313600
+ 743              	.LASF23:
+ 744 0098 706F7369 		.ascii	"position\000"
+ 744      74696F6E 
+ 744      00
+ 745              	.LASF11:
+ 746 00a1 75696E74 		.ascii	"uint32\000"
+ 746      333200
+ 747              	.LASF25:
+ 748 00a8 696E7472 		.ascii	"intrCfg\000"
+ 748      43666700 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cce99zh3.s 			page 19
+
+
+ 749              	.LASF8:
+ 750 00b0 756E7369 		.ascii	"unsigned int\000"
+ 750      676E6564 
+ 750      20696E74 
+ 750      00
+ 751              	.LASF7:
+ 752 00bd 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 752      206C6F6E 
+ 752      6720756E 
+ 752      7369676E 
+ 752      65642069 
+ 753              	.LASF18:
+ 754 00d4 6D6F6465 		.ascii	"mode\000"
+ 754      00
+ 755              	.LASF26:
+ 756 00d9 42757474 		.ascii	"Button_ClearInterrupt\000"
+ 756      6F6E5F43 
+ 756      6C656172 
+ 756      496E7465 
+ 756      72727570 
+ 757              	.LASF29:
+ 758 00ef 433A5C50 		.ascii	"C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4"
+ 758      726F6772 
+ 758      616D2046 
+ 758      696C6573 
+ 758      20287838 
+ 759 011e 5C50536F 		.ascii	"\\PSoC Creator\\1\\LWO3.cydsn\\Generated_Source\\PS"
+ 759      43204372 
+ 759      6561746F 
+ 759      725C315C 
+ 759      4C574F33 
+ 760 014c 6F43345C 		.ascii	"oC4\\Button.c\000"
+ 760      42757474 
+ 760      6F6E2E63 
+ 760      00
+ 761              	.LASF28:
+ 762 0159 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 762      43313120 
+ 762      352E342E 
+ 762      31203230 
+ 762      31363036 
+ 763 018c 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 763      20726576 
+ 763      6973696F 
+ 763      6E203233 
+ 763      37373135 
+ 764 01bf 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 764      66756E63 
+ 764      74696F6E 
+ 764      2D736563 
+ 764      74696F6E 
+ 765              	.LASF20:
+ 766 01e7 42757474 		.ascii	"Button_Read\000"
+ 766      6F6E5F52 
+ 766      65616400 
+ 767              	.LASF6:
+ 768 01f3 6C6F6E67 		.ascii	"long long int\000"
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cce99zh3.s 			page 20
+
+
+ 768      206C6F6E 
+ 768      6720696E 
+ 768      7400
+ 769              	.LASF27:
+ 770 0201 6D61736B 		.ascii	"maskedStatus\000"
+ 770      65645374 
+ 770      61747573 
+ 770      00
+ 771              	.LASF14:
+ 772 020e 63686172 		.ascii	"char\000"
+ 772      00
+ 773              	.LASF17:
+ 774 0213 42757474 		.ascii	"Button_Write\000"
+ 774      6F6E5F57 
+ 774      72697465 
+ 774      00
+ 775              	.LASF2:
+ 776 0220 73686F72 		.ascii	"short int\000"
+ 776      7420696E 
+ 776      7400
+ 777              	.LASF9:
+ 778 022a 75696E74 		.ascii	"uint8\000"
+ 778      3800
+ 779              	.LASF4:
+ 780 0230 6C6F6E67 		.ascii	"long int\000"
+ 780      20696E74 
+ 780      00
+ 781              	.LASF0:
+ 782 0239 7369676E 		.ascii	"signed char\000"
+ 782      65642063 
+ 782      68617200 
+ 783              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

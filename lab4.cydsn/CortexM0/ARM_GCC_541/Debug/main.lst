@@ -1,0 +1,4618 @@
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.initMatrix,"ax",%progbits
+  20              		.align	2
+  21              		.code	16
+  22              		.thumb_func
+  23              		.type	initMatrix, %function
+  24              	initMatrix:
+  25              	.LFB34:
+  26              		.file 1 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\LWO4.cydsn\\main.c"
+   1:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** 
+   2:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** 
+   3:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** #include "project.h" 
+   4:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** static uint8_t LED_NUM[] = { 
+   5:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     0xC0,   //0 
+   6:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     0xF9,   //1 
+   7:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     0xA4,   //2 
+   8:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     0xB0,   //3 
+   9:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     0x99,   //4 
+  10:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     0x92,   //5 
+  11:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     0x82,   //6 
+  12:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     0xF8,   //7 
+  13:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     0x80,   //8 
+  14:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     0x90,   //9 
+  15:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     0xBF,   //- 
+  16:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     0x88,   //A 
+  17:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     0x83,   //b 
+  18:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     0xC6,   //C 
+  19:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     0xA1,   //d 
+  20:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     0x86,   //E 
+  21:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     0x8E,   //F     0x7F    //. 
+  22:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** }; 
+  23:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** /* send data function */     
+  24:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** static void FourDigit74HC595_sendData(uint8_t data) {     
+  25:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     for(uint8_t i = 0; i < 8; i++) {         
+  26:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         if(data & (0x80 >> i)) 
+  27:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         { 
+  28:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             Pin_DO_Write(1); 
+  29:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         }         
+  30:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         else 
+  31:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         { 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 2
+
+
+  32:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             Pin_DO_Write(0); 
+  33:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         } 
+  34:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         Pin_CLK_Write(1); 
+  35:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         Pin_CLK_Write(0); 
+  36:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     } 
+  37:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** }
+  38:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** 
+  39:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** static void FourDigit74HC595_sendOneDigit(uint8_t position, uint8_t digit, uint8_t dot)  
+  40:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** { 
+  41:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     if(position >= 8)   // out of range, clear 7-segment display 
+  42:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     { 
+  43:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         FourDigit74HC595_sendData(0xFF); 
+  44:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         FourDigit74HC595_sendData(0xFF); 
+  45:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     } 
+  46:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     FourDigit74HC595_sendData(0xFF & ~(1 << position));     
+  47:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     if(dot) // if dot is needed 
+  48:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     { 
+  49:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         FourDigit74HC595_sendData(LED_NUM[digit] & 0x7F); 
+  50:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     }     else 
+  51:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     { 
+  52:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         FourDigit74HC595_sendData(LED_NUM[digit]); 
+  53:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     } 
+  54:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     Pin_Latch_Write(1); // Latch shift register 
+  55:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     Pin_Latch_Write(0); 
+  56:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** } 
+  57:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** 
+  58:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** /* function of drive mode configuration */ 
+  59:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** static void (*COLUMN_x_SetDriveMode[3])(uint8_t mode) = { 
+  60:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     COLUMN_0_SetDriveMode, 
+  61:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     COLUMN_1_SetDriveMode, 
+  62:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     COLUMN_2_SetDriveMode 
+  63:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** };   
+  64:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** /* column write function */     
+  65:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** static void (*COLUMN_x_Write[3])(uint8_t value) = { 
+  66:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     COLUMN_0_Write, 
+  67:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     COLUMN_1_Write, 
+  68:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     COLUMN_2_Write 
+  69:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** }; 
+  70:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** /* read row function */    
+  71:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** static uint8 (*ROW_x_Read[4])() = { 
+  72:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     ROW_0_Read, 
+  73:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     ROW_1_Read, 
+  74:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     ROW_2_Read, 
+  75:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     ROW_3_Read 
+  76:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** }; 
+  77:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****  
+  78:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** /* [ROW][COLUMN] */ 
+  79:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** static uint8_t keys[4][3] = { 
+  80:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     {1, 2, 3}, 
+  81:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     {4, 5, 6}, 
+  82:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     {7, 8, 9}, 
+  83:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     {10, 0, 11}, 
+  84:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** }; 
+  85:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** 
+  86:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** /* Password settings */
+  87:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** #define PASSWORD_LENGTH 3
+  88:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** static const uint8_t PASSWORD[PASSWORD_LENGTH] = {1, 2, 3}; // Встановіть свій пар
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 3
+
+
+  89:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** static uint8_t password_buffer[PASSWORD_LENGTH];
+  90:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** static uint8_t password_index = 0;
+  91:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** static uint8_t password_locked = 1; // 1 = заблоковано, 0 = розблоковано
+  92:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****  
+  93:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** /* matrix initialization function */ 
+  94:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** static void initMatrix() 
+  95:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** { 
+  27              		.loc 1 95 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 10B5     		push	{r4, lr}
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 4, -8
+  34              		.cfi_offset 14, -4
+  35              	.LVL0:
+  36              	.LBB2:
+  96:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     for(int column_index = 0; column_index < 3; column_index++) 
+  37              		.loc 1 96 0
+  38 0002 0024     		movs	r4, #0
+  39 0004 05E0     		b	.L2
+  40              	.LVL1:
+  41              	.L3:
+  97:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     { 
+  98:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         COLUMN_x_SetDriveMode[column_index](COLUMN_0_DM_DIG_HIZ); 
+  42              		.loc 1 98 0 discriminator 3
+  43 0006 A200     		lsls	r2, r4, #2
+  44 0008 034B     		ldr	r3, .L4
+  45 000a D358     		ldr	r3, [r2, r3]
+  46 000c 0120     		movs	r0, #1
+  47 000e 9847     		blx	r3
+  48              	.LVL2:
+  96:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     for(int column_index = 0; column_index < 3; column_index++) 
+  49              		.loc 1 96 0 discriminator 3
+  50 0010 0134     		adds	r4, r4, #1
+  51              	.LVL3:
+  52              	.L2:
+  96:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     for(int column_index = 0; column_index < 3; column_index++) 
+  53              		.loc 1 96 0 is_stmt 0 discriminator 1
+  54 0012 022C     		cmp	r4, #2
+  55 0014 F7DD     		ble	.L3
+  56              	.LBE2:
+  99:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     } 
+ 100:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** } 
+  57              		.loc 1 100 0 is_stmt 1
+  58              		@ sp needed
+  59              	.LVL4:
+  60 0016 10BD     		pop	{r4, pc}
+  61              	.L5:
+  62              		.align	2
+  63              	.L4:
+  64 0018 60000000 		.word	.LANCHOR0
+  65              		.cfi_endproc
+  66              	.LFE34:
+  67              		.size	initMatrix, .-initMatrix
+  68              		.section	.text.readMatrix,"ax",%progbits
+  69              		.align	2
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 4
+
+
+  70              		.code	16
+  71              		.thumb_func
+  72              		.type	readMatrix, %function
+  73              	readMatrix:
+  74              	.LFB35:
+ 101:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****  
+ 102:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** /* keys matrix read function */ 
+ 103:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** static void readMatrix() 
+ 104:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** { 
+  75              		.loc 1 104 0
+  76              		.cfi_startproc
+  77              		@ args = 0, pretend = 0, frame = 0
+  78              		@ frame_needed = 0, uses_anonymous_args = 0
+  79 0000 70B5     		push	{r4, r5, r6, lr}
+  80              		.cfi_def_cfa_offset 16
+  81              		.cfi_offset 4, -16
+  82              		.cfi_offset 5, -12
+  83              		.cfi_offset 6, -8
+  84              		.cfi_offset 14, -4
+  85              	.LVL5:
+  86              	.LBB3:
+ 105:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     /* define the length of a row and column */ 
+ 106:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     uint8_t row_counter = sizeof(ROW_x_Read)/sizeof(ROW_x_Read[0]); 
+ 107:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     uint8_t column_counter = sizeof(COLUMN_x_Write)/sizeof(COLUMN_x_Write[0]);     
+ 108:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     /* column: iterate the columns */ 
+ 109:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     for(int column_index = 0; column_index < column_counter; column_index++) { 
+  87              		.loc 1 109 0
+  88 0002 0025     		movs	r5, #0
+  89 0004 1DE0     		b	.L7
+  90              	.LVL6:
+  91              	.L10:
+ 110:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         COLUMN_x_SetDriveMode[column_index](COLUMN_0_DM_STRONG); 
+  92              		.loc 1 110 0
+  93 0006 104E     		ldr	r6, .L11
+  94 0008 AC00     		lsls	r4, r5, #2
+  95 000a 0620     		movs	r0, #6
+  96 000c A359     		ldr	r3, [r4, r6]
+  97 000e 9847     		blx	r3
+  98              	.LVL7:
+ 111:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         COLUMN_x_Write[column_index](0);
+  99              		.loc 1 111 0
+ 100 0010 3419     		adds	r4, r6, r4
+ 101 0012 E368     		ldr	r3, [r4, #12]
+ 102 0014 0020     		movs	r0, #0
+ 103 0016 9847     		blx	r3
+ 104              	.LVL8:
+ 105              	.LBB4:
+ 112:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         /* row: interate throught the rows */ 
+ 113:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         for(int row_index = 0; row_index < row_counter; row_index++) 
+ 106              		.loc 1 113 0
+ 107 0018 0024     		movs	r4, #0
+ 108 001a 0AE0     		b	.L8
+ 109              	.LVL9:
+ 110              	.L9:
+ 114:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         { 
+ 115:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             keys[row_index][column_index] = ROW_x_Read[row_index](); 
+ 111              		.loc 1 115 0 discriminator 3
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 5
+
+
+ 112 001c A300     		lsls	r3, r4, #2
+ 113 001e 0A4A     		ldr	r2, .L11
+ 114 0020 D318     		adds	r3, r2, r3
+ 115 0022 9B69     		ldr	r3, [r3, #24]
+ 116 0024 9847     		blx	r3
+ 117              	.LVL10:
+ 118 0026 6300     		lsls	r3, r4, #1
+ 119 0028 1B19     		adds	r3, r3, r4
+ 120 002a 084A     		ldr	r2, .L11+4
+ 121 002c D318     		adds	r3, r2, r3
+ 122 002e 5855     		strb	r0, [r3, r5]
+ 113:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         { 
+ 123              		.loc 1 113 0 discriminator 3
+ 124 0030 0134     		adds	r4, r4, #1
+ 125              	.LVL11:
+ 126              	.L8:
+ 113:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         { 
+ 127              		.loc 1 113 0 is_stmt 0 discriminator 1
+ 128 0032 032C     		cmp	r4, #3
+ 129 0034 F2DD     		ble	.L9
+ 130              	.LBE4:
+ 116:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         } 
+ 117:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         /* disable the column */ 
+ 118:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         COLUMN_x_SetDriveMode[column_index](COLUMN_0_DM_DIG_HIZ); 
+ 131              		.loc 1 118 0 is_stmt 1 discriminator 2
+ 132 0036 AA00     		lsls	r2, r5, #2
+ 133 0038 034B     		ldr	r3, .L11
+ 134 003a D358     		ldr	r3, [r2, r3]
+ 135 003c 0120     		movs	r0, #1
+ 136 003e 9847     		blx	r3
+ 137              	.LVL12:
+ 109:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         COLUMN_x_SetDriveMode[column_index](COLUMN_0_DM_STRONG); 
+ 138              		.loc 1 109 0 discriminator 2
+ 139 0040 0135     		adds	r5, r5, #1
+ 140              	.LVL13:
+ 141              	.L7:
+ 109:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         COLUMN_x_SetDriveMode[column_index](COLUMN_0_DM_STRONG); 
+ 142              		.loc 1 109 0 is_stmt 0 discriminator 1
+ 143 0042 022D     		cmp	r5, #2
+ 144 0044 DFDD     		ble	.L10
+ 145              	.LBE3:
+ 119:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     } 
+ 120:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** }
+ 146              		.loc 1 120 0 is_stmt 1
+ 147              		@ sp needed
+ 148              	.LVL14:
+ 149 0046 70BD     		pop	{r4, r5, r6, pc}
+ 150              	.L12:
+ 151              		.align	2
+ 152              	.L11:
+ 153 0048 60000000 		.word	.LANCHOR0
+ 154 004c 00000000 		.word	.LANCHOR1
+ 155              		.cfi_endproc
+ 156              	.LFE35:
+ 157              		.size	readMatrix, .-readMatrix
+ 158              		.section	.text.printButtonName,"ax",%progbits
+ 159              		.align	2
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 6
+
+
+ 160              		.code	16
+ 161              		.thumb_func
+ 162              		.type	printButtonName, %function
+ 163              	printButtonName:
+ 164              	.LFB38:
+ 121:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** 
+ 122:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** /* Function to check password */
+ 123:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** static void checkPassword()
+ 124:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** {
+ 125:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     uint8_t correct = 1;
+ 126:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     for(int i = 0; i < PASSWORD_LENGTH; i++)
+ 127:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     {
+ 128:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         if(password_buffer[i] != PASSWORD[i])
+ 129:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         {
+ 130:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             correct = 0;
+ 131:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 132:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         }
+ 133:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     }
+ 134:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     
+ 135:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     if(correct)
+ 136:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     {
+ 137:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         SW_Tx_UART_PutString("Access allowed");
+ 138:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         SW_Tx_UART_PutCRLF();
+ 139:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         password_locked = 0;
+ 140:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         
+ 141:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         LED_R_Write(0);
+ 142:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         LED_G_Write(0);
+ 143:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         LED_B_Write(0);
+ 144:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         CyDelay(1000);
+ 145:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     }
+ 146:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     else
+ 147:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     {
+ 148:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         SW_Tx_UART_PutString("Access denied");
+ 149:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         SW_Tx_UART_PutCRLF();
+ 150:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         password_locked = 1;
+ 151:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     }
+ 152:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     
+ 153:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     password_index = 0;
+ 154:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** }
+ 155:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** 
+ 156:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** /* Function to set LED color based on button */
+ 157:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** static void setLEDColor(uint8_t button_value)
+ 158:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** {
+ 159:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     switch(button_value)
+ 160:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     {
+ 161:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 1:  // Red
+ 162:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 7:
+ 163:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         FourDigit74HC595_sendOneDigit(0, button_value, 0);
+ 164:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_R_Write(0);
+ 165:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_G_Write(1);
+ 166:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_B_Write(1);
+ 167:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 168:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             
+ 169:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 2:  // Green
+ 170:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****        
+ 171:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 8:
+ 172:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         FourDigit74HC595_sendOneDigit(0, button_value, 0);
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 7
+
+
+ 173:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_R_Write(1);
+ 174:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_G_Write(0);
+ 175:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_B_Write(1);
+ 176:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 177:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             
+ 178:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 3:  // Blue
+ 179:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         FourDigit74HC595_sendOneDigit(0, 3, 0);
+ 180:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 9:
+ 181:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         FourDigit74HC595_sendOneDigit(0, button_value, 0);
+ 182:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_R_Write(1);
+ 183:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_G_Write(1);
+ 184:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_B_Write(0);
+ 185:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 186:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             
+ 187:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 4:  // Yellow (Red + Green)
+ 188:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 10: // *
+ 189:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         FourDigit74HC595_sendOneDigit(0, button_value, 0);
+ 190:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_R_Write(0);
+ 191:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_G_Write(0);
+ 192:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_B_Write(1);
+ 193:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 194:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             
+ 195:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 5:  // Purple (Red + Blue)
+ 196:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 0:
+ 197:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         FourDigit74HC595_sendOneDigit(0, button_value, 0);
+ 198:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_R_Write(0);
+ 199:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_G_Write(1);
+ 200:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_B_Write(0);
+ 201:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 202:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             
+ 203:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 6:  // Cyan (Green + Blue)
+ 204:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 11: // #
+ 205:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         FourDigit74HC595_sendOneDigit(0, button_value, 0);
+ 206:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_R_Write(1);
+ 207:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_G_Write(0);
+ 208:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_B_Write(0);
+ 209:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 210:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             
+ 211:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         default:
+ 212:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         FourDigit74HC595_sendOneDigit(8, 0, 0);
+ 213:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             // Turn off LED (Black)
+ 214:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_R_Write(1);
+ 215:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_G_Write(1);
+ 216:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_B_Write(1);
+ 217:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 218:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     }
+ 219:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** }
+ 220:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** 
+ 221:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** /* Function to get button name */
+ 222:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** static void printButtonName(uint8_t button_value)
+ 223:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** {
+ 165              		.loc 1 223 0
+ 166              		.cfi_startproc
+ 167              		@ args = 0, pretend = 0, frame = 0
+ 168              		@ frame_needed = 0, uses_anonymous_args = 0
+ 169              	.LVL15:
+ 170 0000 10B5     		push	{r4, lr}
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 8
+
+
+ 171              		.cfi_def_cfa_offset 8
+ 172              		.cfi_offset 4, -8
+ 173              		.cfi_offset 14, -4
+ 224:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     switch(button_value)
+ 174              		.loc 1 224 0
+ 175 0002 0B28     		cmp	r0, #11
+ 176 0004 32D8     		bhi	.L14
+ 177 0006 8000     		lsls	r0, r0, #2
+ 178              	.LVL16:
+ 179 0008 1A4B     		ldr	r3, .L28
+ 180 000a 1B58     		ldr	r3, [r3, r0]
+ 181 000c 9F46     		mov	pc, r3
+ 182              		.section	.rodata
+ 183              		.align	2
+ 184              	.L16:
+ 185 0000 0E000000 		.word	.L15
+ 186 0004 16000000 		.word	.L17
+ 187 0008 1E000000 		.word	.L18
+ 188 000c 26000000 		.word	.L19
+ 189 0010 2E000000 		.word	.L20
+ 190 0014 36000000 		.word	.L21
+ 191 0018 3E000000 		.word	.L22
+ 192 001c 46000000 		.word	.L23
+ 193 0020 4E000000 		.word	.L24
+ 194 0024 56000000 		.word	.L25
+ 195 0028 5E000000 		.word	.L26
+ 196 002c 66000000 		.word	.L27
+ 197              		.section	.text.printButtonName
+ 198              	.L15:
+ 225:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     {
+ 226:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 0:
+ 227:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             SW_Tx_UART_PutString("Button 0 pressed");
+ 199              		.loc 1 227 0
+ 200 000e 1A48     		ldr	r0, .L28+4
+ 201 0010 FFF7FEFF 		bl	SW_Tx_UART_PutString
+ 202              	.LVL17:
+ 228:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 203              		.loc 1 228 0
+ 204 0014 2AE0     		b	.L14
+ 205              	.L17:
+ 229:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 1:
+ 230:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             SW_Tx_UART_PutString("Button 1 pressed");
+ 206              		.loc 1 230 0
+ 207 0016 1948     		ldr	r0, .L28+8
+ 208 0018 FFF7FEFF 		bl	SW_Tx_UART_PutString
+ 209              	.LVL18:
+ 231:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 210              		.loc 1 231 0
+ 211 001c 26E0     		b	.L14
+ 212              	.L18:
+ 232:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 2:
+ 233:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             SW_Tx_UART_PutString("Button 2 pressed");
+ 213              		.loc 1 233 0
+ 214 001e 1848     		ldr	r0, .L28+12
+ 215 0020 FFF7FEFF 		bl	SW_Tx_UART_PutString
+ 216              	.LVL19:
+ 234:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 9
+
+
+ 217              		.loc 1 234 0
+ 218 0024 22E0     		b	.L14
+ 219              	.L19:
+ 235:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 3:
+ 236:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             SW_Tx_UART_PutString("Button 3 pressed");
+ 220              		.loc 1 236 0
+ 221 0026 1748     		ldr	r0, .L28+16
+ 222 0028 FFF7FEFF 		bl	SW_Tx_UART_PutString
+ 223              	.LVL20:
+ 237:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 224              		.loc 1 237 0
+ 225 002c 1EE0     		b	.L14
+ 226              	.L20:
+ 238:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 4:
+ 239:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             SW_Tx_UART_PutString("Button 4 pressed");
+ 227              		.loc 1 239 0
+ 228 002e 1648     		ldr	r0, .L28+20
+ 229 0030 FFF7FEFF 		bl	SW_Tx_UART_PutString
+ 230              	.LVL21:
+ 240:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 231              		.loc 1 240 0
+ 232 0034 1AE0     		b	.L14
+ 233              	.L21:
+ 241:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 5:
+ 242:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             SW_Tx_UART_PutString("Button 5 pressed");
+ 234              		.loc 1 242 0
+ 235 0036 1548     		ldr	r0, .L28+24
+ 236 0038 FFF7FEFF 		bl	SW_Tx_UART_PutString
+ 237              	.LVL22:
+ 243:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 238              		.loc 1 243 0
+ 239 003c 16E0     		b	.L14
+ 240              	.L22:
+ 244:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 6:
+ 245:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             SW_Tx_UART_PutString("Button 6 pressed");
+ 241              		.loc 1 245 0
+ 242 003e 1448     		ldr	r0, .L28+28
+ 243 0040 FFF7FEFF 		bl	SW_Tx_UART_PutString
+ 244              	.LVL23:
+ 246:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 245              		.loc 1 246 0
+ 246 0044 12E0     		b	.L14
+ 247              	.L23:
+ 247:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 7:
+ 248:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             SW_Tx_UART_PutString("Button 7 pressed");
+ 248              		.loc 1 248 0
+ 249 0046 1348     		ldr	r0, .L28+32
+ 250 0048 FFF7FEFF 		bl	SW_Tx_UART_PutString
+ 251              	.LVL24:
+ 249:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 252              		.loc 1 249 0
+ 253 004c 0EE0     		b	.L14
+ 254              	.L24:
+ 250:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 8:
+ 251:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             SW_Tx_UART_PutString("Button 8 pressed");
+ 255              		.loc 1 251 0
+ 256 004e 1248     		ldr	r0, .L28+36
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 10
+
+
+ 257 0050 FFF7FEFF 		bl	SW_Tx_UART_PutString
+ 258              	.LVL25:
+ 252:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 259              		.loc 1 252 0
+ 260 0054 0AE0     		b	.L14
+ 261              	.L25:
+ 253:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 9:
+ 254:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             SW_Tx_UART_PutString("Button 9 pressed");
+ 262              		.loc 1 254 0
+ 263 0056 1148     		ldr	r0, .L28+40
+ 264 0058 FFF7FEFF 		bl	SW_Tx_UART_PutString
+ 265              	.LVL26:
+ 255:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 266              		.loc 1 255 0
+ 267 005c 06E0     		b	.L14
+ 268              	.L26:
+ 256:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 10:
+ 257:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             SW_Tx_UART_PutString("Button * pressed");
+ 269              		.loc 1 257 0
+ 270 005e 1048     		ldr	r0, .L28+44
+ 271 0060 FFF7FEFF 		bl	SW_Tx_UART_PutString
+ 272              	.LVL27:
+ 258:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 273              		.loc 1 258 0
+ 274 0064 02E0     		b	.L14
+ 275              	.L27:
+ 259:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 11:
+ 260:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             SW_Tx_UART_PutString("Button # pressed");
+ 276              		.loc 1 260 0
+ 277 0066 0F48     		ldr	r0, .L28+48
+ 278 0068 FFF7FEFF 		bl	SW_Tx_UART_PutString
+ 279              	.LVL28:
+ 280              	.L14:
+ 261:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 262:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         default:
+ 263:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 264:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     }
+ 265:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     SW_Tx_UART_PutCRLF();
+ 281              		.loc 1 265 0
+ 282 006c FFF7FEFF 		bl	SW_Tx_UART_PutCRLF
+ 283              	.LVL29:
+ 266:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** }
+ 284              		.loc 1 266 0
+ 285              		@ sp needed
+ 286 0070 10BD     		pop	{r4, pc}
+ 287              	.L29:
+ 288 0072 C046     		.align	2
+ 289              	.L28:
+ 290 0074 00000000 		.word	.L16
+ 291 0078 00000000 		.word	.LC4
+ 292 007c 14000000 		.word	.LC6
+ 293 0080 28000000 		.word	.LC8
+ 294 0084 3C000000 		.word	.LC10
+ 295 0088 50000000 		.word	.LC12
+ 296 008c 64000000 		.word	.LC14
+ 297 0090 78000000 		.word	.LC16
+ 298 0094 8C000000 		.word	.LC18
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 11
+
+
+ 299 0098 A0000000 		.word	.LC20
+ 300 009c B4000000 		.word	.LC22
+ 301 00a0 C8000000 		.word	.LC24
+ 302 00a4 DC000000 		.word	.LC26
+ 303              		.cfi_endproc
+ 304              	.LFE38:
+ 305              		.size	printButtonName, .-printButtonName
+ 306              		.section	.text.checkPassword,"ax",%progbits
+ 307              		.align	2
+ 308              		.code	16
+ 309              		.thumb_func
+ 310              		.type	checkPassword, %function
+ 311              	checkPassword:
+ 312              	.LFB36:
+ 124:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     uint8_t correct = 1;
+ 313              		.loc 1 124 0
+ 314              		.cfi_startproc
+ 315              		@ args = 0, pretend = 0, frame = 0
+ 316              		@ frame_needed = 0, uses_anonymous_args = 0
+ 317 0000 10B5     		push	{r4, lr}
+ 318              		.cfi_def_cfa_offset 8
+ 319              		.cfi_offset 4, -8
+ 320              		.cfi_offset 14, -4
+ 321              	.LVL30:
+ 322              	.LBB5:
+ 126:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     {
+ 323              		.loc 1 126 0
+ 324 0002 0023     		movs	r3, #0
+ 325 0004 06E0     		b	.L31
+ 326              	.LVL31:
+ 327              	.L33:
+ 128:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         {
+ 328              		.loc 1 128 0
+ 329 0006 184A     		ldr	r2, .L37
+ 330 0008 D15C     		ldrb	r1, [r2, r3]
+ 331 000a 184A     		ldr	r2, .L37+4
+ 332 000c D25C     		ldrb	r2, [r2, r3]
+ 333 000e 9142     		cmp	r1, r2
+ 334 0010 04D1     		bne	.L36
+ 126:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     {
+ 335              		.loc 1 126 0 discriminator 2
+ 336 0012 0133     		adds	r3, r3, #1
+ 337              	.LVL32:
+ 338              	.L31:
+ 126:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     {
+ 339              		.loc 1 126 0 is_stmt 0 discriminator 1
+ 340 0014 022B     		cmp	r3, #2
+ 341 0016 F6DD     		ble	.L33
+ 342              	.LBE5:
+ 125:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     for(int i = 0; i < PASSWORD_LENGTH; i++)
+ 343              		.loc 1 125 0 is_stmt 1
+ 344 0018 0123     		movs	r3, #1
+ 345              	.LVL33:
+ 346              	.LBB6:
+ 347 001a 00E0     		b	.L32
+ 348              	.LVL34:
+ 349              	.L36:
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 12
+
+
+ 130:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 350              		.loc 1 130 0
+ 351 001c 0023     		movs	r3, #0
+ 352              	.LVL35:
+ 353              	.L32:
+ 354              	.LBE6:
+ 135:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     {
+ 355              		.loc 1 135 0
+ 356 001e 002B     		cmp	r3, #0
+ 357 0020 15D0     		beq	.L34
+ 137:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         SW_Tx_UART_PutCRLF();
+ 358              		.loc 1 137 0
+ 359 0022 1348     		ldr	r0, .L37+8
+ 360 0024 FFF7FEFF 		bl	SW_Tx_UART_PutString
+ 361              	.LVL36:
+ 138:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         password_locked = 0;
+ 362              		.loc 1 138 0
+ 363 0028 FFF7FEFF 		bl	SW_Tx_UART_PutCRLF
+ 364              	.LVL37:
+ 139:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         
+ 365              		.loc 1 139 0
+ 366 002c 0022     		movs	r2, #0
+ 367 002e 114B     		ldr	r3, .L37+12
+ 368 0030 1A73     		strb	r2, [r3, #12]
+ 141:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         LED_G_Write(0);
+ 369              		.loc 1 141 0
+ 370 0032 0020     		movs	r0, #0
+ 371 0034 FFF7FEFF 		bl	LED_R_Write
+ 372              	.LVL38:
+ 142:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         LED_B_Write(0);
+ 373              		.loc 1 142 0
+ 374 0038 0020     		movs	r0, #0
+ 375 003a FFF7FEFF 		bl	LED_G_Write
+ 376              	.LVL39:
+ 143:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         CyDelay(1000);
+ 377              		.loc 1 143 0
+ 378 003e 0020     		movs	r0, #0
+ 379 0040 FFF7FEFF 		bl	LED_B_Write
+ 380              	.LVL40:
+ 144:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     }
+ 381              		.loc 1 144 0
+ 382 0044 FA20     		movs	r0, #250
+ 383 0046 8000     		lsls	r0, r0, #2
+ 384 0048 FFF7FEFF 		bl	CyDelay
+ 385              	.LVL41:
+ 386 004c 07E0     		b	.L35
+ 387              	.LVL42:
+ 388              	.L34:
+ 148:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         SW_Tx_UART_PutCRLF();
+ 389              		.loc 1 148 0
+ 390 004e 0A48     		ldr	r0, .L37+16
+ 391 0050 FFF7FEFF 		bl	SW_Tx_UART_PutString
+ 392              	.LVL43:
+ 149:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         password_locked = 1;
+ 393              		.loc 1 149 0
+ 394 0054 FFF7FEFF 		bl	SW_Tx_UART_PutCRLF
+ 395              	.LVL44:
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 13
+
+
+ 150:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     }
+ 396              		.loc 1 150 0
+ 397 0058 0122     		movs	r2, #1
+ 398 005a 064B     		ldr	r3, .L37+12
+ 399 005c 1A73     		strb	r2, [r3, #12]
+ 400              	.L35:
+ 153:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** }
+ 401              		.loc 1 153 0
+ 402 005e 0022     		movs	r2, #0
+ 403 0060 014B     		ldr	r3, .L37
+ 404 0062 DA70     		strb	r2, [r3, #3]
+ 154:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** 
+ 405              		.loc 1 154 0
+ 406              		@ sp needed
+ 407 0064 10BD     		pop	{r4, pc}
+ 408              	.L38:
+ 409 0066 C046     		.align	2
+ 410              	.L37:
+ 411 0068 00000000 		.word	.LANCHOR2
+ 412 006c 88000000 		.word	.LANCHOR3
+ 413 0070 F0000000 		.word	.LC30
+ 414 0074 00000000 		.word	.LANCHOR1
+ 415 0078 00010000 		.word	.LC33
+ 416              		.cfi_endproc
+ 417              	.LFE36:
+ 418              		.size	checkPassword, .-checkPassword
+ 419              		.section	.text.FourDigit74HC595_sendData,"ax",%progbits
+ 420              		.align	2
+ 421              		.code	16
+ 422              		.thumb_func
+ 423              		.type	FourDigit74HC595_sendData, %function
+ 424              	FourDigit74HC595_sendData:
+ 425              	.LFB32:
+  24:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     for(uint8_t i = 0; i < 8; i++) {         
+ 426              		.loc 1 24 0
+ 427              		.cfi_startproc
+ 428              		@ args = 0, pretend = 0, frame = 0
+ 429              		@ frame_needed = 0, uses_anonymous_args = 0
+ 430              	.LVL45:
+ 431 0000 70B5     		push	{r4, r5, r6, lr}
+ 432              		.cfi_def_cfa_offset 16
+ 433              		.cfi_offset 4, -16
+ 434              		.cfi_offset 5, -12
+ 435              		.cfi_offset 6, -8
+ 436              		.cfi_offset 14, -4
+ 437 0002 0500     		movs	r5, r0
+ 438              	.LVL46:
+ 439              	.LBB7:
+  25:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         if(data & (0x80 >> i)) 
+ 440              		.loc 1 25 0
+ 441 0004 0024     		movs	r4, #0
+ 442 0006 12E0     		b	.L40
+ 443              	.LVL47:
+ 444              	.L43:
+  26:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         { 
+ 445              		.loc 1 26 0
+ 446 0008 8023     		movs	r3, #128
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 14
+
+
+ 447 000a 2341     		asrs	r3, r3, r4
+ 448 000c 2B42     		tst	r3, r5
+ 449 000e 03D0     		beq	.L41
+  28:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         }         
+ 450              		.loc 1 28 0
+ 451 0010 0120     		movs	r0, #1
+ 452 0012 FFF7FEFF 		bl	Pin_DO_Write
+ 453              	.LVL48:
+ 454 0016 02E0     		b	.L42
+ 455              	.L41:
+  32:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         } 
+ 456              		.loc 1 32 0
+ 457 0018 0020     		movs	r0, #0
+ 458 001a FFF7FEFF 		bl	Pin_DO_Write
+ 459              	.LVL49:
+ 460              	.L42:
+  34:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         Pin_CLK_Write(0); 
+ 461              		.loc 1 34 0 discriminator 2
+ 462 001e 0120     		movs	r0, #1
+ 463 0020 FFF7FEFF 		bl	Pin_CLK_Write
+ 464              	.LVL50:
+  35:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     } 
+ 465              		.loc 1 35 0 discriminator 2
+ 466 0024 0020     		movs	r0, #0
+ 467 0026 FFF7FEFF 		bl	Pin_CLK_Write
+ 468              	.LVL51:
+  25:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         if(data & (0x80 >> i)) 
+ 469              		.loc 1 25 0 discriminator 2
+ 470 002a 0134     		adds	r4, r4, #1
+ 471              	.LVL52:
+ 472 002c E4B2     		uxtb	r4, r4
+ 473              	.LVL53:
+ 474              	.L40:
+  25:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         if(data & (0x80 >> i)) 
+ 475              		.loc 1 25 0 is_stmt 0 discriminator 1
+ 476 002e 072C     		cmp	r4, #7
+ 477 0030 EAD9     		bls	.L43
+ 478              	.LBE7:
+  37:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** 
+ 479              		.loc 1 37 0 is_stmt 1
+ 480              		@ sp needed
+ 481              	.LVL54:
+ 482 0032 70BD     		pop	{r4, r5, r6, pc}
+ 483              		.cfi_endproc
+ 484              	.LFE32:
+ 485              		.size	FourDigit74HC595_sendData, .-FourDigit74HC595_sendData
+ 486              		.section	.text.FourDigit74HC595_sendOneDigit,"ax",%progbits
+ 487              		.align	2
+ 488              		.code	16
+ 489              		.thumb_func
+ 490              		.type	FourDigit74HC595_sendOneDigit, %function
+ 491              	FourDigit74HC595_sendOneDigit:
+ 492              	.LFB33:
+  40:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     if(position >= 8)   // out of range, clear 7-segment display 
+ 493              		.loc 1 40 0
+ 494              		.cfi_startproc
+ 495              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 15
+
+
+ 496              		@ frame_needed = 0, uses_anonymous_args = 0
+ 497              	.LVL55:
+ 498 0000 70B5     		push	{r4, r5, r6, lr}
+ 499              		.cfi_def_cfa_offset 16
+ 500              		.cfi_offset 4, -16
+ 501              		.cfi_offset 5, -12
+ 502              		.cfi_offset 6, -8
+ 503              		.cfi_offset 14, -4
+ 504 0002 0500     		movs	r5, r0
+ 505 0004 0C00     		movs	r4, r1
+ 506 0006 1600     		movs	r6, r2
+  41:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     { 
+ 507              		.loc 1 41 0
+ 508 0008 0728     		cmp	r0, #7
+ 509 000a 05D9     		bls	.L45
+  43:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         FourDigit74HC595_sendData(0xFF); 
+ 510              		.loc 1 43 0
+ 511 000c FF20     		movs	r0, #255
+ 512              	.LVL56:
+ 513 000e FFF7FEFF 		bl	FourDigit74HC595_sendData
+ 514              	.LVL57:
+  44:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     } 
+ 515              		.loc 1 44 0
+ 516 0012 FF20     		movs	r0, #255
+ 517 0014 FFF7FEFF 		bl	FourDigit74HC595_sendData
+ 518              	.LVL58:
+ 519              	.L45:
+  46:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     if(dot) // if dot is needed 
+ 520              		.loc 1 46 0
+ 521 0018 0120     		movs	r0, #1
+ 522 001a A840     		lsls	r0, r0, r5
+ 523 001c C043     		mvns	r0, r0
+ 524 001e C0B2     		uxtb	r0, r0
+ 525 0020 FFF7FEFF 		bl	FourDigit74HC595_sendData
+ 526              	.LVL59:
+  47:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     { 
+ 527              		.loc 1 47 0
+ 528 0024 002E     		cmp	r6, #0
+ 529 0026 07D0     		beq	.L46
+  49:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     }     else 
+ 530              		.loc 1 49 0
+ 531 0028 094B     		ldr	r3, .L48
+ 532 002a 1C19     		adds	r4, r3, r4
+ 533 002c 2379     		ldrb	r3, [r4, #4]
+ 534 002e 7F20     		movs	r0, #127
+ 535 0030 1840     		ands	r0, r3
+ 536 0032 FFF7FEFF 		bl	FourDigit74HC595_sendData
+ 537              	.LVL60:
+ 538 0036 04E0     		b	.L47
+ 539              	.L46:
+  52:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     } 
+ 540              		.loc 1 52 0
+ 541 0038 054B     		ldr	r3, .L48
+ 542 003a 1C19     		adds	r4, r3, r4
+ 543 003c 2079     		ldrb	r0, [r4, #4]
+ 544 003e FFF7FEFF 		bl	FourDigit74HC595_sendData
+ 545              	.LVL61:
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 16
+
+
+ 546              	.L47:
+  54:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     Pin_Latch_Write(0); 
+ 547              		.loc 1 54 0
+ 548 0042 0120     		movs	r0, #1
+ 549 0044 FFF7FEFF 		bl	Pin_Latch_Write
+ 550              	.LVL62:
+  55:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** } 
+ 551              		.loc 1 55 0
+ 552 0048 0020     		movs	r0, #0
+ 553 004a FFF7FEFF 		bl	Pin_Latch_Write
+ 554              	.LVL63:
+  56:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** 
+ 555              		.loc 1 56 0
+ 556              		@ sp needed
+ 557 004e 70BD     		pop	{r4, r5, r6, pc}
+ 558              	.L49:
+ 559              		.align	2
+ 560              	.L48:
+ 561 0050 88000000 		.word	.LANCHOR3
+ 562              		.cfi_endproc
+ 563              	.LFE33:
+ 564              		.size	FourDigit74HC595_sendOneDigit, .-FourDigit74HC595_sendOneDigit
+ 565              		.section	.text.setLEDColor,"ax",%progbits
+ 566              		.align	2
+ 567              		.code	16
+ 568              		.thumb_func
+ 569              		.type	setLEDColor, %function
+ 570              	setLEDColor:
+ 571              	.LFB37:
+ 158:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     switch(button_value)
+ 572              		.loc 1 158 0
+ 573              		.cfi_startproc
+ 574              		@ args = 0, pretend = 0, frame = 0
+ 575              		@ frame_needed = 0, uses_anonymous_args = 0
+ 576              	.LVL64:
+ 577 0000 10B5     		push	{r4, lr}
+ 578              		.cfi_def_cfa_offset 8
+ 579              		.cfi_offset 4, -8
+ 580              		.cfi_offset 14, -4
+ 581 0002 0400     		movs	r4, r0
+ 159:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     {
+ 582              		.loc 1 159 0
+ 583 0004 0B28     		cmp	r0, #11
+ 584 0006 62D8     		bhi	.L51
+ 585 0008 8300     		lsls	r3, r0, #2
+ 586 000a 384A     		ldr	r2, .L61
+ 587 000c D358     		ldr	r3, [r2, r3]
+ 588 000e 9F46     		mov	pc, r3
+ 589              		.section	.rodata
+ 590              		.align	2
+ 591              	.L53:
+ 592 0030 92000000 		.word	.L52
+ 593 0034 10000000 		.word	.L54
+ 594 0038 2E000000 		.word	.L55
+ 595 003c 4C000000 		.word	.L56
+ 596 0040 74000000 		.word	.L57
+ 597 0044 92000000 		.word	.L52
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 17
+
+
+ 598 0048 B0000000 		.word	.L58
+ 599 004c 10000000 		.word	.L54
+ 600 0050 2E000000 		.word	.L55
+ 601 0054 56000000 		.word	.L59
+ 602 0058 74000000 		.word	.L57
+ 603 005c B0000000 		.word	.L58
+ 604              		.section	.text.setLEDColor
+ 605              	.L54:
+ 163:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_R_Write(0);
+ 606              		.loc 1 163 0
+ 607 0010 0022     		movs	r2, #0
+ 608 0012 0100     		movs	r1, r0
+ 609 0014 0020     		movs	r0, #0
+ 610              	.LVL65:
+ 611 0016 FFF7FEFF 		bl	FourDigit74HC595_sendOneDigit
+ 612              	.LVL66:
+ 164:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_G_Write(1);
+ 613              		.loc 1 164 0
+ 614 001a 0020     		movs	r0, #0
+ 615 001c FFF7FEFF 		bl	LED_R_Write
+ 616              	.LVL67:
+ 165:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_B_Write(1);
+ 617              		.loc 1 165 0
+ 618 0020 0120     		movs	r0, #1
+ 619 0022 FFF7FEFF 		bl	LED_G_Write
+ 620              	.LVL68:
+ 166:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 621              		.loc 1 166 0
+ 622 0026 0120     		movs	r0, #1
+ 623 0028 FFF7FEFF 		bl	LED_B_Write
+ 624              	.LVL69:
+ 167:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             
+ 625              		.loc 1 167 0
+ 626 002c 5DE0     		b	.L50
+ 627              	.LVL70:
+ 628              	.L55:
+ 172:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_R_Write(1);
+ 629              		.loc 1 172 0
+ 630 002e 0022     		movs	r2, #0
+ 631 0030 0100     		movs	r1, r0
+ 632 0032 0020     		movs	r0, #0
+ 633              	.LVL71:
+ 634 0034 FFF7FEFF 		bl	FourDigit74HC595_sendOneDigit
+ 635              	.LVL72:
+ 173:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_G_Write(0);
+ 636              		.loc 1 173 0
+ 637 0038 0120     		movs	r0, #1
+ 638 003a FFF7FEFF 		bl	LED_R_Write
+ 639              	.LVL73:
+ 174:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_B_Write(1);
+ 640              		.loc 1 174 0
+ 641 003e 0020     		movs	r0, #0
+ 642 0040 FFF7FEFF 		bl	LED_G_Write
+ 643              	.LVL74:
+ 175:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 644              		.loc 1 175 0
+ 645 0044 0120     		movs	r0, #1
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 18
+
+
+ 646 0046 FFF7FEFF 		bl	LED_B_Write
+ 647              	.LVL75:
+ 176:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             
+ 648              		.loc 1 176 0
+ 649 004a 4EE0     		b	.L50
+ 650              	.LVL76:
+ 651              	.L56:
+ 179:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         case 9:
+ 652              		.loc 1 179 0
+ 653 004c 0022     		movs	r2, #0
+ 654 004e 0321     		movs	r1, #3
+ 655 0050 0020     		movs	r0, #0
+ 656              	.LVL77:
+ 657 0052 FFF7FEFF 		bl	FourDigit74HC595_sendOneDigit
+ 658              	.LVL78:
+ 659              	.L59:
+ 181:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_R_Write(1);
+ 660              		.loc 1 181 0
+ 661 0056 0022     		movs	r2, #0
+ 662 0058 2100     		movs	r1, r4
+ 663 005a 0020     		movs	r0, #0
+ 664 005c FFF7FEFF 		bl	FourDigit74HC595_sendOneDigit
+ 665              	.LVL79:
+ 182:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_G_Write(1);
+ 666              		.loc 1 182 0
+ 667 0060 0120     		movs	r0, #1
+ 668 0062 FFF7FEFF 		bl	LED_R_Write
+ 669              	.LVL80:
+ 183:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_B_Write(0);
+ 670              		.loc 1 183 0
+ 671 0066 0120     		movs	r0, #1
+ 672 0068 FFF7FEFF 		bl	LED_G_Write
+ 673              	.LVL81:
+ 184:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 674              		.loc 1 184 0
+ 675 006c 0020     		movs	r0, #0
+ 676 006e FFF7FEFF 		bl	LED_B_Write
+ 677              	.LVL82:
+ 185:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             
+ 678              		.loc 1 185 0
+ 679 0072 3AE0     		b	.L50
+ 680              	.LVL83:
+ 681              	.L57:
+ 189:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_R_Write(0);
+ 682              		.loc 1 189 0
+ 683 0074 0022     		movs	r2, #0
+ 684 0076 0100     		movs	r1, r0
+ 685 0078 0020     		movs	r0, #0
+ 686              	.LVL84:
+ 687 007a FFF7FEFF 		bl	FourDigit74HC595_sendOneDigit
+ 688              	.LVL85:
+ 190:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_G_Write(0);
+ 689              		.loc 1 190 0
+ 690 007e 0020     		movs	r0, #0
+ 691 0080 FFF7FEFF 		bl	LED_R_Write
+ 692              	.LVL86:
+ 191:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_B_Write(1);
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 19
+
+
+ 693              		.loc 1 191 0
+ 694 0084 0020     		movs	r0, #0
+ 695 0086 FFF7FEFF 		bl	LED_G_Write
+ 696              	.LVL87:
+ 192:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 697              		.loc 1 192 0
+ 698 008a 0120     		movs	r0, #1
+ 699 008c FFF7FEFF 		bl	LED_B_Write
+ 700              	.LVL88:
+ 193:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             
+ 701              		.loc 1 193 0
+ 702 0090 2BE0     		b	.L50
+ 703              	.LVL89:
+ 704              	.L52:
+ 197:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_R_Write(0);
+ 705              		.loc 1 197 0
+ 706 0092 0022     		movs	r2, #0
+ 707 0094 0100     		movs	r1, r0
+ 708 0096 0020     		movs	r0, #0
+ 709              	.LVL90:
+ 710 0098 FFF7FEFF 		bl	FourDigit74HC595_sendOneDigit
+ 711              	.LVL91:
+ 198:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_G_Write(1);
+ 712              		.loc 1 198 0
+ 713 009c 0020     		movs	r0, #0
+ 714 009e FFF7FEFF 		bl	LED_R_Write
+ 715              	.LVL92:
+ 199:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_B_Write(0);
+ 716              		.loc 1 199 0
+ 717 00a2 0120     		movs	r0, #1
+ 718 00a4 FFF7FEFF 		bl	LED_G_Write
+ 719              	.LVL93:
+ 200:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 720              		.loc 1 200 0
+ 721 00a8 0020     		movs	r0, #0
+ 722 00aa FFF7FEFF 		bl	LED_B_Write
+ 723              	.LVL94:
+ 201:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             
+ 724              		.loc 1 201 0
+ 725 00ae 1CE0     		b	.L50
+ 726              	.LVL95:
+ 727              	.L58:
+ 205:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_R_Write(1);
+ 728              		.loc 1 205 0
+ 729 00b0 0022     		movs	r2, #0
+ 730 00b2 0100     		movs	r1, r0
+ 731 00b4 0020     		movs	r0, #0
+ 732              	.LVL96:
+ 733 00b6 FFF7FEFF 		bl	FourDigit74HC595_sendOneDigit
+ 734              	.LVL97:
+ 206:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_G_Write(0);
+ 735              		.loc 1 206 0
+ 736 00ba 0120     		movs	r0, #1
+ 737 00bc FFF7FEFF 		bl	LED_R_Write
+ 738              	.LVL98:
+ 207:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_B_Write(0);
+ 739              		.loc 1 207 0
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 20
+
+
+ 740 00c0 0020     		movs	r0, #0
+ 741 00c2 FFF7FEFF 		bl	LED_G_Write
+ 742              	.LVL99:
+ 208:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 743              		.loc 1 208 0
+ 744 00c6 0020     		movs	r0, #0
+ 745 00c8 FFF7FEFF 		bl	LED_B_Write
+ 746              	.LVL100:
+ 209:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             
+ 747              		.loc 1 209 0
+ 748 00cc 0DE0     		b	.L50
+ 749              	.LVL101:
+ 750              	.L51:
+ 212:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             // Turn off LED (Black)
+ 751              		.loc 1 212 0
+ 752 00ce 0022     		movs	r2, #0
+ 753 00d0 0021     		movs	r1, #0
+ 754 00d2 0820     		movs	r0, #8
+ 755              	.LVL102:
+ 756 00d4 FFF7FEFF 		bl	FourDigit74HC595_sendOneDigit
+ 757              	.LVL103:
+ 214:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_G_Write(1);
+ 758              		.loc 1 214 0
+ 759 00d8 0120     		movs	r0, #1
+ 760 00da FFF7FEFF 		bl	LED_R_Write
+ 761              	.LVL104:
+ 215:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             LED_B_Write(1);
+ 762              		.loc 1 215 0
+ 763 00de 0120     		movs	r0, #1
+ 764 00e0 FFF7FEFF 		bl	LED_G_Write
+ 765              	.LVL105:
+ 216:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             break;
+ 766              		.loc 1 216 0
+ 767 00e4 0120     		movs	r0, #1
+ 768 00e6 FFF7FEFF 		bl	LED_B_Write
+ 769              	.LVL106:
+ 770              	.L50:
+ 219:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** 
+ 771              		.loc 1 219 0
+ 772              		@ sp needed
+ 773 00ea 10BD     		pop	{r4, pc}
+ 774              	.L62:
+ 775              		.align	2
+ 776              	.L61:
+ 777 00ec 30000000 		.word	.L53
+ 778              		.cfi_endproc
+ 779              	.LFE37:
+ 780              		.size	setLEDColor, .-setLEDColor
+ 781              		.section	.text.main,"ax",%progbits
+ 782              		.align	2
+ 783              		.global	main
+ 784              		.code	16
+ 785              		.thumb_func
+ 786              		.type	main, %function
+ 787              	main:
+ 788              	.LFB39:
+ 267:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****   
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 21
+
+
+ 268:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** int main(void) 
+ 269:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c **** { 
+ 789              		.loc 1 269 0
+ 790              		.cfi_startproc
+ 791              		@ args = 0, pretend = 0, frame = 0
+ 792              		@ frame_needed = 0, uses_anonymous_args = 0
+ 793 0000 70B5     		push	{r4, r5, r6, lr}
+ 794              		.cfi_def_cfa_offset 16
+ 795              		.cfi_offset 4, -16
+ 796              		.cfi_offset 5, -12
+ 797              		.cfi_offset 6, -8
+ 798              		.cfi_offset 14, -4
+ 270:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     CyGlobalIntEnable; /* Enable global interrupts. */ 
+ 799              		.loc 1 270 0
+ 800              		.syntax divided
+ 801              	@ 270 "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c" 1
+ 802 0002 62B6     		CPSIE   i
+ 803              	@ 0 "" 2
+ 271:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     FourDigit74HC595_sendOneDigit(0, 0x88, 1);
+ 804              		.loc 1 271 0
+ 805              		.thumb
+ 806              		.syntax unified
+ 807 0004 0122     		movs	r2, #1
+ 808 0006 8821     		movs	r1, #136
+ 809 0008 0020     		movs	r0, #0
+ 810 000a FFF7FEFF 		bl	FourDigit74HC595_sendOneDigit
+ 811              	.LVL107:
+ 272:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     SW_Tx_UART_Start(); 
+ 812              		.loc 1 272 0
+ 813 000e FFF7FEFF 		bl	SW_Tx_UART_Start
+ 814              	.LVL108:
+ 273:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     SW_Tx_UART_PutCRLF(); 
+ 815              		.loc 1 273 0
+ 816 0012 FFF7FEFF 		bl	SW_Tx_UART_PutCRLF
+ 817              	.LVL109:
+ 274:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     SW_Tx_UART_PutString("Software Transmit UART"); 
+ 818              		.loc 1 274 0
+ 819 0016 4448     		ldr	r0, .L84
+ 820 0018 FFF7FEFF 		bl	SW_Tx_UART_PutString
+ 821              	.LVL110:
+ 275:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     SW_Tx_UART_PutCRLF();
+ 822              		.loc 1 275 0
+ 823 001c FFF7FEFF 		bl	SW_Tx_UART_PutCRLF
+ 824              	.LVL111:
+ 276:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     SW_Tx_UART_PutString("Enter password to unlock");
+ 825              		.loc 1 276 0
+ 826 0020 4248     		ldr	r0, .L84+4
+ 827 0022 FFF7FEFF 		bl	SW_Tx_UART_PutString
+ 828              	.LVL112:
+ 277:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     SW_Tx_UART_PutCRLF();
+ 829              		.loc 1 277 0
+ 830 0026 FFF7FEFF 		bl	SW_Tx_UART_PutCRLF
+ 831              	.LVL113:
+ 278:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****  
+ 279:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     initMatrix();
+ 832              		.loc 1 279 0
+ 833 002a FFF7FEFF 		bl	initMatrix
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 22
+
+
+ 834              	.LVL114:
+ 280:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     
+ 281:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     uint8_t last_state = 255; // Ніяка кнопка не натиснута
+ 282:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     uint8_t button_pressed = 0;
+ 283:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     
+ 284:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     // Початковий стан 
+ 285:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     LED_R_Write(0);
+ 835              		.loc 1 285 0
+ 836 002e 0020     		movs	r0, #0
+ 837 0030 FFF7FEFF 		bl	LED_R_Write
+ 838              	.LVL115:
+ 286:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     LED_G_Write(0);
+ 839              		.loc 1 286 0
+ 840 0034 0020     		movs	r0, #0
+ 841 0036 FFF7FEFF 		bl	LED_G_Write
+ 842              	.LVL116:
+ 287:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     LED_B_Write(0);
+ 843              		.loc 1 287 0
+ 844 003a 0020     		movs	r0, #0
+ 845 003c FFF7FEFF 		bl	LED_B_Write
+ 846              	.LVL117:
+ 281:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     uint8_t button_pressed = 0;
+ 847              		.loc 1 281 0
+ 848 0040 FF26     		movs	r6, #255
+ 849              	.LVL118:
+ 850              	.L77:
+ 288:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     
+ 289:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     for(;;) 
+ 290:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     {      
+ 291:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         readMatrix();
+ 851              		.loc 1 291 0
+ 852 0042 FFF7FEFF 		bl	readMatrix
+ 853              	.LVL119:
+ 854              	.LBB8:
+ 292:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         button_pressed = 0;
+ 293:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         
+ 294:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         // Сканування всіх кнопок
+ 295:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         for(int row = 0; row < 4; row++)
+ 855              		.loc 1 295 0
+ 856 0046 0025     		movs	r5, #0
+ 857              	.LBE8:
+ 292:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         button_pressed = 0;
+ 858              		.loc 1 292 0
+ 859 0048 0020     		movs	r0, #0
+ 860              	.LBB13:
+ 861              		.loc 1 295 0
+ 862 004a 46E0     		b	.L64
+ 863              	.LVL120:
+ 864              	.L72:
+ 865              	.LBB9:
+ 296:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         {
+ 297:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             for(int col = 0; col < 3; col++)
+ 298:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             {
+ 299:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                 if(keys[row][col] == 0) 
+ 866              		.loc 1 299 0
+ 867 004c 6B00     		lsls	r3, r5, #1
+ 868 004e 5B19     		adds	r3, r3, r5
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 23
+
+
+ 869 0050 3749     		ldr	r1, .L84+8
+ 870 0052 CB18     		adds	r3, r1, r3
+ 871 0054 9B5C     		ldrb	r3, [r3, r2]
+ 872 0056 002B     		cmp	r3, #0
+ 873 0058 32D1     		bne	.L65
+ 874              	.LBB10:
+ 300:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                 {
+ 301:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                     uint8_t button_value = (row == 3 && col == 1) ? 0 : 
+ 875              		.loc 1 301 0
+ 876 005a 032D     		cmp	r5, #3
+ 877 005c 01D1     		bne	.L66
+ 878              		.loc 1 301 0 is_stmt 0 discriminator 2
+ 879 005e 012A     		cmp	r2, #1
+ 880 0060 0DD0     		beq	.L78
+ 881              	.L66:
+ 882              		.loc 1 301 0 discriminator 3
+ 883 0062 032D     		cmp	r5, #3
+ 884 0064 01D1     		bne	.L68
+ 302:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                                           (row == 3 && col == 0) ? 10 :
+ 885              		.loc 1 302 0 is_stmt 1
+ 886 0066 002A     		cmp	r2, #0
+ 887 0068 0BD0     		beq	.L79
+ 888              	.L68:
+ 301:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                                           (row == 3 && col == 0) ? 10 :
+ 889              		.loc 1 301 0 discriminator 5
+ 890 006a 032D     		cmp	r5, #3
+ 891 006c 01D1     		bne	.L69
+ 303:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                                           (row == 3 && col == 2) ? 11 :
+ 892              		.loc 1 303 0
+ 893 006e 022A     		cmp	r2, #2
+ 894 0070 09D0     		beq	.L80
+ 895              	.L69:
+ 301:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                                           (row == 3 && col == 0) ? 10 :
+ 896              		.loc 1 301 0 discriminator 6
+ 897 0072 6C00     		lsls	r4, r5, #1
+ 898 0074 2C19     		adds	r4, r5, r4
+ 899 0076 A218     		adds	r2, r4, r2
+ 900              	.LVL121:
+ 901 0078 0132     		adds	r2, r2, #1
+ 902 007a D4B2     		uxtb	r4, r2
+ 903 007c 04E0     		b	.L67
+ 904              	.LVL122:
+ 905              	.L78:
+ 301:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                                           (row == 3 && col == 0) ? 10 :
+ 906              		.loc 1 301 0 is_stmt 0
+ 907 007e 0024     		movs	r4, #0
+ 908 0080 02E0     		b	.L67
+ 909              	.L79:
+ 910 0082 0A24     		movs	r4, #10
+ 911 0084 00E0     		b	.L67
+ 912              	.L80:
+ 913 0086 0B24     		movs	r4, #11
+ 914              	.LVL123:
+ 915              	.L67:
+ 304:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                                           (row * 3 + col + 1);
+ 305:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                     
+ 306:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                     if(last_state != button_value)
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 24
+
+
+ 916              		.loc 1 306 0 is_stmt 1 discriminator 12
+ 917 0088 A642     		cmp	r6, r4
+ 918 008a 1FD0     		beq	.L81
+ 919              	.LVL124:
+ 307:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                     {
+ 308:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                         last_state = button_value;
+ 309:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                         printButtonName(button_value);
+ 920              		.loc 1 309 0
+ 921 008c 2000     		movs	r0, r4
+ 922              	.LVL125:
+ 923 008e FFF7FEFF 		bl	printButtonName
+ 924              	.LVL126:
+ 310:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                         
+ 311:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                        
+ 312:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                         if(password_locked)
+ 925              		.loc 1 312 0
+ 926 0092 274B     		ldr	r3, .L84+8
+ 927 0094 1B7B     		ldrb	r3, [r3, #12]
+ 928 0096 002B     		cmp	r3, #0
+ 929 0098 0CD0     		beq	.L71
+ 313:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                         {
+ 314:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                             password_buffer[password_index] = button_value;
+ 930              		.loc 1 314 0
+ 931 009a 264A     		ldr	r2, .L84+12
+ 932 009c D378     		ldrb	r3, [r2, #3]
+ 933 009e D454     		strb	r4, [r2, r3]
+ 315:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                             password_index++;
+ 934              		.loc 1 315 0
+ 935 00a0 0133     		adds	r3, r3, #1
+ 936 00a2 DBB2     		uxtb	r3, r3
+ 937 00a4 D370     		strb	r3, [r2, #3]
+ 316:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                             if(password_index >= PASSWORD_LENGTH)
+ 938              		.loc 1 316 0
+ 939 00a6 022B     		cmp	r3, #2
+ 940 00a8 12D9     		bls	.L82
+ 317:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                             {
+ 318:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                                 checkPassword();
+ 941              		.loc 1 318 0
+ 942 00aa FFF7FEFF 		bl	checkPassword
+ 943              	.LVL127:
+ 308:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                         printButtonName(button_value);
+ 944              		.loc 1 308 0
+ 945 00ae 2600     		movs	r6, r4
+ 319:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                             }
+ 320:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                         }
+ 321:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                         else
+ 322:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                         {
+ 323:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                             // Система розблокована, змінюємо колір
+ 324:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                             setLEDColor(button_value);
+ 325:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                            
+ 326:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                         }
+ 327:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                     }
+ 328:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                     button_pressed = 1;
+ 946              		.loc 1 328 0
+ 947 00b0 0120     		movs	r0, #1
+ 948 00b2 0FE0     		b	.L70
+ 949              	.L71:
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 25
+
+
+ 324:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                            
+ 950              		.loc 1 324 0
+ 951 00b4 2000     		movs	r0, r4
+ 952 00b6 FFF7FEFF 		bl	setLEDColor
+ 953              	.LVL128:
+ 308:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                         printButtonName(button_value);
+ 954              		.loc 1 308 0
+ 955 00ba 2600     		movs	r6, r4
+ 956              		.loc 1 328 0
+ 957 00bc 0120     		movs	r0, #1
+ 958 00be 09E0     		b	.L70
+ 959              	.LVL129:
+ 960              	.L65:
+ 961              	.LBE10:
+ 297:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             {
+ 962              		.loc 1 297 0 discriminator 2
+ 963 00c0 0132     		adds	r2, r2, #1
+ 964              	.LVL130:
+ 965 00c2 00E0     		b	.L74
+ 966              	.LVL131:
+ 967              	.L83:
+ 968              	.LBE9:
+ 969 00c4 0022     		movs	r2, #0
+ 970              	.L74:
+ 971              	.LVL132:
+ 972              	.LBB12:
+ 297:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             {
+ 973              		.loc 1 297 0 is_stmt 0 discriminator 1
+ 974 00c6 022A     		cmp	r2, #2
+ 975 00c8 C0DD     		ble	.L72
+ 976 00ca 03E0     		b	.L70
+ 977              	.LVL133:
+ 978              	.L81:
+ 979              	.LBB11:
+ 980              		.loc 1 328 0 is_stmt 1
+ 981 00cc 0120     		movs	r0, #1
+ 982              	.LVL134:
+ 983 00ce 01E0     		b	.L70
+ 984              	.LVL135:
+ 985              	.L82:
+ 308:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                         printButtonName(button_value);
+ 986              		.loc 1 308 0
+ 987 00d0 2600     		movs	r6, r4
+ 988              		.loc 1 328 0
+ 989 00d2 0120     		movs	r0, #1
+ 990              	.LVL136:
+ 991              	.L70:
+ 992              	.LBE11:
+ 993              	.LBE12:
+ 329:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                     break;
+ 330:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                 }
+ 331:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             }
+ 332:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             if(button_pressed) break;
+ 994              		.loc 1 332 0
+ 995 00d4 0028     		cmp	r0, #0
+ 996 00d6 02D1     		bne	.L73
+ 295:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         {
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 26
+
+
+ 997              		.loc 1 295 0 discriminator 2
+ 998 00d8 0135     		adds	r5, r5, #1
+ 999              	.LVL137:
+ 1000              	.L64:
+ 295:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         {
+ 1001              		.loc 1 295 0 is_stmt 0 discriminator 1
+ 1002 00da 032D     		cmp	r5, #3
+ 1003 00dc F2DD     		ble	.L83
+ 1004              	.L73:
+ 1005              	.LBE13:
+ 333:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         }
+ 334:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         
+ 335:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         // Якщо жодна кнопка не натиснута
+ 336:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         if(!button_pressed)
+ 1006              		.loc 1 336 0 is_stmt 1
+ 1007 00de 0028     		cmp	r0, #0
+ 1008 00e0 1ED1     		bne	.L75
+ 337:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         {
+ 338:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             if(last_state != 255)
+ 1009              		.loc 1 338 0
+ 1010 00e2 FF2E     		cmp	r6, #255
+ 1011 00e4 1CD0     		beq	.L75
+ 1012              	.LVL138:
+ 339:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             {
+ 340:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                 last_state = 255;
+ 341:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                 
+ 342:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                 if(password_locked)
+ 1013              		.loc 1 342 0
+ 1014 00e6 124B     		ldr	r3, .L84+8
+ 1015 00e8 1B7B     		ldrb	r3, [r3, #12]
+ 1016 00ea 002B     		cmp	r3, #0
+ 1017 00ec 09D0     		beq	.L76
+ 343:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                 {
+ 344:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                     // Білий світлодіод, коли система заблокова�
+ 345:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                     LED_R_Write(0);
+ 1018              		.loc 1 345 0
+ 1019 00ee FFF7FEFF 		bl	LED_R_Write
+ 1020              	.LVL139:
+ 346:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                     LED_G_Write(0);
+ 1021              		.loc 1 346 0
+ 1022 00f2 0020     		movs	r0, #0
+ 1023 00f4 FFF7FEFF 		bl	LED_G_Write
+ 1024              	.LVL140:
+ 347:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                     LED_B_Write(0);
+ 1025              		.loc 1 347 0
+ 1026 00f8 0020     		movs	r0, #0
+ 1027 00fa FFF7FEFF 		bl	LED_B_Write
+ 1028              	.LVL141:
+ 340:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                 
+ 1029              		.loc 1 340 0
+ 1030 00fe FF26     		movs	r6, #255
+ 1031 0100 0EE0     		b	.L75
+ 1032              	.LVL142:
+ 1033              	.L76:
+ 348:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                 }
+ 349:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                 else
+ 350:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                 {
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 27
+
+
+ 351:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                     FourDigit74HC595_sendOneDigit(8, 0, 0);
+ 1034              		.loc 1 351 0
+ 1035 0102 0022     		movs	r2, #0
+ 1036 0104 0021     		movs	r1, #0
+ 1037 0106 0820     		movs	r0, #8
+ 1038              	.LVL143:
+ 1039 0108 FFF7FEFF 		bl	FourDigit74HC595_sendOneDigit
+ 1040              	.LVL144:
+ 352:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                     // Вимкнути світлодіод (Black), коли система ро�
+ 353:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                     LED_R_Write(1);
+ 1041              		.loc 1 353 0
+ 1042 010c 0120     		movs	r0, #1
+ 1043 010e FFF7FEFF 		bl	LED_R_Write
+ 1044              	.LVL145:
+ 354:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                     LED_G_Write(1);
+ 1045              		.loc 1 354 0
+ 1046 0112 0120     		movs	r0, #1
+ 1047 0114 FFF7FEFF 		bl	LED_G_Write
+ 1048              	.LVL146:
+ 355:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                     LED_B_Write(1);
+ 1049              		.loc 1 355 0
+ 1050 0118 0120     		movs	r0, #1
+ 1051 011a FFF7FEFF 		bl	LED_B_Write
+ 1052              	.LVL147:
+ 340:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                 
+ 1053              		.loc 1 340 0
+ 1054 011e FF26     		movs	r6, #255
+ 1055              	.LVL148:
+ 1056              	.L75:
+ 356:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****                 }
+ 357:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****             }
+ 358:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         }
+ 359:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         
+ 360:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****         CyDelay(50); // Debounce delay
+ 1057              		.loc 1 360 0
+ 1058 0120 3220     		movs	r0, #50
+ 1059 0122 FFF7FEFF 		bl	CyDelay
+ 1060              	.LVL149:
+ 361:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\main.c ****     }
+ 1061              		.loc 1 361 0
+ 1062 0126 8CE7     		b	.L77
+ 1063              	.L85:
+ 1064              		.align	2
+ 1065              	.L84:
+ 1066 0128 10010000 		.word	.LC37
+ 1067 012c 28010000 		.word	.LC39
+ 1068 0130 00000000 		.word	.LANCHOR1
+ 1069 0134 00000000 		.word	.LANCHOR2
+ 1070              		.cfi_endproc
+ 1071              	.LFE39:
+ 1072              		.size	main, .-main
+ 1073              		.section	.rodata
+ 1074              		.align	2
+ 1075              		.set	.LANCHOR0,. + 0
+ 1076              		.type	COLUMN_x_SetDriveMode, %object
+ 1077              		.size	COLUMN_x_SetDriveMode, 12
+ 1078              	COLUMN_x_SetDriveMode:
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 28
+
+
+ 1079 0060 00000000 		.word	COLUMN_0_SetDriveMode
+ 1080 0064 00000000 		.word	COLUMN_1_SetDriveMode
+ 1081 0068 00000000 		.word	COLUMN_2_SetDriveMode
+ 1082              		.type	COLUMN_x_Write, %object
+ 1083              		.size	COLUMN_x_Write, 12
+ 1084              	COLUMN_x_Write:
+ 1085 006c 00000000 		.word	COLUMN_0_Write
+ 1086 0070 00000000 		.word	COLUMN_1_Write
+ 1087 0074 00000000 		.word	COLUMN_2_Write
+ 1088              		.type	ROW_x_Read, %object
+ 1089              		.size	ROW_x_Read, 16
+ 1090              	ROW_x_Read:
+ 1091 0078 00000000 		.word	ROW_0_Read
+ 1092 007c 00000000 		.word	ROW_1_Read
+ 1093 0080 00000000 		.word	ROW_2_Read
+ 1094 0084 00000000 		.word	ROW_3_Read
+ 1095              		.align	2
+ 1096              		.set	.LANCHOR3,. + 0
+ 1097              		.type	PASSWORD, %object
+ 1098              		.size	PASSWORD, 3
+ 1099              	PASSWORD:
+ 1100 0088 01       		.byte	1
+ 1101 0089 02       		.byte	2
+ 1102 008a 03       		.byte	3
+ 1103 008b 00       		.space	1
+ 1104              		.type	LED_NUM, %object
+ 1105              		.size	LED_NUM, 17
+ 1106              	LED_NUM:
+ 1107 008c C0       		.byte	-64
+ 1108 008d F9       		.byte	-7
+ 1109 008e A4       		.byte	-92
+ 1110 008f B0       		.byte	-80
+ 1111 0090 99       		.byte	-103
+ 1112 0091 92       		.byte	-110
+ 1113 0092 82       		.byte	-126
+ 1114 0093 F8       		.byte	-8
+ 1115 0094 80       		.byte	-128
+ 1116 0095 90       		.byte	-112
+ 1117 0096 BF       		.byte	-65
+ 1118 0097 88       		.byte	-120
+ 1119 0098 83       		.byte	-125
+ 1120 0099 C6       		.byte	-58
+ 1121 009a A1       		.byte	-95
+ 1122 009b 86       		.byte	-122
+ 1123 009c 8E       		.byte	-114
+ 1124              		.data
+ 1125              		.align	2
+ 1126              		.set	.LANCHOR1,. + 0
+ 1127              		.type	keys, %object
+ 1128              		.size	keys, 12
+ 1129              	keys:
+ 1130 0000 01       		.byte	1
+ 1131 0001 02       		.byte	2
+ 1132 0002 03       		.byte	3
+ 1133 0003 04       		.byte	4
+ 1134 0004 05       		.byte	5
+ 1135 0005 06       		.byte	6
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 29
+
+
+ 1136 0006 07       		.byte	7
+ 1137 0007 08       		.byte	8
+ 1138 0008 09       		.byte	9
+ 1139 0009 0A       		.byte	10
+ 1140 000a 00       		.byte	0
+ 1141 000b 0B       		.byte	11
+ 1142              		.type	password_locked, %object
+ 1143              		.size	password_locked, 1
+ 1144              	password_locked:
+ 1145 000c 01       		.byte	1
+ 1146              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 1147              		.align	2
+ 1148              	.LC4:
+ 1149 0000 42757474 		.ascii	"Button 0 pressed\000"
+ 1149      6F6E2030 
+ 1149      20707265 
+ 1149      73736564 
+ 1149      00
+ 1150 0011 000000   		.space	3
+ 1151              	.LC6:
+ 1152 0014 42757474 		.ascii	"Button 1 pressed\000"
+ 1152      6F6E2031 
+ 1152      20707265 
+ 1152      73736564 
+ 1152      00
+ 1153 0025 000000   		.space	3
+ 1154              	.LC8:
+ 1155 0028 42757474 		.ascii	"Button 2 pressed\000"
+ 1155      6F6E2032 
+ 1155      20707265 
+ 1155      73736564 
+ 1155      00
+ 1156 0039 000000   		.space	3
+ 1157              	.LC10:
+ 1158 003c 42757474 		.ascii	"Button 3 pressed\000"
+ 1158      6F6E2033 
+ 1158      20707265 
+ 1158      73736564 
+ 1158      00
+ 1159 004d 000000   		.space	3
+ 1160              	.LC12:
+ 1161 0050 42757474 		.ascii	"Button 4 pressed\000"
+ 1161      6F6E2034 
+ 1161      20707265 
+ 1161      73736564 
+ 1161      00
+ 1162 0061 000000   		.space	3
+ 1163              	.LC14:
+ 1164 0064 42757474 		.ascii	"Button 5 pressed\000"
+ 1164      6F6E2035 
+ 1164      20707265 
+ 1164      73736564 
+ 1164      00
+ 1165 0075 000000   		.space	3
+ 1166              	.LC16:
+ 1167 0078 42757474 		.ascii	"Button 6 pressed\000"
+ 1167      6F6E2036 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 30
+
+
+ 1167      20707265 
+ 1167      73736564 
+ 1167      00
+ 1168 0089 000000   		.space	3
+ 1169              	.LC18:
+ 1170 008c 42757474 		.ascii	"Button 7 pressed\000"
+ 1170      6F6E2037 
+ 1170      20707265 
+ 1170      73736564 
+ 1170      00
+ 1171 009d 000000   		.space	3
+ 1172              	.LC20:
+ 1173 00a0 42757474 		.ascii	"Button 8 pressed\000"
+ 1173      6F6E2038 
+ 1173      20707265 
+ 1173      73736564 
+ 1173      00
+ 1174 00b1 000000   		.space	3
+ 1175              	.LC22:
+ 1176 00b4 42757474 		.ascii	"Button 9 pressed\000"
+ 1176      6F6E2039 
+ 1176      20707265 
+ 1176      73736564 
+ 1176      00
+ 1177 00c5 000000   		.space	3
+ 1178              	.LC24:
+ 1179 00c8 42757474 		.ascii	"Button * pressed\000"
+ 1179      6F6E202A 
+ 1179      20707265 
+ 1179      73736564 
+ 1179      00
+ 1180 00d9 000000   		.space	3
+ 1181              	.LC26:
+ 1182 00dc 42757474 		.ascii	"Button # pressed\000"
+ 1182      6F6E2023 
+ 1182      20707265 
+ 1182      73736564 
+ 1182      00
+ 1183 00ed 000000   		.space	3
+ 1184              	.LC30:
+ 1185 00f0 41636365 		.ascii	"Access allowed\000"
+ 1185      73732061 
+ 1185      6C6C6F77 
+ 1185      656400
+ 1186 00ff 00       		.space	1
+ 1187              	.LC33:
+ 1188 0100 41636365 		.ascii	"Access denied\000"
+ 1188      73732064 
+ 1188      656E6965 
+ 1188      6400
+ 1189 010e 0000     		.space	2
+ 1190              	.LC37:
+ 1191 0110 536F6674 		.ascii	"Software Transmit UART\000"
+ 1191      77617265 
+ 1191      20547261 
+ 1191      6E736D69 
+ 1191      74205541 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 31
+
+
+ 1192 0127 00       		.space	1
+ 1193              	.LC39:
+ 1194 0128 456E7465 		.ascii	"Enter password to unlock\000"
+ 1194      72207061 
+ 1194      7373776F 
+ 1194      72642074 
+ 1194      6F20756E 
+ 1195              		.bss
+ 1196              		.align	2
+ 1197              		.set	.LANCHOR2,. + 0
+ 1198              		.type	password_buffer, %object
+ 1199              		.size	password_buffer, 3
+ 1200              	password_buffer:
+ 1201 0000 000000   		.space	3
+ 1202              		.type	password_index, %object
+ 1203              		.size	password_index, 1
+ 1204              	password_index:
+ 1205 0003 00       		.space	1
+ 1206              		.text
+ 1207              	.Letext0:
+ 1208              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1209              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1210              		.file 4 "Generated_Source\\PSoC4/cytypes.h"
+ 1211              		.file 5 "Generated_Source\\PSoC4/SW_Tx_UART.h"
+ 1212              		.file 6 "Generated_Source\\PSoC4/LED_R.h"
+ 1213              		.file 7 "Generated_Source\\PSoC4/LED_G.h"
+ 1214              		.file 8 "Generated_Source\\PSoC4/LED_B.h"
+ 1215              		.file 9 "Generated_Source\\PSoC4/CyLib.h"
+ 1216              		.file 10 "Generated_Source\\PSoC4/Pin_DO.h"
+ 1217              		.file 11 "Generated_Source\\PSoC4/Pin_CLK.h"
+ 1218              		.file 12 "Generated_Source\\PSoC4/Pin_Latch.h"
+ 1219              		.section	.debug_info,"",%progbits
+ 1220              	.Ldebug_info0:
+ 1221 0000 580B0000 		.4byte	0xb58
+ 1222 0004 0400     		.2byte	0x4
+ 1223 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1224 000a 04       		.byte	0x4
+ 1225 000b 01       		.uleb128 0x1
+ 1226 000c D8010000 		.4byte	.LASF54
+ 1227 0010 0C       		.byte	0xc
+ 1228 0011 CF020000 		.4byte	.LASF55
+ 1229 0015 CE000000 		.4byte	.LASF56
+ 1230 0019 60000000 		.4byte	.Ldebug_ranges0+0x60
+ 1231 001d 00000000 		.4byte	0
+ 1232 0021 00000000 		.4byte	.Ldebug_line0
+ 1233 0025 02       		.uleb128 0x2
+ 1234 0026 01       		.byte	0x1
+ 1235 0027 06       		.byte	0x6
+ 1236 0028 86030000 		.4byte	.LASF0
+ 1237 002c 03       		.uleb128 0x3
+ 1238 002d 0F000000 		.4byte	.LASF9
+ 1239 0031 02       		.byte	0x2
+ 1240 0032 1D       		.byte	0x1d
+ 1241 0033 37000000 		.4byte	0x37
+ 1242 0037 02       		.uleb128 0x2
+ 1243 0038 01       		.byte	0x1
+ 1244 0039 08       		.byte	0x8
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 32
+
+
+ 1245 003a 9D000000 		.4byte	.LASF1
+ 1246 003e 02       		.uleb128 0x2
+ 1247 003f 02       		.byte	0x2
+ 1248 0040 05       		.byte	0x5
+ 1249 0041 20030000 		.4byte	.LASF2
+ 1250 0045 02       		.uleb128 0x2
+ 1251 0046 02       		.byte	0x2
+ 1252 0047 07       		.byte	0x7
+ 1253 0048 A2030000 		.4byte	.LASF3
+ 1254 004c 02       		.uleb128 0x2
+ 1255 004d 04       		.byte	0x4
+ 1256 004e 05       		.byte	0x5
+ 1257 004f 4F030000 		.4byte	.LASF4
+ 1258 0053 02       		.uleb128 0x2
+ 1259 0054 04       		.byte	0x4
+ 1260 0055 07       		.byte	0x7
+ 1261 0056 AB000000 		.4byte	.LASF5
+ 1262 005a 02       		.uleb128 0x2
+ 1263 005b 08       		.byte	0x8
+ 1264 005c 05       		.byte	0x5
+ 1265 005d 9C020000 		.4byte	.LASF6
+ 1266 0061 02       		.uleb128 0x2
+ 1267 0062 08       		.byte	0x8
+ 1268 0063 07       		.byte	0x7
+ 1269 0064 AE010000 		.4byte	.LASF7
+ 1270 0068 04       		.uleb128 0x4
+ 1271 0069 04       		.byte	0x4
+ 1272 006a 05       		.byte	0x5
+ 1273 006b 696E7400 		.ascii	"int\000"
+ 1274 006f 02       		.uleb128 0x2
+ 1275 0070 04       		.byte	0x4
+ 1276 0071 07       		.byte	0x7
+ 1277 0072 57000000 		.4byte	.LASF8
+ 1278 0076 03       		.uleb128 0x3
+ 1279 0077 C5010000 		.4byte	.LASF10
+ 1280 007b 03       		.byte	0x3
+ 1281 007c 18       		.byte	0x18
+ 1282 007d 2C000000 		.4byte	0x2c
+ 1283 0081 05       		.uleb128 0x5
+ 1284 0082 BD000000 		.4byte	.LASF11
+ 1285 0086 04       		.byte	0x4
+ 1286 0087 FB01     		.2byte	0x1fb
+ 1287 0089 37000000 		.4byte	0x37
+ 1288 008d 02       		.uleb128 0x2
+ 1289 008e 04       		.byte	0x4
+ 1290 008f 04       		.byte	0x4
+ 1291 0090 84000000 		.4byte	.LASF12
+ 1292 0094 02       		.uleb128 0x2
+ 1293 0095 08       		.byte	0x8
+ 1294 0096 04       		.byte	0x4
+ 1295 0097 24010000 		.4byte	.LASF13
+ 1296 009b 02       		.uleb128 0x2
+ 1297 009c 01       		.byte	0x1
+ 1298 009d 08       		.byte	0x8
+ 1299 009e B6020000 		.4byte	.LASF14
+ 1300 00a2 02       		.uleb128 0x2
+ 1301 00a3 04       		.byte	0x4
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 33
+
+
+ 1302 00a4 07       		.byte	0x7
+ 1303 00a5 75020000 		.4byte	.LASF15
+ 1304 00a9 02       		.uleb128 0x2
+ 1305 00aa 08       		.byte	0x8
+ 1306 00ab 04       		.byte	0x4
+ 1307 00ac 67030000 		.4byte	.LASF16
+ 1308 00b0 06       		.uleb128 0x6
+ 1309 00b1 C3000000 		.4byte	.LASF17
+ 1310 00b5 01       		.byte	0x1
+ 1311 00b6 5E       		.byte	0x5e
+ 1312 00b7 00000000 		.4byte	.LFB34
+ 1313 00bb 1C000000 		.4byte	.LFE34-.LFB34
+ 1314 00bf 01       		.uleb128 0x1
+ 1315 00c0 9C       		.byte	0x9c
+ 1316 00c1 F6000000 		.4byte	0xf6
+ 1317 00c5 07       		.uleb128 0x7
+ 1318 00c6 02000000 		.4byte	.LBB2
+ 1319 00ca 14000000 		.4byte	.LBE2-.LBB2
+ 1320 00ce 08       		.uleb128 0x8
+ 1321 00cf 3A010000 		.4byte	.LASF19
+ 1322 00d3 01       		.byte	0x1
+ 1323 00d4 60       		.byte	0x60
+ 1324 00d5 68000000 		.4byte	0x68
+ 1325 00d9 00000000 		.4byte	.LLST0
+ 1326 00dd 09       		.uleb128 0x9
+ 1327 00de 10000000 		.4byte	.LVL2
+ 1328 00e2 0B       		.uleb128 0xb
+ 1329 00e3 74       		.byte	0x74
+ 1330 00e4 00       		.sleb128 0
+ 1331 00e5 32       		.byte	0x32
+ 1332 00e6 24       		.byte	0x24
+ 1333 00e7 03       		.byte	0x3
+ 1334 00e8 60000000 		.4byte	.LANCHOR0
+ 1335 00ec 22       		.byte	0x22
+ 1336 00ed 06       		.byte	0x6
+ 1337 00ee 0A       		.uleb128 0xa
+ 1338 00ef 01       		.uleb128 0x1
+ 1339 00f0 50       		.byte	0x50
+ 1340 00f1 01       		.uleb128 0x1
+ 1341 00f2 31       		.byte	0x31
+ 1342 00f3 00       		.byte	0
+ 1343 00f4 00       		.byte	0
+ 1344 00f5 00       		.byte	0
+ 1345 00f6 06       		.uleb128 0x6
+ 1346 00f7 CD010000 		.4byte	.LASF18
+ 1347 00fb 01       		.byte	0x1
+ 1348 00fc 67       		.byte	0x67
+ 1349 00fd 00000000 		.4byte	.LFB35
+ 1350 0101 50000000 		.4byte	.LFE35-.LFB35
+ 1351 0105 01       		.uleb128 0x1
+ 1352 0106 9C       		.byte	0x9c
+ 1353 0107 A7010000 		.4byte	0x1a7
+ 1354 010b 0B       		.uleb128 0xb
+ 1355 010c D7030000 		.4byte	.LASF20
+ 1356 0110 01       		.byte	0x1
+ 1357 0111 6A       		.byte	0x6a
+ 1358 0112 76000000 		.4byte	0x76
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 34
+
+
+ 1359 0116 04       		.byte	0x4
+ 1360 0117 0B       		.uleb128 0xb
+ 1361 0118 66020000 		.4byte	.LASF21
+ 1362 011c 01       		.byte	0x1
+ 1363 011d 6B       		.byte	0x6b
+ 1364 011e 76000000 		.4byte	0x76
+ 1365 0122 03       		.byte	0x3
+ 1366 0123 07       		.uleb128 0x7
+ 1367 0124 02000000 		.4byte	.LBB3
+ 1368 0128 44000000 		.4byte	.LBE3-.LBB3
+ 1369 012c 08       		.uleb128 0x8
+ 1370 012d 3A010000 		.4byte	.LASF19
+ 1371 0131 01       		.byte	0x1
+ 1372 0132 6D       		.byte	0x6d
+ 1373 0133 68000000 		.4byte	0x68
+ 1374 0137 1F000000 		.4byte	.LLST1
+ 1375 013b 0C       		.uleb128 0xc
+ 1376 013c 18000000 		.4byte	.LBB4
+ 1377 0140 1E000000 		.4byte	.LBE4-.LBB4
+ 1378 0144 68010000 		.4byte	0x168
+ 1379 0148 08       		.uleb128 0x8
+ 1380 0149 2B010000 		.4byte	.LASF22
+ 1381 014d 01       		.byte	0x1
+ 1382 014e 71       		.byte	0x71
+ 1383 014f 68000000 		.4byte	0x68
+ 1384 0153 3E000000 		.4byte	.LLST2
+ 1385 0157 0D       		.uleb128 0xd
+ 1386 0158 26000000 		.4byte	.LVL10
+ 1387 015c 0A       		.uleb128 0xa
+ 1388 015d 74       		.byte	0x74
+ 1389 015e 00       		.sleb128 0
+ 1390 015f 32       		.byte	0x32
+ 1391 0160 24       		.byte	0x24
+ 1392 0161 76       		.byte	0x76
+ 1393 0162 00       		.sleb128 0
+ 1394 0163 22       		.byte	0x22
+ 1395 0164 23       		.byte	0x23
+ 1396 0165 18       		.uleb128 0x18
+ 1397 0166 06       		.byte	0x6
+ 1398 0167 00       		.byte	0
+ 1399 0168 0E       		.uleb128 0xe
+ 1400 0169 10000000 		.4byte	.LVL7
+ 1401 016d 06       		.uleb128 0x6
+ 1402 016e 76       		.byte	0x76
+ 1403 016f 00       		.sleb128 0
+ 1404 0170 74       		.byte	0x74
+ 1405 0171 00       		.sleb128 0
+ 1406 0172 22       		.byte	0x22
+ 1407 0173 06       		.byte	0x6
+ 1408 0174 7E010000 		.4byte	0x17e
+ 1409 0178 0A       		.uleb128 0xa
+ 1410 0179 01       		.uleb128 0x1
+ 1411 017a 50       		.byte	0x50
+ 1412 017b 01       		.uleb128 0x1
+ 1413 017c 36       		.byte	0x36
+ 1414 017d 00       		.byte	0
+ 1415 017e 0E       		.uleb128 0xe
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 35
+
+
+ 1416 017f 18000000 		.4byte	.LVL8
+ 1417 0183 03       		.uleb128 0x3
+ 1418 0184 74       		.byte	0x74
+ 1419 0185 0C       		.sleb128 12
+ 1420 0186 06       		.byte	0x6
+ 1421 0187 91010000 		.4byte	0x191
+ 1422 018b 0A       		.uleb128 0xa
+ 1423 018c 01       		.uleb128 0x1
+ 1424 018d 50       		.byte	0x50
+ 1425 018e 01       		.uleb128 0x1
+ 1426 018f 30       		.byte	0x30
+ 1427 0190 00       		.byte	0
+ 1428 0191 09       		.uleb128 0x9
+ 1429 0192 40000000 		.4byte	.LVL12
+ 1430 0196 08       		.uleb128 0x8
+ 1431 0197 75       		.byte	0x75
+ 1432 0198 00       		.sleb128 0
+ 1433 0199 32       		.byte	0x32
+ 1434 019a 24       		.byte	0x24
+ 1435 019b 76       		.byte	0x76
+ 1436 019c 00       		.sleb128 0
+ 1437 019d 22       		.byte	0x22
+ 1438 019e 06       		.byte	0x6
+ 1439 019f 0A       		.uleb128 0xa
+ 1440 01a0 01       		.uleb128 0x1
+ 1441 01a1 50       		.byte	0x50
+ 1442 01a2 01       		.uleb128 0x1
+ 1443 01a3 31       		.byte	0x31
+ 1444 01a4 00       		.byte	0
+ 1445 01a5 00       		.byte	0
+ 1446 01a6 00       		.byte	0
+ 1447 01a7 0F       		.uleb128 0xf
+ 1448 01a8 64000000 		.4byte	.LASF25
+ 1449 01ac 01       		.byte	0x1
+ 1450 01ad DE       		.byte	0xde
+ 1451 01ae 00000000 		.4byte	.LFB38
+ 1452 01b2 A8000000 		.4byte	.LFE38-.LFB38
+ 1453 01b6 01       		.uleb128 0x1
+ 1454 01b7 9C       		.byte	0x9c
+ 1455 01b8 E9020000 		.4byte	0x2e9
+ 1456 01bc 10       		.uleb128 0x10
+ 1457 01bd 77010000 		.4byte	.LASF27
+ 1458 01c1 01       		.byte	0x1
+ 1459 01c2 DE       		.byte	0xde
+ 1460 01c3 76000000 		.4byte	0x76
+ 1461 01c7 5D000000 		.4byte	.LLST3
+ 1462 01cb 11       		.uleb128 0x11
+ 1463 01cc 14000000 		.4byte	.LVL17
+ 1464 01d0 ED0A0000 		.4byte	0xaed
+ 1465 01d4 E2010000 		.4byte	0x1e2
+ 1466 01d8 0A       		.uleb128 0xa
+ 1467 01d9 01       		.uleb128 0x1
+ 1468 01da 50       		.byte	0x50
+ 1469 01db 05       		.uleb128 0x5
+ 1470 01dc 03       		.byte	0x3
+ 1471 01dd 00000000 		.4byte	.LC4
+ 1472 01e1 00       		.byte	0
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 36
+
+
+ 1473 01e2 11       		.uleb128 0x11
+ 1474 01e3 1C000000 		.4byte	.LVL18
+ 1475 01e7 ED0A0000 		.4byte	0xaed
+ 1476 01eb F9010000 		.4byte	0x1f9
+ 1477 01ef 0A       		.uleb128 0xa
+ 1478 01f0 01       		.uleb128 0x1
+ 1479 01f1 50       		.byte	0x50
+ 1480 01f2 05       		.uleb128 0x5
+ 1481 01f3 03       		.byte	0x3
+ 1482 01f4 14000000 		.4byte	.LC6
+ 1483 01f8 00       		.byte	0
+ 1484 01f9 11       		.uleb128 0x11
+ 1485 01fa 24000000 		.4byte	.LVL19
+ 1486 01fe ED0A0000 		.4byte	0xaed
+ 1487 0202 10020000 		.4byte	0x210
+ 1488 0206 0A       		.uleb128 0xa
+ 1489 0207 01       		.uleb128 0x1
+ 1490 0208 50       		.byte	0x50
+ 1491 0209 05       		.uleb128 0x5
+ 1492 020a 03       		.byte	0x3
+ 1493 020b 28000000 		.4byte	.LC8
+ 1494 020f 00       		.byte	0
+ 1495 0210 11       		.uleb128 0x11
+ 1496 0211 2C000000 		.4byte	.LVL20
+ 1497 0215 ED0A0000 		.4byte	0xaed
+ 1498 0219 27020000 		.4byte	0x227
+ 1499 021d 0A       		.uleb128 0xa
+ 1500 021e 01       		.uleb128 0x1
+ 1501 021f 50       		.byte	0x50
+ 1502 0220 05       		.uleb128 0x5
+ 1503 0221 03       		.byte	0x3
+ 1504 0222 3C000000 		.4byte	.LC10
+ 1505 0226 00       		.byte	0
+ 1506 0227 11       		.uleb128 0x11
+ 1507 0228 34000000 		.4byte	.LVL21
+ 1508 022c ED0A0000 		.4byte	0xaed
+ 1509 0230 3E020000 		.4byte	0x23e
+ 1510 0234 0A       		.uleb128 0xa
+ 1511 0235 01       		.uleb128 0x1
+ 1512 0236 50       		.byte	0x50
+ 1513 0237 05       		.uleb128 0x5
+ 1514 0238 03       		.byte	0x3
+ 1515 0239 50000000 		.4byte	.LC12
+ 1516 023d 00       		.byte	0
+ 1517 023e 11       		.uleb128 0x11
+ 1518 023f 3C000000 		.4byte	.LVL22
+ 1519 0243 ED0A0000 		.4byte	0xaed
+ 1520 0247 55020000 		.4byte	0x255
+ 1521 024b 0A       		.uleb128 0xa
+ 1522 024c 01       		.uleb128 0x1
+ 1523 024d 50       		.byte	0x50
+ 1524 024e 05       		.uleb128 0x5
+ 1525 024f 03       		.byte	0x3
+ 1526 0250 64000000 		.4byte	.LC14
+ 1527 0254 00       		.byte	0
+ 1528 0255 11       		.uleb128 0x11
+ 1529 0256 44000000 		.4byte	.LVL23
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 37
+
+
+ 1530 025a ED0A0000 		.4byte	0xaed
+ 1531 025e 6C020000 		.4byte	0x26c
+ 1532 0262 0A       		.uleb128 0xa
+ 1533 0263 01       		.uleb128 0x1
+ 1534 0264 50       		.byte	0x50
+ 1535 0265 05       		.uleb128 0x5
+ 1536 0266 03       		.byte	0x3
+ 1537 0267 78000000 		.4byte	.LC16
+ 1538 026b 00       		.byte	0
+ 1539 026c 11       		.uleb128 0x11
+ 1540 026d 4C000000 		.4byte	.LVL24
+ 1541 0271 ED0A0000 		.4byte	0xaed
+ 1542 0275 83020000 		.4byte	0x283
+ 1543 0279 0A       		.uleb128 0xa
+ 1544 027a 01       		.uleb128 0x1
+ 1545 027b 50       		.byte	0x50
+ 1546 027c 05       		.uleb128 0x5
+ 1547 027d 03       		.byte	0x3
+ 1548 027e 8C000000 		.4byte	.LC18
+ 1549 0282 00       		.byte	0
+ 1550 0283 11       		.uleb128 0x11
+ 1551 0284 54000000 		.4byte	.LVL25
+ 1552 0288 ED0A0000 		.4byte	0xaed
+ 1553 028c 9A020000 		.4byte	0x29a
+ 1554 0290 0A       		.uleb128 0xa
+ 1555 0291 01       		.uleb128 0x1
+ 1556 0292 50       		.byte	0x50
+ 1557 0293 05       		.uleb128 0x5
+ 1558 0294 03       		.byte	0x3
+ 1559 0295 A0000000 		.4byte	.LC20
+ 1560 0299 00       		.byte	0
+ 1561 029a 11       		.uleb128 0x11
+ 1562 029b 5C000000 		.4byte	.LVL26
+ 1563 029f ED0A0000 		.4byte	0xaed
+ 1564 02a3 B1020000 		.4byte	0x2b1
+ 1565 02a7 0A       		.uleb128 0xa
+ 1566 02a8 01       		.uleb128 0x1
+ 1567 02a9 50       		.byte	0x50
+ 1568 02aa 05       		.uleb128 0x5
+ 1569 02ab 03       		.byte	0x3
+ 1570 02ac B4000000 		.4byte	.LC22
+ 1571 02b0 00       		.byte	0
+ 1572 02b1 11       		.uleb128 0x11
+ 1573 02b2 64000000 		.4byte	.LVL27
+ 1574 02b6 ED0A0000 		.4byte	0xaed
+ 1575 02ba C8020000 		.4byte	0x2c8
+ 1576 02be 0A       		.uleb128 0xa
+ 1577 02bf 01       		.uleb128 0x1
+ 1578 02c0 50       		.byte	0x50
+ 1579 02c1 05       		.uleb128 0x5
+ 1580 02c2 03       		.byte	0x3
+ 1581 02c3 C8000000 		.4byte	.LC24
+ 1582 02c7 00       		.byte	0
+ 1583 02c8 11       		.uleb128 0x11
+ 1584 02c9 6C000000 		.4byte	.LVL28
+ 1585 02cd ED0A0000 		.4byte	0xaed
+ 1586 02d1 DF020000 		.4byte	0x2df
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 38
+
+
+ 1587 02d5 0A       		.uleb128 0xa
+ 1588 02d6 01       		.uleb128 0x1
+ 1589 02d7 50       		.byte	0x50
+ 1590 02d8 05       		.uleb128 0x5
+ 1591 02d9 03       		.byte	0x3
+ 1592 02da DC000000 		.4byte	.LC26
+ 1593 02de 00       		.byte	0
+ 1594 02df 12       		.uleb128 0x12
+ 1595 02e0 70000000 		.4byte	.LVL29
+ 1596 02e4 F80A0000 		.4byte	0xaf8
+ 1597 02e8 00       		.byte	0
+ 1598 02e9 06       		.uleb128 0x6
+ 1599 02ea 36030000 		.4byte	.LASF23
+ 1600 02ee 01       		.byte	0x1
+ 1601 02ef 7B       		.byte	0x7b
+ 1602 02f0 00000000 		.4byte	.LFB36
+ 1603 02f4 7C000000 		.4byte	.LFE36-.LFB36
+ 1604 02f8 01       		.uleb128 0x1
+ 1605 02f9 9C       		.byte	0x9c
+ 1606 02fa B3030000 		.4byte	0x3b3
+ 1607 02fe 08       		.uleb128 0x8
+ 1608 02ff 1E000000 		.4byte	.LASF24
+ 1609 0303 01       		.byte	0x1
+ 1610 0304 7D       		.byte	0x7d
+ 1611 0305 76000000 		.4byte	0x76
+ 1612 0309 7E000000 		.4byte	.LLST4
+ 1613 030d 13       		.uleb128 0x13
+ 1614 030e 00000000 		.4byte	.Ldebug_ranges0+0
+ 1615 0312 24030000 		.4byte	0x324
+ 1616 0316 14       		.uleb128 0x14
+ 1617 0317 6900     		.ascii	"i\000"
+ 1618 0319 01       		.byte	0x1
+ 1619 031a 7E       		.byte	0x7e
+ 1620 031b 68000000 		.4byte	0x68
+ 1621 031f A8000000 		.4byte	.LLST5
+ 1622 0323 00       		.byte	0
+ 1623 0324 11       		.uleb128 0x11
+ 1624 0325 28000000 		.4byte	.LVL36
+ 1625 0329 ED0A0000 		.4byte	0xaed
+ 1626 032d 3B030000 		.4byte	0x33b
+ 1627 0331 0A       		.uleb128 0xa
+ 1628 0332 01       		.uleb128 0x1
+ 1629 0333 50       		.byte	0x50
+ 1630 0334 05       		.uleb128 0x5
+ 1631 0335 03       		.byte	0x3
+ 1632 0336 F0000000 		.4byte	.LC30
+ 1633 033a 00       		.byte	0
+ 1634 033b 12       		.uleb128 0x12
+ 1635 033c 2C000000 		.4byte	.LVL37
+ 1636 0340 F80A0000 		.4byte	0xaf8
+ 1637 0344 11       		.uleb128 0x11
+ 1638 0345 38000000 		.4byte	.LVL38
+ 1639 0349 030B0000 		.4byte	0xb03
+ 1640 034d 57030000 		.4byte	0x357
+ 1641 0351 0A       		.uleb128 0xa
+ 1642 0352 01       		.uleb128 0x1
+ 1643 0353 50       		.byte	0x50
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 39
+
+
+ 1644 0354 01       		.uleb128 0x1
+ 1645 0355 30       		.byte	0x30
+ 1646 0356 00       		.byte	0
+ 1647 0357 11       		.uleb128 0x11
+ 1648 0358 3E000000 		.4byte	.LVL39
+ 1649 035c 0E0B0000 		.4byte	0xb0e
+ 1650 0360 6A030000 		.4byte	0x36a
+ 1651 0364 0A       		.uleb128 0xa
+ 1652 0365 01       		.uleb128 0x1
+ 1653 0366 50       		.byte	0x50
+ 1654 0367 01       		.uleb128 0x1
+ 1655 0368 30       		.byte	0x30
+ 1656 0369 00       		.byte	0
+ 1657 036a 11       		.uleb128 0x11
+ 1658 036b 44000000 		.4byte	.LVL40
+ 1659 036f 190B0000 		.4byte	0xb19
+ 1660 0373 7D030000 		.4byte	0x37d
+ 1661 0377 0A       		.uleb128 0xa
+ 1662 0378 01       		.uleb128 0x1
+ 1663 0379 50       		.byte	0x50
+ 1664 037a 01       		.uleb128 0x1
+ 1665 037b 30       		.byte	0x30
+ 1666 037c 00       		.byte	0
+ 1667 037d 11       		.uleb128 0x11
+ 1668 037e 4C000000 		.4byte	.LVL41
+ 1669 0382 240B0000 		.4byte	0xb24
+ 1670 0386 92030000 		.4byte	0x392
+ 1671 038a 0A       		.uleb128 0xa
+ 1672 038b 01       		.uleb128 0x1
+ 1673 038c 50       		.byte	0x50
+ 1674 038d 03       		.uleb128 0x3
+ 1675 038e 0A       		.byte	0xa
+ 1676 038f E803     		.2byte	0x3e8
+ 1677 0391 00       		.byte	0
+ 1678 0392 11       		.uleb128 0x11
+ 1679 0393 54000000 		.4byte	.LVL43
+ 1680 0397 ED0A0000 		.4byte	0xaed
+ 1681 039b A9030000 		.4byte	0x3a9
+ 1682 039f 0A       		.uleb128 0xa
+ 1683 03a0 01       		.uleb128 0x1
+ 1684 03a1 50       		.byte	0x50
+ 1685 03a2 05       		.uleb128 0x5
+ 1686 03a3 03       		.byte	0x3
+ 1687 03a4 00010000 		.4byte	.LC33
+ 1688 03a8 00       		.byte	0
+ 1689 03a9 12       		.uleb128 0x12
+ 1690 03aa 58000000 		.4byte	.LVL44
+ 1691 03ae F80A0000 		.4byte	0xaf8
+ 1692 03b2 00       		.byte	0
+ 1693 03b3 0F       		.uleb128 0xf
+ 1694 03b4 B5030000 		.4byte	.LASF26
+ 1695 03b8 01       		.byte	0x1
+ 1696 03b9 18       		.byte	0x18
+ 1697 03ba 00000000 		.4byte	.LFB32
+ 1698 03be 34000000 		.4byte	.LFE32-.LFB32
+ 1699 03c2 01       		.uleb128 0x1
+ 1700 03c3 9C       		.byte	0x9c
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 40
+
+
+ 1701 03c4 37040000 		.4byte	0x437
+ 1702 03c8 10       		.uleb128 0x10
+ 1703 03c9 8A000000 		.4byte	.LASF28
+ 1704 03cd 01       		.byte	0x1
+ 1705 03ce 18       		.byte	0x18
+ 1706 03cf 76000000 		.4byte	0x76
+ 1707 03d3 D2000000 		.4byte	.LLST6
+ 1708 03d7 07       		.uleb128 0x7
+ 1709 03d8 04000000 		.4byte	.LBB7
+ 1710 03dc 2E000000 		.4byte	.LBE7-.LBB7
+ 1711 03e0 14       		.uleb128 0x14
+ 1712 03e1 6900     		.ascii	"i\000"
+ 1713 03e3 01       		.byte	0x1
+ 1714 03e4 19       		.byte	0x19
+ 1715 03e5 76000000 		.4byte	0x76
+ 1716 03e9 F3000000 		.4byte	.LLST7
+ 1717 03ed 11       		.uleb128 0x11
+ 1718 03ee 16000000 		.4byte	.LVL48
+ 1719 03f2 2F0B0000 		.4byte	0xb2f
+ 1720 03f6 00040000 		.4byte	0x400
+ 1721 03fa 0A       		.uleb128 0xa
+ 1722 03fb 01       		.uleb128 0x1
+ 1723 03fc 50       		.byte	0x50
+ 1724 03fd 01       		.uleb128 0x1
+ 1725 03fe 31       		.byte	0x31
+ 1726 03ff 00       		.byte	0
+ 1727 0400 11       		.uleb128 0x11
+ 1728 0401 1E000000 		.4byte	.LVL49
+ 1729 0405 2F0B0000 		.4byte	0xb2f
+ 1730 0409 13040000 		.4byte	0x413
+ 1731 040d 0A       		.uleb128 0xa
+ 1732 040e 01       		.uleb128 0x1
+ 1733 040f 50       		.byte	0x50
+ 1734 0410 01       		.uleb128 0x1
+ 1735 0411 30       		.byte	0x30
+ 1736 0412 00       		.byte	0
+ 1737 0413 11       		.uleb128 0x11
+ 1738 0414 24000000 		.4byte	.LVL50
+ 1739 0418 3A0B0000 		.4byte	0xb3a
+ 1740 041c 26040000 		.4byte	0x426
+ 1741 0420 0A       		.uleb128 0xa
+ 1742 0421 01       		.uleb128 0x1
+ 1743 0422 50       		.byte	0x50
+ 1744 0423 01       		.uleb128 0x1
+ 1745 0424 31       		.byte	0x31
+ 1746 0425 00       		.byte	0
+ 1747 0426 15       		.uleb128 0x15
+ 1748 0427 2A000000 		.4byte	.LVL51
+ 1749 042b 3A0B0000 		.4byte	0xb3a
+ 1750 042f 0A       		.uleb128 0xa
+ 1751 0430 01       		.uleb128 0x1
+ 1752 0431 50       		.byte	0x50
+ 1753 0432 01       		.uleb128 0x1
+ 1754 0433 30       		.byte	0x30
+ 1755 0434 00       		.byte	0
+ 1756 0435 00       		.byte	0
+ 1757 0436 00       		.byte	0
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 41
+
+
+ 1758 0437 0F       		.uleb128 0xf
+ 1759 0438 7E020000 		.4byte	.LASF29
+ 1760 043c 01       		.byte	0x1
+ 1761 043d 27       		.byte	0x27
+ 1762 043e 00000000 		.4byte	.LFB33
+ 1763 0442 54000000 		.4byte	.LFE33-.LFB33
+ 1764 0446 01       		.uleb128 0x1
+ 1765 0447 9C       		.byte	0x9c
+ 1766 0448 12050000 		.4byte	0x512
+ 1767 044c 10       		.uleb128 0x10
+ 1768 044d 6E010000 		.4byte	.LASF30
+ 1769 0451 01       		.byte	0x1
+ 1770 0452 27       		.byte	0x27
+ 1771 0453 76000000 		.4byte	0x76
+ 1772 0457 1D010000 		.4byte	.LLST8
+ 1773 045b 10       		.uleb128 0x10
+ 1774 045c A8010000 		.4byte	.LASF31
+ 1775 0460 01       		.byte	0x1
+ 1776 0461 27       		.byte	0x27
+ 1777 0462 76000000 		.4byte	0x76
+ 1778 0466 3E010000 		.4byte	.LLST9
+ 1779 046a 16       		.uleb128 0x16
+ 1780 046b 646F7400 		.ascii	"dot\000"
+ 1781 046f 01       		.byte	0x1
+ 1782 0470 27       		.byte	0x27
+ 1783 0471 76000000 		.4byte	0x76
+ 1784 0475 5F010000 		.4byte	.LLST10
+ 1785 0479 11       		.uleb128 0x11
+ 1786 047a 12000000 		.4byte	.LVL57
+ 1787 047e B3030000 		.4byte	0x3b3
+ 1788 0482 8D040000 		.4byte	0x48d
+ 1789 0486 0A       		.uleb128 0xa
+ 1790 0487 01       		.uleb128 0x1
+ 1791 0488 50       		.byte	0x50
+ 1792 0489 02       		.uleb128 0x2
+ 1793 048a 09       		.byte	0x9
+ 1794 048b FF       		.byte	0xff
+ 1795 048c 00       		.byte	0
+ 1796 048d 11       		.uleb128 0x11
+ 1797 048e 18000000 		.4byte	.LVL58
+ 1798 0492 B3030000 		.4byte	0x3b3
+ 1799 0496 A1040000 		.4byte	0x4a1
+ 1800 049a 0A       		.uleb128 0xa
+ 1801 049b 01       		.uleb128 0x1
+ 1802 049c 50       		.byte	0x50
+ 1803 049d 02       		.uleb128 0x2
+ 1804 049e 09       		.byte	0x9
+ 1805 049f FF       		.byte	0xff
+ 1806 04a0 00       		.byte	0
+ 1807 04a1 11       		.uleb128 0x11
+ 1808 04a2 24000000 		.4byte	.LVL59
+ 1809 04a6 B3030000 		.4byte	0x3b3
+ 1810 04aa C0040000 		.4byte	0x4c0
+ 1811 04ae 0A       		.uleb128 0xa
+ 1812 04af 01       		.uleb128 0x1
+ 1813 04b0 50       		.byte	0x50
+ 1814 04b1 0D       		.uleb128 0xd
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 42
+
+
+ 1815 04b2 09       		.byte	0x9
+ 1816 04b3 FE       		.byte	0xfe
+ 1817 04b4 75       		.byte	0x75
+ 1818 04b5 00       		.sleb128 0
+ 1819 04b6 14       		.byte	0x14
+ 1820 04b7 14       		.byte	0x14
+ 1821 04b8 24       		.byte	0x24
+ 1822 04b9 17       		.byte	0x17
+ 1823 04ba 1F       		.byte	0x1f
+ 1824 04bb 23       		.byte	0x23
+ 1825 04bc 20       		.uleb128 0x20
+ 1826 04bd 25       		.byte	0x25
+ 1827 04be 21       		.byte	0x21
+ 1828 04bf 00       		.byte	0
+ 1829 04c0 11       		.uleb128 0x11
+ 1830 04c1 36000000 		.4byte	.LVL60
+ 1831 04c5 B3030000 		.4byte	0x3b3
+ 1832 04c9 D9040000 		.4byte	0x4d9
+ 1833 04cd 0A       		.uleb128 0xa
+ 1834 04ce 01       		.uleb128 0x1
+ 1835 04cf 50       		.byte	0x50
+ 1836 04d0 07       		.uleb128 0x7
+ 1837 04d1 74       		.byte	0x74
+ 1838 04d2 04       		.sleb128 4
+ 1839 04d3 94       		.byte	0x94
+ 1840 04d4 01       		.byte	0x1
+ 1841 04d5 08       		.byte	0x8
+ 1842 04d6 7F       		.byte	0x7f
+ 1843 04d7 1A       		.byte	0x1a
+ 1844 04d8 00       		.byte	0
+ 1845 04d9 11       		.uleb128 0x11
+ 1846 04da 42000000 		.4byte	.LVL61
+ 1847 04de B3030000 		.4byte	0x3b3
+ 1848 04e2 EF040000 		.4byte	0x4ef
+ 1849 04e6 0A       		.uleb128 0xa
+ 1850 04e7 01       		.uleb128 0x1
+ 1851 04e8 50       		.byte	0x50
+ 1852 04e9 04       		.uleb128 0x4
+ 1853 04ea 74       		.byte	0x74
+ 1854 04eb 04       		.sleb128 4
+ 1855 04ec 94       		.byte	0x94
+ 1856 04ed 01       		.byte	0x1
+ 1857 04ee 00       		.byte	0
+ 1858 04ef 11       		.uleb128 0x11
+ 1859 04f0 48000000 		.4byte	.LVL62
+ 1860 04f4 450B0000 		.4byte	0xb45
+ 1861 04f8 02050000 		.4byte	0x502
+ 1862 04fc 0A       		.uleb128 0xa
+ 1863 04fd 01       		.uleb128 0x1
+ 1864 04fe 50       		.byte	0x50
+ 1865 04ff 01       		.uleb128 0x1
+ 1866 0500 31       		.byte	0x31
+ 1867 0501 00       		.byte	0
+ 1868 0502 15       		.uleb128 0x15
+ 1869 0503 4E000000 		.4byte	.LVL63
+ 1870 0507 450B0000 		.4byte	0xb45
+ 1871 050b 0A       		.uleb128 0xa
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 43
+
+
+ 1872 050c 01       		.uleb128 0x1
+ 1873 050d 50       		.byte	0x50
+ 1874 050e 01       		.uleb128 0x1
+ 1875 050f 30       		.byte	0x30
+ 1876 0510 00       		.byte	0
+ 1877 0511 00       		.byte	0
+ 1878 0512 0F       		.uleb128 0xf
+ 1879 0513 2A030000 		.4byte	.LASF32
+ 1880 0517 01       		.byte	0x1
+ 1881 0518 9D       		.byte	0x9d
+ 1882 0519 00000000 		.4byte	.LFB37
+ 1883 051d F0000000 		.4byte	.LFE37-.LFB37
+ 1884 0521 01       		.uleb128 0x1
+ 1885 0522 9C       		.byte	0x9c
+ 1886 0523 B0070000 		.4byte	0x7b0
+ 1887 0527 10       		.uleb128 0x10
+ 1888 0528 77010000 		.4byte	.LASF27
+ 1889 052c 01       		.byte	0x1
+ 1890 052d 9D       		.byte	0x9d
+ 1891 052e 76000000 		.4byte	0x76
+ 1892 0532 80010000 		.4byte	.LLST11
+ 1893 0536 11       		.uleb128 0x11
+ 1894 0537 1A000000 		.4byte	.LVL66
+ 1895 053b 37040000 		.4byte	0x437
+ 1896 053f 54050000 		.4byte	0x554
+ 1897 0543 0A       		.uleb128 0xa
+ 1898 0544 01       		.uleb128 0x1
+ 1899 0545 50       		.byte	0x50
+ 1900 0546 01       		.uleb128 0x1
+ 1901 0547 30       		.byte	0x30
+ 1902 0548 0A       		.uleb128 0xa
+ 1903 0549 01       		.uleb128 0x1
+ 1904 054a 51       		.byte	0x51
+ 1905 054b 02       		.uleb128 0x2
+ 1906 054c 74       		.byte	0x74
+ 1907 054d 00       		.sleb128 0
+ 1908 054e 0A       		.uleb128 0xa
+ 1909 054f 01       		.uleb128 0x1
+ 1910 0550 52       		.byte	0x52
+ 1911 0551 01       		.uleb128 0x1
+ 1912 0552 30       		.byte	0x30
+ 1913 0553 00       		.byte	0
+ 1914 0554 11       		.uleb128 0x11
+ 1915 0555 20000000 		.4byte	.LVL67
+ 1916 0559 030B0000 		.4byte	0xb03
+ 1917 055d 67050000 		.4byte	0x567
+ 1918 0561 0A       		.uleb128 0xa
+ 1919 0562 01       		.uleb128 0x1
+ 1920 0563 50       		.byte	0x50
+ 1921 0564 01       		.uleb128 0x1
+ 1922 0565 30       		.byte	0x30
+ 1923 0566 00       		.byte	0
+ 1924 0567 11       		.uleb128 0x11
+ 1925 0568 26000000 		.4byte	.LVL68
+ 1926 056c 0E0B0000 		.4byte	0xb0e
+ 1927 0570 7A050000 		.4byte	0x57a
+ 1928 0574 0A       		.uleb128 0xa
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 44
+
+
+ 1929 0575 01       		.uleb128 0x1
+ 1930 0576 50       		.byte	0x50
+ 1931 0577 01       		.uleb128 0x1
+ 1932 0578 31       		.byte	0x31
+ 1933 0579 00       		.byte	0
+ 1934 057a 11       		.uleb128 0x11
+ 1935 057b 2C000000 		.4byte	.LVL69
+ 1936 057f 190B0000 		.4byte	0xb19
+ 1937 0583 8D050000 		.4byte	0x58d
+ 1938 0587 0A       		.uleb128 0xa
+ 1939 0588 01       		.uleb128 0x1
+ 1940 0589 50       		.byte	0x50
+ 1941 058a 01       		.uleb128 0x1
+ 1942 058b 31       		.byte	0x31
+ 1943 058c 00       		.byte	0
+ 1944 058d 11       		.uleb128 0x11
+ 1945 058e 38000000 		.4byte	.LVL72
+ 1946 0592 37040000 		.4byte	0x437
+ 1947 0596 AB050000 		.4byte	0x5ab
+ 1948 059a 0A       		.uleb128 0xa
+ 1949 059b 01       		.uleb128 0x1
+ 1950 059c 50       		.byte	0x50
+ 1951 059d 01       		.uleb128 0x1
+ 1952 059e 30       		.byte	0x30
+ 1953 059f 0A       		.uleb128 0xa
+ 1954 05a0 01       		.uleb128 0x1
+ 1955 05a1 51       		.byte	0x51
+ 1956 05a2 02       		.uleb128 0x2
+ 1957 05a3 74       		.byte	0x74
+ 1958 05a4 00       		.sleb128 0
+ 1959 05a5 0A       		.uleb128 0xa
+ 1960 05a6 01       		.uleb128 0x1
+ 1961 05a7 52       		.byte	0x52
+ 1962 05a8 01       		.uleb128 0x1
+ 1963 05a9 30       		.byte	0x30
+ 1964 05aa 00       		.byte	0
+ 1965 05ab 11       		.uleb128 0x11
+ 1966 05ac 3E000000 		.4byte	.LVL73
+ 1967 05b0 030B0000 		.4byte	0xb03
+ 1968 05b4 BE050000 		.4byte	0x5be
+ 1969 05b8 0A       		.uleb128 0xa
+ 1970 05b9 01       		.uleb128 0x1
+ 1971 05ba 50       		.byte	0x50
+ 1972 05bb 01       		.uleb128 0x1
+ 1973 05bc 31       		.byte	0x31
+ 1974 05bd 00       		.byte	0
+ 1975 05be 11       		.uleb128 0x11
+ 1976 05bf 44000000 		.4byte	.LVL74
+ 1977 05c3 0E0B0000 		.4byte	0xb0e
+ 1978 05c7 D1050000 		.4byte	0x5d1
+ 1979 05cb 0A       		.uleb128 0xa
+ 1980 05cc 01       		.uleb128 0x1
+ 1981 05cd 50       		.byte	0x50
+ 1982 05ce 01       		.uleb128 0x1
+ 1983 05cf 30       		.byte	0x30
+ 1984 05d0 00       		.byte	0
+ 1985 05d1 11       		.uleb128 0x11
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 45
+
+
+ 1986 05d2 4A000000 		.4byte	.LVL75
+ 1987 05d6 190B0000 		.4byte	0xb19
+ 1988 05da E4050000 		.4byte	0x5e4
+ 1989 05de 0A       		.uleb128 0xa
+ 1990 05df 01       		.uleb128 0x1
+ 1991 05e0 50       		.byte	0x50
+ 1992 05e1 01       		.uleb128 0x1
+ 1993 05e2 31       		.byte	0x31
+ 1994 05e3 00       		.byte	0
+ 1995 05e4 11       		.uleb128 0x11
+ 1996 05e5 56000000 		.4byte	.LVL78
+ 1997 05e9 37040000 		.4byte	0x437
+ 1998 05ed 01060000 		.4byte	0x601
+ 1999 05f1 0A       		.uleb128 0xa
+ 2000 05f2 01       		.uleb128 0x1
+ 2001 05f3 50       		.byte	0x50
+ 2002 05f4 01       		.uleb128 0x1
+ 2003 05f5 30       		.byte	0x30
+ 2004 05f6 0A       		.uleb128 0xa
+ 2005 05f7 01       		.uleb128 0x1
+ 2006 05f8 51       		.byte	0x51
+ 2007 05f9 01       		.uleb128 0x1
+ 2008 05fa 33       		.byte	0x33
+ 2009 05fb 0A       		.uleb128 0xa
+ 2010 05fc 01       		.uleb128 0x1
+ 2011 05fd 52       		.byte	0x52
+ 2012 05fe 01       		.uleb128 0x1
+ 2013 05ff 30       		.byte	0x30
+ 2014 0600 00       		.byte	0
+ 2015 0601 11       		.uleb128 0x11
+ 2016 0602 60000000 		.4byte	.LVL79
+ 2017 0606 37040000 		.4byte	0x437
+ 2018 060a 1F060000 		.4byte	0x61f
+ 2019 060e 0A       		.uleb128 0xa
+ 2020 060f 01       		.uleb128 0x1
+ 2021 0610 50       		.byte	0x50
+ 2022 0611 01       		.uleb128 0x1
+ 2023 0612 30       		.byte	0x30
+ 2024 0613 0A       		.uleb128 0xa
+ 2025 0614 01       		.uleb128 0x1
+ 2026 0615 51       		.byte	0x51
+ 2027 0616 02       		.uleb128 0x2
+ 2028 0617 74       		.byte	0x74
+ 2029 0618 00       		.sleb128 0
+ 2030 0619 0A       		.uleb128 0xa
+ 2031 061a 01       		.uleb128 0x1
+ 2032 061b 52       		.byte	0x52
+ 2033 061c 01       		.uleb128 0x1
+ 2034 061d 30       		.byte	0x30
+ 2035 061e 00       		.byte	0
+ 2036 061f 11       		.uleb128 0x11
+ 2037 0620 66000000 		.4byte	.LVL80
+ 2038 0624 030B0000 		.4byte	0xb03
+ 2039 0628 32060000 		.4byte	0x632
+ 2040 062c 0A       		.uleb128 0xa
+ 2041 062d 01       		.uleb128 0x1
+ 2042 062e 50       		.byte	0x50
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 46
+
+
+ 2043 062f 01       		.uleb128 0x1
+ 2044 0630 31       		.byte	0x31
+ 2045 0631 00       		.byte	0
+ 2046 0632 11       		.uleb128 0x11
+ 2047 0633 6C000000 		.4byte	.LVL81
+ 2048 0637 0E0B0000 		.4byte	0xb0e
+ 2049 063b 45060000 		.4byte	0x645
+ 2050 063f 0A       		.uleb128 0xa
+ 2051 0640 01       		.uleb128 0x1
+ 2052 0641 50       		.byte	0x50
+ 2053 0642 01       		.uleb128 0x1
+ 2054 0643 31       		.byte	0x31
+ 2055 0644 00       		.byte	0
+ 2056 0645 11       		.uleb128 0x11
+ 2057 0646 72000000 		.4byte	.LVL82
+ 2058 064a 190B0000 		.4byte	0xb19
+ 2059 064e 58060000 		.4byte	0x658
+ 2060 0652 0A       		.uleb128 0xa
+ 2061 0653 01       		.uleb128 0x1
+ 2062 0654 50       		.byte	0x50
+ 2063 0655 01       		.uleb128 0x1
+ 2064 0656 30       		.byte	0x30
+ 2065 0657 00       		.byte	0
+ 2066 0658 11       		.uleb128 0x11
+ 2067 0659 7E000000 		.4byte	.LVL85
+ 2068 065d 37040000 		.4byte	0x437
+ 2069 0661 76060000 		.4byte	0x676
+ 2070 0665 0A       		.uleb128 0xa
+ 2071 0666 01       		.uleb128 0x1
+ 2072 0667 50       		.byte	0x50
+ 2073 0668 01       		.uleb128 0x1
+ 2074 0669 30       		.byte	0x30
+ 2075 066a 0A       		.uleb128 0xa
+ 2076 066b 01       		.uleb128 0x1
+ 2077 066c 51       		.byte	0x51
+ 2078 066d 02       		.uleb128 0x2
+ 2079 066e 74       		.byte	0x74
+ 2080 066f 00       		.sleb128 0
+ 2081 0670 0A       		.uleb128 0xa
+ 2082 0671 01       		.uleb128 0x1
+ 2083 0672 52       		.byte	0x52
+ 2084 0673 01       		.uleb128 0x1
+ 2085 0674 30       		.byte	0x30
+ 2086 0675 00       		.byte	0
+ 2087 0676 11       		.uleb128 0x11
+ 2088 0677 84000000 		.4byte	.LVL86
+ 2089 067b 030B0000 		.4byte	0xb03
+ 2090 067f 89060000 		.4byte	0x689
+ 2091 0683 0A       		.uleb128 0xa
+ 2092 0684 01       		.uleb128 0x1
+ 2093 0685 50       		.byte	0x50
+ 2094 0686 01       		.uleb128 0x1
+ 2095 0687 30       		.byte	0x30
+ 2096 0688 00       		.byte	0
+ 2097 0689 11       		.uleb128 0x11
+ 2098 068a 8A000000 		.4byte	.LVL87
+ 2099 068e 0E0B0000 		.4byte	0xb0e
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 47
+
+
+ 2100 0692 9C060000 		.4byte	0x69c
+ 2101 0696 0A       		.uleb128 0xa
+ 2102 0697 01       		.uleb128 0x1
+ 2103 0698 50       		.byte	0x50
+ 2104 0699 01       		.uleb128 0x1
+ 2105 069a 30       		.byte	0x30
+ 2106 069b 00       		.byte	0
+ 2107 069c 11       		.uleb128 0x11
+ 2108 069d 90000000 		.4byte	.LVL88
+ 2109 06a1 190B0000 		.4byte	0xb19
+ 2110 06a5 AF060000 		.4byte	0x6af
+ 2111 06a9 0A       		.uleb128 0xa
+ 2112 06aa 01       		.uleb128 0x1
+ 2113 06ab 50       		.byte	0x50
+ 2114 06ac 01       		.uleb128 0x1
+ 2115 06ad 31       		.byte	0x31
+ 2116 06ae 00       		.byte	0
+ 2117 06af 11       		.uleb128 0x11
+ 2118 06b0 9C000000 		.4byte	.LVL91
+ 2119 06b4 37040000 		.4byte	0x437
+ 2120 06b8 CD060000 		.4byte	0x6cd
+ 2121 06bc 0A       		.uleb128 0xa
+ 2122 06bd 01       		.uleb128 0x1
+ 2123 06be 50       		.byte	0x50
+ 2124 06bf 01       		.uleb128 0x1
+ 2125 06c0 30       		.byte	0x30
+ 2126 06c1 0A       		.uleb128 0xa
+ 2127 06c2 01       		.uleb128 0x1
+ 2128 06c3 51       		.byte	0x51
+ 2129 06c4 02       		.uleb128 0x2
+ 2130 06c5 74       		.byte	0x74
+ 2131 06c6 00       		.sleb128 0
+ 2132 06c7 0A       		.uleb128 0xa
+ 2133 06c8 01       		.uleb128 0x1
+ 2134 06c9 52       		.byte	0x52
+ 2135 06ca 01       		.uleb128 0x1
+ 2136 06cb 30       		.byte	0x30
+ 2137 06cc 00       		.byte	0
+ 2138 06cd 11       		.uleb128 0x11
+ 2139 06ce A2000000 		.4byte	.LVL92
+ 2140 06d2 030B0000 		.4byte	0xb03
+ 2141 06d6 E0060000 		.4byte	0x6e0
+ 2142 06da 0A       		.uleb128 0xa
+ 2143 06db 01       		.uleb128 0x1
+ 2144 06dc 50       		.byte	0x50
+ 2145 06dd 01       		.uleb128 0x1
+ 2146 06de 30       		.byte	0x30
+ 2147 06df 00       		.byte	0
+ 2148 06e0 11       		.uleb128 0x11
+ 2149 06e1 A8000000 		.4byte	.LVL93
+ 2150 06e5 0E0B0000 		.4byte	0xb0e
+ 2151 06e9 F3060000 		.4byte	0x6f3
+ 2152 06ed 0A       		.uleb128 0xa
+ 2153 06ee 01       		.uleb128 0x1
+ 2154 06ef 50       		.byte	0x50
+ 2155 06f0 01       		.uleb128 0x1
+ 2156 06f1 31       		.byte	0x31
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 48
+
+
+ 2157 06f2 00       		.byte	0
+ 2158 06f3 11       		.uleb128 0x11
+ 2159 06f4 AE000000 		.4byte	.LVL94
+ 2160 06f8 190B0000 		.4byte	0xb19
+ 2161 06fc 06070000 		.4byte	0x706
+ 2162 0700 0A       		.uleb128 0xa
+ 2163 0701 01       		.uleb128 0x1
+ 2164 0702 50       		.byte	0x50
+ 2165 0703 01       		.uleb128 0x1
+ 2166 0704 30       		.byte	0x30
+ 2167 0705 00       		.byte	0
+ 2168 0706 11       		.uleb128 0x11
+ 2169 0707 BA000000 		.4byte	.LVL97
+ 2170 070b 37040000 		.4byte	0x437
+ 2171 070f 24070000 		.4byte	0x724
+ 2172 0713 0A       		.uleb128 0xa
+ 2173 0714 01       		.uleb128 0x1
+ 2174 0715 50       		.byte	0x50
+ 2175 0716 01       		.uleb128 0x1
+ 2176 0717 30       		.byte	0x30
+ 2177 0718 0A       		.uleb128 0xa
+ 2178 0719 01       		.uleb128 0x1
+ 2179 071a 51       		.byte	0x51
+ 2180 071b 02       		.uleb128 0x2
+ 2181 071c 74       		.byte	0x74
+ 2182 071d 00       		.sleb128 0
+ 2183 071e 0A       		.uleb128 0xa
+ 2184 071f 01       		.uleb128 0x1
+ 2185 0720 52       		.byte	0x52
+ 2186 0721 01       		.uleb128 0x1
+ 2187 0722 30       		.byte	0x30
+ 2188 0723 00       		.byte	0
+ 2189 0724 11       		.uleb128 0x11
+ 2190 0725 C0000000 		.4byte	.LVL98
+ 2191 0729 030B0000 		.4byte	0xb03
+ 2192 072d 37070000 		.4byte	0x737
+ 2193 0731 0A       		.uleb128 0xa
+ 2194 0732 01       		.uleb128 0x1
+ 2195 0733 50       		.byte	0x50
+ 2196 0734 01       		.uleb128 0x1
+ 2197 0735 31       		.byte	0x31
+ 2198 0736 00       		.byte	0
+ 2199 0737 11       		.uleb128 0x11
+ 2200 0738 C6000000 		.4byte	.LVL99
+ 2201 073c 0E0B0000 		.4byte	0xb0e
+ 2202 0740 4A070000 		.4byte	0x74a
+ 2203 0744 0A       		.uleb128 0xa
+ 2204 0745 01       		.uleb128 0x1
+ 2205 0746 50       		.byte	0x50
+ 2206 0747 01       		.uleb128 0x1
+ 2207 0748 30       		.byte	0x30
+ 2208 0749 00       		.byte	0
+ 2209 074a 11       		.uleb128 0x11
+ 2210 074b CC000000 		.4byte	.LVL100
+ 2211 074f 190B0000 		.4byte	0xb19
+ 2212 0753 5D070000 		.4byte	0x75d
+ 2213 0757 0A       		.uleb128 0xa
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 49
+
+
+ 2214 0758 01       		.uleb128 0x1
+ 2215 0759 50       		.byte	0x50
+ 2216 075a 01       		.uleb128 0x1
+ 2217 075b 30       		.byte	0x30
+ 2218 075c 00       		.byte	0
+ 2219 075d 11       		.uleb128 0x11
+ 2220 075e D8000000 		.4byte	.LVL103
+ 2221 0762 37040000 		.4byte	0x437
+ 2222 0766 7A070000 		.4byte	0x77a
+ 2223 076a 0A       		.uleb128 0xa
+ 2224 076b 01       		.uleb128 0x1
+ 2225 076c 50       		.byte	0x50
+ 2226 076d 01       		.uleb128 0x1
+ 2227 076e 38       		.byte	0x38
+ 2228 076f 0A       		.uleb128 0xa
+ 2229 0770 01       		.uleb128 0x1
+ 2230 0771 51       		.byte	0x51
+ 2231 0772 01       		.uleb128 0x1
+ 2232 0773 30       		.byte	0x30
+ 2233 0774 0A       		.uleb128 0xa
+ 2234 0775 01       		.uleb128 0x1
+ 2235 0776 52       		.byte	0x52
+ 2236 0777 01       		.uleb128 0x1
+ 2237 0778 30       		.byte	0x30
+ 2238 0779 00       		.byte	0
+ 2239 077a 11       		.uleb128 0x11
+ 2240 077b DE000000 		.4byte	.LVL104
+ 2241 077f 030B0000 		.4byte	0xb03
+ 2242 0783 8D070000 		.4byte	0x78d
+ 2243 0787 0A       		.uleb128 0xa
+ 2244 0788 01       		.uleb128 0x1
+ 2245 0789 50       		.byte	0x50
+ 2246 078a 01       		.uleb128 0x1
+ 2247 078b 31       		.byte	0x31
+ 2248 078c 00       		.byte	0
+ 2249 078d 11       		.uleb128 0x11
+ 2250 078e E4000000 		.4byte	.LVL105
+ 2251 0792 0E0B0000 		.4byte	0xb0e
+ 2252 0796 A0070000 		.4byte	0x7a0
+ 2253 079a 0A       		.uleb128 0xa
+ 2254 079b 01       		.uleb128 0x1
+ 2255 079c 50       		.byte	0x50
+ 2256 079d 01       		.uleb128 0x1
+ 2257 079e 31       		.byte	0x31
+ 2258 079f 00       		.byte	0
+ 2259 07a0 15       		.uleb128 0x15
+ 2260 07a1 EA000000 		.4byte	.LVL106
+ 2261 07a5 190B0000 		.4byte	0xb19
+ 2262 07a9 0A       		.uleb128 0xa
+ 2263 07aa 01       		.uleb128 0x1
+ 2264 07ab 50       		.byte	0x50
+ 2265 07ac 01       		.uleb128 0x1
+ 2266 07ad 31       		.byte	0x31
+ 2267 07ae 00       		.byte	0
+ 2268 07af 00       		.byte	0
+ 2269 07b0 17       		.uleb128 0x17
+ 2270 07b1 35010000 		.4byte	.LASF57
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 50
+
+
+ 2271 07b5 01       		.byte	0x1
+ 2272 07b6 0C01     		.2byte	0x10c
+ 2273 07b8 68000000 		.4byte	0x68
+ 2274 07bc 00000000 		.4byte	.LFB39
+ 2275 07c0 38010000 		.4byte	.LFE39-.LFB39
+ 2276 07c4 01       		.uleb128 0x1
+ 2277 07c5 9C       		.byte	0x9c
+ 2278 07c6 AE090000 		.4byte	0x9ae
+ 2279 07ca 18       		.uleb128 0x18
+ 2280 07cb 44030000 		.4byte	.LASF33
+ 2281 07cf 01       		.byte	0x1
+ 2282 07d0 1901     		.2byte	0x119
+ 2283 07d2 76000000 		.4byte	0x76
+ 2284 07d6 37020000 		.4byte	.LLST12
+ 2285 07da 18       		.uleb128 0x18
+ 2286 07db 99010000 		.4byte	.LASF34
+ 2287 07df 01       		.byte	0x1
+ 2288 07e0 1A01     		.2byte	0x11a
+ 2289 07e2 76000000 		.4byte	0x76
+ 2290 07e6 9B020000 		.4byte	.LLST13
+ 2291 07ea 13       		.uleb128 0x13
+ 2292 07eb 18000000 		.4byte	.Ldebug_ranges0+0x18
+ 2293 07ef 5D080000 		.4byte	0x85d
+ 2294 07f3 19       		.uleb128 0x19
+ 2295 07f4 726F7700 		.ascii	"row\000"
+ 2296 07f8 01       		.byte	0x1
+ 2297 07f9 2701     		.2byte	0x127
+ 2298 07fb 68000000 		.4byte	0x68
+ 2299 07ff E7020000 		.4byte	.LLST14
+ 2300 0803 1A       		.uleb128 0x1a
+ 2301 0804 30000000 		.4byte	.Ldebug_ranges0+0x30
+ 2302 0808 19       		.uleb128 0x19
+ 2303 0809 636F6C00 		.ascii	"col\000"
+ 2304 080d 01       		.byte	0x1
+ 2305 080e 2901     		.2byte	0x129
+ 2306 0810 68000000 		.4byte	0x68
+ 2307 0814 06030000 		.4byte	.LLST15
+ 2308 0818 1A       		.uleb128 0x1a
+ 2309 0819 48000000 		.4byte	.Ldebug_ranges0+0x48
+ 2310 081d 18       		.uleb128 0x18
+ 2311 081e 77010000 		.4byte	.LASF27
+ 2312 0822 01       		.byte	0x1
+ 2313 0823 2D01     		.2byte	0x12d
+ 2314 0825 76000000 		.4byte	0x76
+ 2315 0829 3A030000 		.4byte	.LLST16
+ 2316 082d 11       		.uleb128 0x11
+ 2317 082e 92000000 		.4byte	.LVL126
+ 2318 0832 A7010000 		.4byte	0x1a7
+ 2319 0836 41080000 		.4byte	0x841
+ 2320 083a 0A       		.uleb128 0xa
+ 2321 083b 01       		.uleb128 0x1
+ 2322 083c 50       		.byte	0x50
+ 2323 083d 02       		.uleb128 0x2
+ 2324 083e 74       		.byte	0x74
+ 2325 083f 00       		.sleb128 0
+ 2326 0840 00       		.byte	0
+ 2327 0841 12       		.uleb128 0x12
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 51
+
+
+ 2328 0842 AE000000 		.4byte	.LVL127
+ 2329 0846 E9020000 		.4byte	0x2e9
+ 2330 084a 15       		.uleb128 0x15
+ 2331 084b BA000000 		.4byte	.LVL128
+ 2332 084f 12050000 		.4byte	0x512
+ 2333 0853 0A       		.uleb128 0xa
+ 2334 0854 01       		.uleb128 0x1
+ 2335 0855 50       		.byte	0x50
+ 2336 0856 02       		.uleb128 0x2
+ 2337 0857 74       		.byte	0x74
+ 2338 0858 00       		.sleb128 0
+ 2339 0859 00       		.byte	0
+ 2340 085a 00       		.byte	0
+ 2341 085b 00       		.byte	0
+ 2342 085c 00       		.byte	0
+ 2343 085d 11       		.uleb128 0x11
+ 2344 085e 0E000000 		.4byte	.LVL107
+ 2345 0862 37040000 		.4byte	0x437
+ 2346 0866 7B080000 		.4byte	0x87b
+ 2347 086a 0A       		.uleb128 0xa
+ 2348 086b 01       		.uleb128 0x1
+ 2349 086c 50       		.byte	0x50
+ 2350 086d 01       		.uleb128 0x1
+ 2351 086e 30       		.byte	0x30
+ 2352 086f 0A       		.uleb128 0xa
+ 2353 0870 01       		.uleb128 0x1
+ 2354 0871 51       		.byte	0x51
+ 2355 0872 02       		.uleb128 0x2
+ 2356 0873 09       		.byte	0x9
+ 2357 0874 88       		.byte	0x88
+ 2358 0875 0A       		.uleb128 0xa
+ 2359 0876 01       		.uleb128 0x1
+ 2360 0877 52       		.byte	0x52
+ 2361 0878 01       		.uleb128 0x1
+ 2362 0879 31       		.byte	0x31
+ 2363 087a 00       		.byte	0
+ 2364 087b 12       		.uleb128 0x12
+ 2365 087c 12000000 		.4byte	.LVL108
+ 2366 0880 500B0000 		.4byte	0xb50
+ 2367 0884 12       		.uleb128 0x12
+ 2368 0885 16000000 		.4byte	.LVL109
+ 2369 0889 F80A0000 		.4byte	0xaf8
+ 2370 088d 11       		.uleb128 0x11
+ 2371 088e 1C000000 		.4byte	.LVL110
+ 2372 0892 ED0A0000 		.4byte	0xaed
+ 2373 0896 A4080000 		.4byte	0x8a4
+ 2374 089a 0A       		.uleb128 0xa
+ 2375 089b 01       		.uleb128 0x1
+ 2376 089c 50       		.byte	0x50
+ 2377 089d 05       		.uleb128 0x5
+ 2378 089e 03       		.byte	0x3
+ 2379 089f 10010000 		.4byte	.LC37
+ 2380 08a3 00       		.byte	0
+ 2381 08a4 12       		.uleb128 0x12
+ 2382 08a5 20000000 		.4byte	.LVL111
+ 2383 08a9 F80A0000 		.4byte	0xaf8
+ 2384 08ad 11       		.uleb128 0x11
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 52
+
+
+ 2385 08ae 26000000 		.4byte	.LVL112
+ 2386 08b2 ED0A0000 		.4byte	0xaed
+ 2387 08b6 C4080000 		.4byte	0x8c4
+ 2388 08ba 0A       		.uleb128 0xa
+ 2389 08bb 01       		.uleb128 0x1
+ 2390 08bc 50       		.byte	0x50
+ 2391 08bd 05       		.uleb128 0x5
+ 2392 08be 03       		.byte	0x3
+ 2393 08bf 28010000 		.4byte	.LC39
+ 2394 08c3 00       		.byte	0
+ 2395 08c4 12       		.uleb128 0x12
+ 2396 08c5 2A000000 		.4byte	.LVL113
+ 2397 08c9 F80A0000 		.4byte	0xaf8
+ 2398 08cd 12       		.uleb128 0x12
+ 2399 08ce 2E000000 		.4byte	.LVL114
+ 2400 08d2 B0000000 		.4byte	0xb0
+ 2401 08d6 11       		.uleb128 0x11
+ 2402 08d7 34000000 		.4byte	.LVL115
+ 2403 08db 030B0000 		.4byte	0xb03
+ 2404 08df E9080000 		.4byte	0x8e9
+ 2405 08e3 0A       		.uleb128 0xa
+ 2406 08e4 01       		.uleb128 0x1
+ 2407 08e5 50       		.byte	0x50
+ 2408 08e6 01       		.uleb128 0x1
+ 2409 08e7 30       		.byte	0x30
+ 2410 08e8 00       		.byte	0
+ 2411 08e9 11       		.uleb128 0x11
+ 2412 08ea 3A000000 		.4byte	.LVL116
+ 2413 08ee 0E0B0000 		.4byte	0xb0e
+ 2414 08f2 FC080000 		.4byte	0x8fc
+ 2415 08f6 0A       		.uleb128 0xa
+ 2416 08f7 01       		.uleb128 0x1
+ 2417 08f8 50       		.byte	0x50
+ 2418 08f9 01       		.uleb128 0x1
+ 2419 08fa 30       		.byte	0x30
+ 2420 08fb 00       		.byte	0
+ 2421 08fc 11       		.uleb128 0x11
+ 2422 08fd 40000000 		.4byte	.LVL117
+ 2423 0901 190B0000 		.4byte	0xb19
+ 2424 0905 0F090000 		.4byte	0x90f
+ 2425 0909 0A       		.uleb128 0xa
+ 2426 090a 01       		.uleb128 0x1
+ 2427 090b 50       		.byte	0x50
+ 2428 090c 01       		.uleb128 0x1
+ 2429 090d 30       		.byte	0x30
+ 2430 090e 00       		.byte	0
+ 2431 090f 12       		.uleb128 0x12
+ 2432 0910 46000000 		.4byte	.LVL119
+ 2433 0914 F6000000 		.4byte	0xf6
+ 2434 0918 12       		.uleb128 0x12
+ 2435 0919 F2000000 		.4byte	.LVL139
+ 2436 091d 030B0000 		.4byte	0xb03
+ 2437 0921 11       		.uleb128 0x11
+ 2438 0922 F8000000 		.4byte	.LVL140
+ 2439 0926 0E0B0000 		.4byte	0xb0e
+ 2440 092a 34090000 		.4byte	0x934
+ 2441 092e 0A       		.uleb128 0xa
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 53
+
+
+ 2442 092f 01       		.uleb128 0x1
+ 2443 0930 50       		.byte	0x50
+ 2444 0931 01       		.uleb128 0x1
+ 2445 0932 30       		.byte	0x30
+ 2446 0933 00       		.byte	0
+ 2447 0934 11       		.uleb128 0x11
+ 2448 0935 FE000000 		.4byte	.LVL141
+ 2449 0939 190B0000 		.4byte	0xb19
+ 2450 093d 47090000 		.4byte	0x947
+ 2451 0941 0A       		.uleb128 0xa
+ 2452 0942 01       		.uleb128 0x1
+ 2453 0943 50       		.byte	0x50
+ 2454 0944 01       		.uleb128 0x1
+ 2455 0945 30       		.byte	0x30
+ 2456 0946 00       		.byte	0
+ 2457 0947 11       		.uleb128 0x11
+ 2458 0948 0C010000 		.4byte	.LVL144
+ 2459 094c 37040000 		.4byte	0x437
+ 2460 0950 64090000 		.4byte	0x964
+ 2461 0954 0A       		.uleb128 0xa
+ 2462 0955 01       		.uleb128 0x1
+ 2463 0956 50       		.byte	0x50
+ 2464 0957 01       		.uleb128 0x1
+ 2465 0958 38       		.byte	0x38
+ 2466 0959 0A       		.uleb128 0xa
+ 2467 095a 01       		.uleb128 0x1
+ 2468 095b 51       		.byte	0x51
+ 2469 095c 01       		.uleb128 0x1
+ 2470 095d 30       		.byte	0x30
+ 2471 095e 0A       		.uleb128 0xa
+ 2472 095f 01       		.uleb128 0x1
+ 2473 0960 52       		.byte	0x52
+ 2474 0961 01       		.uleb128 0x1
+ 2475 0962 30       		.byte	0x30
+ 2476 0963 00       		.byte	0
+ 2477 0964 11       		.uleb128 0x11
+ 2478 0965 12010000 		.4byte	.LVL145
+ 2479 0969 030B0000 		.4byte	0xb03
+ 2480 096d 77090000 		.4byte	0x977
+ 2481 0971 0A       		.uleb128 0xa
+ 2482 0972 01       		.uleb128 0x1
+ 2483 0973 50       		.byte	0x50
+ 2484 0974 01       		.uleb128 0x1
+ 2485 0975 31       		.byte	0x31
+ 2486 0976 00       		.byte	0
+ 2487 0977 11       		.uleb128 0x11
+ 2488 0978 18010000 		.4byte	.LVL146
+ 2489 097c 0E0B0000 		.4byte	0xb0e
+ 2490 0980 8A090000 		.4byte	0x98a
+ 2491 0984 0A       		.uleb128 0xa
+ 2492 0985 01       		.uleb128 0x1
+ 2493 0986 50       		.byte	0x50
+ 2494 0987 01       		.uleb128 0x1
+ 2495 0988 31       		.byte	0x31
+ 2496 0989 00       		.byte	0
+ 2497 098a 11       		.uleb128 0x11
+ 2498 098b 1E010000 		.4byte	.LVL147
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 54
+
+
+ 2499 098f 190B0000 		.4byte	0xb19
+ 2500 0993 9D090000 		.4byte	0x99d
+ 2501 0997 0A       		.uleb128 0xa
+ 2502 0998 01       		.uleb128 0x1
+ 2503 0999 50       		.byte	0x50
+ 2504 099a 01       		.uleb128 0x1
+ 2505 099b 31       		.byte	0x31
+ 2506 099c 00       		.byte	0
+ 2507 099d 15       		.uleb128 0x15
+ 2508 099e 26010000 		.4byte	.LVL149
+ 2509 09a2 240B0000 		.4byte	0xb24
+ 2510 09a6 0A       		.uleb128 0xa
+ 2511 09a7 01       		.uleb128 0x1
+ 2512 09a8 50       		.byte	0x50
+ 2513 09a9 02       		.uleb128 0x2
+ 2514 09aa 08       		.byte	0x8
+ 2515 09ab 32       		.byte	0x32
+ 2516 09ac 00       		.byte	0
+ 2517 09ad 00       		.byte	0
+ 2518 09ae 1B       		.uleb128 0x1b
+ 2519 09af 76000000 		.4byte	0x76
+ 2520 09b3 BE090000 		.4byte	0x9be
+ 2521 09b7 1C       		.uleb128 0x1c
+ 2522 09b8 A2000000 		.4byte	0xa2
+ 2523 09bc 10       		.byte	0x10
+ 2524 09bd 00       		.byte	0
+ 2525 09be 1D       		.uleb128 0x1d
+ 2526 09bf BB020000 		.4byte	.LASF35
+ 2527 09c3 01       		.byte	0x1
+ 2528 09c4 04       		.byte	0x4
+ 2529 09c5 CF090000 		.4byte	0x9cf
+ 2530 09c9 05       		.uleb128 0x5
+ 2531 09ca 03       		.byte	0x3
+ 2532 09cb 8C000000 		.4byte	LED_NUM
+ 2533 09cf 1E       		.uleb128 0x1e
+ 2534 09d0 AE090000 		.4byte	0x9ae
+ 2535 09d4 1B       		.uleb128 0x1b
+ 2536 09d5 E4090000 		.4byte	0x9e4
+ 2537 09d9 E4090000 		.4byte	0x9e4
+ 2538 09dd 1C       		.uleb128 0x1c
+ 2539 09de A2000000 		.4byte	0xa2
+ 2540 09e2 02       		.byte	0x2
+ 2541 09e3 00       		.byte	0
+ 2542 09e4 1F       		.uleb128 0x1f
+ 2543 09e5 04       		.byte	0x4
+ 2544 09e6 EA090000 		.4byte	0x9ea
+ 2545 09ea 20       		.uleb128 0x20
+ 2546 09eb F5090000 		.4byte	0x9f5
+ 2547 09ef 21       		.uleb128 0x21
+ 2548 09f0 76000000 		.4byte	0x76
+ 2549 09f4 00       		.byte	0
+ 2550 09f5 1D       		.uleb128 0x1d
+ 2551 09f6 47010000 		.4byte	.LASF36
+ 2552 09fa 01       		.byte	0x1
+ 2553 09fb 3B       		.byte	0x3b
+ 2554 09fc 060A0000 		.4byte	0xa06
+ 2555 0a00 05       		.uleb128 0x5
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 55
+
+
+ 2556 0a01 03       		.byte	0x3
+ 2557 0a02 60000000 		.4byte	COLUMN_x_SetDriveMode
+ 2558 0a06 1E       		.uleb128 0x1e
+ 2559 0a07 D4090000 		.4byte	0x9d4
+ 2560 0a0b 1D       		.uleb128 0x1d
+ 2561 0a0c 58030000 		.4byte	.LASF37
+ 2562 0a10 01       		.byte	0x1
+ 2563 0a11 41       		.byte	0x41
+ 2564 0a12 1C0A0000 		.4byte	0xa1c
+ 2565 0a16 05       		.uleb128 0x5
+ 2566 0a17 03       		.byte	0x3
+ 2567 0a18 6C000000 		.4byte	COLUMN_x_Write
+ 2568 0a1c 1E       		.uleb128 0x1e
+ 2569 0a1d D4090000 		.4byte	0x9d4
+ 2570 0a21 1B       		.uleb128 0x1b
+ 2571 0a22 310A0000 		.4byte	0xa31
+ 2572 0a26 310A0000 		.4byte	0xa31
+ 2573 0a2a 1C       		.uleb128 0x1c
+ 2574 0a2b A2000000 		.4byte	0xa2
+ 2575 0a2f 03       		.byte	0x3
+ 2576 0a30 00       		.byte	0
+ 2577 0a31 1F       		.uleb128 0x1f
+ 2578 0a32 04       		.byte	0x4
+ 2579 0a33 370A0000 		.4byte	0xa37
+ 2580 0a37 22       		.uleb128 0x22
+ 2581 0a38 81000000 		.4byte	0x81
+ 2582 0a3c 420A0000 		.4byte	0xa42
+ 2583 0a40 23       		.uleb128 0x23
+ 2584 0a41 00       		.byte	0
+ 2585 0a42 1D       		.uleb128 0x1d
+ 2586 0a43 26000000 		.4byte	.LASF38
+ 2587 0a47 01       		.byte	0x1
+ 2588 0a48 47       		.byte	0x47
+ 2589 0a49 530A0000 		.4byte	0xa53
+ 2590 0a4d 05       		.uleb128 0x5
+ 2591 0a4e 03       		.byte	0x3
+ 2592 0a4f 78000000 		.4byte	ROW_x_Read
+ 2593 0a53 1E       		.uleb128 0x1e
+ 2594 0a54 210A0000 		.4byte	0xa21
+ 2595 0a58 1B       		.uleb128 0x1b
+ 2596 0a59 76000000 		.4byte	0x76
+ 2597 0a5d 6E0A0000 		.4byte	0xa6e
+ 2598 0a61 1C       		.uleb128 0x1c
+ 2599 0a62 A2000000 		.4byte	0xa2
+ 2600 0a66 03       		.byte	0x3
+ 2601 0a67 1C       		.uleb128 0x1c
+ 2602 0a68 A2000000 		.4byte	0xa2
+ 2603 0a6c 02       		.byte	0x2
+ 2604 0a6d 00       		.byte	0
+ 2605 0a6e 1D       		.uleb128 0x1d
+ 2606 0a6f 19000000 		.4byte	.LASF39
+ 2607 0a73 01       		.byte	0x1
+ 2608 0a74 4F       		.byte	0x4f
+ 2609 0a75 580A0000 		.4byte	0xa58
+ 2610 0a79 05       		.uleb128 0x5
+ 2611 0a7a 03       		.byte	0x3
+ 2612 0a7b 00000000 		.4byte	keys
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 56
+
+
+ 2613 0a7f 1B       		.uleb128 0x1b
+ 2614 0a80 8F0A0000 		.4byte	0xa8f
+ 2615 0a84 8F0A0000 		.4byte	0xa8f
+ 2616 0a88 1C       		.uleb128 0x1c
+ 2617 0a89 A2000000 		.4byte	0xa2
+ 2618 0a8d 02       		.byte	0x2
+ 2619 0a8e 00       		.byte	0
+ 2620 0a8f 1E       		.uleb128 0x1e
+ 2621 0a90 76000000 		.4byte	0x76
+ 2622 0a94 1D       		.uleb128 0x1d
+ 2623 0a95 3E000000 		.4byte	.LASF40
+ 2624 0a99 01       		.byte	0x1
+ 2625 0a9a 58       		.byte	0x58
+ 2626 0a9b A50A0000 		.4byte	0xaa5
+ 2627 0a9f 05       		.uleb128 0x5
+ 2628 0aa0 03       		.byte	0x3
+ 2629 0aa1 88000000 		.4byte	PASSWORD
+ 2630 0aa5 1E       		.uleb128 0x1e
+ 2631 0aa6 7F0A0000 		.4byte	0xa7f
+ 2632 0aaa 1B       		.uleb128 0x1b
+ 2633 0aab 76000000 		.4byte	0x76
+ 2634 0aaf BA0A0000 		.4byte	0xaba
+ 2635 0ab3 1C       		.uleb128 0x1c
+ 2636 0ab4 A2000000 		.4byte	0xa2
+ 2637 0ab8 02       		.byte	0x2
+ 2638 0ab9 00       		.byte	0
+ 2639 0aba 1D       		.uleb128 0x1d
+ 2640 0abb 74000000 		.4byte	.LASF41
+ 2641 0abf 01       		.byte	0x1
+ 2642 0ac0 59       		.byte	0x59
+ 2643 0ac1 AA0A0000 		.4byte	0xaaa
+ 2644 0ac5 05       		.uleb128 0x5
+ 2645 0ac6 03       		.byte	0x3
+ 2646 0ac7 00000000 		.4byte	password_buffer
+ 2647 0acb 1D       		.uleb128 0x1d
+ 2648 0acc 00000000 		.4byte	.LASF42
+ 2649 0ad0 01       		.byte	0x1
+ 2650 0ad1 5A       		.byte	0x5a
+ 2651 0ad2 76000000 		.4byte	0x76
+ 2652 0ad6 05       		.uleb128 0x5
+ 2653 0ad7 03       		.byte	0x3
+ 2654 0ad8 03000000 		.4byte	password_index
+ 2655 0adc 1D       		.uleb128 0x1d
+ 2656 0add 92030000 		.4byte	.LASF43
+ 2657 0ae1 01       		.byte	0x1
+ 2658 0ae2 5B       		.byte	0x5b
+ 2659 0ae3 76000000 		.4byte	0x76
+ 2660 0ae7 05       		.uleb128 0x5
+ 2661 0ae8 03       		.byte	0x3
+ 2662 0ae9 0C000000 		.4byte	password_locked
+ 2663 0aed 24       		.uleb128 0x24
+ 2664 0aee 84010000 		.4byte	.LASF44
+ 2665 0af2 84010000 		.4byte	.LASF44
+ 2666 0af6 05       		.byte	0x5
+ 2667 0af7 26       		.byte	0x26
+ 2668 0af8 24       		.uleb128 0x24
+ 2669 0af9 73030000 		.4byte	.LASF45
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 57
+
+
+ 2670 0afd 73030000 		.4byte	.LASF45
+ 2671 0b01 05       		.byte	0x5
+ 2672 0b02 2A       		.byte	0x2a
+ 2673 0b03 24       		.uleb128 0x24
+ 2674 0b04 C3020000 		.4byte	.LASF46
+ 2675 0b08 C3020000 		.4byte	.LASF46
+ 2676 0b0c 06       		.byte	0x6
+ 2677 0b0d 33       		.byte	0x33
+ 2678 0b0e 24       		.uleb128 0x24
+ 2679 0b0f AA020000 		.4byte	.LASF47
+ 2680 0b13 AA020000 		.4byte	.LASF47
+ 2681 0b17 07       		.byte	0x7
+ 2682 0b18 33       		.byte	0x33
+ 2683 0b19 24       		.uleb128 0x24
+ 2684 0b1a 18010000 		.4byte	.LASF48
+ 2685 0b1e 18010000 		.4byte	.LASF48
+ 2686 0b22 08       		.byte	0x8
+ 2687 0b23 33       		.byte	0x33
+ 2688 0b24 24       		.uleb128 0x24
+ 2689 0b25 CF030000 		.4byte	.LASF49
+ 2690 0b29 CF030000 		.4byte	.LASF49
+ 2691 0b2d 09       		.byte	0x9
+ 2692 0b2e EC       		.byte	0xec
+ 2693 0b2f 24       		.uleb128 0x24
+ 2694 0b30 31000000 		.4byte	.LASF50
+ 2695 0b34 31000000 		.4byte	.LASF50
+ 2696 0b38 0A       		.byte	0xa
+ 2697 0b39 33       		.byte	0x33
+ 2698 0b3a 24       		.uleb128 0x24
+ 2699 0b3b 8F000000 		.4byte	.LASF51
+ 2700 0b3f 8F000000 		.4byte	.LASF51
+ 2701 0b43 0B       		.byte	0xb
+ 2702 0b44 33       		.byte	0x33
+ 2703 0b45 24       		.uleb128 0x24
+ 2704 0b46 47000000 		.4byte	.LASF52
+ 2705 0b4a 47000000 		.4byte	.LASF52
+ 2706 0b4e 0C       		.byte	0xc
+ 2707 0b4f 33       		.byte	0x33
+ 2708 0b50 24       		.uleb128 0x24
+ 2709 0b51 5D010000 		.4byte	.LASF53
+ 2710 0b55 5D010000 		.4byte	.LASF53
+ 2711 0b59 05       		.byte	0x5
+ 2712 0b5a 1F       		.byte	0x1f
+ 2713 0b5b 00       		.byte	0
+ 2714              		.section	.debug_abbrev,"",%progbits
+ 2715              	.Ldebug_abbrev0:
+ 2716 0000 01       		.uleb128 0x1
+ 2717 0001 11       		.uleb128 0x11
+ 2718 0002 01       		.byte	0x1
+ 2719 0003 25       		.uleb128 0x25
+ 2720 0004 0E       		.uleb128 0xe
+ 2721 0005 13       		.uleb128 0x13
+ 2722 0006 0B       		.uleb128 0xb
+ 2723 0007 03       		.uleb128 0x3
+ 2724 0008 0E       		.uleb128 0xe
+ 2725 0009 1B       		.uleb128 0x1b
+ 2726 000a 0E       		.uleb128 0xe
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 58
+
+
+ 2727 000b 55       		.uleb128 0x55
+ 2728 000c 17       		.uleb128 0x17
+ 2729 000d 11       		.uleb128 0x11
+ 2730 000e 01       		.uleb128 0x1
+ 2731 000f 10       		.uleb128 0x10
+ 2732 0010 17       		.uleb128 0x17
+ 2733 0011 00       		.byte	0
+ 2734 0012 00       		.byte	0
+ 2735 0013 02       		.uleb128 0x2
+ 2736 0014 24       		.uleb128 0x24
+ 2737 0015 00       		.byte	0
+ 2738 0016 0B       		.uleb128 0xb
+ 2739 0017 0B       		.uleb128 0xb
+ 2740 0018 3E       		.uleb128 0x3e
+ 2741 0019 0B       		.uleb128 0xb
+ 2742 001a 03       		.uleb128 0x3
+ 2743 001b 0E       		.uleb128 0xe
+ 2744 001c 00       		.byte	0
+ 2745 001d 00       		.byte	0
+ 2746 001e 03       		.uleb128 0x3
+ 2747 001f 16       		.uleb128 0x16
+ 2748 0020 00       		.byte	0
+ 2749 0021 03       		.uleb128 0x3
+ 2750 0022 0E       		.uleb128 0xe
+ 2751 0023 3A       		.uleb128 0x3a
+ 2752 0024 0B       		.uleb128 0xb
+ 2753 0025 3B       		.uleb128 0x3b
+ 2754 0026 0B       		.uleb128 0xb
+ 2755 0027 49       		.uleb128 0x49
+ 2756 0028 13       		.uleb128 0x13
+ 2757 0029 00       		.byte	0
+ 2758 002a 00       		.byte	0
+ 2759 002b 04       		.uleb128 0x4
+ 2760 002c 24       		.uleb128 0x24
+ 2761 002d 00       		.byte	0
+ 2762 002e 0B       		.uleb128 0xb
+ 2763 002f 0B       		.uleb128 0xb
+ 2764 0030 3E       		.uleb128 0x3e
+ 2765 0031 0B       		.uleb128 0xb
+ 2766 0032 03       		.uleb128 0x3
+ 2767 0033 08       		.uleb128 0x8
+ 2768 0034 00       		.byte	0
+ 2769 0035 00       		.byte	0
+ 2770 0036 05       		.uleb128 0x5
+ 2771 0037 16       		.uleb128 0x16
+ 2772 0038 00       		.byte	0
+ 2773 0039 03       		.uleb128 0x3
+ 2774 003a 0E       		.uleb128 0xe
+ 2775 003b 3A       		.uleb128 0x3a
+ 2776 003c 0B       		.uleb128 0xb
+ 2777 003d 3B       		.uleb128 0x3b
+ 2778 003e 05       		.uleb128 0x5
+ 2779 003f 49       		.uleb128 0x49
+ 2780 0040 13       		.uleb128 0x13
+ 2781 0041 00       		.byte	0
+ 2782 0042 00       		.byte	0
+ 2783 0043 06       		.uleb128 0x6
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 59
+
+
+ 2784 0044 2E       		.uleb128 0x2e
+ 2785 0045 01       		.byte	0x1
+ 2786 0046 03       		.uleb128 0x3
+ 2787 0047 0E       		.uleb128 0xe
+ 2788 0048 3A       		.uleb128 0x3a
+ 2789 0049 0B       		.uleb128 0xb
+ 2790 004a 3B       		.uleb128 0x3b
+ 2791 004b 0B       		.uleb128 0xb
+ 2792 004c 11       		.uleb128 0x11
+ 2793 004d 01       		.uleb128 0x1
+ 2794 004e 12       		.uleb128 0x12
+ 2795 004f 06       		.uleb128 0x6
+ 2796 0050 40       		.uleb128 0x40
+ 2797 0051 18       		.uleb128 0x18
+ 2798 0052 9742     		.uleb128 0x2117
+ 2799 0054 19       		.uleb128 0x19
+ 2800 0055 01       		.uleb128 0x1
+ 2801 0056 13       		.uleb128 0x13
+ 2802 0057 00       		.byte	0
+ 2803 0058 00       		.byte	0
+ 2804 0059 07       		.uleb128 0x7
+ 2805 005a 0B       		.uleb128 0xb
+ 2806 005b 01       		.byte	0x1
+ 2807 005c 11       		.uleb128 0x11
+ 2808 005d 01       		.uleb128 0x1
+ 2809 005e 12       		.uleb128 0x12
+ 2810 005f 06       		.uleb128 0x6
+ 2811 0060 00       		.byte	0
+ 2812 0061 00       		.byte	0
+ 2813 0062 08       		.uleb128 0x8
+ 2814 0063 34       		.uleb128 0x34
+ 2815 0064 00       		.byte	0
+ 2816 0065 03       		.uleb128 0x3
+ 2817 0066 0E       		.uleb128 0xe
+ 2818 0067 3A       		.uleb128 0x3a
+ 2819 0068 0B       		.uleb128 0xb
+ 2820 0069 3B       		.uleb128 0x3b
+ 2821 006a 0B       		.uleb128 0xb
+ 2822 006b 49       		.uleb128 0x49
+ 2823 006c 13       		.uleb128 0x13
+ 2824 006d 02       		.uleb128 0x2
+ 2825 006e 17       		.uleb128 0x17
+ 2826 006f 00       		.byte	0
+ 2827 0070 00       		.byte	0
+ 2828 0071 09       		.uleb128 0x9
+ 2829 0072 898201   		.uleb128 0x4109
+ 2830 0075 01       		.byte	0x1
+ 2831 0076 11       		.uleb128 0x11
+ 2832 0077 01       		.uleb128 0x1
+ 2833 0078 9342     		.uleb128 0x2113
+ 2834 007a 18       		.uleb128 0x18
+ 2835 007b 00       		.byte	0
+ 2836 007c 00       		.byte	0
+ 2837 007d 0A       		.uleb128 0xa
+ 2838 007e 8A8201   		.uleb128 0x410a
+ 2839 0081 00       		.byte	0
+ 2840 0082 02       		.uleb128 0x2
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 60
+
+
+ 2841 0083 18       		.uleb128 0x18
+ 2842 0084 9142     		.uleb128 0x2111
+ 2843 0086 18       		.uleb128 0x18
+ 2844 0087 00       		.byte	0
+ 2845 0088 00       		.byte	0
+ 2846 0089 0B       		.uleb128 0xb
+ 2847 008a 34       		.uleb128 0x34
+ 2848 008b 00       		.byte	0
+ 2849 008c 03       		.uleb128 0x3
+ 2850 008d 0E       		.uleb128 0xe
+ 2851 008e 3A       		.uleb128 0x3a
+ 2852 008f 0B       		.uleb128 0xb
+ 2853 0090 3B       		.uleb128 0x3b
+ 2854 0091 0B       		.uleb128 0xb
+ 2855 0092 49       		.uleb128 0x49
+ 2856 0093 13       		.uleb128 0x13
+ 2857 0094 1C       		.uleb128 0x1c
+ 2858 0095 0B       		.uleb128 0xb
+ 2859 0096 00       		.byte	0
+ 2860 0097 00       		.byte	0
+ 2861 0098 0C       		.uleb128 0xc
+ 2862 0099 0B       		.uleb128 0xb
+ 2863 009a 01       		.byte	0x1
+ 2864 009b 11       		.uleb128 0x11
+ 2865 009c 01       		.uleb128 0x1
+ 2866 009d 12       		.uleb128 0x12
+ 2867 009e 06       		.uleb128 0x6
+ 2868 009f 01       		.uleb128 0x1
+ 2869 00a0 13       		.uleb128 0x13
+ 2870 00a1 00       		.byte	0
+ 2871 00a2 00       		.byte	0
+ 2872 00a3 0D       		.uleb128 0xd
+ 2873 00a4 898201   		.uleb128 0x4109
+ 2874 00a7 00       		.byte	0
+ 2875 00a8 11       		.uleb128 0x11
+ 2876 00a9 01       		.uleb128 0x1
+ 2877 00aa 9342     		.uleb128 0x2113
+ 2878 00ac 18       		.uleb128 0x18
+ 2879 00ad 00       		.byte	0
+ 2880 00ae 00       		.byte	0
+ 2881 00af 0E       		.uleb128 0xe
+ 2882 00b0 898201   		.uleb128 0x4109
+ 2883 00b3 01       		.byte	0x1
+ 2884 00b4 11       		.uleb128 0x11
+ 2885 00b5 01       		.uleb128 0x1
+ 2886 00b6 9342     		.uleb128 0x2113
+ 2887 00b8 18       		.uleb128 0x18
+ 2888 00b9 01       		.uleb128 0x1
+ 2889 00ba 13       		.uleb128 0x13
+ 2890 00bb 00       		.byte	0
+ 2891 00bc 00       		.byte	0
+ 2892 00bd 0F       		.uleb128 0xf
+ 2893 00be 2E       		.uleb128 0x2e
+ 2894 00bf 01       		.byte	0x1
+ 2895 00c0 03       		.uleb128 0x3
+ 2896 00c1 0E       		.uleb128 0xe
+ 2897 00c2 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 61
+
+
+ 2898 00c3 0B       		.uleb128 0xb
+ 2899 00c4 3B       		.uleb128 0x3b
+ 2900 00c5 0B       		.uleb128 0xb
+ 2901 00c6 27       		.uleb128 0x27
+ 2902 00c7 19       		.uleb128 0x19
+ 2903 00c8 11       		.uleb128 0x11
+ 2904 00c9 01       		.uleb128 0x1
+ 2905 00ca 12       		.uleb128 0x12
+ 2906 00cb 06       		.uleb128 0x6
+ 2907 00cc 40       		.uleb128 0x40
+ 2908 00cd 18       		.uleb128 0x18
+ 2909 00ce 9742     		.uleb128 0x2117
+ 2910 00d0 19       		.uleb128 0x19
+ 2911 00d1 01       		.uleb128 0x1
+ 2912 00d2 13       		.uleb128 0x13
+ 2913 00d3 00       		.byte	0
+ 2914 00d4 00       		.byte	0
+ 2915 00d5 10       		.uleb128 0x10
+ 2916 00d6 05       		.uleb128 0x5
+ 2917 00d7 00       		.byte	0
+ 2918 00d8 03       		.uleb128 0x3
+ 2919 00d9 0E       		.uleb128 0xe
+ 2920 00da 3A       		.uleb128 0x3a
+ 2921 00db 0B       		.uleb128 0xb
+ 2922 00dc 3B       		.uleb128 0x3b
+ 2923 00dd 0B       		.uleb128 0xb
+ 2924 00de 49       		.uleb128 0x49
+ 2925 00df 13       		.uleb128 0x13
+ 2926 00e0 02       		.uleb128 0x2
+ 2927 00e1 17       		.uleb128 0x17
+ 2928 00e2 00       		.byte	0
+ 2929 00e3 00       		.byte	0
+ 2930 00e4 11       		.uleb128 0x11
+ 2931 00e5 898201   		.uleb128 0x4109
+ 2932 00e8 01       		.byte	0x1
+ 2933 00e9 11       		.uleb128 0x11
+ 2934 00ea 01       		.uleb128 0x1
+ 2935 00eb 31       		.uleb128 0x31
+ 2936 00ec 13       		.uleb128 0x13
+ 2937 00ed 01       		.uleb128 0x1
+ 2938 00ee 13       		.uleb128 0x13
+ 2939 00ef 00       		.byte	0
+ 2940 00f0 00       		.byte	0
+ 2941 00f1 12       		.uleb128 0x12
+ 2942 00f2 898201   		.uleb128 0x4109
+ 2943 00f5 00       		.byte	0
+ 2944 00f6 11       		.uleb128 0x11
+ 2945 00f7 01       		.uleb128 0x1
+ 2946 00f8 31       		.uleb128 0x31
+ 2947 00f9 13       		.uleb128 0x13
+ 2948 00fa 00       		.byte	0
+ 2949 00fb 00       		.byte	0
+ 2950 00fc 13       		.uleb128 0x13
+ 2951 00fd 0B       		.uleb128 0xb
+ 2952 00fe 01       		.byte	0x1
+ 2953 00ff 55       		.uleb128 0x55
+ 2954 0100 17       		.uleb128 0x17
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 62
+
+
+ 2955 0101 01       		.uleb128 0x1
+ 2956 0102 13       		.uleb128 0x13
+ 2957 0103 00       		.byte	0
+ 2958 0104 00       		.byte	0
+ 2959 0105 14       		.uleb128 0x14
+ 2960 0106 34       		.uleb128 0x34
+ 2961 0107 00       		.byte	0
+ 2962 0108 03       		.uleb128 0x3
+ 2963 0109 08       		.uleb128 0x8
+ 2964 010a 3A       		.uleb128 0x3a
+ 2965 010b 0B       		.uleb128 0xb
+ 2966 010c 3B       		.uleb128 0x3b
+ 2967 010d 0B       		.uleb128 0xb
+ 2968 010e 49       		.uleb128 0x49
+ 2969 010f 13       		.uleb128 0x13
+ 2970 0110 02       		.uleb128 0x2
+ 2971 0111 17       		.uleb128 0x17
+ 2972 0112 00       		.byte	0
+ 2973 0113 00       		.byte	0
+ 2974 0114 15       		.uleb128 0x15
+ 2975 0115 898201   		.uleb128 0x4109
+ 2976 0118 01       		.byte	0x1
+ 2977 0119 11       		.uleb128 0x11
+ 2978 011a 01       		.uleb128 0x1
+ 2979 011b 31       		.uleb128 0x31
+ 2980 011c 13       		.uleb128 0x13
+ 2981 011d 00       		.byte	0
+ 2982 011e 00       		.byte	0
+ 2983 011f 16       		.uleb128 0x16
+ 2984 0120 05       		.uleb128 0x5
+ 2985 0121 00       		.byte	0
+ 2986 0122 03       		.uleb128 0x3
+ 2987 0123 08       		.uleb128 0x8
+ 2988 0124 3A       		.uleb128 0x3a
+ 2989 0125 0B       		.uleb128 0xb
+ 2990 0126 3B       		.uleb128 0x3b
+ 2991 0127 0B       		.uleb128 0xb
+ 2992 0128 49       		.uleb128 0x49
+ 2993 0129 13       		.uleb128 0x13
+ 2994 012a 02       		.uleb128 0x2
+ 2995 012b 17       		.uleb128 0x17
+ 2996 012c 00       		.byte	0
+ 2997 012d 00       		.byte	0
+ 2998 012e 17       		.uleb128 0x17
+ 2999 012f 2E       		.uleb128 0x2e
+ 3000 0130 01       		.byte	0x1
+ 3001 0131 3F       		.uleb128 0x3f
+ 3002 0132 19       		.uleb128 0x19
+ 3003 0133 03       		.uleb128 0x3
+ 3004 0134 0E       		.uleb128 0xe
+ 3005 0135 3A       		.uleb128 0x3a
+ 3006 0136 0B       		.uleb128 0xb
+ 3007 0137 3B       		.uleb128 0x3b
+ 3008 0138 05       		.uleb128 0x5
+ 3009 0139 27       		.uleb128 0x27
+ 3010 013a 19       		.uleb128 0x19
+ 3011 013b 49       		.uleb128 0x49
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 63
+
+
+ 3012 013c 13       		.uleb128 0x13
+ 3013 013d 8701     		.uleb128 0x87
+ 3014 013f 19       		.uleb128 0x19
+ 3015 0140 11       		.uleb128 0x11
+ 3016 0141 01       		.uleb128 0x1
+ 3017 0142 12       		.uleb128 0x12
+ 3018 0143 06       		.uleb128 0x6
+ 3019 0144 40       		.uleb128 0x40
+ 3020 0145 18       		.uleb128 0x18
+ 3021 0146 9742     		.uleb128 0x2117
+ 3022 0148 19       		.uleb128 0x19
+ 3023 0149 01       		.uleb128 0x1
+ 3024 014a 13       		.uleb128 0x13
+ 3025 014b 00       		.byte	0
+ 3026 014c 00       		.byte	0
+ 3027 014d 18       		.uleb128 0x18
+ 3028 014e 34       		.uleb128 0x34
+ 3029 014f 00       		.byte	0
+ 3030 0150 03       		.uleb128 0x3
+ 3031 0151 0E       		.uleb128 0xe
+ 3032 0152 3A       		.uleb128 0x3a
+ 3033 0153 0B       		.uleb128 0xb
+ 3034 0154 3B       		.uleb128 0x3b
+ 3035 0155 05       		.uleb128 0x5
+ 3036 0156 49       		.uleb128 0x49
+ 3037 0157 13       		.uleb128 0x13
+ 3038 0158 02       		.uleb128 0x2
+ 3039 0159 17       		.uleb128 0x17
+ 3040 015a 00       		.byte	0
+ 3041 015b 00       		.byte	0
+ 3042 015c 19       		.uleb128 0x19
+ 3043 015d 34       		.uleb128 0x34
+ 3044 015e 00       		.byte	0
+ 3045 015f 03       		.uleb128 0x3
+ 3046 0160 08       		.uleb128 0x8
+ 3047 0161 3A       		.uleb128 0x3a
+ 3048 0162 0B       		.uleb128 0xb
+ 3049 0163 3B       		.uleb128 0x3b
+ 3050 0164 05       		.uleb128 0x5
+ 3051 0165 49       		.uleb128 0x49
+ 3052 0166 13       		.uleb128 0x13
+ 3053 0167 02       		.uleb128 0x2
+ 3054 0168 17       		.uleb128 0x17
+ 3055 0169 00       		.byte	0
+ 3056 016a 00       		.byte	0
+ 3057 016b 1A       		.uleb128 0x1a
+ 3058 016c 0B       		.uleb128 0xb
+ 3059 016d 01       		.byte	0x1
+ 3060 016e 55       		.uleb128 0x55
+ 3061 016f 17       		.uleb128 0x17
+ 3062 0170 00       		.byte	0
+ 3063 0171 00       		.byte	0
+ 3064 0172 1B       		.uleb128 0x1b
+ 3065 0173 01       		.uleb128 0x1
+ 3066 0174 01       		.byte	0x1
+ 3067 0175 49       		.uleb128 0x49
+ 3068 0176 13       		.uleb128 0x13
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 64
+
+
+ 3069 0177 01       		.uleb128 0x1
+ 3070 0178 13       		.uleb128 0x13
+ 3071 0179 00       		.byte	0
+ 3072 017a 00       		.byte	0
+ 3073 017b 1C       		.uleb128 0x1c
+ 3074 017c 21       		.uleb128 0x21
+ 3075 017d 00       		.byte	0
+ 3076 017e 49       		.uleb128 0x49
+ 3077 017f 13       		.uleb128 0x13
+ 3078 0180 2F       		.uleb128 0x2f
+ 3079 0181 0B       		.uleb128 0xb
+ 3080 0182 00       		.byte	0
+ 3081 0183 00       		.byte	0
+ 3082 0184 1D       		.uleb128 0x1d
+ 3083 0185 34       		.uleb128 0x34
+ 3084 0186 00       		.byte	0
+ 3085 0187 03       		.uleb128 0x3
+ 3086 0188 0E       		.uleb128 0xe
+ 3087 0189 3A       		.uleb128 0x3a
+ 3088 018a 0B       		.uleb128 0xb
+ 3089 018b 3B       		.uleb128 0x3b
+ 3090 018c 0B       		.uleb128 0xb
+ 3091 018d 49       		.uleb128 0x49
+ 3092 018e 13       		.uleb128 0x13
+ 3093 018f 02       		.uleb128 0x2
+ 3094 0190 18       		.uleb128 0x18
+ 3095 0191 00       		.byte	0
+ 3096 0192 00       		.byte	0
+ 3097 0193 1E       		.uleb128 0x1e
+ 3098 0194 26       		.uleb128 0x26
+ 3099 0195 00       		.byte	0
+ 3100 0196 49       		.uleb128 0x49
+ 3101 0197 13       		.uleb128 0x13
+ 3102 0198 00       		.byte	0
+ 3103 0199 00       		.byte	0
+ 3104 019a 1F       		.uleb128 0x1f
+ 3105 019b 0F       		.uleb128 0xf
+ 3106 019c 00       		.byte	0
+ 3107 019d 0B       		.uleb128 0xb
+ 3108 019e 0B       		.uleb128 0xb
+ 3109 019f 49       		.uleb128 0x49
+ 3110 01a0 13       		.uleb128 0x13
+ 3111 01a1 00       		.byte	0
+ 3112 01a2 00       		.byte	0
+ 3113 01a3 20       		.uleb128 0x20
+ 3114 01a4 15       		.uleb128 0x15
+ 3115 01a5 01       		.byte	0x1
+ 3116 01a6 27       		.uleb128 0x27
+ 3117 01a7 19       		.uleb128 0x19
+ 3118 01a8 01       		.uleb128 0x1
+ 3119 01a9 13       		.uleb128 0x13
+ 3120 01aa 00       		.byte	0
+ 3121 01ab 00       		.byte	0
+ 3122 01ac 21       		.uleb128 0x21
+ 3123 01ad 05       		.uleb128 0x5
+ 3124 01ae 00       		.byte	0
+ 3125 01af 49       		.uleb128 0x49
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 65
+
+
+ 3126 01b0 13       		.uleb128 0x13
+ 3127 01b1 00       		.byte	0
+ 3128 01b2 00       		.byte	0
+ 3129 01b3 22       		.uleb128 0x22
+ 3130 01b4 15       		.uleb128 0x15
+ 3131 01b5 01       		.byte	0x1
+ 3132 01b6 49       		.uleb128 0x49
+ 3133 01b7 13       		.uleb128 0x13
+ 3134 01b8 01       		.uleb128 0x1
+ 3135 01b9 13       		.uleb128 0x13
+ 3136 01ba 00       		.byte	0
+ 3137 01bb 00       		.byte	0
+ 3138 01bc 23       		.uleb128 0x23
+ 3139 01bd 18       		.uleb128 0x18
+ 3140 01be 00       		.byte	0
+ 3141 01bf 00       		.byte	0
+ 3142 01c0 00       		.byte	0
+ 3143 01c1 24       		.uleb128 0x24
+ 3144 01c2 2E       		.uleb128 0x2e
+ 3145 01c3 00       		.byte	0
+ 3146 01c4 3F       		.uleb128 0x3f
+ 3147 01c5 19       		.uleb128 0x19
+ 3148 01c6 3C       		.uleb128 0x3c
+ 3149 01c7 19       		.uleb128 0x19
+ 3150 01c8 6E       		.uleb128 0x6e
+ 3151 01c9 0E       		.uleb128 0xe
+ 3152 01ca 03       		.uleb128 0x3
+ 3153 01cb 0E       		.uleb128 0xe
+ 3154 01cc 3A       		.uleb128 0x3a
+ 3155 01cd 0B       		.uleb128 0xb
+ 3156 01ce 3B       		.uleb128 0x3b
+ 3157 01cf 0B       		.uleb128 0xb
+ 3158 01d0 00       		.byte	0
+ 3159 01d1 00       		.byte	0
+ 3160 01d2 00       		.byte	0
+ 3161              		.section	.debug_loc,"",%progbits
+ 3162              	.Ldebug_loc0:
+ 3163              	.LLST0:
+ 3164 0000 02000000 		.4byte	.LVL0
+ 3165 0004 06000000 		.4byte	.LVL1
+ 3166 0008 0200     		.2byte	0x2
+ 3167 000a 30       		.byte	0x30
+ 3168 000b 9F       		.byte	0x9f
+ 3169 000c 06000000 		.4byte	.LVL1
+ 3170 0010 16000000 		.4byte	.LVL4
+ 3171 0014 0100     		.2byte	0x1
+ 3172 0016 54       		.byte	0x54
+ 3173 0017 00000000 		.4byte	0
+ 3174 001b 00000000 		.4byte	0
+ 3175              	.LLST1:
+ 3176 001f 02000000 		.4byte	.LVL5
+ 3177 0023 06000000 		.4byte	.LVL6
+ 3178 0027 0200     		.2byte	0x2
+ 3179 0029 30       		.byte	0x30
+ 3180 002a 9F       		.byte	0x9f
+ 3181 002b 06000000 		.4byte	.LVL6
+ 3182 002f 46000000 		.4byte	.LVL14
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 66
+
+
+ 3183 0033 0100     		.2byte	0x1
+ 3184 0035 55       		.byte	0x55
+ 3185 0036 00000000 		.4byte	0
+ 3186 003a 00000000 		.4byte	0
+ 3187              	.LLST2:
+ 3188 003e 18000000 		.4byte	.LVL8
+ 3189 0042 1C000000 		.4byte	.LVL9
+ 3190 0046 0200     		.2byte	0x2
+ 3191 0048 30       		.byte	0x30
+ 3192 0049 9F       		.byte	0x9f
+ 3193 004a 1C000000 		.4byte	.LVL9
+ 3194 004e 42000000 		.4byte	.LVL13
+ 3195 0052 0100     		.2byte	0x1
+ 3196 0054 54       		.byte	0x54
+ 3197 0055 00000000 		.4byte	0
+ 3198 0059 00000000 		.4byte	0
+ 3199              	.LLST3:
+ 3200 005d 00000000 		.4byte	.LVL15
+ 3201 0061 08000000 		.4byte	.LVL16
+ 3202 0065 0100     		.2byte	0x1
+ 3203 0067 50       		.byte	0x50
+ 3204 0068 08000000 		.4byte	.LVL16
+ 3205 006c A8000000 		.4byte	.LFE38
+ 3206 0070 0400     		.2byte	0x4
+ 3207 0072 F3       		.byte	0xf3
+ 3208 0073 01       		.uleb128 0x1
+ 3209 0074 50       		.byte	0x50
+ 3210 0075 9F       		.byte	0x9f
+ 3211 0076 00000000 		.4byte	0
+ 3212 007a 00000000 		.4byte	0
+ 3213              	.LLST4:
+ 3214 007e 02000000 		.4byte	.LVL30
+ 3215 0082 1E000000 		.4byte	.LVL35
+ 3216 0086 0200     		.2byte	0x2
+ 3217 0088 31       		.byte	0x31
+ 3218 0089 9F       		.byte	0x9f
+ 3219 008a 1E000000 		.4byte	.LVL35
+ 3220 008e 27000000 		.4byte	.LVL36-1
+ 3221 0092 0100     		.2byte	0x1
+ 3222 0094 53       		.byte	0x53
+ 3223 0095 4E000000 		.4byte	.LVL42
+ 3224 0099 53000000 		.4byte	.LVL43-1
+ 3225 009d 0100     		.2byte	0x1
+ 3226 009f 53       		.byte	0x53
+ 3227 00a0 00000000 		.4byte	0
+ 3228 00a4 00000000 		.4byte	0
+ 3229              	.LLST5:
+ 3230 00a8 02000000 		.4byte	.LVL30
+ 3231 00ac 06000000 		.4byte	.LVL31
+ 3232 00b0 0200     		.2byte	0x2
+ 3233 00b2 30       		.byte	0x30
+ 3234 00b3 9F       		.byte	0x9f
+ 3235 00b4 06000000 		.4byte	.LVL31
+ 3236 00b8 1A000000 		.4byte	.LVL33
+ 3237 00bc 0100     		.2byte	0x1
+ 3238 00be 53       		.byte	0x53
+ 3239 00bf 1C000000 		.4byte	.LVL34
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 67
+
+
+ 3240 00c3 1E000000 		.4byte	.LVL35
+ 3241 00c7 0100     		.2byte	0x1
+ 3242 00c9 53       		.byte	0x53
+ 3243 00ca 00000000 		.4byte	0
+ 3244 00ce 00000000 		.4byte	0
+ 3245              	.LLST6:
+ 3246 00d2 00000000 		.4byte	.LVL45
+ 3247 00d6 08000000 		.4byte	.LVL47
+ 3248 00da 0100     		.2byte	0x1
+ 3249 00dc 50       		.byte	0x50
+ 3250 00dd 08000000 		.4byte	.LVL47
+ 3251 00e1 34000000 		.4byte	.LFE32
+ 3252 00e5 0400     		.2byte	0x4
+ 3253 00e7 F3       		.byte	0xf3
+ 3254 00e8 01       		.uleb128 0x1
+ 3255 00e9 50       		.byte	0x50
+ 3256 00ea 9F       		.byte	0x9f
+ 3257 00eb 00000000 		.4byte	0
+ 3258 00ef 00000000 		.4byte	0
+ 3259              	.LLST7:
+ 3260 00f3 04000000 		.4byte	.LVL46
+ 3261 00f7 08000000 		.4byte	.LVL47
+ 3262 00fb 0200     		.2byte	0x2
+ 3263 00fd 30       		.byte	0x30
+ 3264 00fe 9F       		.byte	0x9f
+ 3265 00ff 08000000 		.4byte	.LVL47
+ 3266 0103 2C000000 		.4byte	.LVL52
+ 3267 0107 0100     		.2byte	0x1
+ 3268 0109 54       		.byte	0x54
+ 3269 010a 2E000000 		.4byte	.LVL53
+ 3270 010e 32000000 		.4byte	.LVL54
+ 3271 0112 0100     		.2byte	0x1
+ 3272 0114 54       		.byte	0x54
+ 3273 0115 00000000 		.4byte	0
+ 3274 0119 00000000 		.4byte	0
+ 3275              	.LLST8:
+ 3276 011d 00000000 		.4byte	.LVL55
+ 3277 0121 0E000000 		.4byte	.LVL56
+ 3278 0125 0100     		.2byte	0x1
+ 3279 0127 50       		.byte	0x50
+ 3280 0128 0E000000 		.4byte	.LVL56
+ 3281 012c 54000000 		.4byte	.LFE33
+ 3282 0130 0400     		.2byte	0x4
+ 3283 0132 F3       		.byte	0xf3
+ 3284 0133 01       		.uleb128 0x1
+ 3285 0134 50       		.byte	0x50
+ 3286 0135 9F       		.byte	0x9f
+ 3287 0136 00000000 		.4byte	0
+ 3288 013a 00000000 		.4byte	0
+ 3289              	.LLST9:
+ 3290 013e 00000000 		.4byte	.LVL55
+ 3291 0142 11000000 		.4byte	.LVL57-1
+ 3292 0146 0100     		.2byte	0x1
+ 3293 0148 51       		.byte	0x51
+ 3294 0149 11000000 		.4byte	.LVL57-1
+ 3295 014d 54000000 		.4byte	.LFE33
+ 3296 0151 0400     		.2byte	0x4
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 68
+
+
+ 3297 0153 F3       		.byte	0xf3
+ 3298 0154 01       		.uleb128 0x1
+ 3299 0155 51       		.byte	0x51
+ 3300 0156 9F       		.byte	0x9f
+ 3301 0157 00000000 		.4byte	0
+ 3302 015b 00000000 		.4byte	0
+ 3303              	.LLST10:
+ 3304 015f 00000000 		.4byte	.LVL55
+ 3305 0163 11000000 		.4byte	.LVL57-1
+ 3306 0167 0100     		.2byte	0x1
+ 3307 0169 52       		.byte	0x52
+ 3308 016a 11000000 		.4byte	.LVL57-1
+ 3309 016e 54000000 		.4byte	.LFE33
+ 3310 0172 0400     		.2byte	0x4
+ 3311 0174 F3       		.byte	0xf3
+ 3312 0175 01       		.uleb128 0x1
+ 3313 0176 52       		.byte	0x52
+ 3314 0177 9F       		.byte	0x9f
+ 3315 0178 00000000 		.4byte	0
+ 3316 017c 00000000 		.4byte	0
+ 3317              	.LLST11:
+ 3318 0180 00000000 		.4byte	.LVL64
+ 3319 0184 16000000 		.4byte	.LVL65
+ 3320 0188 0100     		.2byte	0x1
+ 3321 018a 50       		.byte	0x50
+ 3322 018b 16000000 		.4byte	.LVL65
+ 3323 018f 2E000000 		.4byte	.LVL70
+ 3324 0193 0400     		.2byte	0x4
+ 3325 0195 F3       		.byte	0xf3
+ 3326 0196 01       		.uleb128 0x1
+ 3327 0197 50       		.byte	0x50
+ 3328 0198 9F       		.byte	0x9f
+ 3329 0199 2E000000 		.4byte	.LVL70
+ 3330 019d 34000000 		.4byte	.LVL71
+ 3331 01a1 0100     		.2byte	0x1
+ 3332 01a3 50       		.byte	0x50
+ 3333 01a4 34000000 		.4byte	.LVL71
+ 3334 01a8 4C000000 		.4byte	.LVL76
+ 3335 01ac 0400     		.2byte	0x4
+ 3336 01ae F3       		.byte	0xf3
+ 3337 01af 01       		.uleb128 0x1
+ 3338 01b0 50       		.byte	0x50
+ 3339 01b1 9F       		.byte	0x9f
+ 3340 01b2 4C000000 		.4byte	.LVL76
+ 3341 01b6 52000000 		.4byte	.LVL77
+ 3342 01ba 0100     		.2byte	0x1
+ 3343 01bc 50       		.byte	0x50
+ 3344 01bd 52000000 		.4byte	.LVL77
+ 3345 01c1 74000000 		.4byte	.LVL83
+ 3346 01c5 0400     		.2byte	0x4
+ 3347 01c7 F3       		.byte	0xf3
+ 3348 01c8 01       		.uleb128 0x1
+ 3349 01c9 50       		.byte	0x50
+ 3350 01ca 9F       		.byte	0x9f
+ 3351 01cb 74000000 		.4byte	.LVL83
+ 3352 01cf 7A000000 		.4byte	.LVL84
+ 3353 01d3 0100     		.2byte	0x1
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 69
+
+
+ 3354 01d5 50       		.byte	0x50
+ 3355 01d6 7A000000 		.4byte	.LVL84
+ 3356 01da 92000000 		.4byte	.LVL89
+ 3357 01de 0400     		.2byte	0x4
+ 3358 01e0 F3       		.byte	0xf3
+ 3359 01e1 01       		.uleb128 0x1
+ 3360 01e2 50       		.byte	0x50
+ 3361 01e3 9F       		.byte	0x9f
+ 3362 01e4 92000000 		.4byte	.LVL89
+ 3363 01e8 98000000 		.4byte	.LVL90
+ 3364 01ec 0100     		.2byte	0x1
+ 3365 01ee 50       		.byte	0x50
+ 3366 01ef 98000000 		.4byte	.LVL90
+ 3367 01f3 B0000000 		.4byte	.LVL95
+ 3368 01f7 0400     		.2byte	0x4
+ 3369 01f9 F3       		.byte	0xf3
+ 3370 01fa 01       		.uleb128 0x1
+ 3371 01fb 50       		.byte	0x50
+ 3372 01fc 9F       		.byte	0x9f
+ 3373 01fd B0000000 		.4byte	.LVL95
+ 3374 0201 B6000000 		.4byte	.LVL96
+ 3375 0205 0100     		.2byte	0x1
+ 3376 0207 50       		.byte	0x50
+ 3377 0208 B6000000 		.4byte	.LVL96
+ 3378 020c CE000000 		.4byte	.LVL101
+ 3379 0210 0400     		.2byte	0x4
+ 3380 0212 F3       		.byte	0xf3
+ 3381 0213 01       		.uleb128 0x1
+ 3382 0214 50       		.byte	0x50
+ 3383 0215 9F       		.byte	0x9f
+ 3384 0216 CE000000 		.4byte	.LVL101
+ 3385 021a D4000000 		.4byte	.LVL102
+ 3386 021e 0100     		.2byte	0x1
+ 3387 0220 50       		.byte	0x50
+ 3388 0221 D4000000 		.4byte	.LVL102
+ 3389 0225 F0000000 		.4byte	.LFE37
+ 3390 0229 0400     		.2byte	0x4
+ 3391 022b F3       		.byte	0xf3
+ 3392 022c 01       		.uleb128 0x1
+ 3393 022d 50       		.byte	0x50
+ 3394 022e 9F       		.byte	0x9f
+ 3395 022f 00000000 		.4byte	0
+ 3396 0233 00000000 		.4byte	0
+ 3397              	.LLST12:
+ 3398 0237 2E000000 		.4byte	.LVL114
+ 3399 023b 42000000 		.4byte	.LVL118
+ 3400 023f 0300     		.2byte	0x3
+ 3401 0241 09       		.byte	0x9
+ 3402 0242 FF       		.byte	0xff
+ 3403 0243 9F       		.byte	0x9f
+ 3404 0244 42000000 		.4byte	.LVL118
+ 3405 0248 8C000000 		.4byte	.LVL124
+ 3406 024c 0100     		.2byte	0x1
+ 3407 024e 56       		.byte	0x56
+ 3408 024f 8C000000 		.4byte	.LVL124
+ 3409 0253 C0000000 		.4byte	.LVL129
+ 3410 0257 0100     		.2byte	0x1
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 70
+
+
+ 3411 0259 54       		.byte	0x54
+ 3412 025a C0000000 		.4byte	.LVL129
+ 3413 025e D0000000 		.4byte	.LVL135
+ 3414 0262 0100     		.2byte	0x1
+ 3415 0264 56       		.byte	0x56
+ 3416 0265 D0000000 		.4byte	.LVL135
+ 3417 0269 D4000000 		.4byte	.LVL136
+ 3418 026d 0100     		.2byte	0x1
+ 3419 026f 54       		.byte	0x54
+ 3420 0270 D4000000 		.4byte	.LVL136
+ 3421 0274 E6000000 		.4byte	.LVL138
+ 3422 0278 0100     		.2byte	0x1
+ 3423 027a 56       		.byte	0x56
+ 3424 027b E6000000 		.4byte	.LVL138
+ 3425 027f 20010000 		.4byte	.LVL148
+ 3426 0283 0300     		.2byte	0x3
+ 3427 0285 09       		.byte	0x9
+ 3428 0286 FF       		.byte	0xff
+ 3429 0287 9F       		.byte	0x9f
+ 3430 0288 20010000 		.4byte	.LVL148
+ 3431 028c 38010000 		.4byte	.LFE39
+ 3432 0290 0100     		.2byte	0x1
+ 3433 0292 56       		.byte	0x56
+ 3434 0293 00000000 		.4byte	0
+ 3435 0297 00000000 		.4byte	0
+ 3436              	.LLST13:
+ 3437 029b 2E000000 		.4byte	.LVL114
+ 3438 029f 42000000 		.4byte	.LVL118
+ 3439 02a3 0200     		.2byte	0x2
+ 3440 02a5 30       		.byte	0x30
+ 3441 02a6 9F       		.byte	0x9f
+ 3442 02a7 46000000 		.4byte	.LVL119
+ 3443 02ab 4C000000 		.4byte	.LVL120
+ 3444 02af 0200     		.2byte	0x2
+ 3445 02b1 30       		.byte	0x30
+ 3446 02b2 9F       		.byte	0x9f
+ 3447 02b3 4C000000 		.4byte	.LVL120
+ 3448 02b7 8E000000 		.4byte	.LVL125
+ 3449 02bb 0100     		.2byte	0x1
+ 3450 02bd 50       		.byte	0x50
+ 3451 02be C0000000 		.4byte	.LVL129
+ 3452 02c2 CE000000 		.4byte	.LVL134
+ 3453 02c6 0100     		.2byte	0x1
+ 3454 02c8 50       		.byte	0x50
+ 3455 02c9 D4000000 		.4byte	.LVL136
+ 3456 02cd F1000000 		.4byte	.LVL139-1
+ 3457 02d1 0100     		.2byte	0x1
+ 3458 02d3 50       		.byte	0x50
+ 3459 02d4 02010000 		.4byte	.LVL142
+ 3460 02d8 08010000 		.4byte	.LVL143
+ 3461 02dc 0100     		.2byte	0x1
+ 3462 02de 50       		.byte	0x50
+ 3463 02df 00000000 		.4byte	0
+ 3464 02e3 00000000 		.4byte	0
+ 3465              	.LLST14:
+ 3466 02e7 46000000 		.4byte	.LVL119
+ 3467 02eb 4C000000 		.4byte	.LVL120
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 71
+
+
+ 3468 02ef 0200     		.2byte	0x2
+ 3469 02f1 30       		.byte	0x30
+ 3470 02f2 9F       		.byte	0x9f
+ 3471 02f3 4C000000 		.4byte	.LVL120
+ 3472 02f7 38010000 		.4byte	.LFE39
+ 3473 02fb 0100     		.2byte	0x1
+ 3474 02fd 55       		.byte	0x55
+ 3475 02fe 00000000 		.4byte	0
+ 3476 0302 00000000 		.4byte	0
+ 3477              	.LLST15:
+ 3478 0306 4C000000 		.4byte	.LVL120
+ 3479 030a 78000000 		.4byte	.LVL121
+ 3480 030e 0100     		.2byte	0x1
+ 3481 0310 52       		.byte	0x52
+ 3482 0311 7E000000 		.4byte	.LVL122
+ 3483 0315 88000000 		.4byte	.LVL123
+ 3484 0319 0100     		.2byte	0x1
+ 3485 031b 52       		.byte	0x52
+ 3486 031c C0000000 		.4byte	.LVL129
+ 3487 0320 C4000000 		.4byte	.LVL131
+ 3488 0324 0100     		.2byte	0x1
+ 3489 0326 52       		.byte	0x52
+ 3490 0327 C6000000 		.4byte	.LVL132
+ 3491 032b CC000000 		.4byte	.LVL133
+ 3492 032f 0100     		.2byte	0x1
+ 3493 0331 52       		.byte	0x52
+ 3494 0332 00000000 		.4byte	0
+ 3495 0336 00000000 		.4byte	0
+ 3496              	.LLST16:
+ 3497 033a 88000000 		.4byte	.LVL123
+ 3498 033e C0000000 		.4byte	.LVL129
+ 3499 0342 0100     		.2byte	0x1
+ 3500 0344 54       		.byte	0x54
+ 3501 0345 CC000000 		.4byte	.LVL133
+ 3502 0349 D4000000 		.4byte	.LVL136
+ 3503 034d 0100     		.2byte	0x1
+ 3504 034f 54       		.byte	0x54
+ 3505 0350 00000000 		.4byte	0
+ 3506 0354 00000000 		.4byte	0
+ 3507              		.section	.debug_aranges,"",%progbits
+ 3508 0000 54000000 		.4byte	0x54
+ 3509 0004 0200     		.2byte	0x2
+ 3510 0006 00000000 		.4byte	.Ldebug_info0
+ 3511 000a 04       		.byte	0x4
+ 3512 000b 00       		.byte	0
+ 3513 000c 0000     		.2byte	0
+ 3514 000e 0000     		.2byte	0
+ 3515 0010 00000000 		.4byte	.LFB34
+ 3516 0014 1C000000 		.4byte	.LFE34-.LFB34
+ 3517 0018 00000000 		.4byte	.LFB35
+ 3518 001c 50000000 		.4byte	.LFE35-.LFB35
+ 3519 0020 00000000 		.4byte	.LFB38
+ 3520 0024 A8000000 		.4byte	.LFE38-.LFB38
+ 3521 0028 00000000 		.4byte	.LFB36
+ 3522 002c 7C000000 		.4byte	.LFE36-.LFB36
+ 3523 0030 00000000 		.4byte	.LFB32
+ 3524 0034 34000000 		.4byte	.LFE32-.LFB32
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 72
+
+
+ 3525 0038 00000000 		.4byte	.LFB33
+ 3526 003c 54000000 		.4byte	.LFE33-.LFB33
+ 3527 0040 00000000 		.4byte	.LFB37
+ 3528 0044 F0000000 		.4byte	.LFE37-.LFB37
+ 3529 0048 00000000 		.4byte	.LFB39
+ 3530 004c 38010000 		.4byte	.LFE39-.LFB39
+ 3531 0050 00000000 		.4byte	0
+ 3532 0054 00000000 		.4byte	0
+ 3533              		.section	.debug_ranges,"",%progbits
+ 3534              	.Ldebug_ranges0:
+ 3535 0000 02000000 		.4byte	.LBB5
+ 3536 0004 18000000 		.4byte	.LBE5
+ 3537 0008 1A000000 		.4byte	.LBB6
+ 3538 000c 1E000000 		.4byte	.LBE6
+ 3539 0010 00000000 		.4byte	0
+ 3540 0014 00000000 		.4byte	0
+ 3541 0018 46000000 		.4byte	.LBB8
+ 3542 001c 48000000 		.4byte	.LBE8
+ 3543 0020 4A000000 		.4byte	.LBB13
+ 3544 0024 DE000000 		.4byte	.LBE13
+ 3545 0028 00000000 		.4byte	0
+ 3546 002c 00000000 		.4byte	0
+ 3547 0030 4C000000 		.4byte	.LBB9
+ 3548 0034 C4000000 		.4byte	.LBE9
+ 3549 0038 C6000000 		.4byte	.LBB12
+ 3550 003c D4000000 		.4byte	.LBE12
+ 3551 0040 00000000 		.4byte	0
+ 3552 0044 00000000 		.4byte	0
+ 3553 0048 5A000000 		.4byte	.LBB10
+ 3554 004c C0000000 		.4byte	.LBE10
+ 3555 0050 CC000000 		.4byte	.LBB11
+ 3556 0054 D4000000 		.4byte	.LBE11
+ 3557 0058 00000000 		.4byte	0
+ 3558 005c 00000000 		.4byte	0
+ 3559 0060 00000000 		.4byte	.LFB34
+ 3560 0064 1C000000 		.4byte	.LFE34
+ 3561 0068 00000000 		.4byte	.LFB35
+ 3562 006c 50000000 		.4byte	.LFE35
+ 3563 0070 00000000 		.4byte	.LFB38
+ 3564 0074 A8000000 		.4byte	.LFE38
+ 3565 0078 00000000 		.4byte	.LFB36
+ 3566 007c 7C000000 		.4byte	.LFE36
+ 3567 0080 00000000 		.4byte	.LFB32
+ 3568 0084 34000000 		.4byte	.LFE32
+ 3569 0088 00000000 		.4byte	.LFB33
+ 3570 008c 54000000 		.4byte	.LFE33
+ 3571 0090 00000000 		.4byte	.LFB37
+ 3572 0094 F0000000 		.4byte	.LFE37
+ 3573 0098 00000000 		.4byte	.LFB39
+ 3574 009c 38010000 		.4byte	.LFE39
+ 3575 00a0 00000000 		.4byte	0
+ 3576 00a4 00000000 		.4byte	0
+ 3577              		.section	.debug_line,"",%progbits
+ 3578              	.Ldebug_line0:
+ 3579 0000 BB030000 		.section	.debug_str,"MS",%progbits,1
+ 3579      0200EC01 
+ 3579      00000201 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 73
+
+
+ 3579      FB0E0D00 
+ 3579      01010101 
+ 3580              	.LASF42:
+ 3581 0000 70617373 		.ascii	"password_index\000"
+ 3581      776F7264 
+ 3581      5F696E64 
+ 3581      657800
+ 3582              	.LASF9:
+ 3583 000f 5F5F7569 		.ascii	"__uint8_t\000"
+ 3583      6E74385F 
+ 3583      7400
+ 3584              	.LASF39:
+ 3585 0019 6B657973 		.ascii	"keys\000"
+ 3585      00
+ 3586              	.LASF24:
+ 3587 001e 636F7272 		.ascii	"correct\000"
+ 3587      65637400 
+ 3588              	.LASF38:
+ 3589 0026 524F575F 		.ascii	"ROW_x_Read\000"
+ 3589      785F5265 
+ 3589      616400
+ 3590              	.LASF50:
+ 3591 0031 50696E5F 		.ascii	"Pin_DO_Write\000"
+ 3591      444F5F57 
+ 3591      72697465 
+ 3591      00
+ 3592              	.LASF40:
+ 3593 003e 50415353 		.ascii	"PASSWORD\000"
+ 3593      574F5244 
+ 3593      00
+ 3594              	.LASF52:
+ 3595 0047 50696E5F 		.ascii	"Pin_Latch_Write\000"
+ 3595      4C617463 
+ 3595      685F5772 
+ 3595      69746500 
+ 3596              	.LASF8:
+ 3597 0057 756E7369 		.ascii	"unsigned int\000"
+ 3597      676E6564 
+ 3597      20696E74 
+ 3597      00
+ 3598              	.LASF25:
+ 3599 0064 7072696E 		.ascii	"printButtonName\000"
+ 3599      74427574 
+ 3599      746F6E4E 
+ 3599      616D6500 
+ 3600              	.LASF41:
+ 3601 0074 70617373 		.ascii	"password_buffer\000"
+ 3601      776F7264 
+ 3601      5F627566 
+ 3601      66657200 
+ 3602              	.LASF12:
+ 3603 0084 666C6F61 		.ascii	"float\000"
+ 3603      7400
+ 3604              	.LASF28:
+ 3605 008a 64617461 		.ascii	"data\000"
+ 3605      00
+ 3606              	.LASF51:
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 74
+
+
+ 3607 008f 50696E5F 		.ascii	"Pin_CLK_Write\000"
+ 3607      434C4B5F 
+ 3607      57726974 
+ 3607      6500
+ 3608              	.LASF1:
+ 3609 009d 756E7369 		.ascii	"unsigned char\000"
+ 3609      676E6564 
+ 3609      20636861 
+ 3609      7200
+ 3610              	.LASF5:
+ 3611 00ab 6C6F6E67 		.ascii	"long unsigned int\000"
+ 3611      20756E73 
+ 3611      69676E65 
+ 3611      6420696E 
+ 3611      7400
+ 3612              	.LASF11:
+ 3613 00bd 75696E74 		.ascii	"uint8\000"
+ 3613      3800
+ 3614              	.LASF17:
+ 3615 00c3 696E6974 		.ascii	"initMatrix\000"
+ 3615      4D617472 
+ 3615      697800
+ 3616              	.LASF56:
+ 3617 00ce 433A5C50 		.ascii	"C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4"
+ 3617      726F6772 
+ 3617      616D2046 
+ 3617      696C6573 
+ 3617      20287838 
+ 3618 00fd 5C50536F 		.ascii	"\\PSoC Creator\\1\\LWO4.cydsn\000"
+ 3618      43204372 
+ 3618      6561746F 
+ 3618      725C315C 
+ 3618      4C574F34 
+ 3619              	.LASF48:
+ 3620 0118 4C45445F 		.ascii	"LED_B_Write\000"
+ 3620      425F5772 
+ 3620      69746500 
+ 3621              	.LASF13:
+ 3622 0124 646F7562 		.ascii	"double\000"
+ 3622      6C6500
+ 3623              	.LASF22:
+ 3624 012b 726F775F 		.ascii	"row_index\000"
+ 3624      696E6465 
+ 3624      7800
+ 3625              	.LASF57:
+ 3626 0135 6D61696E 		.ascii	"main\000"
+ 3626      00
+ 3627              	.LASF19:
+ 3628 013a 636F6C75 		.ascii	"column_index\000"
+ 3628      6D6E5F69 
+ 3628      6E646578 
+ 3628      00
+ 3629              	.LASF36:
+ 3630 0147 434F4C55 		.ascii	"COLUMN_x_SetDriveMode\000"
+ 3630      4D4E5F78 
+ 3630      5F536574 
+ 3630      44726976 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 75
+
+
+ 3630      654D6F64 
+ 3631              	.LASF53:
+ 3632 015d 53575F54 		.ascii	"SW_Tx_UART_Start\000"
+ 3632      785F5541 
+ 3632      52545F53 
+ 3632      74617274 
+ 3632      00
+ 3633              	.LASF30:
+ 3634 016e 706F7369 		.ascii	"position\000"
+ 3634      74696F6E 
+ 3634      00
+ 3635              	.LASF27:
+ 3636 0177 62757474 		.ascii	"button_value\000"
+ 3636      6F6E5F76 
+ 3636      616C7565 
+ 3636      00
+ 3637              	.LASF44:
+ 3638 0184 53575F54 		.ascii	"SW_Tx_UART_PutString\000"
+ 3638      785F5541 
+ 3638      52545F50 
+ 3638      75745374 
+ 3638      72696E67 
+ 3639              	.LASF34:
+ 3640 0199 62757474 		.ascii	"button_pressed\000"
+ 3640      6F6E5F70 
+ 3640      72657373 
+ 3640      656400
+ 3641              	.LASF31:
+ 3642 01a8 64696769 		.ascii	"digit\000"
+ 3642      7400
+ 3643              	.LASF7:
+ 3644 01ae 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 3644      206C6F6E 
+ 3644      6720756E 
+ 3644      7369676E 
+ 3644      65642069 
+ 3645              	.LASF10:
+ 3646 01c5 75696E74 		.ascii	"uint8_t\000"
+ 3646      385F7400 
+ 3647              	.LASF18:
+ 3648 01cd 72656164 		.ascii	"readMatrix\000"
+ 3648      4D617472 
+ 3648      697800
+ 3649              	.LASF54:
+ 3650 01d8 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 3650      43313120 
+ 3650      352E342E 
+ 3650      31203230 
+ 3650      31363036 
+ 3651 020b 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 3651      20726576 
+ 3651      6973696F 
+ 3651      6E203233 
+ 3651      37373135 
+ 3652 023e 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 3652      66756E63 
+ 3652      74696F6E 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 76
+
+
+ 3652      2D736563 
+ 3652      74696F6E 
+ 3653              	.LASF21:
+ 3654 0266 636F6C75 		.ascii	"column_counter\000"
+ 3654      6D6E5F63 
+ 3654      6F756E74 
+ 3654      657200
+ 3655              	.LASF15:
+ 3656 0275 73697A65 		.ascii	"sizetype\000"
+ 3656      74797065 
+ 3656      00
+ 3657              	.LASF29:
+ 3658 027e 466F7572 		.ascii	"FourDigit74HC595_sendOneDigit\000"
+ 3658      44696769 
+ 3658      74373448 
+ 3658      43353935 
+ 3658      5F73656E 
+ 3659              	.LASF6:
+ 3660 029c 6C6F6E67 		.ascii	"long long int\000"
+ 3660      206C6F6E 
+ 3660      6720696E 
+ 3660      7400
+ 3661              	.LASF47:
+ 3662 02aa 4C45445F 		.ascii	"LED_G_Write\000"
+ 3662      475F5772 
+ 3662      69746500 
+ 3663              	.LASF14:
+ 3664 02b6 63686172 		.ascii	"char\000"
+ 3664      00
+ 3665              	.LASF35:
+ 3666 02bb 4C45445F 		.ascii	"LED_NUM\000"
+ 3666      4E554D00 
+ 3667              	.LASF46:
+ 3668 02c3 4C45445F 		.ascii	"LED_R_Write\000"
+ 3668      525F5772 
+ 3668      69746500 
+ 3669              	.LASF55:
+ 3670 02cf 433A5C50 		.ascii	"C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4"
+ 3670      726F6772 
+ 3670      616D2046 
+ 3670      696C6573 
+ 3670      20287838 
+ 3671 02fe 5C50536F 		.ascii	"\\PSoC Creator\\1\\LWO4.cydsn\\main.c\000"
+ 3671      43204372 
+ 3671      6561746F 
+ 3671      725C315C 
+ 3671      4C574F34 
+ 3672              	.LASF2:
+ 3673 0320 73686F72 		.ascii	"short int\000"
+ 3673      7420696E 
+ 3673      7400
+ 3674              	.LASF32:
+ 3675 032a 7365744C 		.ascii	"setLEDColor\000"
+ 3675      4544436F 
+ 3675      6C6F7200 
+ 3676              	.LASF23:
+ 3677 0336 63686563 		.ascii	"checkPassword\000"
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccGinPWO.s 			page 77
+
+
+ 3677      6B506173 
+ 3677      73776F72 
+ 3677      6400
+ 3678              	.LASF33:
+ 3679 0344 6C617374 		.ascii	"last_state\000"
+ 3679      5F737461 
+ 3679      746500
+ 3680              	.LASF4:
+ 3681 034f 6C6F6E67 		.ascii	"long int\000"
+ 3681      20696E74 
+ 3681      00
+ 3682              	.LASF37:
+ 3683 0358 434F4C55 		.ascii	"COLUMN_x_Write\000"
+ 3683      4D4E5F78 
+ 3683      5F577269 
+ 3683      746500
+ 3684              	.LASF16:
+ 3685 0367 6C6F6E67 		.ascii	"long double\000"
+ 3685      20646F75 
+ 3685      626C6500 
+ 3686              	.LASF45:
+ 3687 0373 53575F54 		.ascii	"SW_Tx_UART_PutCRLF\000"
+ 3687      785F5541 
+ 3687      52545F50 
+ 3687      75744352 
+ 3687      4C4600
+ 3688              	.LASF0:
+ 3689 0386 7369676E 		.ascii	"signed char\000"
+ 3689      65642063 
+ 3689      68617200 
+ 3690              	.LASF43:
+ 3691 0392 70617373 		.ascii	"password_locked\000"
+ 3691      776F7264 
+ 3691      5F6C6F63 
+ 3691      6B656400 
+ 3692              	.LASF3:
+ 3693 03a2 73686F72 		.ascii	"short unsigned int\000"
+ 3693      7420756E 
+ 3693      7369676E 
+ 3693      65642069 
+ 3693      6E7400
+ 3694              	.LASF26:
+ 3695 03b5 466F7572 		.ascii	"FourDigit74HC595_sendData\000"
+ 3695      44696769 
+ 3695      74373448 
+ 3695      43353935 
+ 3695      5F73656E 
+ 3696              	.LASF49:
+ 3697 03cf 43794465 		.ascii	"CyDelay\000"
+ 3697      6C617900 
+ 3698              	.LASF20:
+ 3699 03d7 726F775F 		.ascii	"row_counter\000"
+ 3699      636F756E 
+ 3699      74657200 
+ 3700              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

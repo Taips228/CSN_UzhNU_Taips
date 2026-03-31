@@ -1,0 +1,3275 @@
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"CapSense_CSD_SMS.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	CapSense_CSD_prescalerTable
+  20              		.section	.rodata
+  21              		.align	2
+  22              		.type	CapSense_CSD_prescalerTable, %object
+  23              		.size	CapSense_CSD_prescalerTable, 16
+  24              	CapSense_CSD_prescalerTable:
+  25 0000 01       		.byte	1
+  26 0001 01       		.byte	1
+  27 0002 01       		.byte	1
+  28 0003 02       		.byte	2
+  29 0004 02       		.byte	2
+  30 0005 02       		.byte	2
+  31 0006 02       		.byte	2
+  32 0007 04       		.byte	4
+  33 0008 04       		.byte	4
+  34 0009 04       		.byte	4
+  35 000a 04       		.byte	4
+  36 000b 04       		.byte	4
+  37 000c 04       		.byte	4
+  38 000d 04       		.byte	4
+  39 000e 04       		.byte	4
+  40 000f 04       		.byte	4
+  41              		.comm	CapSense_CSD_noiseEnvelopeTbl,5,4
+  42              		.comm	CapSense_CSD_runningDifferenceTbl,5,4
+  43              		.comm	CapSense_CSD_signRegisterTbl,5,4
+  44              		.comm	CapSense_CSD_sampleMinTbl,10,4
+  45              		.comm	CapSense_CSD_sampleMaxTbl,10,4
+  46              		.comm	CapSense_CSD_previousSampleTbl,10,4
+  47              		.comm	CapSense_CSD_kValueTbl,5,4
+  48              		.global	CapSense_CSD_sensorSensitivity
+  49              		.data
+  50              		.align	2
+  51              		.type	CapSense_CSD_sensorSensitivity, %object
+  52              		.size	CapSense_CSD_sensorSensitivity, 5
+  53              	CapSense_CSD_sensorSensitivity:
+  54 0000 04       		.byte	4
+  55 0001 04       		.byte	4
+  56 0002 04       		.byte	4
+  57 0003 04       		.byte	4
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 2
+
+
+  58 0004 04       		.byte	4
+  59              		.comm	CapSense_CSD_config,12,4
+  60              		.global	CapSense_CSD_configPointers
+  61              		.section	.rodata
+  62              		.align	2
+  63              		.type	CapSense_CSD_configPointers, %object
+  64              		.size	CapSense_CSD_configPointers, 92
+  65              	CapSense_CSD_configPointers:
+  66 0010 00000000 		.word	CapSense_CSD_modulationIDAC
+  67 0014 00000000 		.word	CapSense_CSD_compensationIDAC
+  68 0018 00000000 		.word	CapSense_CSD_sensorSensitivity
+  69 001c 00000000 		.word	CapSense_CSD_senseClkDividerVal
+  70 0020 00000000 		.word	CapSense_CSD_sampleClkDividerVal
+  71 0024 00000000 		.word	CapSense_CSD_widgetNumber
+  72 0028 00000000 		.word	CapSense_CSD_widgetResolution
+  73 002c 00000000 		.word	CapSense_CSD_noiseEnvelopeTbl
+  74 0030 00000000 		.word	CapSense_CSD_runningDifferenceTbl
+  75 0034 00000000 		.word	CapSense_CSD_signRegisterTbl
+  76 0038 00000000 		.word	CapSense_CSD_sampleMinTbl
+  77 003c 00000000 		.word	CapSense_CSD_sampleMaxTbl
+  78 0040 00000000 		.word	CapSense_CSD_previousSampleTbl
+  79 0044 00000000 		.word	CapSense_CSD_kValueTbl
+  80 0048 00000000 		.word	CapSense_CSD_scanSpeedTbl
+  81 004c 00000000 		.word	CapSense_CSD_prescalerTable
+  82 0050 00000000 		.word	CapSense_CSD_rawDataIndex
+  83 0054 00000000 		.word	CapSense_CSD_numberOfSensors
+  84 0058 00000000 		.word	CapSense_CSD_GetSensorRaw
+  85 005c 00000000 		.word	CapSense_CSD_PreScan
+  86 0060 00000000 		.word	CapSense_CSD_ReadSensorRaw
+  87 0064 00000000 		.word	CapSense_CSD_GetBitValue
+  88 0068 00000000 		.word	CapSense_CSD_SetBitValue
+  89              		.section	.text.CapSense_CSD_AutoTune,"ax",%progbits
+  90              		.align	2
+  91              		.global	CapSense_CSD_AutoTune
+  92              		.code	16
+  93              		.thumb_func
+  94              		.type	CapSense_CSD_AutoTune, %function
+  95              	CapSense_CSD_AutoTune:
+  96              	.LFB32:
+  97              		.file 1 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\CapSense_CSD_P4_Des
+   1:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** /*******************************************************************************
+   2:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * File Name: CapSense_CSD_SMS.c
+   3:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Version 2.60
+   4:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+   5:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Description:
+   6:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  This file provides the source code of wrapper between CapSense CSD component
+   7:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  and Auto Tuning library.
+   8:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+   9:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Note:
+  10:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+  11:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** ********************************************************************************
+  12:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Copyright 2013-2016, Cypress Semiconductor Corporation.  All rights reserved.
+  13:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * You may use this file only in accordance with the license, terms, conditions,
+  14:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  15:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * the software package with which this file was provided.
+  16:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *******************************************************************************/
+  17:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 3
+
+
+  18:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** #include "CapSense_CSD_SMS.h"
+  19:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** #include "CapSense_CSD_PVT.h"
+  20:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+  21:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** #include "cytypes.h"
+  22:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+  23:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** #if (CapSense_CSD_TUNING_METHOD == CapSense_CSD__TUNING_AUTO)
+  24:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+  25:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+  26:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** /*  Real Charge Divider values */
+  27:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** #if ((0u != CapSense_CSD_IS_M0S8PERI_BLOCK) && (0u == CY_PSOC4_4000))
+  28:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     /*  Dividers are not chained */
+  29:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #if (CYDEV_BCLK__HFCLK__MHZ > 24u)
+  30:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         const uint8 CapSense_CSD_prescalerTable[CapSense_CSD_PRESCALERS_TBL_SIZE] = {
+  31:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****             4u,     4u,     4u,    8u,    8u,    8u,    8u,    16u,    16u,    16u,    16u,    16u,
+  32:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         };
+  33:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #elif (CYDEV_BCLK__HFCLK__MHZ >12u)
+  34:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         const uint8 CapSense_CSD_prescalerTable[CapSense_CSD_PRESCALERS_TBL_SIZE] = {
+  35:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****             2u,     2u,     2u,    4u,    4u,    4u,    4u,    8u,    8u,    8u,    8u,    8u,    8
+  36:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         };
+  37:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #else   /* (CYDEV_BCLK__HFCLK__MHZ > 12u) */
+  38:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         const uint8 CapSense_CSD_prescalerTable[CapSense_CSD_PRESCALERS_TBL_SIZE] = {
+  39:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****             1u,     1u,     1u,    2u,    2u,    2u,    2u,    4u,    4u,    4u,    4u,    4u,    4
+  40:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         };
+  41:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #endif /* (CYDEV_BCLK__HFCLK__MHZ > 24u) */
+  42:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+  43:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** #elif (0u != CapSense_CSD_IS_M0S8PERI_BLOCK)
+  44:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     /*  Dividers are not chained (PSoC 4000) */
+  45:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #if (CYDEV_BCLK__HFCLK__MHZ >= 12u)
+  46:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         const uint8 CapSense_CSD_prescalerTable[CapSense_CSD_PRESCALERS_TBL_SIZE] = {
+  47:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****             1u,     1u,     1u,    2u,    2u,    2u,    2u,    4u,    4u,    4u,    4u,    4u,    4
+  48:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         };
+  49:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+  50:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #elif (CYDEV_BCLK__HFCLK__MHZ >= 6u)
+  51:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         const uint8 CapSense_CSD_prescalerTable[CapSense_CSD_PRESCALERS_TBL_SIZE] = {
+  52:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****             1u,     1u,     1u,    1u,    1u,    1u,    1u,    2u,    2u,    2u,    2u,    2u,    2
+  53:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         };
+  54:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #else
+  55:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         const uint8 CapSense_CSD_prescalerTable[CapSense_CSD_PRESCALERS_TBL_SIZE] = {
+  56:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****             1u,     1u,     1u,    1u,    1u,    1u,    1u,    1u,    1u,    1u,    1u,    1u,    1
+  57:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         };
+  58:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #endif /* (CYDEV_BCLK__HFCLK__MHZ > 12u) */
+  59:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+  60:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** #else
+  61:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     /*  Dividers are chained (PSoC 4100, PSoC 4200) */
+  62:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #if (CYDEV_BCLK__HFCLK__MHZ > 24u)
+  63:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         const uint8 CapSense_CSD_prescalerTable[CapSense_CSD_PRESCALERS_TBL_SIZE] = {
+  64:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****             2u,     2u,     2u,    4u,    4u,    4u,    4u,    8u,    8u,    8u,    8u,    8u,    8
+  65:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         };
+  66:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+  67:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #elif (CYDEV_BCLK__HFCLK__MHZ >12u)
+  68:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         const uint8 CapSense_CSD_prescalerTable[CapSense_CSD_PRESCALERS_TBL_SIZE] = {
+  69:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****             1u,     1u,     1u,    2u,    2u,    2u,    2u,    4u,    4u,    4u,    4u,    4u,    4
+  70:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         };
+  71:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #else   /* (CYDEV_BCLK__HFCLK__MHZ > 12u) */
+  72:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         const uint8 CapSense_CSD_prescalerTable[CapSense_CSD_PRESCALERS_TBL_SIZE] = {
+  73:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****             1u,     1u,     1u,    1u,    1u,    1u,    1u,    2u,    2u,    2u,    2u,    2u,    2
+  74:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         };
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 4
+
+
+  75:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #endif /* (CYDEV_BCLK__HFCLK__MHZ > 24u) */
+  76:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** #endif /* ((0u != CapSense_CSD_IS_M0S8PERI_BLOCK) && (0u == CY_PSOC4_4000)) */
+  77:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+  78:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+  79:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** uint8 CapSense_CSD_noiseEnvelopeTbl[CapSense_CSD_TOTAL_SENSOR_COUNT];
+  80:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** uint8 CapSense_CSD_runningDifferenceTbl[CapSense_CSD_TOTAL_SENSOR_COUNT];
+  81:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** uint8 CapSense_CSD_signRegisterTbl[CapSense_CSD_TOTAL_SENSOR_COUNT];
+  82:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** uint16 CapSense_CSD_sampleMinTbl[CapSense_CSD_TOTAL_SENSOR_COUNT];
+  83:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** uint16 CapSense_CSD_sampleMaxTbl[CapSense_CSD_TOTAL_SENSOR_COUNT];
+  84:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** uint16 CapSense_CSD_previousSampleTbl[CapSense_CSD_TOTAL_SENSOR_COUNT];
+  85:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** uint8 CapSense_CSD_kValueTbl[CapSense_CSD_TOTAL_SENSOR_COUNT];
+  86:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+  87:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** uint8 CapSense_CSD_sensorSensitivity[] = {
+  88:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     4u, 4u, 4u, 4u, 4u, 
+  89:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** };
+  90:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+  91:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** CapSense_CSD_CONFIG_TYPE_P4_v2_60 CapSense_CSD_config;
+  92:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** CapSense_CSD_CONFIG_TYPE_POINTERS_P4_v2_60 const CapSense_CSD_configPointers = {
+  93:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_modulationIDAC,
+  94:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_compensationIDAC,
+  95:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_sensorSensitivity,
+  96:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_senseClkDividerVal,
+  97:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_sampleClkDividerVal,
+  98:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_widgetNumber,
+  99:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_widgetResolution,
+ 100:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_noiseEnvelopeTbl,
+ 101:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_runningDifferenceTbl,
+ 102:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_signRegisterTbl,
+ 103:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_sampleMinTbl,
+ 104:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_sampleMaxTbl,
+ 105:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_previousSampleTbl,
+ 106:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_kValueTbl,
+ 107:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_scanSpeedTbl,
+ 108:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_prescalerTable,
+ 109:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     (const uint8  *)CapSense_CSD_rawDataIndex,
+ 110:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     (const uint8  *)CapSense_CSD_numberOfSensors,
+ 111:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     &CapSense_CSD_GetSensorRaw,
+ 112:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     &CapSense_CSD_PreScan,
+ 113:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     &CapSense_CSD_ReadSensorRaw,
+ 114:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     &CapSense_CSD_GetBitValue,
+ 115:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     &CapSense_CSD_SetBitValue
+ 116:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** };
+ 117:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 118:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 119:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** /*******************************************************************************
+ 120:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Function Name: CapSense_CSD_AutoTune
+ 121:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** ********************************************************************************
+ 122:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 123:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Summary:
+ 124:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  Provides the tuning procedure for all sensors.
+ 125:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 126:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Parameters:
+ 127:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  None
+ 128:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 129:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Return:
+ 130:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  None
+ 131:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 5
+
+
+ 132:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Global Variables:
+ 133:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *   CapSense_CSD_config: the structure which contains configuration parameters
+ 134:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *   CapSense_CSD_senseClkDividerVal[]: used to store the Analog Switch
+ 135:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *   dividers for each sensor.
+ 136:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *   CapSense_CSD_senseClkDividerVal[]: used to store the
+ 137:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *    Analog Switch divider for all sensors.
+ 138:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *   CapSense_CSD_prescalersTuningDone - used to notify the Tuner GUI that
+ 139:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *   the pre-scalers tuning  is done.
+ 140:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 141:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Side Effects:
+ 142:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  None
+ 143:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 144:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *******************************************************************************/
+ 145:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** void CapSense_CSD_AutoTune(void)
+ 146:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** {
+  98              		.loc 1 146 0
+  99              		.cfi_startproc
+ 100              		@ args = 0, pretend = 0, frame = 8
+ 101              		@ frame_needed = 1, uses_anonymous_args = 0
+ 102 0000 80B5     		push	{r7, lr}
+ 103              		.cfi_def_cfa_offset 8
+ 104              		.cfi_offset 7, -8
+ 105              		.cfi_offset 14, -4
+ 106 0002 82B0     		sub	sp, sp, #8
+ 107              		.cfi_def_cfa_offset 16
+ 108 0004 00AF     		add	r7, sp, #0
+ 109              		.cfi_def_cfa_register 7
+ 147:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     uint32 curSensor;
+ 148:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     uint32 widget;
+ 149:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 150:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_config.totalScanslotsNum = CapSense_CSD_TOTAL_SCANSLOT_COUNT;
+ 110              		.loc 1 150 0
+ 111 0006 384B     		ldr	r3, .L8
+ 112 0008 0522     		movs	r2, #5
+ 113 000a 1A70     		strb	r2, [r3]
+ 151:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_config.totalWidgetsNum = CapSense_CSD_END_OF_WIDGETS_INDEX;
+ 114              		.loc 1 151 0
+ 115 000c 364B     		ldr	r3, .L8
+ 116 000e 0122     		movs	r2, #1
+ 117 0010 5A70     		strb	r2, [r3, #1]
+ 152:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_config.totalSensorsNum = CapSense_CSD_TOTAL_SENSOR_COUNT;
+ 118              		.loc 1 152 0
+ 119 0012 354B     		ldr	r3, .L8
+ 120 0014 0522     		movs	r2, #5
+ 121 0016 9A70     		strb	r2, [r3, #2]
+ 153:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 154:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_config.hfclkFreq_MHz = CYDEV_BCLK__HFCLK__MHZ;
+ 122              		.loc 1 154 0
+ 123 0018 334B     		ldr	r3, .L8
+ 124 001a 1822     		movs	r2, #24
+ 125 001c DA80     		strh	r2, [r3, #6]
+ 155:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_config.sensetivitySeed = CapSense_CSD_SENSETIVITY_FACTOR;
+ 126              		.loc 1 155 0
+ 127 001e 324B     		ldr	r3, .L8
+ 128 0020 324A     		ldr	r2, .L8+4
+ 129 0022 9A80     		strh	r2, [r3, #4]
+ 156:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 6
+
+
+ 157:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_config.pointers = &CapSense_CSD_configPointers;
+ 130              		.loc 1 157 0
+ 131 0024 304B     		ldr	r3, .L8
+ 132 0026 324A     		ldr	r2, .L8+8
+ 133 0028 9A60     		str	r2, [r3, #8]
+ 158:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 159:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_SetAnalogSwitchesSrcDirect();
+ 134              		.loc 1 159 0
+ 135 002a FFF7FEFF 		bl	CapSense_CSD_SetAnalogSwitchesSrcDirect
+ 160:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 161:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     for(widget = 0u; widget < CapSense_CSD_config.totalWidgetsNum; widget++)
+ 136              		.loc 1 161 0
+ 137 002e 0023     		movs	r3, #0
+ 138 0030 3B60     		str	r3, [r7]
+ 139 0032 07E0     		b	.L2
+ 140              	.L3:
+ 162:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     {
+ 163:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         CapSense_CSD_widgetResolution[widget] = CapSense_CSD_CALIBRATION_RESOLUTION;
+ 141              		.loc 1 163 0 discriminator 3
+ 142 0034 2F4B     		ldr	r3, .L8+12
+ 143 0036 3A68     		ldr	r2, [r7]
+ 144 0038 9200     		lsls	r2, r2, #2
+ 145 003a 2F49     		ldr	r1, .L8+16
+ 146 003c D150     		str	r1, [r2, r3]
+ 161:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     {
+ 147              		.loc 1 161 0 discriminator 3
+ 148 003e 3B68     		ldr	r3, [r7]
+ 149 0040 0133     		adds	r3, r3, #1
+ 150 0042 3B60     		str	r3, [r7]
+ 151              	.L2:
+ 161:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     {
+ 152              		.loc 1 161 0 is_stmt 0 discriminator 1
+ 153 0044 284B     		ldr	r3, .L8
+ 154 0046 5B78     		ldrb	r3, [r3, #1]
+ 155 0048 1A00     		movs	r2, r3
+ 156 004a 3B68     		ldr	r3, [r7]
+ 157 004c 9A42     		cmp	r2, r3
+ 158 004e F1D8     		bhi	.L3
+ 164:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     }
+ 165:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 166:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 167:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     for(curSensor = 0u; curSensor < CapSense_CSD_TOTAL_SCANSLOT_COUNT; curSensor++)
+ 159              		.loc 1 167 0 is_stmt 1
+ 160 0050 0023     		movs	r3, #0
+ 161 0052 7B60     		str	r3, [r7, #4]
+ 162 0054 0CE0     		b	.L4
+ 163              	.L5:
+ 168:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     {
+ 169:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         CapSense_CSD_senseClkDividerVal[curSensor] = CapSense_CSD_CALIBRATION_ASD;
+ 164              		.loc 1 169 0 discriminator 3
+ 165 0056 294A     		ldr	r2, .L8+20
+ 166 0058 7B68     		ldr	r3, [r7, #4]
+ 167 005a D318     		adds	r3, r2, r3
+ 168 005c 0422     		movs	r2, #4
+ 169 005e 1A70     		strb	r2, [r3]
+ 170:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         CapSense_CSD_sampleClkDividerVal[curSensor] = CapSense_CSD_CALIBRATION_MD;
+ 170              		.loc 1 170 0 discriminator 3
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 7
+
+
+ 171 0060 274A     		ldr	r2, .L8+24
+ 172 0062 7B68     		ldr	r3, [r7, #4]
+ 173 0064 D318     		adds	r3, r2, r3
+ 174 0066 0222     		movs	r2, #2
+ 175 0068 1A70     		strb	r2, [r3]
+ 167:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     {
+ 176              		.loc 1 167 0 discriminator 3
+ 177 006a 7B68     		ldr	r3, [r7, #4]
+ 178 006c 0133     		adds	r3, r3, #1
+ 179 006e 7B60     		str	r3, [r7, #4]
+ 180              	.L4:
+ 167:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     {
+ 181              		.loc 1 167 0 is_stmt 0 discriminator 1
+ 182 0070 7B68     		ldr	r3, [r7, #4]
+ 183 0072 042B     		cmp	r3, #4
+ 184 0074 EFD9     		bls	.L5
+ 171:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     }
+ 172:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 173:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_DisableBaselineIDAC();
+ 185              		.loc 1 173 0 is_stmt 1
+ 186 0076 FFF7FEFF 		bl	CapSense_CSD_DisableBaselineIDAC
+ 174:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 175:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CalibrateSensors_P4_v2_60(&CapSense_CSD_config, CapSense_CSD_CAL_RAW_COUNT);
+ 187              		.loc 1 175 0
+ 188 007a 224A     		ldr	r2, .L8+28
+ 189 007c 1A4B     		ldr	r3, .L8
+ 190 007e 1100     		movs	r1, r2
+ 191 0080 1800     		movs	r0, r3
+ 192 0082 FFF7FEFF 		bl	CalibrateSensors_P4_v2_60
+ 176:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 177:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #if(0u != CapSense_CSD_TOTAL_CENTROIDS_COUNT)
+ 178:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         CapSense_CSD_NormalizeWidgets(CapSense_CSD_END_OF_WIDGETS_INDEX, CapSense_CSD_modulationIDA
+ 193              		.loc 1 178 0
+ 194 0086 204B     		ldr	r3, .L8+32
+ 195 0088 1900     		movs	r1, r3
+ 196 008a 0120     		movs	r0, #1
+ 197 008c FFF7FEFF 		bl	CapSense_CSD_NormalizeWidgets
+ 179:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #endif /* (0u != CapSense_CSD_TOTAL_CENTROIDS_COUNT)  */
+ 180:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 181:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     TunePrescalers_P4_v2_60(&CapSense_CSD_config);
+ 198              		.loc 1 181 0
+ 199 0090 154B     		ldr	r3, .L8
+ 200 0092 1800     		movs	r0, r3
+ 201 0094 FFF7FEFF 		bl	TunePrescalers_P4_v2_60
+ 182:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 183:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #if(CapSense_CSD_PRS_OPTIONS != CapSense_CSD__PRS_NONE)
+ 184:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         CapSense_CSD_prescalersTuningDone = 1u;
+ 202              		.loc 1 184 0
+ 203 0098 1C4B     		ldr	r3, .L8+36
+ 204 009a 0122     		movs	r2, #1
+ 205 009c 1A70     		strb	r2, [r3]
+ 185:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #endif /* (CapSense_CSD_PRS_OPTIONS == CapSense_CSD__PRS_NONE) */
+ 186:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 187:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CalibrateSensors_P4_v2_60(&CapSense_CSD_config, CapSense_CSD_CAL_RAW_COUNT);
+ 206              		.loc 1 187 0
+ 207 009e 194A     		ldr	r2, .L8+28
+ 208 00a0 114B     		ldr	r3, .L8
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 8
+
+
+ 209 00a2 1100     		movs	r1, r2
+ 210 00a4 1800     		movs	r0, r3
+ 211 00a6 FFF7FEFF 		bl	CalibrateSensors_P4_v2_60
+ 188:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #if(0u != CapSense_CSD_TOTAL_CENTROIDS_COUNT)
+ 189:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         CapSense_CSD_NormalizeWidgets(CapSense_CSD_END_OF_WIDGETS_INDEX, CapSense_CSD_modulationIDA
+ 212              		.loc 1 189 0
+ 213 00aa 174B     		ldr	r3, .L8+32
+ 214 00ac 1900     		movs	r1, r3
+ 215 00ae 0120     		movs	r0, #1
+ 216 00b0 FFF7FEFF 		bl	CapSense_CSD_NormalizeWidgets
+ 190:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #endif /* (0u != CapSense_CSD_TOTAL_CENTROIDS_COUNT)  */
+ 191:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     TuneSensitivity_P4_v2_60(&CapSense_CSD_config);
+ 217              		.loc 1 191 0
+ 218 00b4 0C4B     		ldr	r3, .L8
+ 219 00b6 1800     		movs	r0, r3
+ 220 00b8 FFF7FEFF 		bl	TuneSensitivity_P4_v2_60
+ 192:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 193:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_EnableBaselineIDAC(&CapSense_CSD_config);
+ 221              		.loc 1 193 0
+ 222 00bc 0A4B     		ldr	r3, .L8
+ 223 00be 1800     		movs	r0, r3
+ 224 00c0 FFF7FEFF 		bl	CapSense_CSD_EnableBaselineIDAC
+ 194:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 195:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     for(curSensor = 0u; curSensor < CapSense_CSD_TOTAL_SCANSLOT_COUNT; curSensor++)
+ 225              		.loc 1 195 0
+ 226 00c4 0023     		movs	r3, #0
+ 227 00c6 7B60     		str	r3, [r7, #4]
+ 228 00c8 06E0     		b	.L6
+ 229              	.L7:
+ 196:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     {
+ 197:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         CapSense_CSD_UpdateThresholds(curSensor);
+ 230              		.loc 1 197 0 discriminator 3
+ 231 00ca 7B68     		ldr	r3, [r7, #4]
+ 232 00cc 1800     		movs	r0, r3
+ 233 00ce FFF7FEFF 		bl	CapSense_CSD_UpdateThresholds
+ 195:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     {
+ 234              		.loc 1 195 0 discriminator 3
+ 235 00d2 7B68     		ldr	r3, [r7, #4]
+ 236 00d4 0133     		adds	r3, r3, #1
+ 237 00d6 7B60     		str	r3, [r7, #4]
+ 238              	.L6:
+ 195:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     {
+ 239              		.loc 1 195 0 is_stmt 0 discriminator 1
+ 240 00d8 7B68     		ldr	r3, [r7, #4]
+ 241 00da 042B     		cmp	r3, #4
+ 242 00dc F5D9     		bls	.L7
+ 198:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     }
+ 199:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** }
+ 243              		.loc 1 199 0 is_stmt 1
+ 244 00de C046     		nop
+ 245 00e0 BD46     		mov	sp, r7
+ 246 00e2 02B0     		add	sp, sp, #8
+ 247              		@ sp needed
+ 248 00e4 80BD     		pop	{r7, pc}
+ 249              	.L9:
+ 250 00e6 C046     		.align	2
+ 251              	.L8:
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 9
+
+
+ 252 00e8 00000000 		.word	CapSense_CSD_config
+ 253 00ec 66020000 		.word	614
+ 254 00f0 00000000 		.word	CapSense_CSD_configPointers
+ 255 00f4 00000000 		.word	CapSense_CSD_widgetResolution
+ 256 00f8 0000FF0F 		.word	268369920
+ 257 00fc 00000000 		.word	CapSense_CSD_senseClkDividerVal
+ 258 0100 00000000 		.word	CapSense_CSD_sampleClkDividerVal
+ 259 0104 9A0D0000 		.word	3482
+ 260 0108 00000000 		.word	CapSense_CSD_modulationIDAC
+ 261 010c 00000000 		.word	CapSense_CSD_prescalersTuningDone
+ 262              		.cfi_endproc
+ 263              	.LFE32:
+ 264              		.size	CapSense_CSD_AutoTune, .-CapSense_CSD_AutoTune
+ 265              		.section	.text.CapSense_CSD_UpdateThresholds,"ax",%progbits
+ 266              		.align	2
+ 267              		.global	CapSense_CSD_UpdateThresholds
+ 268              		.code	16
+ 269              		.thumb_func
+ 270              		.type	CapSense_CSD_UpdateThresholds, %function
+ 271              	CapSense_CSD_UpdateThresholds:
+ 272              	.LFB33:
+ 200:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 201:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 202:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** /*******************************************************************************
+ 203:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Function Name: CapSense_CSD_UpdateThresholds
+ 204:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** ********************************************************************************
+ 205:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 206:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Summary:
+ 207:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  The API updates the Finger Threshold, Hysteresis, Noise Threshold, and
+ 208:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  Negative Noise Threshold in the AutoTuning (Smartsense) Mode.
+ 209:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 210:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Parameters:
+ 211:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  sensor: sensor number.
+ 212:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 213:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Return:
+ 214:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  None
+ 215:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 216:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Global Variables:
+ 217:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  CapSense_CSD_widgetNumber[] - contains widget Number for given sensor.
+ 218:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  0 through 7 (sensor 0 is bit 0, sensor 1 is bit 1).
+ 219:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  For other sensors the array element equals to 255.
+ 220:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  CapSense_CSD_numberOfSensors[widget] - Number of sensors in the widget.
+ 221:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *   CapSense_CSD_fingerThreshold[] - contains the level of signal for each sensor
+ 222:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *   that determines if a finger present on the sensor.
+ 223:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *   CapSense_CSD_negativeNoiseThreshold[] - negative Noise Threshold
+ 224:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *   CapSense_CSD_hysteresis[] - the array with hysteresis values.
+ 225:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 226:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Side Effects:
+ 227:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  None
+ 228:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 229:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *******************************************************************************/
+ 230:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** void CapSense_CSD_UpdateThresholds(uint32 sensor)
+ 231:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** {
+ 273              		.loc 1 231 0
+ 274              		.cfi_startproc
+ 275              		@ args = 0, pretend = 0, frame = 16
+ 276              		@ frame_needed = 1, uses_anonymous_args = 0
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 10
+
+
+ 277 0000 90B5     		push	{r4, r7, lr}
+ 278              		.cfi_def_cfa_offset 12
+ 279              		.cfi_offset 4, -12
+ 280              		.cfi_offset 7, -8
+ 281              		.cfi_offset 14, -4
+ 282 0002 87B0     		sub	sp, sp, #28
+ 283              		.cfi_def_cfa_offset 40
+ 284 0004 02AF     		add	r7, sp, #8
+ 285              		.cfi_def_cfa 7, 32
+ 286 0006 7860     		str	r0, [r7, #4]
+ 232:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     uint8 fingerThreshold;
+ 233:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     uint32 widget;
+ 234:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 235:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     widget = CapSense_CSD_widgetNumber[sensor];
+ 287              		.loc 1 235 0
+ 288 0008 344A     		ldr	r2, .L17
+ 289 000a 7B68     		ldr	r3, [r7, #4]
+ 290 000c D318     		adds	r3, r2, r3
+ 291 000e 1B78     		ldrb	r3, [r3]
+ 292 0010 FB60     		str	r3, [r7, #12]
+ 236:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 237:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #if(0u != CapSense_CSD_FLEXIBLE_THRESHOLDS_EN)
+ 238:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         fingerThreshold = CapSense_CSD_fingerThreshold[widget];
+ 239:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         /* Update Threshold manually (flexible) */
+ 240:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         CapSense_CSD_noiseThreshold[widget] = (uint8)(fingerThreshold >> 1u);
+ 241:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         CapSense_CSD_negativeNoiseThreshold[widget] = (uint8)(fingerThreshold >> 1u);
+ 242:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         CapSense_CSD_hysteresis[widget] = (uint8)(fingerThreshold >> 3u);
+ 243:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #else
+ 244:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         /* Calculate Finger Threshold and Noise Threshold with Smartsense (automatic) */
+ 245:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         CalculateThresholds_P4_v2_60(&CapSense_CSD_config, (uint8)sensor, (uint8)widget, CapSense_C
+ 293              		.loc 1 245 0
+ 294 0012 7B68     		ldr	r3, [r7, #4]
+ 295 0014 D9B2     		uxtb	r1, r3
+ 296 0016 FB68     		ldr	r3, [r7, #12]
+ 297 0018 DAB2     		uxtb	r2, r3
+ 298 001a 314C     		ldr	r4, .L17+4
+ 299 001c 3148     		ldr	r0, .L17+8
+ 300 001e 324B     		ldr	r3, .L17+12
+ 301 0020 0093     		str	r3, [sp]
+ 302 0022 2300     		movs	r3, r4
+ 303 0024 FFF7FEFF 		bl	CalculateThresholds_P4_v2_60
+ 246:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 247:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         fingerThreshold = CapSense_CSD_fingerThreshold[widget];
+ 304              		.loc 1 247 0
+ 305 0028 0B23     		movs	r3, #11
+ 306 002a FB18     		adds	r3, r7, r3
+ 307 002c 2C49     		ldr	r1, .L17+4
+ 308 002e FA68     		ldr	r2, [r7, #12]
+ 309 0030 8A18     		adds	r2, r1, r2
+ 310 0032 1278     		ldrb	r2, [r2]
+ 311 0034 1A70     		strb	r2, [r3]
+ 248:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 249:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         /* Update Threshold based on calculated with Smartsense (automatic) */
+ 250:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         CapSense_CSD_negativeNoiseThreshold[widget] = CapSense_CSD_noiseThreshold[widget];
+ 312              		.loc 1 250 0
+ 313 0036 2C4A     		ldr	r2, .L17+12
+ 314 0038 FB68     		ldr	r3, [r7, #12]
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 11
+
+
+ 315 003a D318     		adds	r3, r2, r3
+ 316 003c 1978     		ldrb	r1, [r3]
+ 317 003e 2B4A     		ldr	r2, .L17+16
+ 318 0040 FB68     		ldr	r3, [r7, #12]
+ 319 0042 D318     		adds	r3, r2, r3
+ 320 0044 0A1C     		adds	r2, r1, #0
+ 321 0046 1A70     		strb	r2, [r3]
+ 251:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 252:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         if(fingerThreshold < CapSense_CSD_THRESHOLD_1)
+ 322              		.loc 1 252 0
+ 323 0048 0B23     		movs	r3, #11
+ 324 004a FB18     		adds	r3, r7, r3
+ 325 004c 1B78     		ldrb	r3, [r3]
+ 326 004e DB2B     		cmp	r3, #219
+ 327 0050 0AD8     		bhi	.L11
+ 253:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         {
+ 254:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****             CapSense_CSD_hysteresis[widget] = (uint8)(fingerThreshold >> 3u);
+ 328              		.loc 1 254 0
+ 329 0052 0B23     		movs	r3, #11
+ 330 0054 FB18     		adds	r3, r7, r3
+ 331 0056 1B78     		ldrb	r3, [r3]
+ 332 0058 DB08     		lsrs	r3, r3, #3
+ 333 005a D9B2     		uxtb	r1, r3
+ 334 005c 244A     		ldr	r2, .L17+20
+ 335 005e FB68     		ldr	r3, [r7, #12]
+ 336 0060 D318     		adds	r3, r2, r3
+ 337 0062 0A1C     		adds	r2, r1, #0
+ 338 0064 1A70     		strb	r2, [r3]
+ 255:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         }
+ 256:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         else if(fingerThreshold <  CapSense_CSD_THRESHOLD_2)
+ 257:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         {
+ 258:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****             CapSense_CSD_hysteresis[widget] = (uint8)(fingerThreshold >> 4u);
+ 259:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         }
+ 260:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         else if(fingerThreshold <  CapSense_CSD_THRESHOLD_3)
+ 261:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         {
+ 262:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****             CapSense_CSD_hysteresis[widget] = (uint8)(fingerThreshold >> 5u);
+ 263:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         }
+ 264:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         else if(fingerThreshold <  CapSense_CSD_THRESHOLD_4)
+ 265:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         {
+ 266:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****             CapSense_CSD_hysteresis[widget] = (uint8)(fingerThreshold >> 6u);
+ 267:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         }
+ 268:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         else
+ 269:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         {
+ 270:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****             CapSense_CSD_hysteresis[widget] = 0u;
+ 271:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         }
+ 272:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     #endif /* (0u != CapSense_CSD_FLEXIBLE_THRESHOLDS_EN)  */
+ 273:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** }
+ 339              		.loc 1 273 0
+ 340 0066 34E0     		b	.L16
+ 341              	.L11:
+ 256:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         {
+ 342              		.loc 1 256 0
+ 343 0068 0B23     		movs	r3, #11
+ 344 006a FB18     		adds	r3, r7, r3
+ 345 006c 1B78     		ldrb	r3, [r3]
+ 346 006e EC2B     		cmp	r3, #236
+ 347 0070 0AD8     		bhi	.L13
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 12
+
+
+ 258:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         }
+ 348              		.loc 1 258 0
+ 349 0072 0B23     		movs	r3, #11
+ 350 0074 FB18     		adds	r3, r7, r3
+ 351 0076 1B78     		ldrb	r3, [r3]
+ 352 0078 1B09     		lsrs	r3, r3, #4
+ 353 007a D9B2     		uxtb	r1, r3
+ 354 007c 1C4A     		ldr	r2, .L17+20
+ 355 007e FB68     		ldr	r3, [r7, #12]
+ 356 0080 D318     		adds	r3, r2, r3
+ 357 0082 0A1C     		adds	r2, r1, #0
+ 358 0084 1A70     		strb	r2, [r3]
+ 359              		.loc 1 273 0
+ 360 0086 24E0     		b	.L16
+ 361              	.L13:
+ 260:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         {
+ 362              		.loc 1 260 0
+ 363 0088 0B23     		movs	r3, #11
+ 364 008a FB18     		adds	r3, r7, r3
+ 365 008c 1B78     		ldrb	r3, [r3]
+ 366 008e F42B     		cmp	r3, #244
+ 367 0090 0AD8     		bhi	.L14
+ 262:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         }
+ 368              		.loc 1 262 0
+ 369 0092 0B23     		movs	r3, #11
+ 370 0094 FB18     		adds	r3, r7, r3
+ 371 0096 1B78     		ldrb	r3, [r3]
+ 372 0098 5B09     		lsrs	r3, r3, #5
+ 373 009a D9B2     		uxtb	r1, r3
+ 374 009c 144A     		ldr	r2, .L17+20
+ 375 009e FB68     		ldr	r3, [r7, #12]
+ 376 00a0 D318     		adds	r3, r2, r3
+ 377 00a2 0A1C     		adds	r2, r1, #0
+ 378 00a4 1A70     		strb	r2, [r3]
+ 379              		.loc 1 273 0
+ 380 00a6 14E0     		b	.L16
+ 381              	.L14:
+ 264:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         {
+ 382              		.loc 1 264 0
+ 383 00a8 0B23     		movs	r3, #11
+ 384 00aa FB18     		adds	r3, r7, r3
+ 385 00ac 1B78     		ldrb	r3, [r3]
+ 386 00ae F92B     		cmp	r3, #249
+ 387 00b0 0AD8     		bhi	.L15
+ 266:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         }
+ 388              		.loc 1 266 0
+ 389 00b2 0B23     		movs	r3, #11
+ 390 00b4 FB18     		adds	r3, r7, r3
+ 391 00b6 1B78     		ldrb	r3, [r3]
+ 392 00b8 9B09     		lsrs	r3, r3, #6
+ 393 00ba D9B2     		uxtb	r1, r3
+ 394 00bc 0C4A     		ldr	r2, .L17+20
+ 395 00be FB68     		ldr	r3, [r7, #12]
+ 396 00c0 D318     		adds	r3, r2, r3
+ 397 00c2 0A1C     		adds	r2, r1, #0
+ 398 00c4 1A70     		strb	r2, [r3]
+ 399              		.loc 1 273 0
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 13
+
+
+ 400 00c6 04E0     		b	.L16
+ 401              	.L15:
+ 270:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         }
+ 402              		.loc 1 270 0
+ 403 00c8 094A     		ldr	r2, .L17+20
+ 404 00ca FB68     		ldr	r3, [r7, #12]
+ 405 00cc D318     		adds	r3, r2, r3
+ 406 00ce 0022     		movs	r2, #0
+ 407 00d0 1A70     		strb	r2, [r3]
+ 408              	.L16:
+ 409              		.loc 1 273 0
+ 410 00d2 C046     		nop
+ 411 00d4 BD46     		mov	sp, r7
+ 412 00d6 05B0     		add	sp, sp, #20
+ 413              		@ sp needed
+ 414 00d8 90BD     		pop	{r4, r7, pc}
+ 415              	.L18:
+ 416 00da C046     		.align	2
+ 417              	.L17:
+ 418 00dc 00000000 		.word	CapSense_CSD_widgetNumber
+ 419 00e0 00000000 		.word	CapSense_CSD_fingerThreshold
+ 420 00e4 00000000 		.word	CapSense_CSD_config
+ 421 00e8 00000000 		.word	CapSense_CSD_noiseThreshold
+ 422 00ec 00000000 		.word	CapSense_CSD_negativeNoiseThreshold
+ 423 00f0 00000000 		.word	CapSense_CSD_hysteresis
+ 424              		.cfi_endproc
+ 425              	.LFE33:
+ 426              		.size	CapSense_CSD_UpdateThresholds, .-CapSense_CSD_UpdateThresholds
+ 427              		.section	.text.CapSense_CSD_SetAnalogSwitchesSrcDirect,"ax",%progbits
+ 428              		.align	2
+ 429              		.global	CapSense_CSD_SetAnalogSwitchesSrcDirect
+ 430              		.code	16
+ 431              		.thumb_func
+ 432              		.type	CapSense_CSD_SetAnalogSwitchesSrcDirect, %function
+ 433              	CapSense_CSD_SetAnalogSwitchesSrcDirect:
+ 434              	.LFB34:
+ 274:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 275:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** /*******************************************************************************
+ 276:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Function Name: CapSense_CSD_SetAnalogSwitchesSrcDirect
+ 277:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** ********************************************************************************
+ 278:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 279:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Summary:
+ 280:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  This API switches the charge clock source to prescaler.
+ 281:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 282:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Parameters:
+ 283:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  None
+ 284:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 285:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Return:
+ 286:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  None
+ 287:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 288:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Global Variables:
+ 289:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  None
+ 290:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 291:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Side Effects:
+ 292:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  None
+ 293:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 294:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *******************************************************************************/
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 14
+
+
+ 295:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** void CapSense_CSD_SetAnalogSwitchesSrcDirect(void)
+ 296:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** {
+ 435              		.loc 1 296 0
+ 436              		.cfi_startproc
+ 437              		@ args = 0, pretend = 0, frame = 0
+ 438              		@ frame_needed = 1, uses_anonymous_args = 0
+ 439 0000 80B5     		push	{r7, lr}
+ 440              		.cfi_def_cfa_offset 8
+ 441              		.cfi_offset 7, -8
+ 442              		.cfi_offset 14, -4
+ 443 0002 00AF     		add	r7, sp, #0
+ 444              		.cfi_def_cfa_register 7
+ 297:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_CSD_CFG_REG &= ~(CapSense_CSD_CSD_CFG_PRS_SELECT);
+ 445              		.loc 1 297 0
+ 446 0004 044B     		ldr	r3, .L20
+ 447 0006 044A     		ldr	r2, .L20
+ 448 0008 1268     		ldr	r2, [r2]
+ 449 000a 4021     		movs	r1, #64
+ 450 000c 8A43     		bics	r2, r1
+ 451 000e 1A60     		str	r2, [r3]
+ 298:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** }
+ 452              		.loc 1 298 0
+ 453 0010 C046     		nop
+ 454 0012 BD46     		mov	sp, r7
+ 455              		@ sp needed
+ 456 0014 80BD     		pop	{r7, pc}
+ 457              	.L21:
+ 458 0016 C046     		.align	2
+ 459              	.L20:
+ 460 0018 04000840 		.word	1074266116
+ 461              		.cfi_endproc
+ 462              	.LFE34:
+ 463              		.size	CapSense_CSD_SetAnalogSwitchesSrcDirect, .-CapSense_CSD_SetAnalogSwitchesSrcDirect
+ 464              		.section	.text.CapSense_CSD_DisableBaselineIDAC,"ax",%progbits
+ 465              		.align	2
+ 466              		.global	CapSense_CSD_DisableBaselineIDAC
+ 467              		.code	16
+ 468              		.thumb_func
+ 469              		.type	CapSense_CSD_DisableBaselineIDAC, %function
+ 470              	CapSense_CSD_DisableBaselineIDAC:
+ 471              	.LFB35:
+ 299:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 300:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 301:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** /*******************************************************************************
+ 302:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Function Name: CapSense_CSD_DisableBaselineIDAC
+ 303:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** ********************************************************************************
+ 304:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 305:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Summary:
+ 306:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  The API disables the Compensation IDAC.
+ 307:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 308:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Parameters:
+ 309:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  None
+ 310:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 311:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Return:
+ 312:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  None
+ 313:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 314:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Global Variables:
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 15
+
+
+ 315:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  None
+ 316:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 317:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Side Effects:
+ 318:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  None
+ 319:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 320:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *******************************************************************************/
+ 321:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** void CapSense_CSD_DisableBaselineIDAC(void)
+ 322:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** {
+ 472              		.loc 1 322 0
+ 473              		.cfi_startproc
+ 474              		@ args = 0, pretend = 0, frame = 8
+ 475              		@ frame_needed = 1, uses_anonymous_args = 0
+ 476 0000 80B5     		push	{r7, lr}
+ 477              		.cfi_def_cfa_offset 8
+ 478              		.cfi_offset 7, -8
+ 479              		.cfi_offset 14, -4
+ 480 0002 82B0     		sub	sp, sp, #8
+ 481              		.cfi_def_cfa_offset 16
+ 482 0004 00AF     		add	r7, sp, #0
+ 483              		.cfi_def_cfa_register 7
+ 323:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     uint32 newRegValue;
+ 324:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 325:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     newRegValue = CapSense_CSD_CSD_IDAC_REG;
+ 484              		.loc 1 325 0
+ 485 0006 094B     		ldr	r3, .L23
+ 486 0008 1B68     		ldr	r3, [r3]
+ 487 000a 7B60     		str	r3, [r7, #4]
+ 326:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 327:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     newRegValue &= ~(CapSense_CSD_CSD_IDAC1_MODE_MASK | CapSense_CSD_CSD_IDAC2_MODE_MASK);
+ 488              		.loc 1 327 0
+ 489 000c 7B68     		ldr	r3, [r7, #4]
+ 490 000e 084A     		ldr	r2, .L23+4
+ 491 0010 1340     		ands	r3, r2
+ 492 0012 7B60     		str	r3, [r7, #4]
+ 328:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     newRegValue |= CapSense_CSD_CSD_IDAC1_MODE_VARIABLE;
+ 493              		.loc 1 328 0
+ 494 0014 7B68     		ldr	r3, [r7, #4]
+ 495 0016 8022     		movs	r2, #128
+ 496 0018 9200     		lsls	r2, r2, #2
+ 497 001a 1343     		orrs	r3, r2
+ 498 001c 7B60     		str	r3, [r7, #4]
+ 329:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 330:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_CSD_IDAC_REG = newRegValue;
+ 499              		.loc 1 330 0
+ 500 001e 034B     		ldr	r3, .L23
+ 501 0020 7A68     		ldr	r2, [r7, #4]
+ 502 0022 1A60     		str	r2, [r3]
+ 331:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** }
+ 503              		.loc 1 331 0
+ 504 0024 C046     		nop
+ 505 0026 BD46     		mov	sp, r7
+ 506 0028 02B0     		add	sp, sp, #8
+ 507              		@ sp needed
+ 508 002a 80BD     		pop	{r7, pc}
+ 509              	.L24:
+ 510              		.align	2
+ 511              	.L23:
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 16
+
+
+ 512 002c 08000840 		.word	1074266120
+ 513 0030 FFFCFFFC 		.word	-50332417
+ 514              		.cfi_endproc
+ 515              	.LFE35:
+ 516              		.size	CapSense_CSD_DisableBaselineIDAC, .-CapSense_CSD_DisableBaselineIDAC
+ 517              		.section	.text.CapSense_CSD_EnableBaselineIDAC,"ax",%progbits
+ 518              		.align	2
+ 519              		.global	CapSense_CSD_EnableBaselineIDAC
+ 520              		.code	16
+ 521              		.thumb_func
+ 522              		.type	CapSense_CSD_EnableBaselineIDAC, %function
+ 523              	CapSense_CSD_EnableBaselineIDAC:
+ 524              	.LFB36:
+ 332:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 333:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 334:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** /*******************************************************************************
+ 335:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Function Name: CapSense_CSD_EnableBaselineIDAC
+ 336:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** ********************************************************************************
+ 337:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 338:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Summary:
+ 339:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  The API enables the Compensation IDAC.
+ 340:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 341:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Parameters:
+ 342:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  None
+ 343:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 344:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Return:
+ 345:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  None
+ 346:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 347:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Global Variables:
+ 348:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  CapSense_CSD_compensationIDAC[] - used to store a 7-bit idac value for all the sensors.
+ 349:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 350:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Side Effects:
+ 351:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  None
+ 352:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 353:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *******************************************************************************/
+ 354:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** void  CapSense_CSD_EnableBaselineIDAC(const CapSense_CSD_CONFIG_TYPE_P4_v2_60 *config)
+ 355:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** {
+ 525              		.loc 1 355 0
+ 526              		.cfi_startproc
+ 527              		@ args = 0, pretend = 0, frame = 16
+ 528              		@ frame_needed = 1, uses_anonymous_args = 0
+ 529 0000 80B5     		push	{r7, lr}
+ 530              		.cfi_def_cfa_offset 8
+ 531              		.cfi_offset 7, -8
+ 532              		.cfi_offset 14, -4
+ 533 0002 84B0     		sub	sp, sp, #16
+ 534              		.cfi_def_cfa_offset 24
+ 535 0004 00AF     		add	r7, sp, #0
+ 536              		.cfi_def_cfa_register 7
+ 537 0006 7860     		str	r0, [r7, #4]
+ 356:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     uint32 curSensor;
+ 357:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     uint32 newRegValue;
+ 358:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 359:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     for(curSensor = 0u; curSensor < config->totalScanslotsNum; curSensor++)
+ 538              		.loc 1 359 0
+ 539 0008 0023     		movs	r3, #0
+ 540 000a FB60     		str	r3, [r7, #12]
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 17
+
+
+ 541 000c 19E0     		b	.L26
+ 542              	.L27:
+ 360:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     {
+ 361:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         CapSense_CSD_compensationIDAC[curSensor] = CapSense_CSD_modulationIDAC[curSensor] / 2u;
+ 543              		.loc 1 361 0 discriminator 3
+ 544 000e 1C4A     		ldr	r2, .L28
+ 545 0010 FB68     		ldr	r3, [r7, #12]
+ 546 0012 D318     		adds	r3, r2, r3
+ 547 0014 1B78     		ldrb	r3, [r3]
+ 548 0016 5B08     		lsrs	r3, r3, #1
+ 549 0018 D9B2     		uxtb	r1, r3
+ 550 001a 1A4A     		ldr	r2, .L28+4
+ 551 001c FB68     		ldr	r3, [r7, #12]
+ 552 001e D318     		adds	r3, r2, r3
+ 553 0020 0A1C     		adds	r2, r1, #0
+ 554 0022 1A70     		strb	r2, [r3]
+ 362:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         CapSense_CSD_modulationIDAC[curSensor] = (CapSense_CSD_modulationIDAC[curSensor] + 1u) / 2u
+ 555              		.loc 1 362 0 discriminator 3
+ 556 0024 164A     		ldr	r2, .L28
+ 557 0026 FB68     		ldr	r3, [r7, #12]
+ 558 0028 D318     		adds	r3, r2, r3
+ 559 002a 1B78     		ldrb	r3, [r3]
+ 560 002c 0133     		adds	r3, r3, #1
+ 561 002e 5B08     		lsrs	r3, r3, #1
+ 562 0030 D9B2     		uxtb	r1, r3
+ 563 0032 134A     		ldr	r2, .L28
+ 564 0034 FB68     		ldr	r3, [r7, #12]
+ 565 0036 D318     		adds	r3, r2, r3
+ 566 0038 0A1C     		adds	r2, r1, #0
+ 567 003a 1A70     		strb	r2, [r3]
+ 359:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     {
+ 568              		.loc 1 359 0 discriminator 3
+ 569 003c FB68     		ldr	r3, [r7, #12]
+ 570 003e 0133     		adds	r3, r3, #1
+ 571 0040 FB60     		str	r3, [r7, #12]
+ 572              	.L26:
+ 359:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     {
+ 573              		.loc 1 359 0 is_stmt 0 discriminator 1
+ 574 0042 7B68     		ldr	r3, [r7, #4]
+ 575 0044 1B78     		ldrb	r3, [r3]
+ 576 0046 1A00     		movs	r2, r3
+ 577 0048 FB68     		ldr	r3, [r7, #12]
+ 578 004a 9A42     		cmp	r2, r3
+ 579 004c DFD8     		bhi	.L27
+ 363:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     }
+ 364:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 365:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CyIntDisable(CapSense_CSD_ISR_NUMBER);
+ 580              		.loc 1 365 0 is_stmt 1
+ 581 004e 0F20     		movs	r0, #15
+ 582 0050 FFF7FEFF 		bl	CyIntDisable
+ 366:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 367:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     newRegValue = CapSense_CSD_CSD_IDAC_REG;
+ 583              		.loc 1 367 0
+ 584 0054 0C4B     		ldr	r3, .L28+8
+ 585 0056 1B68     		ldr	r3, [r3]
+ 586 0058 BB60     		str	r3, [r7, #8]
+ 368:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     newRegValue &= ~(CapSense_CSD_CSD_IDAC1_MODE_MASK | CapSense_CSD_CSD_IDAC2_MODE_MASK);
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 18
+
+
+ 587              		.loc 1 368 0
+ 588 005a BB68     		ldr	r3, [r7, #8]
+ 589 005c 0B4A     		ldr	r2, .L28+12
+ 590 005e 1340     		ands	r3, r2
+ 591 0060 BB60     		str	r3, [r7, #8]
+ 369:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     newRegValue |= (CapSense_CSD_CSD_IDAC1_MODE_VARIABLE | CapSense_CSD_CSD_IDAC2_MODE_FIXED);
+ 592              		.loc 1 369 0
+ 593 0062 BB68     		ldr	r3, [r7, #8]
+ 594 0064 0A4A     		ldr	r2, .L28+16
+ 595 0066 1343     		orrs	r3, r2
+ 596 0068 BB60     		str	r3, [r7, #8]
+ 370:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_CSD_IDAC_REG = newRegValue;
+ 597              		.loc 1 370 0
+ 598 006a 074B     		ldr	r3, .L28+8
+ 599 006c BA68     		ldr	r2, [r7, #8]
+ 600 006e 1A60     		str	r2, [r3]
+ 371:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 372:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CyIntEnable(CapSense_CSD_ISR_NUMBER);
+ 601              		.loc 1 372 0
+ 602 0070 0F20     		movs	r0, #15
+ 603 0072 FFF7FEFF 		bl	CyIntEnable
+ 373:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** }
+ 604              		.loc 1 373 0
+ 605 0076 C046     		nop
+ 606 0078 BD46     		mov	sp, r7
+ 607 007a 04B0     		add	sp, sp, #16
+ 608              		@ sp needed
+ 609 007c 80BD     		pop	{r7, pc}
+ 610              	.L29:
+ 611 007e C046     		.align	2
+ 612              	.L28:
+ 613 0080 00000000 		.word	CapSense_CSD_modulationIDAC
+ 614 0084 00000000 		.word	CapSense_CSD_compensationIDAC
+ 615 0088 08000840 		.word	1074266120
+ 616 008c FFFCFFFC 		.word	-50332417
+ 617 0090 00020001 		.word	16777728
+ 618              		.cfi_endproc
+ 619              	.LFE36:
+ 620              		.size	CapSense_CSD_EnableBaselineIDAC, .-CapSense_CSD_EnableBaselineIDAC
+ 621              		.section	.text.CapSense_CSD_SetSensitivity,"ax",%progbits
+ 622              		.align	2
+ 623              		.global	CapSense_CSD_SetSensitivity
+ 624              		.code	16
+ 625              		.thumb_func
+ 626              		.type	CapSense_CSD_SetSensitivity, %function
+ 627              	CapSense_CSD_SetSensitivity:
+ 628              	.LFB37:
+ 374:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 375:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 376:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** /*******************************************************************************
+ 377:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Function Name: CapSense_CSD_SetSensitivity
+ 378:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** ********************************************************************************
+ 379:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 380:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Summary:
+ 381:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  This API sets the sensitivity value for the sensor. The sensitivity
+ 382:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  value is used during the auto-tuning algorithm executed as part of the CapSense_Start API.
+ 383:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  This API is called by the application layer prior to calling the CapSense_Start API.
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 19
+
+
+ 384:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  Calling this API after execution of CapSense_Start API has no effect.
+ 385:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 386:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Parameters:
+ 387:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  sensor  Sensor index
+ 388:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  data    Sensitivity of the sensor. Possible values are below
+ 389:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  1 - 0.1pf sensitivity
+ 390:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  2 - 0.2pf sensitivity
+ 391:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  3 - 0.3pf sensitivity
+ 392:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  4 - 0.4pf sensitivity
+ 393:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  5 - 0.5pf sensitivity
+ 394:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  6 - 0.6pf sensitivity
+ 395:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  7 - 0.7pf sensitivity
+ 396:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  8 - 0.8pf sensitivity
+ 397:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  9 - 0.9pf sensitivity
+ 398:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  10 - 1.0pf sensitivity
+ 399:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  All other values, set sensitivity to 1.0pf
+ 400:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 401:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  Return Value:
+ 402:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *   None
+ 403:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 404:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Global Variables:
+ 405:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * CapSense_CSD_sensorSensitivity[] - This 8-bits array contains Sensitivity in the LSB nibble
+ 406:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *                                and Noise Reset Counter value in the MSB nibble.
+ 407:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 408:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Side Effects:
+ 409:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  None
+ 410:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 411:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *******************************************************************************/
+ 412:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** void CapSense_CSD_SetSensitivity(uint32 sensor, uint32 value)
+ 413:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** {
+ 629              		.loc 1 413 0
+ 630              		.cfi_startproc
+ 631              		@ args = 0, pretend = 0, frame = 8
+ 632              		@ frame_needed = 1, uses_anonymous_args = 0
+ 633 0000 80B5     		push	{r7, lr}
+ 634              		.cfi_def_cfa_offset 8
+ 635              		.cfi_offset 7, -8
+ 636              		.cfi_offset 14, -4
+ 637 0002 82B0     		sub	sp, sp, #8
+ 638              		.cfi_def_cfa_offset 16
+ 639 0004 00AF     		add	r7, sp, #0
+ 640              		.cfi_def_cfa_register 7
+ 641 0006 7860     		str	r0, [r7, #4]
+ 642 0008 3960     		str	r1, [r7]
+ 414:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     if(value > 10u)
+ 643              		.loc 1 414 0
+ 644 000a 3B68     		ldr	r3, [r7]
+ 645 000c 0A2B     		cmp	r3, #10
+ 646 000e 01D9     		bls	.L31
+ 415:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     {
+ 416:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****         value = 10u;
+ 647              		.loc 1 416 0
+ 648 0010 0A23     		movs	r3, #10
+ 649 0012 3B60     		str	r3, [r7]
+ 650              	.L31:
+ 417:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     }
+ 418:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 20
+
+
+ 419:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     /* Clear SensorSensitivity value in LSB nibble */
+ 420:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_sensorSensitivity[sensor] &= (uint8)~CapSense_CSD_SENSITIVITY_MASK;
+ 651              		.loc 1 420 0
+ 652 0014 0F4A     		ldr	r2, .L32
+ 653 0016 7B68     		ldr	r3, [r7, #4]
+ 654 0018 D318     		adds	r3, r2, r3
+ 655 001a 1B78     		ldrb	r3, [r3]
+ 656 001c 0F22     		movs	r2, #15
+ 657 001e 9343     		bics	r3, r2
+ 658 0020 D9B2     		uxtb	r1, r3
+ 659 0022 0C4A     		ldr	r2, .L32
+ 660 0024 7B68     		ldr	r3, [r7, #4]
+ 661 0026 D318     		adds	r3, r2, r3
+ 662 0028 0A1C     		adds	r2, r1, #0
+ 663 002a 1A70     		strb	r2, [r3]
+ 421:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     /* Set SensorSensitivity value in LSB nibble */
+ 422:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     CapSense_CSD_sensorSensitivity[sensor] |= (uint8)value;
+ 664              		.loc 1 422 0
+ 665 002c 094A     		ldr	r2, .L32
+ 666 002e 7B68     		ldr	r3, [r7, #4]
+ 667 0030 D318     		adds	r3, r2, r3
+ 668 0032 1B78     		ldrb	r3, [r3]
+ 669 0034 5AB2     		sxtb	r2, r3
+ 670 0036 3B68     		ldr	r3, [r7]
+ 671 0038 5BB2     		sxtb	r3, r3
+ 672 003a 1343     		orrs	r3, r2
+ 673 003c 5BB2     		sxtb	r3, r3
+ 674 003e D9B2     		uxtb	r1, r3
+ 675 0040 044A     		ldr	r2, .L32
+ 676 0042 7B68     		ldr	r3, [r7, #4]
+ 677 0044 D318     		adds	r3, r2, r3
+ 678 0046 0A1C     		adds	r2, r1, #0
+ 679 0048 1A70     		strb	r2, [r3]
+ 423:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** }
+ 680              		.loc 1 423 0
+ 681 004a C046     		nop
+ 682 004c BD46     		mov	sp, r7
+ 683 004e 02B0     		add	sp, sp, #8
+ 684              		@ sp needed
+ 685 0050 80BD     		pop	{r7, pc}
+ 686              	.L33:
+ 687 0052 C046     		.align	2
+ 688              	.L32:
+ 689 0054 00000000 		.word	CapSense_CSD_sensorSensitivity
+ 690              		.cfi_endproc
+ 691              	.LFE37:
+ 692              		.size	CapSense_CSD_SetSensitivity, .-CapSense_CSD_SetSensitivity
+ 693              		.section	.text.CapSense_CSD_GetSensitivityCoefficient,"ax",%progbits
+ 694              		.align	2
+ 695              		.global	CapSense_CSD_GetSensitivityCoefficient
+ 696              		.code	16
+ 697              		.thumb_func
+ 698              		.type	CapSense_CSD_GetSensitivityCoefficient, %function
+ 699              	CapSense_CSD_GetSensitivityCoefficient:
+ 700              	.LFB38:
+ 424:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 425:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 21
+
+
+ 426:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** /*******************************************************************************
+ 427:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Function Name: CapSense_CSD_GetSensitivityCoefficient
+ 428:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** ********************************************************************************
+ 429:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 430:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Summary:
+ 431:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  This API returns the K coefficient for the appropriate sensor.
+ 432:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 433:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Parameters:
+ 434:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  sensor:  Sensor index
+ 435:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 436:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  Return Value:
+ 437:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *   K - value for the appropriate sensor.
+ 438:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 439:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Global Variables:
+ 440:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  CapSense_CSD_kValueTbl[] - This 8-bits array contains the K value for each sensor.
+ 441:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 442:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Side Effects:
+ 443:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  None
+ 444:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 445:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *******************************************************************************/
+ 446:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** uint8 CapSense_CSD_GetSensitivityCoefficient(uint32 sensor)
+ 447:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** {
+ 701              		.loc 1 447 0
+ 702              		.cfi_startproc
+ 703              		@ args = 0, pretend = 0, frame = 8
+ 704              		@ frame_needed = 1, uses_anonymous_args = 0
+ 705 0000 80B5     		push	{r7, lr}
+ 706              		.cfi_def_cfa_offset 8
+ 707              		.cfi_offset 7, -8
+ 708              		.cfi_offset 14, -4
+ 709 0002 82B0     		sub	sp, sp, #8
+ 710              		.cfi_def_cfa_offset 16
+ 711 0004 00AF     		add	r7, sp, #0
+ 712              		.cfi_def_cfa_register 7
+ 713 0006 7860     		str	r0, [r7, #4]
+ 448:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     return (CapSense_CSD_kValueTbl[sensor]);
+ 714              		.loc 1 448 0
+ 715 0008 034A     		ldr	r2, .L36
+ 716 000a 7B68     		ldr	r3, [r7, #4]
+ 717 000c D318     		adds	r3, r2, r3
+ 718 000e 1B78     		ldrb	r3, [r3]
+ 449:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** }
+ 719              		.loc 1 449 0
+ 720 0010 1800     		movs	r0, r3
+ 721 0012 BD46     		mov	sp, r7
+ 722 0014 02B0     		add	sp, sp, #8
+ 723              		@ sp needed
+ 724 0016 80BD     		pop	{r7, pc}
+ 725              	.L37:
+ 726              		.align	2
+ 727              	.L36:
+ 728 0018 00000000 		.word	CapSense_CSD_kValueTbl
+ 729              		.cfi_endproc
+ 730              	.LFE38:
+ 731              		.size	CapSense_CSD_GetSensitivityCoefficient, .-CapSense_CSD_GetSensitivityCoefficient
+ 732              		.section	.text.CapSense_CSD_GetNoiseEnvelope,"ax",%progbits
+ 733              		.align	2
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 22
+
+
+ 734              		.global	CapSense_CSD_GetNoiseEnvelope
+ 735              		.code	16
+ 736              		.thumb_func
+ 737              		.type	CapSense_CSD_GetNoiseEnvelope, %function
+ 738              	CapSense_CSD_GetNoiseEnvelope:
+ 739              	.LFB39:
+ 450:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 451:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 452:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** /*******************************************************************************
+ 453:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Function Name: CapSense_CSD_GetNoiseEnvelope
+ 454:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** ********************************************************************************
+ 455:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 456:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Summary:
+ 457:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  This function returns the noise value of a
+ 458:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  component.
+ 459:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 460:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Parameters:
+ 461:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  sensor - Sensor number.
+ 462:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 463:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Return:
+ 464:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  The noise envelope value of the sensor
+ 465:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  indicated by argument.
+ 466:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 467:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Global Variables:
+ 468:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  CapSense_CSD_noiseEnvelopeTbl[] - array with Noise Envelope.
+ 469:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 470:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Side Effects:
+ 471:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  None
+ 472:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 473:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *******************************************************************************/
+ 474:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** uint16 CapSense_CSD_GetNoiseEnvelope(uint32 sensor)
+ 475:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** {
+ 740              		.loc 1 475 0
+ 741              		.cfi_startproc
+ 742              		@ args = 0, pretend = 0, frame = 8
+ 743              		@ frame_needed = 1, uses_anonymous_args = 0
+ 744 0000 80B5     		push	{r7, lr}
+ 745              		.cfi_def_cfa_offset 8
+ 746              		.cfi_offset 7, -8
+ 747              		.cfi_offset 14, -4
+ 748 0002 82B0     		sub	sp, sp, #8
+ 749              		.cfi_def_cfa_offset 16
+ 750 0004 00AF     		add	r7, sp, #0
+ 751              		.cfi_def_cfa_register 7
+ 752 0006 7860     		str	r0, [r7, #4]
+ 476:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     return((uint16)((uint16)CapSense_CSD_noiseEnvelopeTbl[sensor] << 1u) + 1u);
+ 753              		.loc 1 476 0
+ 754 0008 064A     		ldr	r2, .L40
+ 755 000a 7B68     		ldr	r3, [r7, #4]
+ 756 000c D318     		adds	r3, r2, r3
+ 757 000e 1B78     		ldrb	r3, [r3]
+ 758 0010 9BB2     		uxth	r3, r3
+ 759 0012 DB18     		adds	r3, r3, r3
+ 760 0014 9BB2     		uxth	r3, r3
+ 761 0016 0133     		adds	r3, r3, #1
+ 762 0018 9BB2     		uxth	r3, r3
+ 477:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** }
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 23
+
+
+ 763              		.loc 1 477 0
+ 764 001a 1800     		movs	r0, r3
+ 765 001c BD46     		mov	sp, r7
+ 766 001e 02B0     		add	sp, sp, #8
+ 767              		@ sp needed
+ 768 0020 80BD     		pop	{r7, pc}
+ 769              	.L41:
+ 770 0022 C046     		.align	2
+ 771              	.L40:
+ 772 0024 00000000 		.word	CapSense_CSD_noiseEnvelopeTbl
+ 773              		.cfi_endproc
+ 774              	.LFE39:
+ 775              		.size	CapSense_CSD_GetNoiseEnvelope, .-CapSense_CSD_GetNoiseEnvelope
+ 776              		.global	__aeabi_uidiv
+ 777              		.section	.text.CapSense_CSD_GetNormalizedDiffCountData,"ax",%progbits
+ 778              		.align	2
+ 779              		.global	CapSense_CSD_GetNormalizedDiffCountData
+ 780              		.code	16
+ 781              		.thumb_func
+ 782              		.type	CapSense_CSD_GetNormalizedDiffCountData, %function
+ 783              	CapSense_CSD_GetNormalizedDiffCountData:
+ 784              	.LFB40:
+ 478:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 479:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** 
+ 480:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** /*******************************************************************************
+ 481:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Function Name: CapSense_CSD_GetNormalizedDiffCountData
+ 482:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** ********************************************************************************
+ 483:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 484:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Summary:
+ 485:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  This API returns normalized difference count data.
+ 486:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 487:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Parameters:
+ 488:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  sensor:  Sensor number.
+ 489:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 490:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Return:
+ 491:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  This API returns a normalized count value of the sensor indicated by the
+ 492:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  argument.
+ 493:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 494:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Global Variables:
+ 495:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  CapSense_CSD_sensorSignal[] - array with difference counts for sensors
+ 496:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 497:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** * Side Effects:
+ 498:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *  None
+ 499:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *
+ 500:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** *******************************************************************************/
+ 501:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** uint16 CapSense_CSD_GetNormalizedDiffCountData(uint32 sensor)
+ 502:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** {
+ 785              		.loc 1 502 0
+ 786              		.cfi_startproc
+ 787              		@ args = 0, pretend = 0, frame = 8
+ 788              		@ frame_needed = 1, uses_anonymous_args = 0
+ 789 0000 80B5     		push	{r7, lr}
+ 790              		.cfi_def_cfa_offset 8
+ 791              		.cfi_offset 7, -8
+ 792              		.cfi_offset 14, -4
+ 793 0002 82B0     		sub	sp, sp, #8
+ 794              		.cfi_def_cfa_offset 16
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 24
+
+
+ 795 0004 00AF     		add	r7, sp, #0
+ 796              		.cfi_def_cfa_register 7
+ 797 0006 7860     		str	r0, [r7, #4]
+ 503:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c ****     return (uint16)(((uint32)CapSense_CSD_sensorSignal[sensor] << 7u) / CapSense_CSD_kValueTbl[sens
+ 798              		.loc 1 503 0
+ 799 0008 084A     		ldr	r2, .L44
+ 800 000a 7B68     		ldr	r3, [r7, #4]
+ 801 000c D318     		adds	r3, r2, r3
+ 802 000e 1B78     		ldrb	r3, [r3]
+ 803 0010 D801     		lsls	r0, r3, #7
+ 804 0012 074A     		ldr	r2, .L44+4
+ 805 0014 7B68     		ldr	r3, [r7, #4]
+ 806 0016 D318     		adds	r3, r2, r3
+ 807 0018 1B78     		ldrb	r3, [r3]
+ 808 001a 1900     		movs	r1, r3
+ 809 001c FFF7FEFF 		bl	__aeabi_uidiv
+ 810 0020 0300     		movs	r3, r0
+ 811 0022 9BB2     		uxth	r3, r3
+ 504:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\CapSense_CSD_SMS.c **** }
+ 812              		.loc 1 504 0
+ 813 0024 1800     		movs	r0, r3
+ 814 0026 BD46     		mov	sp, r7
+ 815 0028 02B0     		add	sp, sp, #8
+ 816              		@ sp needed
+ 817 002a 80BD     		pop	{r7, pc}
+ 818              	.L45:
+ 819              		.align	2
+ 820              	.L44:
+ 821 002c 00000000 		.word	CapSense_CSD_sensorSignal
+ 822 0030 00000000 		.word	CapSense_CSD_kValueTbl
+ 823              		.cfi_endproc
+ 824              	.LFE40:
+ 825              		.size	CapSense_CSD_GetNormalizedDiffCountData, .-CapSense_CSD_GetNormalizedDiffCountData
+ 826              		.text
+ 827              	.Letext0:
+ 828              		.file 2 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\CapSense_CSD_P4_Des
+ 829              		.file 3 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\CapSense_CSD_P4_Des
+ 830              		.file 4 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\CapSense_CSD_P4_Des
+ 831              		.file 5 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\CapSense_CSD_P4_Des
+ 832              		.section	.debug_info,"",%progbits
+ 833              	.Ldebug_info0:
+ 834 0000 66060000 		.4byte	0x666
+ 835 0004 0400     		.2byte	0x4
+ 836 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 837 000a 04       		.byte	0x4
+ 838 000b 01       		.uleb128 0x1
+ 839 000c 7E030000 		.4byte	.LASF90
+ 840 0010 0C       		.byte	0xc
+ 841 0011 47040000 		.4byte	.LASF91
+ 842 0015 0D020000 		.4byte	.LASF92
+ 843 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 844 001d 00000000 		.4byte	0
+ 845 0021 00000000 		.4byte	.Ldebug_line0
+ 846 0025 02       		.uleb128 0x2
+ 847 0026 01       		.byte	0x1
+ 848 0027 06       		.byte	0x6
+ 849 0028 7D010000 		.4byte	.LASF0
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 25
+
+
+ 850 002c 02       		.uleb128 0x2
+ 851 002d 01       		.byte	0x1
+ 852 002e 08       		.byte	0x8
+ 853 002f AB050000 		.4byte	.LASF1
+ 854 0033 02       		.uleb128 0x2
+ 855 0034 02       		.byte	0x2
+ 856 0035 05       		.byte	0x5
+ 857 0036 EE050000 		.4byte	.LASF2
+ 858 003a 02       		.uleb128 0x2
+ 859 003b 02       		.byte	0x2
+ 860 003c 07       		.byte	0x7
+ 861 003d 1D030000 		.4byte	.LASF3
+ 862 0041 02       		.uleb128 0x2
+ 863 0042 04       		.byte	0x4
+ 864 0043 05       		.byte	0x5
+ 865 0044 E4010000 		.4byte	.LASF4
+ 866 0048 02       		.uleb128 0x2
+ 867 0049 04       		.byte	0x4
+ 868 004a 07       		.byte	0x7
+ 869 004b ED020000 		.4byte	.LASF5
+ 870 004f 02       		.uleb128 0x2
+ 871 0050 08       		.byte	0x8
+ 872 0051 05       		.byte	0x5
+ 873 0052 6F010000 		.4byte	.LASF6
+ 874 0056 02       		.uleb128 0x2
+ 875 0057 08       		.byte	0x8
+ 876 0058 07       		.byte	0x7
+ 877 0059 FB000000 		.4byte	.LASF7
+ 878 005d 03       		.uleb128 0x3
+ 879 005e 04       		.byte	0x4
+ 880 005f 05       		.byte	0x5
+ 881 0060 696E7400 		.ascii	"int\000"
+ 882 0064 02       		.uleb128 0x2
+ 883 0065 04       		.byte	0x4
+ 884 0066 07       		.byte	0x7
+ 885 0067 AB020000 		.4byte	.LASF8
+ 886 006b 04       		.uleb128 0x4
+ 887 006c 07020000 		.4byte	.LASF9
+ 888 0070 02       		.byte	0x2
+ 889 0071 D201     		.2byte	0x1d2
+ 890 0073 2C000000 		.4byte	0x2c
+ 891 0077 04       		.uleb128 0x4
+ 892 0078 0A000000 		.4byte	.LASF10
+ 893 007c 02       		.byte	0x2
+ 894 007d D301     		.2byte	0x1d3
+ 895 007f 3A000000 		.4byte	0x3a
+ 896 0083 04       		.uleb128 0x4
+ 897 0084 7E020000 		.4byte	.LASF11
+ 898 0088 02       		.byte	0x2
+ 899 0089 D401     		.2byte	0x1d4
+ 900 008b 48000000 		.4byte	0x48
+ 901 008f 02       		.uleb128 0x2
+ 902 0090 04       		.byte	0x4
+ 903 0091 04       		.byte	0x4
+ 904 0092 55050000 		.4byte	.LASF12
+ 905 0096 02       		.uleb128 0x2
+ 906 0097 08       		.byte	0x8
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 26
+
+
+ 907 0098 04       		.byte	0x4
+ 908 0099 6B020000 		.4byte	.LASF13
+ 909 009d 02       		.uleb128 0x2
+ 910 009e 01       		.byte	0x1
+ 911 009f 08       		.byte	0x8
+ 912 00a0 94060000 		.4byte	.LASF14
+ 913 00a4 04       		.uleb128 0x4
+ 914 00a5 19040000 		.4byte	.LASF15
+ 915 00a9 02       		.byte	0x2
+ 916 00aa 7E02     		.2byte	0x27e
+ 917 00ac B0000000 		.4byte	0xb0
+ 918 00b0 05       		.uleb128 0x5
+ 919 00b1 83000000 		.4byte	0x83
+ 920 00b5 02       		.uleb128 0x2
+ 921 00b6 04       		.byte	0x4
+ 922 00b7 07       		.byte	0x7
+ 923 00b8 3E040000 		.4byte	.LASF16
+ 924 00bc 02       		.uleb128 0x2
+ 925 00bd 08       		.byte	0x8
+ 926 00be 04       		.byte	0x4
+ 927 00bf CF040000 		.4byte	.LASF17
+ 928 00c3 06       		.uleb128 0x6
+ 929 00c4 5C       		.byte	0x5c
+ 930 00c5 03       		.byte	0x3
+ 931 00c6 2F       		.byte	0x2f
+ 932 00c7 E0010000 		.4byte	0x1e0
+ 933 00cb 07       		.uleb128 0x7
+ 934 00cc FD040000 		.4byte	.LASF18
+ 935 00d0 03       		.byte	0x3
+ 936 00d1 31       		.byte	0x31
+ 937 00d2 E0010000 		.4byte	0x1e0
+ 938 00d6 00       		.byte	0
+ 939 00d7 07       		.uleb128 0x7
+ 940 00d8 0C050000 		.4byte	.LASF19
+ 941 00dc 03       		.byte	0x3
+ 942 00dd 32       		.byte	0x32
+ 943 00de E0010000 		.4byte	0x1e0
+ 944 00e2 04       		.byte	0x4
+ 945 00e3 07       		.uleb128 0x7
+ 946 00e4 30030000 		.4byte	.LASF20
+ 947 00e8 03       		.byte	0x3
+ 948 00e9 33       		.byte	0x33
+ 949 00ea E0010000 		.4byte	0x1e0
+ 950 00ee 08       		.byte	0x8
+ 951 00ef 07       		.uleb128 0x7
+ 952 00f0 71030000 		.4byte	.LASF21
+ 953 00f4 03       		.byte	0x3
+ 954 00f5 34       		.byte	0x34
+ 955 00f6 E0010000 		.4byte	0x1e0
+ 956 00fa 0C       		.byte	0xc
+ 957 00fb 07       		.uleb128 0x7
+ 958 00fc FF050000 		.4byte	.LASF22
+ 959 0100 03       		.byte	0x3
+ 960 0101 35       		.byte	0x35
+ 961 0102 E0010000 		.4byte	0x1e0
+ 962 0106 10       		.byte	0x10
+ 963 0107 07       		.uleb128 0x7
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 27
+
+
+ 964 0108 B5010000 		.4byte	.LASF23
+ 965 010c 03       		.byte	0x3
+ 966 010d 36       		.byte	0x36
+ 967 010e E6010000 		.4byte	0x1e6
+ 968 0112 14       		.byte	0x14
+ 969 0113 07       		.uleb128 0x7
+ 970 0114 FF020000 		.4byte	.LASF24
+ 971 0118 03       		.byte	0x3
+ 972 0119 37       		.byte	0x37
+ 973 011a F1010000 		.4byte	0x1f1
+ 974 011e 18       		.byte	0x18
+ 975 011f 07       		.uleb128 0x7
+ 976 0120 1F040000 		.4byte	.LASF25
+ 977 0124 03       		.byte	0x3
+ 978 0125 38       		.byte	0x38
+ 979 0126 E0010000 		.4byte	0x1e0
+ 980 012a 1C       		.byte	0x1c
+ 981 012b 07       		.uleb128 0x7
+ 982 012c 99060000 		.4byte	.LASF26
+ 983 0130 03       		.byte	0x3
+ 984 0131 39       		.byte	0x39
+ 985 0132 E0010000 		.4byte	0x1e0
+ 986 0136 20       		.byte	0x20
+ 987 0137 07       		.uleb128 0x7
+ 988 0138 8C050000 		.4byte	.LASF27
+ 989 013c 03       		.byte	0x3
+ 990 013d 3A       		.byte	0x3a
+ 991 013e E0010000 		.4byte	0x1e0
+ 992 0142 24       		.byte	0x24
+ 993 0143 07       		.uleb128 0x7
+ 994 0144 0C040000 		.4byte	.LASF28
+ 995 0148 03       		.byte	0x3
+ 996 0149 3B       		.byte	0x3b
+ 997 014a F7010000 		.4byte	0x1f7
+ 998 014e 28       		.byte	0x28
+ 999 014f 07       		.uleb128 0x7
+ 1000 0150 B8020000 		.4byte	.LASF29
+ 1001 0154 03       		.byte	0x3
+ 1002 0155 3C       		.byte	0x3c
+ 1003 0156 F7010000 		.4byte	0x1f7
+ 1004 015a 2C       		.byte	0x2c
+ 1005 015b 07       		.uleb128 0x7
+ 1006 015c 66060000 		.4byte	.LASF30
+ 1007 0160 03       		.byte	0x3
+ 1008 0161 3D       		.byte	0x3d
+ 1009 0162 F7010000 		.4byte	0x1f7
+ 1010 0166 30       		.byte	0x30
+ 1011 0167 07       		.uleb128 0x7
+ 1012 0168 25060000 		.4byte	.LASF31
+ 1013 016c 03       		.byte	0x3
+ 1014 016d 3E       		.byte	0x3e
+ 1015 016e E0010000 		.4byte	0x1e0
+ 1016 0172 34       		.byte	0x34
+ 1017 0173 07       		.uleb128 0x7
+ 1018 0174 70070000 		.4byte	.LASF32
+ 1019 0178 03       		.byte	0x3
+ 1020 0179 3F       		.byte	0x3f
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 28
+
+
+ 1021 017a E0010000 		.4byte	0x1e0
+ 1022 017e 38       		.byte	0x38
+ 1023 017f 07       		.uleb128 0x7
+ 1024 0180 9C050000 		.4byte	.LASF33
+ 1025 0184 03       		.byte	0x3
+ 1026 0185 40       		.byte	0x40
+ 1027 0186 E6010000 		.4byte	0x1e6
+ 1028 018a 3C       		.byte	0x3c
+ 1029 018b 07       		.uleb128 0x7
+ 1030 018c 5D080000 		.4byte	.LASF34
+ 1031 0190 03       		.byte	0x3
+ 1032 0191 41       		.byte	0x41
+ 1033 0192 E6010000 		.4byte	0x1e6
+ 1034 0196 40       		.byte	0x40
+ 1035 0197 07       		.uleb128 0x7
+ 1036 0198 A5010000 		.4byte	.LASF35
+ 1037 019c 03       		.byte	0x3
+ 1038 019d 42       		.byte	0x42
+ 1039 019e E6010000 		.4byte	0x1e6
+ 1040 01a2 44       		.byte	0x44
+ 1041 01a3 07       		.uleb128 0x7
+ 1042 01a4 97000000 		.4byte	.LASF36
+ 1043 01a8 03       		.byte	0x3
+ 1044 01a9 43       		.byte	0x43
+ 1045 01aa 0C020000 		.4byte	0x20c
+ 1046 01ae 48       		.byte	0x48
+ 1047 01af 07       		.uleb128 0x7
+ 1048 01b0 29070000 		.4byte	.LASF37
+ 1049 01b4 03       		.byte	0x3
+ 1050 01b5 44       		.byte	0x44
+ 1051 01b6 1D020000 		.4byte	0x21d
+ 1052 01ba 4C       		.byte	0x4c
+ 1053 01bb 07       		.uleb128 0x7
+ 1054 01bc B9050000 		.4byte	.LASF38
+ 1055 01c0 03       		.byte	0x3
+ 1056 01c1 45       		.byte	0x45
+ 1057 01c2 0C020000 		.4byte	0x20c
+ 1058 01c6 50       		.byte	0x50
+ 1059 01c7 07       		.uleb128 0x7
+ 1060 01c8 0E030000 		.4byte	.LASF39
+ 1061 01cc 03       		.byte	0x3
+ 1062 01cd 46       		.byte	0x46
+ 1063 01ce 37020000 		.4byte	0x237
+ 1064 01d2 54       		.byte	0x54
+ 1065 01d3 07       		.uleb128 0x7
+ 1066 01d4 09080000 		.4byte	.LASF40
+ 1067 01d8 03       		.byte	0x3
+ 1068 01d9 47       		.byte	0x47
+ 1069 01da 52020000 		.4byte	0x252
+ 1070 01de 58       		.byte	0x58
+ 1071 01df 00       		.byte	0
+ 1072 01e0 08       		.uleb128 0x8
+ 1073 01e1 04       		.byte	0x4
+ 1074 01e2 6B000000 		.4byte	0x6b
+ 1075 01e6 08       		.uleb128 0x8
+ 1076 01e7 04       		.byte	0x4
+ 1077 01e8 EC010000 		.4byte	0x1ec
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 29
+
+
+ 1078 01ec 09       		.uleb128 0x9
+ 1079 01ed 6B000000 		.4byte	0x6b
+ 1080 01f1 08       		.uleb128 0x8
+ 1081 01f2 04       		.byte	0x4
+ 1082 01f3 83000000 		.4byte	0x83
+ 1083 01f7 08       		.uleb128 0x8
+ 1084 01f8 04       		.byte	0x4
+ 1085 01f9 77000000 		.4byte	0x77
+ 1086 01fd 0A       		.uleb128 0xa
+ 1087 01fe 77000000 		.4byte	0x77
+ 1088 0202 0C020000 		.4byte	0x20c
+ 1089 0206 0B       		.uleb128 0xb
+ 1090 0207 83000000 		.4byte	0x83
+ 1091 020b 00       		.byte	0
+ 1092 020c 08       		.uleb128 0x8
+ 1093 020d 04       		.byte	0x4
+ 1094 020e FD010000 		.4byte	0x1fd
+ 1095 0212 0C       		.uleb128 0xc
+ 1096 0213 1D020000 		.4byte	0x21d
+ 1097 0217 0B       		.uleb128 0xb
+ 1098 0218 83000000 		.4byte	0x83
+ 1099 021c 00       		.byte	0
+ 1100 021d 08       		.uleb128 0x8
+ 1101 021e 04       		.byte	0x4
+ 1102 021f 12020000 		.4byte	0x212
+ 1103 0223 0A       		.uleb128 0xa
+ 1104 0224 83000000 		.4byte	0x83
+ 1105 0228 37020000 		.4byte	0x237
+ 1106 022c 0B       		.uleb128 0xb
+ 1107 022d E6010000 		.4byte	0x1e6
+ 1108 0231 0B       		.uleb128 0xb
+ 1109 0232 83000000 		.4byte	0x83
+ 1110 0236 00       		.byte	0
+ 1111 0237 08       		.uleb128 0x8
+ 1112 0238 04       		.byte	0x4
+ 1113 0239 23020000 		.4byte	0x223
+ 1114 023d 0C       		.uleb128 0xc
+ 1115 023e 52020000 		.4byte	0x252
+ 1116 0242 0B       		.uleb128 0xb
+ 1117 0243 E0010000 		.4byte	0x1e0
+ 1118 0247 0B       		.uleb128 0xb
+ 1119 0248 83000000 		.4byte	0x83
+ 1120 024c 0B       		.uleb128 0xb
+ 1121 024d 83000000 		.4byte	0x83
+ 1122 0251 00       		.byte	0
+ 1123 0252 08       		.uleb128 0x8
+ 1124 0253 04       		.byte	0x4
+ 1125 0254 3D020000 		.4byte	0x23d
+ 1126 0258 0D       		.uleb128 0xd
+ 1127 0259 32080000 		.4byte	.LASF41
+ 1128 025d 03       		.byte	0x3
+ 1129 025e 48       		.byte	0x48
+ 1130 025f C3000000 		.4byte	0xc3
+ 1131 0263 06       		.uleb128 0x6
+ 1132 0264 0C       		.byte	0xc
+ 1133 0265 03       		.byte	0x3
+ 1134 0266 4A       		.byte	0x4a
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 30
+
+
+ 1135 0267 B4020000 		.4byte	0x2b4
+ 1136 026b 07       		.uleb128 0x7
+ 1137 026c D9070000 		.4byte	.LASF42
+ 1138 0270 03       		.byte	0x3
+ 1139 0271 4C       		.byte	0x4c
+ 1140 0272 6B000000 		.4byte	0x6b
+ 1141 0276 00       		.byte	0
+ 1142 0277 07       		.uleb128 0x7
+ 1143 0278 6A080000 		.4byte	.LASF43
+ 1144 027c 03       		.byte	0x3
+ 1145 027d 4D       		.byte	0x4d
+ 1146 027e 6B000000 		.4byte	0x6b
+ 1147 0282 01       		.byte	0x1
+ 1148 0283 07       		.uleb128 0x7
+ 1149 0284 95020000 		.4byte	.LASF44
+ 1150 0288 03       		.byte	0x3
+ 1151 0289 4E       		.byte	0x4e
+ 1152 028a 6B000000 		.4byte	0x6b
+ 1153 028e 02       		.byte	0x2
+ 1154 028f 07       		.uleb128 0x7
+ 1155 0290 85020000 		.4byte	.LASF45
+ 1156 0294 03       		.byte	0x3
+ 1157 0295 4F       		.byte	0x4f
+ 1158 0296 77000000 		.4byte	0x77
+ 1159 029a 04       		.byte	0x4
+ 1160 029b 07       		.uleb128 0x7
+ 1161 029c 30040000 		.4byte	.LASF46
+ 1162 02a0 03       		.byte	0x3
+ 1163 02a1 50       		.byte	0x50
+ 1164 02a2 77000000 		.4byte	0x77
+ 1165 02a6 06       		.byte	0x6
+ 1166 02a7 07       		.uleb128 0x7
+ 1167 02a8 46030000 		.4byte	.LASF47
+ 1168 02ac 03       		.byte	0x3
+ 1169 02ad 51       		.byte	0x51
+ 1170 02ae B4020000 		.4byte	0x2b4
+ 1171 02b2 08       		.byte	0x8
+ 1172 02b3 00       		.byte	0
+ 1173 02b4 08       		.uleb128 0x8
+ 1174 02b5 04       		.byte	0x4
+ 1175 02b6 BA020000 		.4byte	0x2ba
+ 1176 02ba 09       		.uleb128 0x9
+ 1177 02bb 58020000 		.4byte	0x258
+ 1178 02bf 0D       		.uleb128 0xd
+ 1179 02c0 DB040000 		.4byte	.LASF48
+ 1180 02c4 03       		.byte	0x3
+ 1181 02c5 52       		.byte	0x52
+ 1182 02c6 63020000 		.4byte	0x263
+ 1183 02ca 0E       		.uleb128 0xe
+ 1184 02cb A1000000 		.4byte	.LASF51
+ 1185 02cf 01       		.byte	0x1
+ 1186 02d0 91       		.byte	0x91
+ 1187 02d1 00000000 		.4byte	.LFB32
+ 1188 02d5 10010000 		.4byte	.LFE32-.LFB32
+ 1189 02d9 01       		.uleb128 0x1
+ 1190 02da 9C       		.byte	0x9c
+ 1191 02db FC020000 		.4byte	0x2fc
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 31
+
+
+ 1192 02df 0F       		.uleb128 0xf
+ 1193 02e0 00000000 		.4byte	.LASF49
+ 1194 02e4 01       		.byte	0x1
+ 1195 02e5 93       		.byte	0x93
+ 1196 02e6 83000000 		.4byte	0x83
+ 1197 02ea 02       		.uleb128 0x2
+ 1198 02eb 91       		.byte	0x91
+ 1199 02ec 74       		.sleb128 -12
+ 1200 02ed 0F       		.uleb128 0xf
+ 1201 02ee F8050000 		.4byte	.LASF50
+ 1202 02f2 01       		.byte	0x1
+ 1203 02f3 94       		.byte	0x94
+ 1204 02f4 83000000 		.4byte	0x83
+ 1205 02f8 02       		.uleb128 0x2
+ 1206 02f9 91       		.byte	0x91
+ 1207 02fa 70       		.sleb128 -16
+ 1208 02fb 00       		.byte	0
+ 1209 02fc 0E       		.uleb128 0xe
+ 1210 02fd 69000000 		.4byte	.LASF52
+ 1211 0301 01       		.byte	0x1
+ 1212 0302 E6       		.byte	0xe6
+ 1213 0303 00000000 		.4byte	.LFB33
+ 1214 0307 F4000000 		.4byte	.LFE33-.LFB33
+ 1215 030b 01       		.uleb128 0x1
+ 1216 030c 9C       		.byte	0x9c
+ 1217 030d 3C030000 		.4byte	0x33c
+ 1218 0311 10       		.uleb128 0x10
+ 1219 0312 3F030000 		.4byte	.LASF57
+ 1220 0316 01       		.byte	0x1
+ 1221 0317 E6       		.byte	0xe6
+ 1222 0318 83000000 		.4byte	0x83
+ 1223 031c 02       		.uleb128 0x2
+ 1224 031d 91       		.byte	0x91
+ 1225 031e 64       		.sleb128 -28
+ 1226 031f 0F       		.uleb128 0xf
+ 1227 0320 87000000 		.4byte	.LASF53
+ 1228 0324 01       		.byte	0x1
+ 1229 0325 E8       		.byte	0xe8
+ 1230 0326 6B000000 		.4byte	0x6b
+ 1231 032a 02       		.uleb128 0x2
+ 1232 032b 91       		.byte	0x91
+ 1233 032c 6B       		.sleb128 -21
+ 1234 032d 0F       		.uleb128 0xf
+ 1235 032e F8050000 		.4byte	.LASF50
+ 1236 0332 01       		.byte	0x1
+ 1237 0333 E9       		.byte	0xe9
+ 1238 0334 83000000 		.4byte	0x83
+ 1239 0338 02       		.uleb128 0x2
+ 1240 0339 91       		.byte	0x91
+ 1241 033a 6C       		.sleb128 -20
+ 1242 033b 00       		.byte	0
+ 1243 033c 11       		.uleb128 0x11
+ 1244 033d D3000000 		.4byte	.LASF93
+ 1245 0341 01       		.byte	0x1
+ 1246 0342 2701     		.2byte	0x127
+ 1247 0344 00000000 		.4byte	.LFB34
+ 1248 0348 1C000000 		.4byte	.LFE34-.LFB34
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 32
+
+
+ 1249 034c 01       		.uleb128 0x1
+ 1250 034d 9C       		.byte	0x9c
+ 1251 034e 12       		.uleb128 0x12
+ 1252 034f 7D070000 		.4byte	.LASF54
+ 1253 0353 01       		.byte	0x1
+ 1254 0354 4101     		.2byte	0x141
+ 1255 0356 00000000 		.4byte	.LFB35
+ 1256 035a 34000000 		.4byte	.LFE35-.LFB35
+ 1257 035e 01       		.uleb128 0x1
+ 1258 035f 9C       		.byte	0x9c
+ 1259 0360 74030000 		.4byte	0x374
+ 1260 0364 13       		.uleb128 0x13
+ 1261 0365 72020000 		.4byte	.LASF55
+ 1262 0369 01       		.byte	0x1
+ 1263 036a 4301     		.2byte	0x143
+ 1264 036c 83000000 		.4byte	0x83
+ 1265 0370 02       		.uleb128 0x2
+ 1266 0371 91       		.byte	0x91
+ 1267 0372 74       		.sleb128 -12
+ 1268 0373 00       		.byte	0
+ 1269 0374 14       		.uleb128 0x14
+ 1270 0375 35050000 		.4byte	.LASF56
+ 1271 0379 01       		.byte	0x1
+ 1272 037a 6201     		.2byte	0x162
+ 1273 037c 00000000 		.4byte	.LFB36
+ 1274 0380 94000000 		.4byte	.LFE36-.LFB36
+ 1275 0384 01       		.uleb128 0x1
+ 1276 0385 9C       		.byte	0x9c
+ 1277 0386 B8030000 		.4byte	0x3b8
+ 1278 038a 15       		.uleb128 0x15
+ 1279 038b AE060000 		.4byte	.LASF58
+ 1280 038f 01       		.byte	0x1
+ 1281 0390 6201     		.2byte	0x162
+ 1282 0392 B8030000 		.4byte	0x3b8
+ 1283 0396 02       		.uleb128 0x2
+ 1284 0397 91       		.byte	0x91
+ 1285 0398 6C       		.sleb128 -20
+ 1286 0399 13       		.uleb128 0x13
+ 1287 039a 00000000 		.4byte	.LASF49
+ 1288 039e 01       		.byte	0x1
+ 1289 039f 6401     		.2byte	0x164
+ 1290 03a1 83000000 		.4byte	0x83
+ 1291 03a5 02       		.uleb128 0x2
+ 1292 03a6 91       		.byte	0x91
+ 1293 03a7 74       		.sleb128 -12
+ 1294 03a8 13       		.uleb128 0x13
+ 1295 03a9 72020000 		.4byte	.LASF55
+ 1296 03ad 01       		.byte	0x1
+ 1297 03ae 6501     		.2byte	0x165
+ 1298 03b0 83000000 		.4byte	0x83
+ 1299 03b4 02       		.uleb128 0x2
+ 1300 03b5 91       		.byte	0x91
+ 1301 03b6 70       		.sleb128 -16
+ 1302 03b7 00       		.byte	0
+ 1303 03b8 08       		.uleb128 0x8
+ 1304 03b9 04       		.byte	0x4
+ 1305 03ba BE030000 		.4byte	0x3be
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 33
+
+
+ 1306 03be 09       		.uleb128 0x9
+ 1307 03bf BF020000 		.4byte	0x2bf
+ 1308 03c3 12       		.uleb128 0x12
+ 1309 03c4 09060000 		.4byte	.LASF59
+ 1310 03c8 01       		.byte	0x1
+ 1311 03c9 9C01     		.2byte	0x19c
+ 1312 03cb 00000000 		.4byte	.LFB37
+ 1313 03cf 58000000 		.4byte	.LFE37-.LFB37
+ 1314 03d3 01       		.uleb128 0x1
+ 1315 03d4 9C       		.byte	0x9c
+ 1316 03d5 F8030000 		.4byte	0x3f8
+ 1317 03d9 15       		.uleb128 0x15
+ 1318 03da 3F030000 		.4byte	.LASF57
+ 1319 03de 01       		.byte	0x1
+ 1320 03df 9C01     		.2byte	0x19c
+ 1321 03e1 83000000 		.4byte	0x83
+ 1322 03e5 02       		.uleb128 0x2
+ 1323 03e6 91       		.byte	0x91
+ 1324 03e7 74       		.sleb128 -12
+ 1325 03e8 15       		.uleb128 0x15
+ 1326 03e9 A5020000 		.4byte	.LASF60
+ 1327 03ed 01       		.byte	0x1
+ 1328 03ee 9C01     		.2byte	0x19c
+ 1329 03f0 83000000 		.4byte	0x83
+ 1330 03f4 02       		.uleb128 0x2
+ 1331 03f5 91       		.byte	0x91
+ 1332 03f6 70       		.sleb128 -16
+ 1333 03f7 00       		.byte	0
+ 1334 03f8 16       		.uleb128 0x16
+ 1335 03f9 28000000 		.4byte	.LASF61
+ 1336 03fd 01       		.byte	0x1
+ 1337 03fe BE01     		.2byte	0x1be
+ 1338 0400 6B000000 		.4byte	0x6b
+ 1339 0404 00000000 		.4byte	.LFB38
+ 1340 0408 1C000000 		.4byte	.LFE38-.LFB38
+ 1341 040c 01       		.uleb128 0x1
+ 1342 040d 9C       		.byte	0x9c
+ 1343 040e 22040000 		.4byte	0x422
+ 1344 0412 15       		.uleb128 0x15
+ 1345 0413 3F030000 		.4byte	.LASF57
+ 1346 0417 01       		.byte	0x1
+ 1347 0418 BE01     		.2byte	0x1be
+ 1348 041a 83000000 		.4byte	0x83
+ 1349 041e 02       		.uleb128 0x2
+ 1350 041f 91       		.byte	0x91
+ 1351 0420 74       		.sleb128 -12
+ 1352 0421 00       		.byte	0
+ 1353 0422 16       		.uleb128 0x16
+ 1354 0423 EB070000 		.4byte	.LASF62
+ 1355 0427 01       		.byte	0x1
+ 1356 0428 DA01     		.2byte	0x1da
+ 1357 042a 77000000 		.4byte	0x77
+ 1358 042e 00000000 		.4byte	.LFB39
+ 1359 0432 28000000 		.4byte	.LFE39-.LFB39
+ 1360 0436 01       		.uleb128 0x1
+ 1361 0437 9C       		.byte	0x9c
+ 1362 0438 4C040000 		.4byte	0x44c
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 34
+
+
+ 1363 043c 15       		.uleb128 0x15
+ 1364 043d 3F030000 		.4byte	.LASF57
+ 1365 0441 01       		.byte	0x1
+ 1366 0442 DA01     		.2byte	0x1da
+ 1367 0444 83000000 		.4byte	0x83
+ 1368 0448 02       		.uleb128 0x2
+ 1369 0449 91       		.byte	0x91
+ 1370 044a 74       		.sleb128 -12
+ 1371 044b 00       		.byte	0
+ 1372 044c 17       		.uleb128 0x17
+ 1373 044d C5020000 		.4byte	.LASF63
+ 1374 0451 01       		.byte	0x1
+ 1375 0452 F501     		.2byte	0x1f5
+ 1376 0454 77000000 		.4byte	0x77
+ 1377 0458 00000000 		.4byte	.LFB40
+ 1378 045c 34000000 		.4byte	.LFE40-.LFB40
+ 1379 0460 01       		.uleb128 0x1
+ 1380 0461 9C       		.byte	0x9c
+ 1381 0462 76040000 		.4byte	0x476
+ 1382 0466 15       		.uleb128 0x15
+ 1383 0467 3F030000 		.4byte	.LASF57
+ 1384 046b 01       		.byte	0x1
+ 1385 046c F501     		.2byte	0x1f5
+ 1386 046e 83000000 		.4byte	0x83
+ 1387 0472 02       		.uleb128 0x2
+ 1388 0473 91       		.byte	0x91
+ 1389 0474 74       		.sleb128 -12
+ 1390 0475 00       		.byte	0
+ 1391 0476 18       		.uleb128 0x18
+ 1392 0477 6B000000 		.4byte	0x6b
+ 1393 047b 86040000 		.4byte	0x486
+ 1394 047f 19       		.uleb128 0x19
+ 1395 0480 B5000000 		.4byte	0xb5
+ 1396 0484 00       		.byte	0
+ 1397 0485 00       		.byte	0
+ 1398 0486 1A       		.uleb128 0x1a
+ 1399 0487 1B050000 		.4byte	.LASF64
+ 1400 048b 04       		.byte	0x4
+ 1401 048c BC02     		.2byte	0x2bc
+ 1402 048e 76040000 		.4byte	0x476
+ 1403 0492 1A       		.uleb128 0x1a
+ 1404 0493 4F030000 		.4byte	.LASF65
+ 1405 0497 04       		.byte	0x4
+ 1406 0498 C102     		.2byte	0x2c1
+ 1407 049a 6B000000 		.4byte	0x6b
+ 1408 049e 18       		.uleb128 0x18
+ 1409 049f 6B000000 		.4byte	0x6b
+ 1410 04a3 AE040000 		.4byte	0x4ae
+ 1411 04a7 19       		.uleb128 0x19
+ 1412 04a8 B5000000 		.4byte	0xb5
+ 1413 04ac 04       		.byte	0x4
+ 1414 04ad 00       		.byte	0
+ 1415 04ae 1A       		.uleb128 0x1a
+ 1416 04af B7000000 		.4byte	.LASF66
+ 1417 04b3 04       		.byte	0x4
+ 1418 04b4 CD02     		.2byte	0x2cd
+ 1419 04b6 9E040000 		.4byte	0x49e
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 35
+
+
+ 1420 04ba 1A       		.uleb128 0x1a
+ 1421 04bb C6010000 		.4byte	.LASF67
+ 1422 04bf 04       		.byte	0x4
+ 1423 04c0 CE02     		.2byte	0x2ce
+ 1424 04c2 9E040000 		.4byte	0x49e
+ 1425 04c6 18       		.uleb128 0x18
+ 1426 04c7 83000000 		.4byte	0x83
+ 1427 04cb D6040000 		.4byte	0x4d6
+ 1428 04cf 19       		.uleb128 0x19
+ 1429 04d0 B5000000 		.4byte	0xb5
+ 1430 04d4 00       		.byte	0
+ 1431 04d5 00       		.byte	0
+ 1432 04d6 1A       		.uleb128 0x1a
+ 1433 04d7 F3060000 		.4byte	.LASF68
+ 1434 04db 04       		.byte	0x4
+ 1435 04dc D502     		.2byte	0x2d5
+ 1436 04de C6040000 		.4byte	0x4c6
+ 1437 04e2 1A       		.uleb128 0x1a
+ 1438 04e3 31010000 		.4byte	.LASF69
+ 1439 04e7 04       		.byte	0x4
+ 1440 04e8 D702     		.2byte	0x2d7
+ 1441 04ea 9E040000 		.4byte	0x49e
+ 1442 04ee 1A       		.uleb128 0x1a
+ 1443 04ef 9E070000 		.4byte	.LASF70
+ 1444 04f3 04       		.byte	0x4
+ 1445 04f4 D802     		.2byte	0x2d8
+ 1446 04f6 9E040000 		.4byte	0x49e
+ 1447 04fa 18       		.uleb128 0x18
+ 1448 04fb EC010000 		.4byte	0x1ec
+ 1449 04ff 0A050000 		.4byte	0x50a
+ 1450 0503 19       		.uleb128 0x19
+ 1451 0504 B5000000 		.4byte	0xb5
+ 1452 0508 04       		.byte	0x4
+ 1453 0509 00       		.byte	0
+ 1454 050a 1A       		.uleb128 0x1a
+ 1455 050b ED010000 		.4byte	.LASF71
+ 1456 050f 04       		.byte	0x4
+ 1457 0510 E802     		.2byte	0x2e8
+ 1458 0512 16050000 		.4byte	0x516
+ 1459 0516 09       		.uleb128 0x9
+ 1460 0517 FA040000 		.4byte	0x4fa
+ 1461 051b 1A       		.uleb128 0x1a
+ 1462 051c BF070000 		.4byte	.LASF72
+ 1463 0520 05       		.byte	0x5
+ 1464 0521 2601     		.2byte	0x126
+ 1465 0523 9E040000 		.4byte	0x49e
+ 1466 0527 1A       		.uleb128 0x1a
+ 1467 0528 6F050000 		.4byte	.LASF73
+ 1468 052c 05       		.byte	0x5
+ 1469 052d 2E01     		.2byte	0x12e
+ 1470 052f 76040000 		.4byte	0x476
+ 1471 0533 1A       		.uleb128 0x1a
+ 1472 0534 78060000 		.4byte	.LASF74
+ 1473 0538 05       		.byte	0x5
+ 1474 0539 2F01     		.2byte	0x12f
+ 1475 053b 76040000 		.4byte	0x476
+ 1476 053f 1A       		.uleb128 0x1a
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 36
+
+
+ 1477 0540 CA050000 		.4byte	.LASF75
+ 1478 0544 05       		.byte	0x5
+ 1479 0545 3001     		.2byte	0x130
+ 1480 0547 76040000 		.4byte	0x476
+ 1481 054b 1A       		.uleb128 0x1a
+ 1482 054c 11070000 		.4byte	.LASF76
+ 1483 0550 05       		.byte	0x5
+ 1484 0551 3101     		.2byte	0x131
+ 1485 0553 76040000 		.4byte	0x476
+ 1486 0557 18       		.uleb128 0x18
+ 1487 0558 EC010000 		.4byte	0x1ec
+ 1488 055c 67050000 		.4byte	0x567
+ 1489 0560 19       		.uleb128 0x19
+ 1490 0561 B5000000 		.4byte	0xb5
+ 1491 0565 00       		.byte	0
+ 1492 0566 00       		.byte	0
+ 1493 0567 1A       		.uleb128 0x1a
+ 1494 0568 18080000 		.4byte	.LASF77
+ 1495 056c 05       		.byte	0x5
+ 1496 056d 3A01     		.2byte	0x13a
+ 1497 056f 73050000 		.4byte	0x573
+ 1498 0573 09       		.uleb128 0x9
+ 1499 0574 57050000 		.4byte	0x557
+ 1500 0578 1A       		.uleb128 0x1a
+ 1501 0579 2F060000 		.4byte	.LASF78
+ 1502 057d 05       		.byte	0x5
+ 1503 057e 3B01     		.2byte	0x13b
+ 1504 0580 84050000 		.4byte	0x584
+ 1505 0584 09       		.uleb128 0x9
+ 1506 0585 57050000 		.4byte	0x557
+ 1507 0589 1B       		.uleb128 0x1b
+ 1508 058a 51010000 		.4byte	.LASF79
+ 1509 058e 01       		.byte	0x1
+ 1510 058f 4F       		.byte	0x4f
+ 1511 0590 9E040000 		.4byte	0x49e
+ 1512 0594 05       		.uleb128 0x5
+ 1513 0595 03       		.byte	0x3
+ 1514 0596 00000000 		.4byte	CapSense_CSD_noiseEnvelopeTbl
+ 1515 059a 1B       		.uleb128 0x1b
+ 1516 059b B5060000 		.4byte	.LASF80
+ 1517 059f 01       		.byte	0x1
+ 1518 05a0 50       		.byte	0x50
+ 1519 05a1 9E040000 		.4byte	0x49e
+ 1520 05a5 05       		.uleb128 0x5
+ 1521 05a6 03       		.byte	0x3
+ 1522 05a7 00000000 		.4byte	CapSense_CSD_runningDifferenceTbl
+ 1523 05ab 1B       		.uleb128 0x1b
+ 1524 05ac 53070000 		.4byte	.LASF81
+ 1525 05b0 01       		.byte	0x1
+ 1526 05b1 51       		.byte	0x51
+ 1527 05b2 9E040000 		.4byte	0x49e
+ 1528 05b6 05       		.uleb128 0x5
+ 1529 05b7 03       		.byte	0x3
+ 1530 05b8 00000000 		.4byte	CapSense_CSD_signRegisterTbl
+ 1531 05bc 18       		.uleb128 0x18
+ 1532 05bd 77000000 		.4byte	0x77
+ 1533 05c1 CC050000 		.4byte	0x5cc
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 37
+
+
+ 1534 05c5 19       		.uleb128 0x19
+ 1535 05c6 B5000000 		.4byte	0xb5
+ 1536 05ca 04       		.byte	0x4
+ 1537 05cb 00       		.byte	0
+ 1538 05cc 1B       		.uleb128 0x1b
+ 1539 05cd 4C060000 		.4byte	.LASF82
+ 1540 05d1 01       		.byte	0x1
+ 1541 05d2 52       		.byte	0x52
+ 1542 05d3 BC050000 		.4byte	0x5bc
+ 1543 05d7 05       		.uleb128 0x5
+ 1544 05d8 03       		.byte	0x3
+ 1545 05d9 00000000 		.4byte	CapSense_CSD_sampleMinTbl
+ 1546 05dd 1B       		.uleb128 0x1b
+ 1547 05de 4F000000 		.4byte	.LASF83
+ 1548 05e2 01       		.byte	0x1
+ 1549 05e3 53       		.byte	0x53
+ 1550 05e4 BC050000 		.4byte	0x5bc
+ 1551 05e8 05       		.uleb128 0x5
+ 1552 05e9 03       		.byte	0x3
+ 1553 05ea 00000000 		.4byte	CapSense_CSD_sampleMaxTbl
+ 1554 05ee 1B       		.uleb128 0x1b
+ 1555 05ef 12010000 		.4byte	.LASF84
+ 1556 05f3 01       		.byte	0x1
+ 1557 05f4 54       		.byte	0x54
+ 1558 05f5 BC050000 		.4byte	0x5bc
+ 1559 05f9 05       		.uleb128 0x5
+ 1560 05fa 03       		.byte	0x3
+ 1561 05fb 00000000 		.4byte	CapSense_CSD_previousSampleTbl
+ 1562 05ff 1B       		.uleb128 0x1b
+ 1563 0600 11000000 		.4byte	.LASF85
+ 1564 0604 01       		.byte	0x1
+ 1565 0605 55       		.byte	0x55
+ 1566 0606 9E040000 		.4byte	0x49e
+ 1567 060a 05       		.uleb128 0x5
+ 1568 060b 03       		.byte	0x3
+ 1569 060c 00000000 		.4byte	CapSense_CSD_kValueTbl
+ 1570 0610 18       		.uleb128 0x18
+ 1571 0611 EC010000 		.4byte	0x1ec
+ 1572 0615 20060000 		.4byte	0x620
+ 1573 0619 19       		.uleb128 0x19
+ 1574 061a B5000000 		.4byte	0xb5
+ 1575 061e 0F       		.byte	0xf
+ 1576 061f 00       		.byte	0
+ 1577 0620 1B       		.uleb128 0x1b
+ 1578 0621 D7060000 		.4byte	.LASF86
+ 1579 0625 01       		.byte	0x1
+ 1580 0626 44       		.byte	0x44
+ 1581 0627 31060000 		.4byte	0x631
+ 1582 062b 05       		.uleb128 0x5
+ 1583 062c 03       		.byte	0x3
+ 1584 062d 00000000 		.4byte	CapSense_CSD_prescalerTable
+ 1585 0631 09       		.uleb128 0x9
+ 1586 0632 10060000 		.4byte	0x610
+ 1587 0636 1B       		.uleb128 0x1b
+ 1588 0637 34070000 		.4byte	.LASF87
+ 1589 063b 01       		.byte	0x1
+ 1590 063c 57       		.byte	0x57
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 38
+
+
+ 1591 063d 9E040000 		.4byte	0x49e
+ 1592 0641 05       		.uleb128 0x5
+ 1593 0642 03       		.byte	0x3
+ 1594 0643 00000000 		.4byte	CapSense_CSD_sensorSensitivity
+ 1595 0647 1B       		.uleb128 0x1b
+ 1596 0648 5B050000 		.4byte	.LASF88
+ 1597 064c 01       		.byte	0x1
+ 1598 064d 5B       		.byte	0x5b
+ 1599 064e BF020000 		.4byte	0x2bf
+ 1600 0652 05       		.uleb128 0x5
+ 1601 0653 03       		.byte	0x3
+ 1602 0654 00000000 		.4byte	CapSense_CSD_config
+ 1603 0658 1B       		.uleb128 0x1b
+ 1604 0659 89010000 		.4byte	.LASF89
+ 1605 065d 01       		.byte	0x1
+ 1606 065e 5C       		.byte	0x5c
+ 1607 065f BA020000 		.4byte	0x2ba
+ 1608 0663 05       		.uleb128 0x5
+ 1609 0664 03       		.byte	0x3
+ 1610 0665 00000000 		.4byte	CapSense_CSD_configPointers
+ 1611 0669 00       		.byte	0
+ 1612              		.section	.debug_abbrev,"",%progbits
+ 1613              	.Ldebug_abbrev0:
+ 1614 0000 01       		.uleb128 0x1
+ 1615 0001 11       		.uleb128 0x11
+ 1616 0002 01       		.byte	0x1
+ 1617 0003 25       		.uleb128 0x25
+ 1618 0004 0E       		.uleb128 0xe
+ 1619 0005 13       		.uleb128 0x13
+ 1620 0006 0B       		.uleb128 0xb
+ 1621 0007 03       		.uleb128 0x3
+ 1622 0008 0E       		.uleb128 0xe
+ 1623 0009 1B       		.uleb128 0x1b
+ 1624 000a 0E       		.uleb128 0xe
+ 1625 000b 55       		.uleb128 0x55
+ 1626 000c 17       		.uleb128 0x17
+ 1627 000d 11       		.uleb128 0x11
+ 1628 000e 01       		.uleb128 0x1
+ 1629 000f 10       		.uleb128 0x10
+ 1630 0010 17       		.uleb128 0x17
+ 1631 0011 00       		.byte	0
+ 1632 0012 00       		.byte	0
+ 1633 0013 02       		.uleb128 0x2
+ 1634 0014 24       		.uleb128 0x24
+ 1635 0015 00       		.byte	0
+ 1636 0016 0B       		.uleb128 0xb
+ 1637 0017 0B       		.uleb128 0xb
+ 1638 0018 3E       		.uleb128 0x3e
+ 1639 0019 0B       		.uleb128 0xb
+ 1640 001a 03       		.uleb128 0x3
+ 1641 001b 0E       		.uleb128 0xe
+ 1642 001c 00       		.byte	0
+ 1643 001d 00       		.byte	0
+ 1644 001e 03       		.uleb128 0x3
+ 1645 001f 24       		.uleb128 0x24
+ 1646 0020 00       		.byte	0
+ 1647 0021 0B       		.uleb128 0xb
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 39
+
+
+ 1648 0022 0B       		.uleb128 0xb
+ 1649 0023 3E       		.uleb128 0x3e
+ 1650 0024 0B       		.uleb128 0xb
+ 1651 0025 03       		.uleb128 0x3
+ 1652 0026 08       		.uleb128 0x8
+ 1653 0027 00       		.byte	0
+ 1654 0028 00       		.byte	0
+ 1655 0029 04       		.uleb128 0x4
+ 1656 002a 16       		.uleb128 0x16
+ 1657 002b 00       		.byte	0
+ 1658 002c 03       		.uleb128 0x3
+ 1659 002d 0E       		.uleb128 0xe
+ 1660 002e 3A       		.uleb128 0x3a
+ 1661 002f 0B       		.uleb128 0xb
+ 1662 0030 3B       		.uleb128 0x3b
+ 1663 0031 05       		.uleb128 0x5
+ 1664 0032 49       		.uleb128 0x49
+ 1665 0033 13       		.uleb128 0x13
+ 1666 0034 00       		.byte	0
+ 1667 0035 00       		.byte	0
+ 1668 0036 05       		.uleb128 0x5
+ 1669 0037 35       		.uleb128 0x35
+ 1670 0038 00       		.byte	0
+ 1671 0039 49       		.uleb128 0x49
+ 1672 003a 13       		.uleb128 0x13
+ 1673 003b 00       		.byte	0
+ 1674 003c 00       		.byte	0
+ 1675 003d 06       		.uleb128 0x6
+ 1676 003e 13       		.uleb128 0x13
+ 1677 003f 01       		.byte	0x1
+ 1678 0040 0B       		.uleb128 0xb
+ 1679 0041 0B       		.uleb128 0xb
+ 1680 0042 3A       		.uleb128 0x3a
+ 1681 0043 0B       		.uleb128 0xb
+ 1682 0044 3B       		.uleb128 0x3b
+ 1683 0045 0B       		.uleb128 0xb
+ 1684 0046 01       		.uleb128 0x1
+ 1685 0047 13       		.uleb128 0x13
+ 1686 0048 00       		.byte	0
+ 1687 0049 00       		.byte	0
+ 1688 004a 07       		.uleb128 0x7
+ 1689 004b 0D       		.uleb128 0xd
+ 1690 004c 00       		.byte	0
+ 1691 004d 03       		.uleb128 0x3
+ 1692 004e 0E       		.uleb128 0xe
+ 1693 004f 3A       		.uleb128 0x3a
+ 1694 0050 0B       		.uleb128 0xb
+ 1695 0051 3B       		.uleb128 0x3b
+ 1696 0052 0B       		.uleb128 0xb
+ 1697 0053 49       		.uleb128 0x49
+ 1698 0054 13       		.uleb128 0x13
+ 1699 0055 38       		.uleb128 0x38
+ 1700 0056 0B       		.uleb128 0xb
+ 1701 0057 00       		.byte	0
+ 1702 0058 00       		.byte	0
+ 1703 0059 08       		.uleb128 0x8
+ 1704 005a 0F       		.uleb128 0xf
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 40
+
+
+ 1705 005b 00       		.byte	0
+ 1706 005c 0B       		.uleb128 0xb
+ 1707 005d 0B       		.uleb128 0xb
+ 1708 005e 49       		.uleb128 0x49
+ 1709 005f 13       		.uleb128 0x13
+ 1710 0060 00       		.byte	0
+ 1711 0061 00       		.byte	0
+ 1712 0062 09       		.uleb128 0x9
+ 1713 0063 26       		.uleb128 0x26
+ 1714 0064 00       		.byte	0
+ 1715 0065 49       		.uleb128 0x49
+ 1716 0066 13       		.uleb128 0x13
+ 1717 0067 00       		.byte	0
+ 1718 0068 00       		.byte	0
+ 1719 0069 0A       		.uleb128 0xa
+ 1720 006a 15       		.uleb128 0x15
+ 1721 006b 01       		.byte	0x1
+ 1722 006c 27       		.uleb128 0x27
+ 1723 006d 19       		.uleb128 0x19
+ 1724 006e 49       		.uleb128 0x49
+ 1725 006f 13       		.uleb128 0x13
+ 1726 0070 01       		.uleb128 0x1
+ 1727 0071 13       		.uleb128 0x13
+ 1728 0072 00       		.byte	0
+ 1729 0073 00       		.byte	0
+ 1730 0074 0B       		.uleb128 0xb
+ 1731 0075 05       		.uleb128 0x5
+ 1732 0076 00       		.byte	0
+ 1733 0077 49       		.uleb128 0x49
+ 1734 0078 13       		.uleb128 0x13
+ 1735 0079 00       		.byte	0
+ 1736 007a 00       		.byte	0
+ 1737 007b 0C       		.uleb128 0xc
+ 1738 007c 15       		.uleb128 0x15
+ 1739 007d 01       		.byte	0x1
+ 1740 007e 27       		.uleb128 0x27
+ 1741 007f 19       		.uleb128 0x19
+ 1742 0080 01       		.uleb128 0x1
+ 1743 0081 13       		.uleb128 0x13
+ 1744 0082 00       		.byte	0
+ 1745 0083 00       		.byte	0
+ 1746 0084 0D       		.uleb128 0xd
+ 1747 0085 16       		.uleb128 0x16
+ 1748 0086 00       		.byte	0
+ 1749 0087 03       		.uleb128 0x3
+ 1750 0088 0E       		.uleb128 0xe
+ 1751 0089 3A       		.uleb128 0x3a
+ 1752 008a 0B       		.uleb128 0xb
+ 1753 008b 3B       		.uleb128 0x3b
+ 1754 008c 0B       		.uleb128 0xb
+ 1755 008d 49       		.uleb128 0x49
+ 1756 008e 13       		.uleb128 0x13
+ 1757 008f 00       		.byte	0
+ 1758 0090 00       		.byte	0
+ 1759 0091 0E       		.uleb128 0xe
+ 1760 0092 2E       		.uleb128 0x2e
+ 1761 0093 01       		.byte	0x1
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 41
+
+
+ 1762 0094 3F       		.uleb128 0x3f
+ 1763 0095 19       		.uleb128 0x19
+ 1764 0096 03       		.uleb128 0x3
+ 1765 0097 0E       		.uleb128 0xe
+ 1766 0098 3A       		.uleb128 0x3a
+ 1767 0099 0B       		.uleb128 0xb
+ 1768 009a 3B       		.uleb128 0x3b
+ 1769 009b 0B       		.uleb128 0xb
+ 1770 009c 27       		.uleb128 0x27
+ 1771 009d 19       		.uleb128 0x19
+ 1772 009e 11       		.uleb128 0x11
+ 1773 009f 01       		.uleb128 0x1
+ 1774 00a0 12       		.uleb128 0x12
+ 1775 00a1 06       		.uleb128 0x6
+ 1776 00a2 40       		.uleb128 0x40
+ 1777 00a3 18       		.uleb128 0x18
+ 1778 00a4 9642     		.uleb128 0x2116
+ 1779 00a6 19       		.uleb128 0x19
+ 1780 00a7 01       		.uleb128 0x1
+ 1781 00a8 13       		.uleb128 0x13
+ 1782 00a9 00       		.byte	0
+ 1783 00aa 00       		.byte	0
+ 1784 00ab 0F       		.uleb128 0xf
+ 1785 00ac 34       		.uleb128 0x34
+ 1786 00ad 00       		.byte	0
+ 1787 00ae 03       		.uleb128 0x3
+ 1788 00af 0E       		.uleb128 0xe
+ 1789 00b0 3A       		.uleb128 0x3a
+ 1790 00b1 0B       		.uleb128 0xb
+ 1791 00b2 3B       		.uleb128 0x3b
+ 1792 00b3 0B       		.uleb128 0xb
+ 1793 00b4 49       		.uleb128 0x49
+ 1794 00b5 13       		.uleb128 0x13
+ 1795 00b6 02       		.uleb128 0x2
+ 1796 00b7 18       		.uleb128 0x18
+ 1797 00b8 00       		.byte	0
+ 1798 00b9 00       		.byte	0
+ 1799 00ba 10       		.uleb128 0x10
+ 1800 00bb 05       		.uleb128 0x5
+ 1801 00bc 00       		.byte	0
+ 1802 00bd 03       		.uleb128 0x3
+ 1803 00be 0E       		.uleb128 0xe
+ 1804 00bf 3A       		.uleb128 0x3a
+ 1805 00c0 0B       		.uleb128 0xb
+ 1806 00c1 3B       		.uleb128 0x3b
+ 1807 00c2 0B       		.uleb128 0xb
+ 1808 00c3 49       		.uleb128 0x49
+ 1809 00c4 13       		.uleb128 0x13
+ 1810 00c5 02       		.uleb128 0x2
+ 1811 00c6 18       		.uleb128 0x18
+ 1812 00c7 00       		.byte	0
+ 1813 00c8 00       		.byte	0
+ 1814 00c9 11       		.uleb128 0x11
+ 1815 00ca 2E       		.uleb128 0x2e
+ 1816 00cb 00       		.byte	0
+ 1817 00cc 3F       		.uleb128 0x3f
+ 1818 00cd 19       		.uleb128 0x19
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 42
+
+
+ 1819 00ce 03       		.uleb128 0x3
+ 1820 00cf 0E       		.uleb128 0xe
+ 1821 00d0 3A       		.uleb128 0x3a
+ 1822 00d1 0B       		.uleb128 0xb
+ 1823 00d2 3B       		.uleb128 0x3b
+ 1824 00d3 05       		.uleb128 0x5
+ 1825 00d4 27       		.uleb128 0x27
+ 1826 00d5 19       		.uleb128 0x19
+ 1827 00d6 11       		.uleb128 0x11
+ 1828 00d7 01       		.uleb128 0x1
+ 1829 00d8 12       		.uleb128 0x12
+ 1830 00d9 06       		.uleb128 0x6
+ 1831 00da 40       		.uleb128 0x40
+ 1832 00db 18       		.uleb128 0x18
+ 1833 00dc 9742     		.uleb128 0x2117
+ 1834 00de 19       		.uleb128 0x19
+ 1835 00df 00       		.byte	0
+ 1836 00e0 00       		.byte	0
+ 1837 00e1 12       		.uleb128 0x12
+ 1838 00e2 2E       		.uleb128 0x2e
+ 1839 00e3 01       		.byte	0x1
+ 1840 00e4 3F       		.uleb128 0x3f
+ 1841 00e5 19       		.uleb128 0x19
+ 1842 00e6 03       		.uleb128 0x3
+ 1843 00e7 0E       		.uleb128 0xe
+ 1844 00e8 3A       		.uleb128 0x3a
+ 1845 00e9 0B       		.uleb128 0xb
+ 1846 00ea 3B       		.uleb128 0x3b
+ 1847 00eb 05       		.uleb128 0x5
+ 1848 00ec 27       		.uleb128 0x27
+ 1849 00ed 19       		.uleb128 0x19
+ 1850 00ee 11       		.uleb128 0x11
+ 1851 00ef 01       		.uleb128 0x1
+ 1852 00f0 12       		.uleb128 0x12
+ 1853 00f1 06       		.uleb128 0x6
+ 1854 00f2 40       		.uleb128 0x40
+ 1855 00f3 18       		.uleb128 0x18
+ 1856 00f4 9742     		.uleb128 0x2117
+ 1857 00f6 19       		.uleb128 0x19
+ 1858 00f7 01       		.uleb128 0x1
+ 1859 00f8 13       		.uleb128 0x13
+ 1860 00f9 00       		.byte	0
+ 1861 00fa 00       		.byte	0
+ 1862 00fb 13       		.uleb128 0x13
+ 1863 00fc 34       		.uleb128 0x34
+ 1864 00fd 00       		.byte	0
+ 1865 00fe 03       		.uleb128 0x3
+ 1866 00ff 0E       		.uleb128 0xe
+ 1867 0100 3A       		.uleb128 0x3a
+ 1868 0101 0B       		.uleb128 0xb
+ 1869 0102 3B       		.uleb128 0x3b
+ 1870 0103 05       		.uleb128 0x5
+ 1871 0104 49       		.uleb128 0x49
+ 1872 0105 13       		.uleb128 0x13
+ 1873 0106 02       		.uleb128 0x2
+ 1874 0107 18       		.uleb128 0x18
+ 1875 0108 00       		.byte	0
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 43
+
+
+ 1876 0109 00       		.byte	0
+ 1877 010a 14       		.uleb128 0x14
+ 1878 010b 2E       		.uleb128 0x2e
+ 1879 010c 01       		.byte	0x1
+ 1880 010d 3F       		.uleb128 0x3f
+ 1881 010e 19       		.uleb128 0x19
+ 1882 010f 03       		.uleb128 0x3
+ 1883 0110 0E       		.uleb128 0xe
+ 1884 0111 3A       		.uleb128 0x3a
+ 1885 0112 0B       		.uleb128 0xb
+ 1886 0113 3B       		.uleb128 0x3b
+ 1887 0114 05       		.uleb128 0x5
+ 1888 0115 27       		.uleb128 0x27
+ 1889 0116 19       		.uleb128 0x19
+ 1890 0117 11       		.uleb128 0x11
+ 1891 0118 01       		.uleb128 0x1
+ 1892 0119 12       		.uleb128 0x12
+ 1893 011a 06       		.uleb128 0x6
+ 1894 011b 40       		.uleb128 0x40
+ 1895 011c 18       		.uleb128 0x18
+ 1896 011d 9642     		.uleb128 0x2116
+ 1897 011f 19       		.uleb128 0x19
+ 1898 0120 01       		.uleb128 0x1
+ 1899 0121 13       		.uleb128 0x13
+ 1900 0122 00       		.byte	0
+ 1901 0123 00       		.byte	0
+ 1902 0124 15       		.uleb128 0x15
+ 1903 0125 05       		.uleb128 0x5
+ 1904 0126 00       		.byte	0
+ 1905 0127 03       		.uleb128 0x3
+ 1906 0128 0E       		.uleb128 0xe
+ 1907 0129 3A       		.uleb128 0x3a
+ 1908 012a 0B       		.uleb128 0xb
+ 1909 012b 3B       		.uleb128 0x3b
+ 1910 012c 05       		.uleb128 0x5
+ 1911 012d 49       		.uleb128 0x49
+ 1912 012e 13       		.uleb128 0x13
+ 1913 012f 02       		.uleb128 0x2
+ 1914 0130 18       		.uleb128 0x18
+ 1915 0131 00       		.byte	0
+ 1916 0132 00       		.byte	0
+ 1917 0133 16       		.uleb128 0x16
+ 1918 0134 2E       		.uleb128 0x2e
+ 1919 0135 01       		.byte	0x1
+ 1920 0136 3F       		.uleb128 0x3f
+ 1921 0137 19       		.uleb128 0x19
+ 1922 0138 03       		.uleb128 0x3
+ 1923 0139 0E       		.uleb128 0xe
+ 1924 013a 3A       		.uleb128 0x3a
+ 1925 013b 0B       		.uleb128 0xb
+ 1926 013c 3B       		.uleb128 0x3b
+ 1927 013d 05       		.uleb128 0x5
+ 1928 013e 27       		.uleb128 0x27
+ 1929 013f 19       		.uleb128 0x19
+ 1930 0140 49       		.uleb128 0x49
+ 1931 0141 13       		.uleb128 0x13
+ 1932 0142 11       		.uleb128 0x11
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 44
+
+
+ 1933 0143 01       		.uleb128 0x1
+ 1934 0144 12       		.uleb128 0x12
+ 1935 0145 06       		.uleb128 0x6
+ 1936 0146 40       		.uleb128 0x40
+ 1937 0147 18       		.uleb128 0x18
+ 1938 0148 9742     		.uleb128 0x2117
+ 1939 014a 19       		.uleb128 0x19
+ 1940 014b 01       		.uleb128 0x1
+ 1941 014c 13       		.uleb128 0x13
+ 1942 014d 00       		.byte	0
+ 1943 014e 00       		.byte	0
+ 1944 014f 17       		.uleb128 0x17
+ 1945 0150 2E       		.uleb128 0x2e
+ 1946 0151 01       		.byte	0x1
+ 1947 0152 3F       		.uleb128 0x3f
+ 1948 0153 19       		.uleb128 0x19
+ 1949 0154 03       		.uleb128 0x3
+ 1950 0155 0E       		.uleb128 0xe
+ 1951 0156 3A       		.uleb128 0x3a
+ 1952 0157 0B       		.uleb128 0xb
+ 1953 0158 3B       		.uleb128 0x3b
+ 1954 0159 05       		.uleb128 0x5
+ 1955 015a 27       		.uleb128 0x27
+ 1956 015b 19       		.uleb128 0x19
+ 1957 015c 49       		.uleb128 0x49
+ 1958 015d 13       		.uleb128 0x13
+ 1959 015e 11       		.uleb128 0x11
+ 1960 015f 01       		.uleb128 0x1
+ 1961 0160 12       		.uleb128 0x12
+ 1962 0161 06       		.uleb128 0x6
+ 1963 0162 40       		.uleb128 0x40
+ 1964 0163 18       		.uleb128 0x18
+ 1965 0164 9642     		.uleb128 0x2116
+ 1966 0166 19       		.uleb128 0x19
+ 1967 0167 01       		.uleb128 0x1
+ 1968 0168 13       		.uleb128 0x13
+ 1969 0169 00       		.byte	0
+ 1970 016a 00       		.byte	0
+ 1971 016b 18       		.uleb128 0x18
+ 1972 016c 01       		.uleb128 0x1
+ 1973 016d 01       		.byte	0x1
+ 1974 016e 49       		.uleb128 0x49
+ 1975 016f 13       		.uleb128 0x13
+ 1976 0170 01       		.uleb128 0x1
+ 1977 0171 13       		.uleb128 0x13
+ 1978 0172 00       		.byte	0
+ 1979 0173 00       		.byte	0
+ 1980 0174 19       		.uleb128 0x19
+ 1981 0175 21       		.uleb128 0x21
+ 1982 0176 00       		.byte	0
+ 1983 0177 49       		.uleb128 0x49
+ 1984 0178 13       		.uleb128 0x13
+ 1985 0179 2F       		.uleb128 0x2f
+ 1986 017a 0B       		.uleb128 0xb
+ 1987 017b 00       		.byte	0
+ 1988 017c 00       		.byte	0
+ 1989 017d 1A       		.uleb128 0x1a
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 45
+
+
+ 1990 017e 34       		.uleb128 0x34
+ 1991 017f 00       		.byte	0
+ 1992 0180 03       		.uleb128 0x3
+ 1993 0181 0E       		.uleb128 0xe
+ 1994 0182 3A       		.uleb128 0x3a
+ 1995 0183 0B       		.uleb128 0xb
+ 1996 0184 3B       		.uleb128 0x3b
+ 1997 0185 05       		.uleb128 0x5
+ 1998 0186 49       		.uleb128 0x49
+ 1999 0187 13       		.uleb128 0x13
+ 2000 0188 3F       		.uleb128 0x3f
+ 2001 0189 19       		.uleb128 0x19
+ 2002 018a 3C       		.uleb128 0x3c
+ 2003 018b 19       		.uleb128 0x19
+ 2004 018c 00       		.byte	0
+ 2005 018d 00       		.byte	0
+ 2006 018e 1B       		.uleb128 0x1b
+ 2007 018f 34       		.uleb128 0x34
+ 2008 0190 00       		.byte	0
+ 2009 0191 03       		.uleb128 0x3
+ 2010 0192 0E       		.uleb128 0xe
+ 2011 0193 3A       		.uleb128 0x3a
+ 2012 0194 0B       		.uleb128 0xb
+ 2013 0195 3B       		.uleb128 0x3b
+ 2014 0196 0B       		.uleb128 0xb
+ 2015 0197 49       		.uleb128 0x49
+ 2016 0198 13       		.uleb128 0x13
+ 2017 0199 3F       		.uleb128 0x3f
+ 2018 019a 19       		.uleb128 0x19
+ 2019 019b 02       		.uleb128 0x2
+ 2020 019c 18       		.uleb128 0x18
+ 2021 019d 00       		.byte	0
+ 2022 019e 00       		.byte	0
+ 2023 019f 00       		.byte	0
+ 2024              		.section	.debug_aranges,"",%progbits
+ 2025 0000 5C000000 		.4byte	0x5c
+ 2026 0004 0200     		.2byte	0x2
+ 2027 0006 00000000 		.4byte	.Ldebug_info0
+ 2028 000a 04       		.byte	0x4
+ 2029 000b 00       		.byte	0
+ 2030 000c 0000     		.2byte	0
+ 2031 000e 0000     		.2byte	0
+ 2032 0010 00000000 		.4byte	.LFB32
+ 2033 0014 10010000 		.4byte	.LFE32-.LFB32
+ 2034 0018 00000000 		.4byte	.LFB33
+ 2035 001c F4000000 		.4byte	.LFE33-.LFB33
+ 2036 0020 00000000 		.4byte	.LFB34
+ 2037 0024 1C000000 		.4byte	.LFE34-.LFB34
+ 2038 0028 00000000 		.4byte	.LFB35
+ 2039 002c 34000000 		.4byte	.LFE35-.LFB35
+ 2040 0030 00000000 		.4byte	.LFB36
+ 2041 0034 94000000 		.4byte	.LFE36-.LFB36
+ 2042 0038 00000000 		.4byte	.LFB37
+ 2043 003c 58000000 		.4byte	.LFE37-.LFB37
+ 2044 0040 00000000 		.4byte	.LFB38
+ 2045 0044 1C000000 		.4byte	.LFE38-.LFB38
+ 2046 0048 00000000 		.4byte	.LFB39
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 46
+
+
+ 2047 004c 28000000 		.4byte	.LFE39-.LFB39
+ 2048 0050 00000000 		.4byte	.LFB40
+ 2049 0054 34000000 		.4byte	.LFE40-.LFB40
+ 2050 0058 00000000 		.4byte	0
+ 2051 005c 00000000 		.4byte	0
+ 2052              		.section	.debug_ranges,"",%progbits
+ 2053              	.Ldebug_ranges0:
+ 2054 0000 00000000 		.4byte	.LFB32
+ 2055 0004 10010000 		.4byte	.LFE32
+ 2056 0008 00000000 		.4byte	.LFB33
+ 2057 000c F4000000 		.4byte	.LFE33
+ 2058 0010 00000000 		.4byte	.LFB34
+ 2059 0014 1C000000 		.4byte	.LFE34
+ 2060 0018 00000000 		.4byte	.LFB35
+ 2061 001c 34000000 		.4byte	.LFE35
+ 2062 0020 00000000 		.4byte	.LFB36
+ 2063 0024 94000000 		.4byte	.LFE36
+ 2064 0028 00000000 		.4byte	.LFB37
+ 2065 002c 58000000 		.4byte	.LFE37
+ 2066 0030 00000000 		.4byte	.LFB38
+ 2067 0034 1C000000 		.4byte	.LFE38
+ 2068 0038 00000000 		.4byte	.LFB39
+ 2069 003c 28000000 		.4byte	.LFE39
+ 2070 0040 00000000 		.4byte	.LFB40
+ 2071 0044 34000000 		.4byte	.LFE40
+ 2072 0048 00000000 		.4byte	0
+ 2073 004c 00000000 		.4byte	0
+ 2074              		.section	.debug_line,"",%progbits
+ 2075              	.Ldebug_line0:
+ 2076 0000 1B020000 		.section	.debug_str,"MS",%progbits,1
+ 2076      0200EA00 
+ 2076      00000201 
+ 2076      FB0E0D00 
+ 2076      01010101 
+ 2077              	.LASF49:
+ 2078 0000 63757253 		.ascii	"curSensor\000"
+ 2078      656E736F 
+ 2078      7200
+ 2079              	.LASF10:
+ 2080 000a 75696E74 		.ascii	"uint16\000"
+ 2080      313600
+ 2081              	.LASF85:
+ 2082 0011 43617053 		.ascii	"CapSense_CSD_kValueTbl\000"
+ 2082      656E7365 
+ 2082      5F435344 
+ 2082      5F6B5661 
+ 2082      6C756554 
+ 2083              	.LASF61:
+ 2084 0028 43617053 		.ascii	"CapSense_CSD_GetSensitivityCoefficient\000"
+ 2084      656E7365 
+ 2084      5F435344 
+ 2084      5F476574 
+ 2084      53656E73 
+ 2085              	.LASF83:
+ 2086 004f 43617053 		.ascii	"CapSense_CSD_sampleMaxTbl\000"
+ 2086      656E7365 
+ 2086      5F435344 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 47
+
+
+ 2086      5F73616D 
+ 2086      706C654D 
+ 2087              	.LASF52:
+ 2088 0069 43617053 		.ascii	"CapSense_CSD_UpdateThresholds\000"
+ 2088      656E7365 
+ 2088      5F435344 
+ 2088      5F557064 
+ 2088      61746554 
+ 2089              	.LASF53:
+ 2090 0087 66696E67 		.ascii	"fingerThreshold\000"
+ 2090      65725468 
+ 2090      72657368 
+ 2090      6F6C6400 
+ 2091              	.LASF36:
+ 2092 0097 70747247 		.ascii	"ptrGetRaw\000"
+ 2092      65745261 
+ 2092      7700
+ 2093              	.LASF51:
+ 2094 00a1 43617053 		.ascii	"CapSense_CSD_AutoTune\000"
+ 2094      656E7365 
+ 2094      5F435344 
+ 2094      5F417574 
+ 2094      6F54756E 
+ 2095              	.LASF66:
+ 2096 00b7 43617053 		.ascii	"CapSense_CSD_modulationIDAC\000"
+ 2096      656E7365 
+ 2096      5F435344 
+ 2096      5F6D6F64 
+ 2096      756C6174 
+ 2097              	.LASF93:
+ 2098 00d3 43617053 		.ascii	"CapSense_CSD_SetAnalogSwitchesSrcDirect\000"
+ 2098      656E7365 
+ 2098      5F435344 
+ 2098      5F536574 
+ 2098      416E616C 
+ 2099              	.LASF7:
+ 2100 00fb 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2100      206C6F6E 
+ 2100      6720756E 
+ 2100      7369676E 
+ 2100      65642069 
+ 2101              	.LASF84:
+ 2102 0112 43617053 		.ascii	"CapSense_CSD_previousSampleTbl\000"
+ 2102      656E7365 
+ 2102      5F435344 
+ 2102      5F707265 
+ 2102      76696F75 
+ 2103              	.LASF69:
+ 2104 0131 43617053 		.ascii	"CapSense_CSD_senseClkDividerVal\000"
+ 2104      656E7365 
+ 2104      5F435344 
+ 2104      5F73656E 
+ 2104      7365436C 
+ 2105              	.LASF79:
+ 2106 0151 43617053 		.ascii	"CapSense_CSD_noiseEnvelopeTbl\000"
+ 2106      656E7365 
+ 2106      5F435344 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 48
+
+
+ 2106      5F6E6F69 
+ 2106      7365456E 
+ 2107              	.LASF6:
+ 2108 016f 6C6F6E67 		.ascii	"long long int\000"
+ 2108      206C6F6E 
+ 2108      6720696E 
+ 2108      7400
+ 2109              	.LASF0:
+ 2110 017d 7369676E 		.ascii	"signed char\000"
+ 2110      65642063 
+ 2110      68617200 
+ 2111              	.LASF89:
+ 2112 0189 43617053 		.ascii	"CapSense_CSD_configPointers\000"
+ 2112      656E7365 
+ 2112      5F435344 
+ 2112      5F636F6E 
+ 2112      66696750 
+ 2113              	.LASF35:
+ 2114 01a5 6E756D62 		.ascii	"numberOfSensors\000"
+ 2114      65724F66 
+ 2114      53656E73 
+ 2114      6F727300 
+ 2115              	.LASF23:
+ 2116 01b5 77696467 		.ascii	"widgetNubmersTbl\000"
+ 2116      65744E75 
+ 2116      626D6572 
+ 2116      7354626C 
+ 2116      00
+ 2117              	.LASF67:
+ 2118 01c6 43617053 		.ascii	"CapSense_CSD_compensationIDAC\000"
+ 2118      656E7365 
+ 2118      5F435344 
+ 2118      5F636F6D 
+ 2118      70656E73 
+ 2119              	.LASF4:
+ 2120 01e4 6C6F6E67 		.ascii	"long int\000"
+ 2120      20696E74 
+ 2120      00
+ 2121              	.LASF71:
+ 2122 01ed 43617053 		.ascii	"CapSense_CSD_widgetNumber\000"
+ 2122      656E7365 
+ 2122      5F435344 
+ 2122      5F776964 
+ 2122      6765744E 
+ 2123              	.LASF9:
+ 2124 0207 75696E74 		.ascii	"uint8\000"
+ 2124      3800
+ 2125              	.LASF92:
+ 2126 020d 433A5C50 		.ascii	"C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4"
+ 2126      726F6772 
+ 2126      616D2046 
+ 2126      696C6573 
+ 2126      20287838 
+ 2127 023c 5C50536F 		.ascii	"\\PSoC Creator\\1\\CapSense_CSD_P4_Design01.cydsn\000"
+ 2127      43204372 
+ 2127      6561746F 
+ 2127      725C315C 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 49
+
+
+ 2127      43617053 
+ 2128              	.LASF13:
+ 2129 026b 646F7562 		.ascii	"double\000"
+ 2129      6C6500
+ 2130              	.LASF55:
+ 2131 0272 6E657752 		.ascii	"newRegValue\000"
+ 2131      65675661 
+ 2131      6C756500 
+ 2132              	.LASF11:
+ 2133 027e 75696E74 		.ascii	"uint32\000"
+ 2133      333200
+ 2134              	.LASF45:
+ 2135 0285 73656E73 		.ascii	"sensetivitySeed\000"
+ 2135      65746976 
+ 2135      69747953 
+ 2135      65656400 
+ 2136              	.LASF44:
+ 2137 0295 746F7461 		.ascii	"totalSensorsNum\000"
+ 2137      6C53656E 
+ 2137      736F7273 
+ 2137      4E756D00 
+ 2138              	.LASF60:
+ 2139 02a5 76616C75 		.ascii	"value\000"
+ 2139      6500
+ 2140              	.LASF8:
+ 2141 02ab 756E7369 		.ascii	"unsigned int\000"
+ 2141      676E6564 
+ 2141      20696E74 
+ 2141      00
+ 2142              	.LASF29:
+ 2143 02b8 73616D70 		.ascii	"sampleMaxTbl\000"
+ 2143      6C654D61 
+ 2143      7854626C 
+ 2143      00
+ 2144              	.LASF63:
+ 2145 02c5 43617053 		.ascii	"CapSense_CSD_GetNormalizedDiffCountData\000"
+ 2145      656E7365 
+ 2145      5F435344 
+ 2145      5F476574 
+ 2145      4E6F726D 
+ 2146              	.LASF5:
+ 2147 02ed 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2147      20756E73 
+ 2147      69676E65 
+ 2147      6420696E 
+ 2147      7400
+ 2148              	.LASF24:
+ 2149 02ff 7265736F 		.ascii	"resolutionsTbl\000"
+ 2149      6C757469 
+ 2149      6F6E7354 
+ 2149      626C00
+ 2150              	.LASF39:
+ 2151 030e 70747247 		.ascii	"ptrGetBitValue\000"
+ 2151      65744269 
+ 2151      7456616C 
+ 2151      756500
+ 2152              	.LASF3:
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 50
+
+
+ 2153 031d 73686F72 		.ascii	"short unsigned int\000"
+ 2153      7420756E 
+ 2153      7369676E 
+ 2153      65642069 
+ 2153      6E7400
+ 2154              	.LASF20:
+ 2155 0330 73656E73 		.ascii	"sensetivityTbl\000"
+ 2155      65746976 
+ 2155      69747954 
+ 2155      626C00
+ 2156              	.LASF57:
+ 2157 033f 73656E73 		.ascii	"sensor\000"
+ 2157      6F7200
+ 2158              	.LASF47:
+ 2159 0346 706F696E 		.ascii	"pointers\000"
+ 2159      74657273 
+ 2159      00
+ 2160              	.LASF65:
+ 2161 034f 43617053 		.ascii	"CapSense_CSD_prescalersTuningDone\000"
+ 2161      656E7365 
+ 2161      5F435344 
+ 2161      5F707265 
+ 2161      7363616C 
+ 2162              	.LASF21:
+ 2163 0371 63686172 		.ascii	"chargeDivTbl\000"
+ 2163      67654469 
+ 2163      7654626C 
+ 2163      00
+ 2164              	.LASF90:
+ 2165 037e 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2165      43313120 
+ 2165      352E342E 
+ 2165      31203230 
+ 2165      31363036 
+ 2166 03b1 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 2166      20726576 
+ 2166      6973696F 
+ 2166      6E203233 
+ 2166      37373135 
+ 2167 03e4 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 2167      66756E63 
+ 2167      74696F6E 
+ 2167      2D736563 
+ 2167      74696F6E 
+ 2168              	.LASF28:
+ 2169 040c 73616D70 		.ascii	"sampleMinTbl\000"
+ 2169      6C654D69 
+ 2169      6E54626C 
+ 2169      00
+ 2170              	.LASF15:
+ 2171 0419 72656733 		.ascii	"reg32\000"
+ 2171      3200
+ 2172              	.LASF25:
+ 2173 041f 6E6F6973 		.ascii	"noiseEnvelopeTbl\000"
+ 2173      65456E76 
+ 2173      656C6F70 
+ 2173      6554626C 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 51
+
+
+ 2173      00
+ 2174              	.LASF46:
+ 2175 0430 6866636C 		.ascii	"hfclkFreq_MHz\000"
+ 2175      6B467265 
+ 2175      715F4D48 
+ 2175      7A00
+ 2176              	.LASF16:
+ 2177 043e 73697A65 		.ascii	"sizetype\000"
+ 2177      74797065 
+ 2177      00
+ 2178              	.LASF91:
+ 2179 0447 433A5C50 		.ascii	"C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4"
+ 2179      726F6772 
+ 2179      616D2046 
+ 2179      696C6573 
+ 2179      20287838 
+ 2180 0476 5C50536F 		.ascii	"\\PSoC Creator\\1\\CapSense_CSD_P4_Design01.cydsn\\"
+ 2180      43204372 
+ 2180      6561746F 
+ 2180      725C315C 
+ 2180      43617053 
+ 2181 04a5 47656E65 		.ascii	"Generated_Source\\PSoC4\\CapSense_CSD_SMS.c\000"
+ 2181      72617465 
+ 2181      645F536F 
+ 2181      75726365 
+ 2181      5C50536F 
+ 2182              	.LASF17:
+ 2183 04cf 6C6F6E67 		.ascii	"long double\000"
+ 2183      20646F75 
+ 2183      626C6500 
+ 2184              	.LASF48:
+ 2185 04db 43617053 		.ascii	"CapSense_CSD_CONFIG_TYPE_P4_v2_60\000"
+ 2185      656E7365 
+ 2185      5F435344 
+ 2185      5F434F4E 
+ 2185      4649475F 
+ 2186              	.LASF18:
+ 2187 04fd 69646163 		.ascii	"idac1LevelsTbl\000"
+ 2187      314C6576 
+ 2187      656C7354 
+ 2187      626C00
+ 2188              	.LASF19:
+ 2189 050c 69646163 		.ascii	"idac2LevelsTbl\000"
+ 2189      324C6576 
+ 2189      656C7354 
+ 2189      626C00
+ 2190              	.LASF64:
+ 2191 051b 43617053 		.ascii	"CapSense_CSD_scanSpeedTbl\000"
+ 2191      656E7365 
+ 2191      5F435344 
+ 2191      5F736361 
+ 2191      6E537065 
+ 2192              	.LASF56:
+ 2193 0535 43617053 		.ascii	"CapSense_CSD_EnableBaselineIDAC\000"
+ 2193      656E7365 
+ 2193      5F435344 
+ 2193      5F456E61 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 52
+
+
+ 2193      626C6542 
+ 2194              	.LASF12:
+ 2195 0555 666C6F61 		.ascii	"float\000"
+ 2195      7400
+ 2196              	.LASF88:
+ 2197 055b 43617053 		.ascii	"CapSense_CSD_config\000"
+ 2197      656E7365 
+ 2197      5F435344 
+ 2197      5F636F6E 
+ 2197      66696700 
+ 2198              	.LASF73:
+ 2199 056f 43617053 		.ascii	"CapSense_CSD_fingerThreshold\000"
+ 2199      656E7365 
+ 2199      5F435344 
+ 2199      5F66696E 
+ 2199      67657254 
+ 2200              	.LASF27:
+ 2201 058c 7369676E 		.ascii	"signRegisterTbl\000"
+ 2201      52656769 
+ 2201      73746572 
+ 2201      54626C00 
+ 2202              	.LASF33:
+ 2203 059c 70726573 		.ascii	"prescalerTable\000"
+ 2203      63616C65 
+ 2203      72546162 
+ 2203      6C6500
+ 2204              	.LASF1:
+ 2205 05ab 756E7369 		.ascii	"unsigned char\000"
+ 2205      676E6564 
+ 2205      20636861 
+ 2205      7200
+ 2206              	.LASF38:
+ 2207 05b9 70747252 		.ascii	"ptrReadSensorRaw\000"
+ 2207      65616453 
+ 2207      656E736F 
+ 2207      72526177 
+ 2207      00
+ 2208              	.LASF75:
+ 2209 05ca 43617053 		.ascii	"CapSense_CSD_negativeNoiseThreshold\000"
+ 2209      656E7365 
+ 2209      5F435344 
+ 2209      5F6E6567 
+ 2209      61746976 
+ 2210              	.LASF2:
+ 2211 05ee 73686F72 		.ascii	"short int\000"
+ 2211      7420696E 
+ 2211      7400
+ 2212              	.LASF50:
+ 2213 05f8 77696467 		.ascii	"widget\000"
+ 2213      657400
+ 2214              	.LASF22:
+ 2215 05ff 6D6F6444 		.ascii	"modDivTbl\000"
+ 2215      69765462 
+ 2215      6C00
+ 2216              	.LASF59:
+ 2217 0609 43617053 		.ascii	"CapSense_CSD_SetSensitivity\000"
+ 2217      656E7365 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 53
+
+
+ 2217      5F435344 
+ 2217      5F536574 
+ 2217      53656E73 
+ 2218              	.LASF31:
+ 2219 0625 6B56616C 		.ascii	"kValueTbl\000"
+ 2219      75655462 
+ 2219      6C00
+ 2220              	.LASF78:
+ 2221 062f 43617053 		.ascii	"CapSense_CSD_numberOfSensors\000"
+ 2221      656E7365 
+ 2221      5F435344 
+ 2221      5F6E756D 
+ 2221      6265724F 
+ 2222              	.LASF82:
+ 2223 064c 43617053 		.ascii	"CapSense_CSD_sampleMinTbl\000"
+ 2223      656E7365 
+ 2223      5F435344 
+ 2223      5F73616D 
+ 2223      706C654D 
+ 2224              	.LASF30:
+ 2225 0666 70726576 		.ascii	"previousSampleTbl\000"
+ 2225      696F7573 
+ 2225      53616D70 
+ 2225      6C655462 
+ 2225      6C00
+ 2226              	.LASF74:
+ 2227 0678 43617053 		.ascii	"CapSense_CSD_noiseThreshold\000"
+ 2227      656E7365 
+ 2227      5F435344 
+ 2227      5F6E6F69 
+ 2227      73655468 
+ 2228              	.LASF14:
+ 2229 0694 63686172 		.ascii	"char\000"
+ 2229      00
+ 2230              	.LASF26:
+ 2231 0699 72756E6E 		.ascii	"runningDifferenceTbl\000"
+ 2231      696E6744 
+ 2231      69666665 
+ 2231      72656E63 
+ 2231      6554626C 
+ 2232              	.LASF58:
+ 2233 06ae 636F6E66 		.ascii	"config\000"
+ 2233      696700
+ 2234              	.LASF80:
+ 2235 06b5 43617053 		.ascii	"CapSense_CSD_runningDifferenceTbl\000"
+ 2235      656E7365 
+ 2235      5F435344 
+ 2235      5F72756E 
+ 2235      6E696E67 
+ 2236              	.LASF86:
+ 2237 06d7 43617053 		.ascii	"CapSense_CSD_prescalerTable\000"
+ 2237      656E7365 
+ 2237      5F435344 
+ 2237      5F707265 
+ 2237      7363616C 
+ 2238              	.LASF68:
+ 2239 06f3 43617053 		.ascii	"CapSense_CSD_widgetResolution\000"
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 54
+
+
+ 2239      656E7365 
+ 2239      5F435344 
+ 2239      5F776964 
+ 2239      67657452 
+ 2240              	.LASF76:
+ 2241 0711 43617053 		.ascii	"CapSense_CSD_hysteresis\000"
+ 2241      656E7365 
+ 2241      5F435344 
+ 2241      5F687973 
+ 2241      74657265 
+ 2242              	.LASF37:
+ 2243 0729 70747250 		.ascii	"ptrPreScan\000"
+ 2243      72655363 
+ 2243      616E00
+ 2244              	.LASF87:
+ 2245 0734 43617053 		.ascii	"CapSense_CSD_sensorSensitivity\000"
+ 2245      656E7365 
+ 2245      5F435344 
+ 2245      5F73656E 
+ 2245      736F7253 
+ 2246              	.LASF81:
+ 2247 0753 43617053 		.ascii	"CapSense_CSD_signRegisterTbl\000"
+ 2247      656E7365 
+ 2247      5F435344 
+ 2247      5F736967 
+ 2247      6E526567 
+ 2248              	.LASF32:
+ 2249 0770 7363616E 		.ascii	"scanSpeedTbl\000"
+ 2249      53706565 
+ 2249      6454626C 
+ 2249      00
+ 2250              	.LASF54:
+ 2251 077d 43617053 		.ascii	"CapSense_CSD_DisableBaselineIDAC\000"
+ 2251      656E7365 
+ 2251      5F435344 
+ 2251      5F446973 
+ 2251      61626C65 
+ 2252              	.LASF70:
+ 2253 079e 43617053 		.ascii	"CapSense_CSD_sampleClkDividerVal\000"
+ 2253      656E7365 
+ 2253      5F435344 
+ 2253      5F73616D 
+ 2253      706C6543 
+ 2254              	.LASF72:
+ 2255 07bf 43617053 		.ascii	"CapSense_CSD_sensorSignal\000"
+ 2255      656E7365 
+ 2255      5F435344 
+ 2255      5F73656E 
+ 2255      736F7253 
+ 2256              	.LASF42:
+ 2257 07d9 746F7461 		.ascii	"totalScanslotsNum\000"
+ 2257      6C536361 
+ 2257      6E736C6F 
+ 2257      74734E75 
+ 2257      6D00
+ 2258              	.LASF62:
+ 2259 07eb 43617053 		.ascii	"CapSense_CSD_GetNoiseEnvelope\000"
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccU4wZTH.s 			page 55
+
+
+ 2259      656E7365 
+ 2259      5F435344 
+ 2259      5F476574 
+ 2259      4E6F6973 
+ 2260              	.LASF40:
+ 2261 0809 70747253 		.ascii	"ptrSetBitValue\000"
+ 2261      65744269 
+ 2261      7456616C 
+ 2261      756500
+ 2262              	.LASF77:
+ 2263 0818 43617053 		.ascii	"CapSense_CSD_rawDataIndex\000"
+ 2263      656E7365 
+ 2263      5F435344 
+ 2263      5F726177 
+ 2263      44617461 
+ 2264              	.LASF41:
+ 2265 0832 43617053 		.ascii	"CapSense_CSD_CONFIG_TYPE_POINTERS_P4_v2_60\000"
+ 2265      656E7365 
+ 2265      5F435344 
+ 2265      5F434F4E 
+ 2265      4649475F 
+ 2266              	.LASF34:
+ 2267 085d 72617744 		.ascii	"rawDataIndex\000"
+ 2267      61746149 
+ 2267      6E646578 
+ 2267      00
+ 2268              	.LASF43:
+ 2269 086a 746F7461 		.ascii	"totalWidgetsNum\000"
+ 2269      6C576964 
+ 2269      67657473 
+ 2269      4E756D00 
+ 2270              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<blockRegMap version="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://cypress.com/xsd/cyblockregmap cyblockregmap.xsd" xmlns="http://cypress.com/xsd/cyblockregmap">
+  <block name="ROW_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="ROW_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="ROW_0" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="ROW_3" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="Em_EEPROM_Dynamic" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="cy_lfclk" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="cy_boot" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="COLUMN_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="LED_G" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="LED_R" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="Button" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="LED_B" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="COLUMN_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="COLUMN_0" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="SW_Tx_UART" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false">
+    <block name="tx" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  </block>
+</blockRegMap>

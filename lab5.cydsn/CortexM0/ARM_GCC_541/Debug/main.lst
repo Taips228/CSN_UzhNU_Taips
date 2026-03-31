@@ -1,0 +1,4064 @@
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.cyclicDisplay,"ax",%progbits
+  20              		.align	2
+  21              		.code	16
+  22              		.thumb_func
+  23              		.type	cyclicDisplay, %function
+  24              	cyclicDisplay:
+  25              	.LFB35:
+  26              		.file 1 "main.c"
+   1:main.c        **** #include "project.h" 
+   2:main.c        **** 
+   3:main.c        **** /* Forward declarations */
+   4:main.c        **** static void FourDigit74HC595_sendData(uint8_t data);
+   5:main.c        **** static void FourDigit74HC595_sendOneDigit(uint8_t position, uint8_t digit, uint8_t dot);
+   6:main.c        **** static void initMatrix(void);
+   7:main.c        **** static void readMatrix(void);
+   8:main.c        **** static void checkPassword(void);
+   9:main.c        **** static void showSuccessAnimation(void);
+  10:main.c        **** static void showFailAnimation(void);
+  11:main.c        **** static void cyclicDisplay(void);
+  12:main.c        **** 
+  13:main.c        **** /* Segment codes */
+  14:main.c        **** static uint8_t LED_NUM[] = { 
+  15:main.c        ****     0xC0,   //0 
+  16:main.c        ****     0xF9,   //1 
+  17:main.c        ****     0xA4,   //2 
+  18:main.c        ****     0xB0,   //3 
+  19:main.c        ****     0x99,   //4 
+  20:main.c        ****     0x92,   //5 
+  21:main.c        ****     0x82,   //6 
+  22:main.c        ****     0xF8,   //7 
+  23:main.c        ****     0x80,   //8 
+  24:main.c        ****     0x90,   //9 
+  25:main.c        ****     0xBF,   //- (dash)
+  26:main.c        ****     0x88,   //A 
+  27:main.c        ****     0x83,   //b 
+  28:main.c        ****     0xC6,   //C 
+  29:main.c        ****     0xA1,   //d 
+  30:main.c        ****     0x86,   //E 
+  31:main.c        ****     0x8E,   //F
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 2
+
+
+  32:main.c        ****     0xFF,   //OFF (blank)
+  33:main.c        **** }; 
+  34:main.c        **** 
+  35:main.c        **** /* Global variables */
+  36:main.c        **** static uint8_t led_counter = 0;
+  37:main.c        **** static uint8_t display_buffer[8] = {7, 6, 5, 4, 3, 2, 1, 0};
+  38:main.c        **** 
+  39:main.c        **** /* Password system variables */
+  40:main.c        **** #define PASSWORD_LENGTH 4
+  41:main.c        **** #define CORRECT_PASSWORD {1, 2, 3, 4}  // Задайте свій пароль тут
+  42:main.c        **** static uint8_t entered_password[PASSWORD_LENGTH];
+  43:main.c        **** static uint8_t password_index = 0;
+  44:main.c        **** static uint8_t password_mode = 0;  // 0 - normal, 1 - entering password, 2 - checking
+  45:main.c        **** 
+  46:main.c        **** /* Cyclic display variables */
+  47:main.c        **** static uint8_t cyclic_pattern[] = {8, 11, 12, 13, 14, 15, 10, 17};  // 8AbCdEF-_
+  48:main.c        **** static uint8_t cyclic_index = 0;
+  49:main.c        **** static uint16_t cyclic_counter = 0;
+  50:main.c        **** 
+  51:main.c        **** /* Timer interrupt for dynamic display */
+  52:main.c        **** CY_ISR(Timer_Int_Handler2)
+  53:main.c        **** {
+  54:main.c        ****     FourDigit74HC595_sendOneDigit(led_counter, display_buffer[led_counter], 0);
+  55:main.c        ****     led_counter++;
+  56:main.c        ****     if(led_counter > 7) led_counter = 0;
+  57:main.c        ****     
+  58:main.c        ****     // Cyclic display update
+  59:main.c        ****     cyclic_counter++;
+  60:main.c        ****     if(cyclic_counter >= 500) {  // Adjust speed here
+  61:main.c        ****         cyclic_counter = 0;
+  62:main.c        ****         if(password_mode == 0) {
+  63:main.c        ****             cyclicDisplay();
+  64:main.c        ****         }
+  65:main.c        ****     }
+  66:main.c        **** }
+  67:main.c        **** 
+  68:main.c        **** /* Send data to shift register */     
+  69:main.c        **** static void FourDigit74HC595_sendData(uint8_t data) {     
+  70:main.c        ****     for(uint8_t i = 0; i < 8; i++) {         
+  71:main.c        ****         if(data & (0x80 >> i)) { 
+  72:main.c        ****             Pin_DO_Write(1); 
+  73:main.c        ****         } else { 
+  74:main.c        ****             Pin_DO_Write(0); 
+  75:main.c        ****         } 
+  76:main.c        ****         Pin_CLK_Write(1); 
+  77:main.c        ****         Pin_CLK_Write(0); 
+  78:main.c        ****     } 
+  79:main.c        **** } 
+  80:main.c        **** 
+  81:main.c        **** /* Send one digit to display */ 
+  82:main.c        **** static void FourDigit74HC595_sendOneDigit(uint8_t position, uint8_t digit, uint8_t dot)  
+  83:main.c        **** { 
+  84:main.c        ****     if(position >= 8) {
+  85:main.c        ****         FourDigit74HC595_sendData(0xFF); 
+  86:main.c        ****         FourDigit74HC595_sendData(0xFF); 
+  87:main.c        ****         return;
+  88:main.c        ****     } 
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 3
+
+
+  89:main.c        ****     FourDigit74HC595_sendData(0xFF & ~(1 << position));     
+  90:main.c        ****     if(dot) { 
+  91:main.c        ****         FourDigit74HC595_sendData(LED_NUM[digit] & 0x7F); 
+  92:main.c        ****     } else { 
+  93:main.c        ****         FourDigit74HC595_sendData(LED_NUM[digit]); 
+  94:main.c        ****     } 
+  95:main.c        ****     Pin_Latch_Write(1);
+  96:main.c        ****     Pin_Latch_Write(0); 
+  97:main.c        **** } 
+  98:main.c        **** 
+  99:main.c        **** /* Cyclic display function - scroll pattern left to right */
+ 100:main.c        **** static void cyclicDisplay(void) {
+  27              		.loc 1 100 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32              	.LVL0:
+  33              	.LBB2:
+ 101:main.c        ****     // Shift all positions left
+ 102:main.c        ****     for(int i = 0; i < 7; i++) {
+  34              		.loc 1 102 0
+  35 0000 0023     		movs	r3, #0
+  36 0002 04E0     		b	.L2
+  37              	.LVL1:
+  38              	.L3:
+ 103:main.c        ****         display_buffer[i] = display_buffer[i + 1];
+  39              		.loc 1 103 0 discriminator 3
+  40 0004 5A1C     		adds	r2, r3, #1
+  41 0006 0A49     		ldr	r1, .L5
+  42 0008 885C     		ldrb	r0, [r1, r2]
+  43 000a C854     		strb	r0, [r1, r3]
+  44              	.LVL2:
+ 102:main.c        ****         display_buffer[i] = display_buffer[i + 1];
+  45              		.loc 1 102 0 discriminator 3
+  46 000c 1300     		movs	r3, r2
+  47              	.LVL3:
+  48              	.L2:
+ 102:main.c        ****         display_buffer[i] = display_buffer[i + 1];
+  49              		.loc 1 102 0 is_stmt 0 discriminator 1
+  50 000e 062B     		cmp	r3, #6
+  51 0010 F8DD     		ble	.L3
+  52              	.LBE2:
+ 104:main.c        ****     }
+ 105:main.c        ****     // Add new symbol at the right
+ 106:main.c        ****     display_buffer[7] = cyclic_pattern[cyclic_index];
+  53              		.loc 1 106 0 is_stmt 1
+  54 0012 084A     		ldr	r2, .L5+4
+  55 0014 1378     		ldrb	r3, [r2]
+  56              	.LVL4:
+  57 0016 0849     		ldr	r1, .L5+8
+  58 0018 C85C     		ldrb	r0, [r1, r3]
+  59 001a 0549     		ldr	r1, .L5
+  60 001c C871     		strb	r0, [r1, #7]
+ 107:main.c        ****     cyclic_index++;
+  61              		.loc 1 107 0
+  62 001e 0133     		adds	r3, r3, #1
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 4
+
+
+  63 0020 DBB2     		uxtb	r3, r3
+  64 0022 1370     		strb	r3, [r2]
+ 108:main.c        ****     if(cyclic_index >= sizeof(cyclic_pattern)) {
+  65              		.loc 1 108 0
+  66 0024 072B     		cmp	r3, #7
+  67 0026 02D9     		bls	.L1
+ 109:main.c        ****         cyclic_index = 0;
+  68              		.loc 1 109 0
+  69 0028 0022     		movs	r2, #0
+  70 002a 024B     		ldr	r3, .L5+4
+  71 002c 1A70     		strb	r2, [r3]
+  72              	.L1:
+ 110:main.c        ****     }
+ 111:main.c        **** }
+  73              		.loc 1 111 0
+  74              		@ sp needed
+  75 002e 7047     		bx	lr
+  76              	.L6:
+  77              		.align	2
+  78              	.L5:
+  79 0030 00000000 		.word	.LANCHOR0
+  80 0034 00000000 		.word	.LANCHOR1
+  81 0038 00000000 		.word	.LANCHOR2
+  82              		.cfi_endproc
+  83              	.LFE35:
+  84              		.size	cyclicDisplay, .-cyclicDisplay
+  85              		.section	.text.initMatrix,"ax",%progbits
+  86              		.align	2
+  87              		.code	16
+  88              		.thumb_func
+  89              		.type	initMatrix, %function
+  90              	initMatrix:
+  91              	.LFB36:
+ 112:main.c        ****  
+ 113:main.c        **** /* Keypad matrix [ROW][COLUMN] */ 
+ 114:main.c        **** static uint8_t keys[4][3] = { 
+ 115:main.c        ****     {1, 2, 3}, 
+ 116:main.c        ****     {4, 5, 6}, 
+ 117:main.c        ****     {7, 8, 9}, 
+ 118:main.c        ****     {10, 0, 11},  // *, 0, #
+ 119:main.c        **** }; 
+ 120:main.c        **** 
+ 121:main.c        **** /* Arrays of function pointers */ 
+ 122:main.c        **** static void (*COLUMN_x_SetDriveMode[3])(uint8_t mode) = { 
+ 123:main.c        ****     COLUMN_0_SetDriveMode, 
+ 124:main.c        ****     COLUMN_1_SetDriveMode, 
+ 125:main.c        ****     COLUMN_2_SetDriveMode 
+ 126:main.c        **** };   
+ 127:main.c        **** 
+ 128:main.c        **** static void (*COLUMN_x_Write[3])(uint8_t value) = { 
+ 129:main.c        ****     COLUMN_0_Write, 
+ 130:main.c        ****     COLUMN_1_Write, 
+ 131:main.c        ****     COLUMN_2_Write 
+ 132:main.c        **** }; 
+ 133:main.c        **** 
+ 134:main.c        **** static uint8 (*ROW_x_Read[4])() = { 
+ 135:main.c        ****     ROW_0_Read, 
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 5
+
+
+ 136:main.c        ****     ROW_1_Read, 
+ 137:main.c        ****     ROW_2_Read, 
+ 138:main.c        ****     ROW_3_Read 
+ 139:main.c        **** }; 
+ 140:main.c        **** 
+ 141:main.c        **** /* Initialize keypad matrix */ 
+ 142:main.c        **** static void initMatrix(void) 
+ 143:main.c        **** {     
+  92              		.loc 1 143 0
+  93              		.cfi_startproc
+  94              		@ args = 0, pretend = 0, frame = 0
+  95              		@ frame_needed = 0, uses_anonymous_args = 0
+  96 0000 10B5     		push	{r4, lr}
+  97              		.cfi_def_cfa_offset 8
+  98              		.cfi_offset 4, -8
+  99              		.cfi_offset 14, -4
+ 100              	.LVL5:
+ 101              	.LBB3:
+ 144:main.c        ****     for(int column_index = 0; column_index < 3; column_index++) { 
+ 102              		.loc 1 144 0
+ 103 0002 0024     		movs	r4, #0
+ 104 0004 06E0     		b	.L8
+ 105              	.LVL6:
+ 106              	.L9:
+ 145:main.c        ****         COLUMN_x_SetDriveMode[column_index](COLUMN_0_DM_DIG_HIZ); 
+ 107              		.loc 1 145 0 discriminator 3
+ 108 0006 A300     		lsls	r3, r4, #2
+ 109 0008 044A     		ldr	r2, .L10
+ 110 000a D318     		adds	r3, r2, r3
+ 111 000c 9B68     		ldr	r3, [r3, #8]
+ 112 000e 0120     		movs	r0, #1
+ 113 0010 9847     		blx	r3
+ 114              	.LVL7:
+ 144:main.c        ****     for(int column_index = 0; column_index < 3; column_index++) { 
+ 115              		.loc 1 144 0 discriminator 3
+ 116 0012 0134     		adds	r4, r4, #1
+ 117              	.LVL8:
+ 118              	.L8:
+ 144:main.c        ****     for(int column_index = 0; column_index < 3; column_index++) { 
+ 119              		.loc 1 144 0 is_stmt 0 discriminator 1
+ 120 0014 022C     		cmp	r4, #2
+ 121 0016 F6DD     		ble	.L9
+ 122              	.LBE3:
+ 146:main.c        ****     } 
+ 147:main.c        **** } 
+ 123              		.loc 1 147 0 is_stmt 1
+ 124              		@ sp needed
+ 125              	.LVL9:
+ 126 0018 10BD     		pop	{r4, pc}
+ 127              	.L11:
+ 128 001a C046     		.align	2
+ 129              	.L10:
+ 130 001c 00000000 		.word	.LANCHOR2
+ 131              		.cfi_endproc
+ 132              	.LFE36:
+ 133              		.size	initMatrix, .-initMatrix
+ 134              		.section	.text.readMatrix,"ax",%progbits
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 6
+
+
+ 135              		.align	2
+ 136              		.code	16
+ 137              		.thumb_func
+ 138              		.type	readMatrix, %function
+ 139              	readMatrix:
+ 140              	.LFB37:
+ 148:main.c        **** 
+ 149:main.c        **** /* Read keypad matrix */ 
+ 150:main.c        **** static void readMatrix(void) 
+ 151:main.c        **** { 
+ 141              		.loc 1 151 0
+ 142              		.cfi_startproc
+ 143              		@ args = 0, pretend = 0, frame = 0
+ 144              		@ frame_needed = 0, uses_anonymous_args = 0
+ 145 0000 70B5     		push	{r4, r5, r6, lr}
+ 146              		.cfi_def_cfa_offset 16
+ 147              		.cfi_offset 4, -16
+ 148              		.cfi_offset 5, -12
+ 149              		.cfi_offset 6, -8
+ 150              		.cfi_offset 14, -4
+ 151              	.LVL10:
+ 152              	.LBB4:
+ 152:main.c        ****     uint8_t row_counter = sizeof(ROW_x_Read)/sizeof(ROW_x_Read[0]); 
+ 153:main.c        ****     uint8_t column_counter = sizeof(COLUMN_x_Write)/sizeof(COLUMN_x_Write[0]);     
+ 154:main.c        ****     
+ 155:main.c        ****     for(int column_index = 0; column_index < column_counter; column_index++) { 
+ 153              		.loc 1 155 0
+ 154 0002 0025     		movs	r5, #0
+ 155 0004 1FE0     		b	.L13
+ 156              	.LVL11:
+ 157              	.L16:
+ 156:main.c        ****         COLUMN_x_SetDriveMode[column_index](COLUMN_0_DM_STRONG); 
+ 158              		.loc 1 156 0
+ 159 0006 AB00     		lsls	r3, r5, #2
+ 160 0008 104C     		ldr	r4, .L17
+ 161 000a E418     		adds	r4, r4, r3
+ 162 000c 0620     		movs	r0, #6
+ 163 000e A368     		ldr	r3, [r4, #8]
+ 164 0010 9847     		blx	r3
+ 165              	.LVL12:
+ 157:main.c        ****         COLUMN_x_Write[column_index](0);         
+ 166              		.loc 1 157 0
+ 167 0012 6369     		ldr	r3, [r4, #20]
+ 168 0014 0020     		movs	r0, #0
+ 169 0016 9847     		blx	r3
+ 170              	.LVL13:
+ 171              	.LBB5:
+ 158:main.c        ****         
+ 159:main.c        ****         for(int row_index = 0; row_index < row_counter; row_index++) { 
+ 172              		.loc 1 159 0
+ 173 0018 0024     		movs	r4, #0
+ 174 001a 0BE0     		b	.L14
+ 175              	.LVL14:
+ 176              	.L15:
+ 160:main.c        ****             keys[row_index][column_index] = ROW_x_Read[row_index](); 
+ 177              		.loc 1 160 0 discriminator 3
+ 178 001c A300     		lsls	r3, r4, #2
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 7
+
+
+ 179 001e 0B4A     		ldr	r2, .L17
+ 180 0020 D318     		adds	r3, r2, r3
+ 181 0022 1B6A     		ldr	r3, [r3, #32]
+ 182 0024 9847     		blx	r3
+ 183              	.LVL15:
+ 184 0026 6300     		lsls	r3, r4, #1
+ 185 0028 1B19     		adds	r3, r3, r4
+ 186 002a 094A     		ldr	r2, .L17+4
+ 187 002c D318     		adds	r3, r2, r3
+ 188 002e 5B19     		adds	r3, r3, r5
+ 189 0030 1872     		strb	r0, [r3, #8]
+ 159:main.c        ****             keys[row_index][column_index] = ROW_x_Read[row_index](); 
+ 190              		.loc 1 159 0 discriminator 3
+ 191 0032 0134     		adds	r4, r4, #1
+ 192              	.LVL16:
+ 193              	.L14:
+ 159:main.c        ****             keys[row_index][column_index] = ROW_x_Read[row_index](); 
+ 194              		.loc 1 159 0 is_stmt 0 discriminator 1
+ 195 0034 032C     		cmp	r4, #3
+ 196 0036 F1DD     		ble	.L15
+ 197              	.LBE5:
+ 161:main.c        ****         } 
+ 162:main.c        ****         
+ 163:main.c        ****         COLUMN_x_SetDriveMode[column_index](COLUMN_0_DM_DIG_HIZ); 
+ 198              		.loc 1 163 0 is_stmt 1 discriminator 2
+ 199 0038 AB00     		lsls	r3, r5, #2
+ 200 003a 044A     		ldr	r2, .L17
+ 201 003c D318     		adds	r3, r2, r3
+ 202 003e 9B68     		ldr	r3, [r3, #8]
+ 203 0040 0120     		movs	r0, #1
+ 204 0042 9847     		blx	r3
+ 205              	.LVL17:
+ 155:main.c        ****         COLUMN_x_SetDriveMode[column_index](COLUMN_0_DM_STRONG); 
+ 206              		.loc 1 155 0 discriminator 2
+ 207 0044 0135     		adds	r5, r5, #1
+ 208              	.LVL18:
+ 209              	.L13:
+ 155:main.c        ****         COLUMN_x_SetDriveMode[column_index](COLUMN_0_DM_STRONG); 
+ 210              		.loc 1 155 0 is_stmt 0 discriminator 1
+ 211 0046 022D     		cmp	r5, #2
+ 212 0048 DDDD     		ble	.L16
+ 213              	.LBE4:
+ 164:main.c        ****     } 
+ 165:main.c        **** } 
+ 214              		.loc 1 165 0 is_stmt 1
+ 215              		@ sp needed
+ 216              	.LVL19:
+ 217 004a 70BD     		pop	{r4, r5, r6, pc}
+ 218              	.L18:
+ 219              		.align	2
+ 220              	.L17:
+ 221 004c 00000000 		.word	.LANCHOR2
+ 222 0050 00000000 		.word	.LANCHOR0
+ 223              		.cfi_endproc
+ 224              	.LFE37:
+ 225              		.size	readMatrix, .-readMatrix
+ 226              		.section	.text.FourDigit74HC595_sendData,"ax",%progbits
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 8
+
+
+ 227              		.align	2
+ 228              		.code	16
+ 229              		.thumb_func
+ 230              		.type	FourDigit74HC595_sendData, %function
+ 231              	FourDigit74HC595_sendData:
+ 232              	.LFB33:
+  69:main.c        ****     for(uint8_t i = 0; i < 8; i++) {         
+ 233              		.loc 1 69 0
+ 234              		.cfi_startproc
+ 235              		@ args = 0, pretend = 0, frame = 0
+ 236              		@ frame_needed = 0, uses_anonymous_args = 0
+ 237              	.LVL20:
+ 238 0000 70B5     		push	{r4, r5, r6, lr}
+ 239              		.cfi_def_cfa_offset 16
+ 240              		.cfi_offset 4, -16
+ 241              		.cfi_offset 5, -12
+ 242              		.cfi_offset 6, -8
+ 243              		.cfi_offset 14, -4
+ 244 0002 0500     		movs	r5, r0
+ 245              	.LVL21:
+ 246              	.LBB6:
+  70:main.c        ****         if(data & (0x80 >> i)) { 
+ 247              		.loc 1 70 0
+ 248 0004 0024     		movs	r4, #0
+ 249 0006 12E0     		b	.L20
+ 250              	.LVL22:
+ 251              	.L23:
+  71:main.c        ****             Pin_DO_Write(1); 
+ 252              		.loc 1 71 0
+ 253 0008 8023     		movs	r3, #128
+ 254 000a 2341     		asrs	r3, r3, r4
+ 255 000c 2B42     		tst	r3, r5
+ 256 000e 03D0     		beq	.L21
+  72:main.c        ****         } else { 
+ 257              		.loc 1 72 0
+ 258 0010 0120     		movs	r0, #1
+ 259 0012 FFF7FEFF 		bl	Pin_DO_Write
+ 260              	.LVL23:
+ 261 0016 02E0     		b	.L22
+ 262              	.L21:
+  74:main.c        ****         } 
+ 263              		.loc 1 74 0
+ 264 0018 0020     		movs	r0, #0
+ 265 001a FFF7FEFF 		bl	Pin_DO_Write
+ 266              	.LVL24:
+ 267              	.L22:
+  76:main.c        ****         Pin_CLK_Write(0); 
+ 268              		.loc 1 76 0 discriminator 2
+ 269 001e 0120     		movs	r0, #1
+ 270 0020 FFF7FEFF 		bl	Pin_CLK_Write
+ 271              	.LVL25:
+  77:main.c        ****     } 
+ 272              		.loc 1 77 0 discriminator 2
+ 273 0024 0020     		movs	r0, #0
+ 274 0026 FFF7FEFF 		bl	Pin_CLK_Write
+ 275              	.LVL26:
+  70:main.c        ****         if(data & (0x80 >> i)) { 
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 9
+
+
+ 276              		.loc 1 70 0 discriminator 2
+ 277 002a 0134     		adds	r4, r4, #1
+ 278              	.LVL27:
+ 279 002c E4B2     		uxtb	r4, r4
+ 280              	.LVL28:
+ 281              	.L20:
+  70:main.c        ****         if(data & (0x80 >> i)) { 
+ 282              		.loc 1 70 0 is_stmt 0 discriminator 1
+ 283 002e 072C     		cmp	r4, #7
+ 284 0030 EAD9     		bls	.L23
+ 285              	.LBE6:
+  79:main.c        **** 
+ 286              		.loc 1 79 0 is_stmt 1
+ 287              		@ sp needed
+ 288              	.LVL29:
+ 289 0032 70BD     		pop	{r4, r5, r6, pc}
+ 290              		.cfi_endproc
+ 291              	.LFE33:
+ 292              		.size	FourDigit74HC595_sendData, .-FourDigit74HC595_sendData
+ 293              		.section	.text.FourDigit74HC595_sendOneDigit,"ax",%progbits
+ 294              		.align	2
+ 295              		.code	16
+ 296              		.thumb_func
+ 297              		.type	FourDigit74HC595_sendOneDigit, %function
+ 298              	FourDigit74HC595_sendOneDigit:
+ 299              	.LFB34:
+  83:main.c        ****     if(position >= 8) {
+ 300              		.loc 1 83 0
+ 301              		.cfi_startproc
+ 302              		@ args = 0, pretend = 0, frame = 0
+ 303              		@ frame_needed = 0, uses_anonymous_args = 0
+ 304              	.LVL30:
+ 305 0000 70B5     		push	{r4, r5, r6, lr}
+ 306              		.cfi_def_cfa_offset 16
+ 307              		.cfi_offset 4, -16
+ 308              		.cfi_offset 5, -12
+ 309              		.cfi_offset 6, -8
+ 310              		.cfi_offset 14, -4
+ 311 0002 0C00     		movs	r4, r1
+ 312 0004 1500     		movs	r5, r2
+  84:main.c        ****         FourDigit74HC595_sendData(0xFF); 
+ 313              		.loc 1 84 0
+ 314 0006 0728     		cmp	r0, #7
+ 315 0008 06D9     		bls	.L25
+  85:main.c        ****         FourDigit74HC595_sendData(0xFF); 
+ 316              		.loc 1 85 0
+ 317 000a FF20     		movs	r0, #255
+ 318              	.LVL31:
+ 319 000c FFF7FEFF 		bl	FourDigit74HC595_sendData
+ 320              	.LVL32:
+  86:main.c        ****         return;
+ 321              		.loc 1 86 0
+ 322 0010 FF20     		movs	r0, #255
+ 323 0012 FFF7FEFF 		bl	FourDigit74HC595_sendData
+ 324              	.LVL33:
+  87:main.c        ****     } 
+ 325              		.loc 1 87 0
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 10
+
+
+ 326 0016 1CE0     		b	.L24
+ 327              	.LVL34:
+ 328              	.L25:
+  89:main.c        ****     if(dot) { 
+ 329              		.loc 1 89 0
+ 330 0018 0123     		movs	r3, #1
+ 331 001a 8340     		lsls	r3, r3, r0
+ 332 001c D843     		mvns	r0, r3
+ 333              	.LVL35:
+ 334 001e C0B2     		uxtb	r0, r0
+ 335 0020 FFF7FEFF 		bl	FourDigit74HC595_sendData
+ 336              	.LVL36:
+  90:main.c        ****         FourDigit74HC595_sendData(LED_NUM[digit] & 0x7F); 
+ 337              		.loc 1 90 0
+ 338 0024 002D     		cmp	r5, #0
+ 339 0026 08D0     		beq	.L27
+  91:main.c        ****     } else { 
+ 340              		.loc 1 91 0
+ 341 0028 0A4B     		ldr	r3, .L29
+ 342 002a 1C19     		adds	r4, r3, r4
+ 343 002c 3023     		movs	r3, #48
+ 344 002e E35C     		ldrb	r3, [r4, r3]
+ 345 0030 7F20     		movs	r0, #127
+ 346 0032 1840     		ands	r0, r3
+ 347 0034 FFF7FEFF 		bl	FourDigit74HC595_sendData
+ 348              	.LVL37:
+ 349 0038 05E0     		b	.L28
+ 350              	.L27:
+  93:main.c        ****     } 
+ 351              		.loc 1 93 0
+ 352 003a 064B     		ldr	r3, .L29
+ 353 003c 1C19     		adds	r4, r3, r4
+ 354 003e 3023     		movs	r3, #48
+ 355 0040 E05C     		ldrb	r0, [r4, r3]
+ 356 0042 FFF7FEFF 		bl	FourDigit74HC595_sendData
+ 357              	.LVL38:
+ 358              	.L28:
+  95:main.c        ****     Pin_Latch_Write(0); 
+ 359              		.loc 1 95 0
+ 360 0046 0120     		movs	r0, #1
+ 361 0048 FFF7FEFF 		bl	Pin_Latch_Write
+ 362              	.LVL39:
+  96:main.c        **** } 
+ 363              		.loc 1 96 0
+ 364 004c 0020     		movs	r0, #0
+ 365 004e FFF7FEFF 		bl	Pin_Latch_Write
+ 366              	.LVL40:
+ 367              	.L24:
+  97:main.c        **** 
+ 368              		.loc 1 97 0
+ 369              		@ sp needed
+ 370 0052 70BD     		pop	{r4, r5, r6, pc}
+ 371              	.L30:
+ 372              		.align	2
+ 373              	.L29:
+ 374 0054 00000000 		.word	.LANCHOR2
+ 375              		.cfi_endproc
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 11
+
+
+ 376              	.LFE34:
+ 377              		.size	FourDigit74HC595_sendOneDigit, .-FourDigit74HC595_sendOneDigit
+ 378              		.section	.text.Timer_Int_Handler2,"ax",%progbits
+ 379              		.align	2
+ 380              		.global	Timer_Int_Handler2
+ 381              		.code	16
+ 382              		.thumb_func
+ 383              		.type	Timer_Int_Handler2, %function
+ 384              	Timer_Int_Handler2:
+ 385              	.LFB32:
+  53:main.c        ****     FourDigit74HC595_sendOneDigit(led_counter, display_buffer[led_counter], 0);
+ 386              		.loc 1 53 0
+ 387              		.cfi_startproc
+ 388              		@ args = 0, pretend = 0, frame = 0
+ 389              		@ frame_needed = 0, uses_anonymous_args = 0
+ 390 0000 10B5     		push	{r4, lr}
+ 391              		.cfi_def_cfa_offset 8
+ 392              		.cfi_offset 4, -8
+ 393              		.cfi_offset 14, -4
+  54:main.c        ****     led_counter++;
+ 394              		.loc 1 54 0
+ 395 0002 114C     		ldr	r4, .L34
+ 396 0004 6078     		ldrb	r0, [r4, #1]
+ 397 0006 114B     		ldr	r3, .L34+4
+ 398 0008 195C     		ldrb	r1, [r3, r0]
+ 399 000a 0022     		movs	r2, #0
+ 400 000c FFF7FEFF 		bl	FourDigit74HC595_sendOneDigit
+ 401              	.LVL41:
+  55:main.c        ****     if(led_counter > 7) led_counter = 0;
+ 402              		.loc 1 55 0
+ 403 0010 6378     		ldrb	r3, [r4, #1]
+ 404 0012 0133     		adds	r3, r3, #1
+ 405 0014 DBB2     		uxtb	r3, r3
+ 406 0016 6370     		strb	r3, [r4, #1]
+  56:main.c        ****     
+ 407              		.loc 1 56 0
+ 408 0018 072B     		cmp	r3, #7
+ 409 001a 02D9     		bls	.L32
+  56:main.c        ****     
+ 410              		.loc 1 56 0 is_stmt 0 discriminator 1
+ 411 001c 0022     		movs	r2, #0
+ 412 001e 0A4B     		ldr	r3, .L34
+ 413 0020 5A70     		strb	r2, [r3, #1]
+ 414              	.L32:
+  59:main.c        ****     if(cyclic_counter >= 500) {  // Adjust speed here
+ 415              		.loc 1 59 0 is_stmt 1
+ 416 0022 094A     		ldr	r2, .L34
+ 417 0024 5388     		ldrh	r3, [r2, #2]
+ 418 0026 0133     		adds	r3, r3, #1
+ 419 0028 9BB2     		uxth	r3, r3
+ 420 002a 5380     		strh	r3, [r2, #2]
+  60:main.c        ****         cyclic_counter = 0;
+ 421              		.loc 1 60 0
+ 422 002c F422     		movs	r2, #244
+ 423 002e FF32     		adds	r2, r2, #255
+ 424 0030 9342     		cmp	r3, r2
+ 425 0032 07D9     		bls	.L31
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 12
+
+
+  61:main.c        ****         if(password_mode == 0) {
+ 426              		.loc 1 61 0
+ 427 0034 044B     		ldr	r3, .L34
+ 428 0036 0022     		movs	r2, #0
+ 429 0038 5A80     		strh	r2, [r3, #2]
+  62:main.c        ****             cyclicDisplay();
+ 430              		.loc 1 62 0
+ 431 003a 1B79     		ldrb	r3, [r3, #4]
+ 432 003c 002B     		cmp	r3, #0
+ 433 003e 01D1     		bne	.L31
+  63:main.c        ****         }
+ 434              		.loc 1 63 0
+ 435 0040 FFF7FEFF 		bl	cyclicDisplay
+ 436              	.LVL42:
+ 437              	.L31:
+  66:main.c        **** 
+ 438              		.loc 1 66 0
+ 439              		@ sp needed
+ 440 0044 10BD     		pop	{r4, pc}
+ 441              	.L35:
+ 442 0046 C046     		.align	2
+ 443              	.L34:
+ 444 0048 00000000 		.word	.LANCHOR1
+ 445 004c 00000000 		.word	.LANCHOR0
+ 446              		.cfi_endproc
+ 447              	.LFE32:
+ 448              		.size	Timer_Int_Handler2, .-Timer_Int_Handler2
+ 449              		.section	.text.showSuccessAnimation,"ax",%progbits
+ 450              		.align	2
+ 451              		.code	16
+ 452              		.thumb_func
+ 453              		.type	showSuccessAnimation, %function
+ 454              	showSuccessAnimation:
+ 455              	.LFB39:
+ 166:main.c        **** 
+ 167:main.c        **** /* Check if entered password is correct */
+ 168:main.c        **** static void checkPassword(void) {
+ 169:main.c        ****     uint8_t correct_password[PASSWORD_LENGTH] = CORRECT_PASSWORD;
+ 170:main.c        ****     uint8_t is_correct = 1;
+ 171:main.c        ****     
+ 172:main.c        ****     for(int i = 0; i < PASSWORD_LENGTH; i++) {
+ 173:main.c        ****         if(entered_password[i] != correct_password[i]) {
+ 174:main.c        ****             is_correct = 0;
+ 175:main.c        ****             break;
+ 176:main.c        ****         }
+ 177:main.c        ****     }
+ 178:main.c        ****     
+ 179:main.c        ****     if(is_correct) {
+ 180:main.c        ****         showSuccessAnimation();
+ 181:main.c        ****     } else {
+ 182:main.c        ****         showFailAnimation();
+ 183:main.c        ****     }
+ 184:main.c        ****     
+ 185:main.c        ****     // Reset password mode
+ 186:main.c        ****     password_mode = 0;
+ 187:main.c        ****     password_index = 0;
+ 188:main.c        ****     cyclic_index = 0;
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 13
+
+
+ 189:main.c        **** }
+ 190:main.c        **** 
+ 191:main.c        **** /* Success animation - running light */
+ 192:main.c        **** static void showSuccessAnimation(void) {
+ 456              		.loc 1 192 0
+ 457              		.cfi_startproc
+ 458              		@ args = 0, pretend = 0, frame = 0
+ 459              		@ frame_needed = 0, uses_anonymous_args = 0
+ 460 0000 70B5     		push	{r4, r5, r6, lr}
+ 461              		.cfi_def_cfa_offset 16
+ 462              		.cfi_offset 4, -16
+ 463              		.cfi_offset 5, -12
+ 464              		.cfi_offset 6, -8
+ 465              		.cfi_offset 14, -4
+ 466              	.LVL43:
+ 467              	.LBB7:
+ 193:main.c        ****     // Fill with blank
+ 194:main.c        ****     for(int i = 0; i < 8; i++) {
+ 468              		.loc 1 194 0
+ 469 0002 0023     		movs	r3, #0
+ 470 0004 03E0     		b	.L37
+ 471              	.LVL44:
+ 472              	.L38:
+ 195:main.c        ****         display_buffer[i] = 17;  // blank
+ 473              		.loc 1 195 0 discriminator 3
+ 474 0006 1121     		movs	r1, #17
+ 475 0008 144A     		ldr	r2, .L43
+ 476 000a D154     		strb	r1, [r2, r3]
+ 194:main.c        ****         display_buffer[i] = 17;  // blank
+ 477              		.loc 1 194 0 discriminator 3
+ 478 000c 0133     		adds	r3, r3, #1
+ 479              	.LVL45:
+ 480              	.L37:
+ 194:main.c        ****         display_buffer[i] = 17;  // blank
+ 481              		.loc 1 194 0 is_stmt 0 discriminator 1
+ 482 000e 072B     		cmp	r3, #7
+ 483 0010 F9DD     		ble	.L38
+ 484 0012 0026     		movs	r6, #0
+ 485 0014 0DE0     		b	.L39
+ 486              	.LVL46:
+ 487              	.L40:
+ 488              	.LBE7:
+ 489              	.LBB8:
+ 490              	.LBB9:
+ 196:main.c        ****     }
+ 197:main.c        ****     
+ 198:main.c        ****     // Running light effect (3 cycles)
+ 199:main.c        ****     for(int cycle = 0; cycle < 3; cycle++) {
+ 200:main.c        ****         for(int pos = 0; pos < 8; pos++) {
+ 201:main.c        ****             display_buffer[pos] = 8;  // Show '8'
+ 491              		.loc 1 201 0 is_stmt 1 discriminator 3
+ 492 0016 114D     		ldr	r5, .L43
+ 493 0018 0823     		movs	r3, #8
+ 494 001a 2B55     		strb	r3, [r5, r4]
+ 202:main.c        ****             CyDelay(100);
+ 495              		.loc 1 202 0 discriminator 3
+ 496 001c 6420     		movs	r0, #100
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 14
+
+
+ 497 001e FFF7FEFF 		bl	CyDelay
+ 498              	.LVL47:
+ 203:main.c        ****             display_buffer[pos] = 17;  // blank
+ 499              		.loc 1 203 0 discriminator 3
+ 500 0022 1123     		movs	r3, #17
+ 501 0024 2B55     		strb	r3, [r5, r4]
+ 200:main.c        ****             display_buffer[pos] = 8;  // Show '8'
+ 502              		.loc 1 200 0 discriminator 3
+ 503 0026 0134     		adds	r4, r4, #1
+ 504              	.LVL48:
+ 505 0028 00E0     		b	.L41
+ 506              	.LVL49:
+ 507              	.L42:
+ 508              	.LBE9:
+ 509 002a 0024     		movs	r4, #0
+ 510              	.L41:
+ 511              	.LVL50:
+ 512              	.LBB10:
+ 200:main.c        ****             display_buffer[pos] = 8;  // Show '8'
+ 513              		.loc 1 200 0 is_stmt 0 discriminator 1
+ 514 002c 072C     		cmp	r4, #7
+ 515 002e F2DD     		ble	.L40
+ 516              	.LBE10:
+ 199:main.c        ****         for(int pos = 0; pos < 8; pos++) {
+ 517              		.loc 1 199 0 is_stmt 1 discriminator 2
+ 518 0030 0136     		adds	r6, r6, #1
+ 519              	.LVL51:
+ 520              	.L39:
+ 199:main.c        ****         for(int pos = 0; pos < 8; pos++) {
+ 521              		.loc 1 199 0 is_stmt 0 discriminator 1
+ 522 0032 022E     		cmp	r6, #2
+ 523 0034 F9DD     		ble	.L42
+ 524              	.LBE8:
+ 204:main.c        ****         }
+ 205:main.c        ****     }
+ 206:main.c        ****     
+ 207:main.c        ****     // Show "PASS" pattern
+ 208:main.c        ****     display_buffer[0] = 17;  // blank
+ 525              		.loc 1 208 0 is_stmt 1
+ 526 0036 094B     		ldr	r3, .L43
+ 527 0038 1122     		movs	r2, #17
+ 528 003a 1A70     		strb	r2, [r3]
+ 209:main.c        ****     display_buffer[1] = 17;  // blank
+ 529              		.loc 1 209 0
+ 530 003c 5A70     		strb	r2, [r3, #1]
+ 210:main.c        ****     display_buffer[2] = 0;   // P (use 0)
+ 531              		.loc 1 210 0
+ 532 003e 0021     		movs	r1, #0
+ 533 0040 9970     		strb	r1, [r3, #2]
+ 211:main.c        ****     display_buffer[3] = 11;  // A
+ 534              		.loc 1 211 0
+ 535 0042 0B31     		adds	r1, r1, #11
+ 536 0044 D970     		strb	r1, [r3, #3]
+ 212:main.c        ****     display_buffer[4] = 5;   // S (use 5)
+ 537              		.loc 1 212 0
+ 538 0046 0639     		subs	r1, r1, #6
+ 539 0048 1971     		strb	r1, [r3, #4]
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 15
+
+
+ 213:main.c        ****     display_buffer[5] = 5;   // S (use 5)
+ 540              		.loc 1 213 0
+ 541 004a 5971     		strb	r1, [r3, #5]
+ 214:main.c        ****     display_buffer[6] = 17;  // blank
+ 542              		.loc 1 214 0
+ 543 004c 9A71     		strb	r2, [r3, #6]
+ 215:main.c        ****     display_buffer[7] = 17;  // blank
+ 544              		.loc 1 215 0
+ 545 004e DA71     		strb	r2, [r3, #7]
+ 216:main.c        ****     CyDelay(2000);
+ 546              		.loc 1 216 0
+ 547 0050 FA20     		movs	r0, #250
+ 548 0052 C000     		lsls	r0, r0, #3
+ 549 0054 FFF7FEFF 		bl	CyDelay
+ 550              	.LVL52:
+ 217:main.c        **** }
+ 551              		.loc 1 217 0
+ 552              		@ sp needed
+ 553              	.LVL53:
+ 554 0058 70BD     		pop	{r4, r5, r6, pc}
+ 555              	.L44:
+ 556 005a C046     		.align	2
+ 557              	.L43:
+ 558 005c 00000000 		.word	.LANCHOR0
+ 559              		.cfi_endproc
+ 560              	.LFE39:
+ 561              		.size	showSuccessAnimation, .-showSuccessAnimation
+ 562              		.section	.text.showFailAnimation,"ax",%progbits
+ 563              		.align	2
+ 564              		.code	16
+ 565              		.thumb_func
+ 566              		.type	showFailAnimation, %function
+ 567              	showFailAnimation:
+ 568              	.LFB40:
+ 218:main.c        **** 
+ 219:main.c        **** /* Fail animation - blinking dashes */
+ 220:main.c        **** static void showFailAnimation(void) {
+ 569              		.loc 1 220 0
+ 570              		.cfi_startproc
+ 571              		@ args = 0, pretend = 0, frame = 0
+ 572              		@ frame_needed = 0, uses_anonymous_args = 0
+ 573 0000 10B5     		push	{r4, lr}
+ 574              		.cfi_def_cfa_offset 8
+ 575              		.cfi_offset 4, -8
+ 576              		.cfi_offset 14, -4
+ 577              	.LVL54:
+ 578              	.LBB11:
+ 221:main.c        ****     // Blink error pattern 5 times
+ 222:main.c        ****     for(int i = 0; i < 5; i++) {
+ 579              		.loc 1 222 0
+ 580 0002 0024     		movs	r4, #0
+ 581 0004 16E0     		b	.L46
+ 582              	.LVL55:
+ 583              	.L47:
+ 584              	.LBB12:
+ 223:main.c        ****         // Show all dashes
+ 224:main.c        ****         for(int j = 0; j < 8; j++) {
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 16
+
+
+ 225:main.c        ****             display_buffer[j] = 10;  // dash
+ 585              		.loc 1 225 0 discriminator 3
+ 586 0006 0A21     		movs	r1, #10
+ 587 0008 154A     		ldr	r2, .L52
+ 588 000a D154     		strb	r1, [r2, r3]
+ 224:main.c        ****             display_buffer[j] = 10;  // dash
+ 589              		.loc 1 224 0 discriminator 3
+ 590 000c 0133     		adds	r3, r3, #1
+ 591              	.LVL56:
+ 592 000e 00E0     		b	.L50
+ 593              	.LVL57:
+ 594              	.L51:
+ 595              	.LBE12:
+ 596 0010 0023     		movs	r3, #0
+ 597              	.L50:
+ 598              	.LVL58:
+ 599              	.LBB13:
+ 224:main.c        ****             display_buffer[j] = 10;  // dash
+ 600              		.loc 1 224 0 is_stmt 0 discriminator 1
+ 601 0012 072B     		cmp	r3, #7
+ 602 0014 F7DD     		ble	.L47
+ 603              	.LBE13:
+ 226:main.c        ****         }
+ 227:main.c        ****         CyDelay(200);
+ 604              		.loc 1 227 0 is_stmt 1
+ 605 0016 C820     		movs	r0, #200
+ 606 0018 FFF7FEFF 		bl	CyDelay
+ 607              	.LVL59:
+ 608              	.LBB14:
+ 228:main.c        ****         
+ 229:main.c        ****         // All blank
+ 230:main.c        ****         for(int j = 0; j < 8; j++) {
+ 609              		.loc 1 230 0
+ 610 001c 0023     		movs	r3, #0
+ 611 001e 03E0     		b	.L48
+ 612              	.LVL60:
+ 613              	.L49:
+ 231:main.c        ****             display_buffer[j] = 17;  // blank
+ 614              		.loc 1 231 0 discriminator 3
+ 615 0020 1121     		movs	r1, #17
+ 616 0022 0F4A     		ldr	r2, .L52
+ 617 0024 D154     		strb	r1, [r2, r3]
+ 230:main.c        ****             display_buffer[j] = 17;  // blank
+ 618              		.loc 1 230 0 discriminator 3
+ 619 0026 0133     		adds	r3, r3, #1
+ 620              	.LVL61:
+ 621              	.L48:
+ 230:main.c        ****             display_buffer[j] = 17;  // blank
+ 622              		.loc 1 230 0 is_stmt 0 discriminator 1
+ 623 0028 072B     		cmp	r3, #7
+ 624 002a F9DD     		ble	.L49
+ 625              	.LBE14:
+ 232:main.c        ****         }
+ 233:main.c        ****         CyDelay(200);
+ 626              		.loc 1 233 0 is_stmt 1 discriminator 2
+ 627 002c C820     		movs	r0, #200
+ 628 002e FFF7FEFF 		bl	CyDelay
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 17
+
+
+ 629              	.LVL62:
+ 222:main.c        ****         // Show all dashes
+ 630              		.loc 1 222 0 discriminator 2
+ 631 0032 0134     		adds	r4, r4, #1
+ 632              	.LVL63:
+ 633              	.L46:
+ 222:main.c        ****         // Show all dashes
+ 634              		.loc 1 222 0 is_stmt 0 discriminator 1
+ 635 0034 042C     		cmp	r4, #4
+ 636 0036 EBDD     		ble	.L51
+ 637              	.LBE11:
+ 234:main.c        ****     }
+ 235:main.c        ****     
+ 236:main.c        ****     // Show "FAIL" pattern
+ 237:main.c        ****     display_buffer[0] = 17;  // blank
+ 638              		.loc 1 237 0 is_stmt 1
+ 639 0038 094B     		ldr	r3, .L52
+ 640 003a 1122     		movs	r2, #17
+ 641 003c 1A70     		strb	r2, [r3]
+ 238:main.c        ****     display_buffer[1] = 15;  // F
+ 642              		.loc 1 238 0
+ 643 003e 0F21     		movs	r1, #15
+ 644 0040 5970     		strb	r1, [r3, #1]
+ 239:main.c        ****     display_buffer[2] = 11;  // A
+ 645              		.loc 1 239 0
+ 646 0042 0439     		subs	r1, r1, #4
+ 647 0044 9970     		strb	r1, [r3, #2]
+ 240:main.c        ****     display_buffer[3] = 1;   // I (use 1)
+ 648              		.loc 1 240 0
+ 649 0046 0A39     		subs	r1, r1, #10
+ 650 0048 D970     		strb	r1, [r3, #3]
+ 241:main.c        ****     display_buffer[4] = 6;   // L (use 6)
+ 651              		.loc 1 241 0
+ 652 004a 0531     		adds	r1, r1, #5
+ 653 004c 1971     		strb	r1, [r3, #4]
+ 242:main.c        ****     display_buffer[5] = 17;  // blank
+ 654              		.loc 1 242 0
+ 655 004e 5A71     		strb	r2, [r3, #5]
+ 243:main.c        ****     display_buffer[6] = 17;  // blank
+ 656              		.loc 1 243 0
+ 657 0050 9A71     		strb	r2, [r3, #6]
+ 244:main.c        ****     display_buffer[7] = 17;  // blank
+ 658              		.loc 1 244 0
+ 659 0052 DA71     		strb	r2, [r3, #7]
+ 245:main.c        ****     CyDelay(2000);
+ 660              		.loc 1 245 0
+ 661 0054 FA20     		movs	r0, #250
+ 662 0056 C000     		lsls	r0, r0, #3
+ 663 0058 FFF7FEFF 		bl	CyDelay
+ 664              	.LVL64:
+ 246:main.c        **** }
+ 665              		.loc 1 246 0
+ 666              		@ sp needed
+ 667              	.LVL65:
+ 668 005c 10BD     		pop	{r4, pc}
+ 669              	.L53:
+ 670 005e C046     		.align	2
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 18
+
+
+ 671              	.L52:
+ 672 0060 00000000 		.word	.LANCHOR0
+ 673              		.cfi_endproc
+ 674              	.LFE40:
+ 675              		.size	showFailAnimation, .-showFailAnimation
+ 676              		.section	.text.checkPassword,"ax",%progbits
+ 677              		.align	2
+ 678              		.code	16
+ 679              		.thumb_func
+ 680              		.type	checkPassword, %function
+ 681              	checkPassword:
+ 682              	.LFB38:
+ 168:main.c        ****     uint8_t correct_password[PASSWORD_LENGTH] = CORRECT_PASSWORD;
+ 683              		.loc 1 168 0
+ 684              		.cfi_startproc
+ 685              		@ args = 0, pretend = 0, frame = 8
+ 686              		@ frame_needed = 0, uses_anonymous_args = 0
+ 687 0000 00B5     		push	{lr}
+ 688              		.cfi_def_cfa_offset 4
+ 689              		.cfi_offset 14, -4
+ 690 0002 83B0     		sub	sp, sp, #12
+ 691              		.cfi_def_cfa_offset 16
+ 169:main.c        ****     uint8_t is_correct = 1;
+ 692              		.loc 1 169 0
+ 693 0004 0422     		movs	r2, #4
+ 694 0006 1149     		ldr	r1, .L61
+ 695 0008 4431     		adds	r1, r1, #68
+ 696 000a 01A8     		add	r0, sp, #4
+ 697 000c FFF7FEFF 		bl	memcpy
+ 698              	.LVL66:
+ 699              	.LBB15:
+ 172:main.c        ****         if(entered_password[i] != correct_password[i]) {
+ 700              		.loc 1 172 0
+ 701 0010 0023     		movs	r3, #0
+ 702 0012 07E0     		b	.L55
+ 703              	.LVL67:
+ 704              	.L57:
+ 173:main.c        ****             is_correct = 0;
+ 705              		.loc 1 173 0
+ 706 0014 0E4A     		ldr	r2, .L61+4
+ 707 0016 D218     		adds	r2, r2, r3
+ 708 0018 117A     		ldrb	r1, [r2, #8]
+ 709 001a 01AA     		add	r2, sp, #4
+ 710 001c D25C     		ldrb	r2, [r2, r3]
+ 711 001e 9142     		cmp	r1, r2
+ 712 0020 04D1     		bne	.L60
+ 172:main.c        ****         if(entered_password[i] != correct_password[i]) {
+ 713              		.loc 1 172 0 discriminator 2
+ 714 0022 0133     		adds	r3, r3, #1
+ 715              	.LVL68:
+ 716              	.L55:
+ 172:main.c        ****         if(entered_password[i] != correct_password[i]) {
+ 717              		.loc 1 172 0 is_stmt 0 discriminator 1
+ 718 0024 032B     		cmp	r3, #3
+ 719 0026 F5DD     		ble	.L57
+ 720              	.LBE15:
+ 170:main.c        ****     
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 19
+
+
+ 721              		.loc 1 170 0 is_stmt 1
+ 722 0028 0123     		movs	r3, #1
+ 723              	.LVL69:
+ 724              	.LBB16:
+ 725 002a 00E0     		b	.L56
+ 726              	.LVL70:
+ 727              	.L60:
+ 174:main.c        ****             break;
+ 728              		.loc 1 174 0
+ 729 002c 0023     		movs	r3, #0
+ 730              	.LVL71:
+ 731              	.L56:
+ 732              	.LBE16:
+ 179:main.c        ****         showSuccessAnimation();
+ 733              		.loc 1 179 0
+ 734 002e 002B     		cmp	r3, #0
+ 735 0030 02D0     		beq	.L58
+ 180:main.c        ****     } else {
+ 736              		.loc 1 180 0
+ 737 0032 FFF7FEFF 		bl	showSuccessAnimation
+ 738              	.LVL72:
+ 739 0036 01E0     		b	.L59
+ 740              	.LVL73:
+ 741              	.L58:
+ 182:main.c        ****     }
+ 742              		.loc 1 182 0
+ 743 0038 FFF7FEFF 		bl	showFailAnimation
+ 744              	.LVL74:
+ 745              	.L59:
+ 186:main.c        ****     password_index = 0;
+ 746              		.loc 1 186 0
+ 747 003c 044B     		ldr	r3, .L61+4
+ 748 003e 0022     		movs	r2, #0
+ 749 0040 1A71     		strb	r2, [r3, #4]
+ 187:main.c        ****     cyclic_index = 0;
+ 750              		.loc 1 187 0
+ 751 0042 1A73     		strb	r2, [r3, #12]
+ 188:main.c        **** }
+ 752              		.loc 1 188 0
+ 753 0044 1A70     		strb	r2, [r3]
+ 189:main.c        **** 
+ 754              		.loc 1 189 0
+ 755 0046 03B0     		add	sp, sp, #12
+ 756              		@ sp needed
+ 757 0048 00BD     		pop	{pc}
+ 758              	.L62:
+ 759 004a C046     		.align	2
+ 760              	.L61:
+ 761 004c 00000000 		.word	.LANCHOR2
+ 762 0050 00000000 		.word	.LANCHOR1
+ 763              		.cfi_endproc
+ 764              	.LFE38:
+ 765              		.size	checkPassword, .-checkPassword
+ 766              		.section	.text.main,"ax",%progbits
+ 767              		.align	2
+ 768              		.global	main
+ 769              		.code	16
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 20
+
+
+ 770              		.thumb_func
+ 771              		.type	main, %function
+ 772              	main:
+ 773              	.LFB41:
+ 247:main.c        **** 
+ 248:main.c        **** int main(void) 
+ 249:main.c        **** { 
+ 774              		.loc 1 249 0
+ 775              		.cfi_startproc
+ 776              		@ args = 0, pretend = 0, frame = 0
+ 777              		@ frame_needed = 0, uses_anonymous_args = 0
+ 778 0000 70B5     		push	{r4, r5, r6, lr}
+ 779              		.cfi_def_cfa_offset 16
+ 780              		.cfi_offset 4, -16
+ 781              		.cfi_offset 5, -12
+ 782              		.cfi_offset 6, -8
+ 783              		.cfi_offset 14, -4
+ 250:main.c        ****     CyGlobalIntEnable;
+ 784              		.loc 1 250 0
+ 785              		.syntax divided
+ 786              	@ 250 "main.c" 1
+ 787 0002 62B6     		CPSIE   i
+ 788              	@ 0 "" 2
+ 251:main.c        ****     
+ 252:main.c        ****     Timer_Start();
+ 789              		.loc 1 252 0
+ 790              		.thumb
+ 791              		.syntax unified
+ 792 0004 FFF7FEFF 		bl	Timer_Start
+ 793              	.LVL75:
+ 253:main.c        ****     Timer_Int_StartEx(Timer_Int_Handler2);
+ 794              		.loc 1 253 0
+ 795 0008 5748     		ldr	r0, .L104
+ 796 000a FFF7FEFF 		bl	Timer_Int_StartEx
+ 797              	.LVL76:
+ 254:main.c        ****     
+ 255:main.c        ****     initMatrix(); 
+ 798              		.loc 1 255 0
+ 799 000e FFF7FEFF 		bl	initMatrix
+ 800              	.LVL77:
+ 801              	.LBB17:
+ 256:main.c        ****     uint8_t last_state = 12;
+ 257:main.c        ****     
+ 258:main.c        ****     // Initialize display with cyclic pattern
+ 259:main.c        ****     for(int i = 0; i < 8; i++) {
+ 802              		.loc 1 259 0
+ 803 0012 0023     		movs	r3, #0
+ 804 0014 06E0     		b	.L64
+ 805              	.LVL78:
+ 806              	.L65:
+ 260:main.c        ****         display_buffer[i] = cyclic_pattern[i % sizeof(cyclic_pattern)];
+ 807              		.loc 1 260 0 discriminator 3
+ 808 0016 0722     		movs	r2, #7
+ 809 0018 1A40     		ands	r2, r3
+ 810 001a 5449     		ldr	r1, .L104+4
+ 811 001c 895C     		ldrb	r1, [r1, r2]
+ 812 001e 544A     		ldr	r2, .L104+8
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 21
+
+
+ 813 0020 D154     		strb	r1, [r2, r3]
+ 259:main.c        ****         display_buffer[i] = cyclic_pattern[i % sizeof(cyclic_pattern)];
+ 814              		.loc 1 259 0 discriminator 3
+ 815 0022 0133     		adds	r3, r3, #1
+ 816              	.LVL79:
+ 817              	.L64:
+ 259:main.c        ****         display_buffer[i] = cyclic_pattern[i % sizeof(cyclic_pattern)];
+ 818              		.loc 1 259 0 is_stmt 0 discriminator 1
+ 819 0024 072B     		cmp	r3, #7
+ 820 0026 F6DD     		ble	.L65
+ 821 0028 0C24     		movs	r4, #12
+ 822              	.LVL80:
+ 823              	.L88:
+ 824              	.LBE17:
+ 261:main.c        ****     }
+ 262:main.c        ****     
+ 263:main.c        ****     for(;;) 
+ 264:main.c        ****     { 
+ 265:main.c        ****         readMatrix(); 
+ 825              		.loc 1 265 0 is_stmt 1
+ 826 002a FFF7FEFF 		bl	readMatrix
+ 827              	.LVL81:
+ 266:main.c        ****         
+ 267:main.c        ****         // Check for '#' key to start password entry
+ 268:main.c        ****         if(keys[3][2] == 0 && last_state != 11) {
+ 828              		.loc 1 268 0
+ 829 002e 504B     		ldr	r3, .L104+8
+ 830 0030 DB7C     		ldrb	r3, [r3, #19]
+ 831 0032 002B     		cmp	r3, #0
+ 832 0034 26D1     		bne	.L66
+ 833              		.loc 1 268 0 is_stmt 0 discriminator 1
+ 834 0036 0B2C     		cmp	r4, #11
+ 835 0038 24D0     		beq	.L66
+ 836              	.LVL82:
+ 269:main.c        ****             last_state = 11;
+ 270:main.c        ****             if(password_mode == 0) {
+ 837              		.loc 1 270 0 is_stmt 1
+ 838 003a 4E4B     		ldr	r3, .L104+12
+ 839 003c 1B79     		ldrb	r3, [r3, #4]
+ 840 003e 002B     		cmp	r3, #0
+ 841 0040 16D1     		bne	.L67
+ 271:main.c        ****                 // Start password entry mode
+ 272:main.c        ****                 password_mode = 1;
+ 842              		.loc 1 272 0
+ 843 0042 4C4B     		ldr	r3, .L104+12
+ 844 0044 0122     		movs	r2, #1
+ 845 0046 1A71     		strb	r2, [r3, #4]
+ 273:main.c        ****                 password_index = 0;
+ 846              		.loc 1 273 0
+ 847 0048 0022     		movs	r2, #0
+ 848 004a 1A73     		strb	r2, [r3, #12]
+ 849              	.LVL83:
+ 850              	.LBB18:
+ 274:main.c        ****                 // Clear display
+ 275:main.c        ****                 for(int i = 0; i < 8; i++) {
+ 851              		.loc 1 275 0
+ 852 004c 0023     		movs	r3, #0
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 22
+
+
+ 853 004e 03E0     		b	.L68
+ 854              	.LVL84:
+ 855              	.L69:
+ 276:main.c        ****                     display_buffer[i] = 17;  // blank
+ 856              		.loc 1 276 0 discriminator 3
+ 857 0050 1121     		movs	r1, #17
+ 858 0052 474A     		ldr	r2, .L104+8
+ 859 0054 D154     		strb	r1, [r2, r3]
+ 275:main.c        ****                     display_buffer[i] = 17;  // blank
+ 860              		.loc 1 275 0 discriminator 3
+ 861 0056 0133     		adds	r3, r3, #1
+ 862              	.LVL85:
+ 863              	.L68:
+ 275:main.c        ****                     display_buffer[i] = 17;  // blank
+ 864              		.loc 1 275 0 is_stmt 0 discriminator 1
+ 865 0058 072B     		cmp	r3, #7
+ 866 005a F9DD     		ble	.L69
+ 867 005c 0023     		movs	r3, #0
+ 868              	.LVL86:
+ 869 005e 03E0     		b	.L70
+ 870              	.LVL87:
+ 871              	.L71:
+ 872              	.LBE18:
+ 873              	.LBB19:
+ 277:main.c        ****                 }
+ 278:main.c        ****                 // Show "----" for password entry
+ 279:main.c        ****                 for(int i = 0; i < PASSWORD_LENGTH; i++) {
+ 280:main.c        ****                     display_buffer[i] = 10;  // dash
+ 874              		.loc 1 280 0 is_stmt 1 discriminator 3
+ 875 0060 0A21     		movs	r1, #10
+ 876 0062 434A     		ldr	r2, .L104+8
+ 877 0064 D154     		strb	r1, [r2, r3]
+ 279:main.c        ****                     display_buffer[i] = 10;  // dash
+ 878              		.loc 1 279 0 discriminator 3
+ 879 0066 0133     		adds	r3, r3, #1
+ 880              	.LVL88:
+ 881              	.L70:
+ 279:main.c        ****                     display_buffer[i] = 10;  // dash
+ 882              		.loc 1 279 0 is_stmt 0 discriminator 1
+ 883 0068 032B     		cmp	r3, #3
+ 884 006a F9DD     		ble	.L71
+ 885              	.LBE19:
+ 269:main.c        ****             if(password_mode == 0) {
+ 886              		.loc 1 269 0 is_stmt 1
+ 887 006c 0B24     		movs	r4, #11
+ 888 006e 09E0     		b	.L66
+ 889              	.LVL89:
+ 890              	.L67:
+ 281:main.c        ****                 }
+ 282:main.c        ****             } else if(password_mode == 1) {
+ 891              		.loc 1 282 0
+ 892 0070 012B     		cmp	r3, #1
+ 893 0072 06D1     		bne	.L89
+ 283:main.c        ****                 // Submit password
+ 284:main.c        ****                 password_mode = 2;
+ 894              		.loc 1 284 0
+ 895 0074 0222     		movs	r2, #2
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 23
+
+
+ 896 0076 3F4B     		ldr	r3, .L104+12
+ 897 0078 1A71     		strb	r2, [r3, #4]
+ 285:main.c        ****                 checkPassword();
+ 898              		.loc 1 285 0
+ 899 007a FFF7FEFF 		bl	checkPassword
+ 900              	.LVL90:
+ 269:main.c        ****             if(password_mode == 0) {
+ 901              		.loc 1 269 0
+ 902 007e 0B24     		movs	r4, #11
+ 903 0080 00E0     		b	.L66
+ 904              	.L89:
+ 905 0082 0B24     		movs	r4, #11
+ 906              	.LVL91:
+ 907              	.L66:
+ 286:main.c        ****             }
+ 287:main.c        ****         }
+ 288:main.c        ****         if(keys[3][2] == 1 && last_state == 11) {
+ 908              		.loc 1 288 0
+ 909 0084 3A4B     		ldr	r3, .L104+8
+ 910 0086 DB7C     		ldrb	r3, [r3, #19]
+ 911 0088 012B     		cmp	r3, #1
+ 912 008a 02D1     		bne	.L72
+ 913              		.loc 1 288 0 is_stmt 0 discriminator 1
+ 914 008c 0B2C     		cmp	r4, #11
+ 915 008e 00D1     		bne	.L72
+ 289:main.c        ****             last_state = 12;
+ 916              		.loc 1 289 0 is_stmt 1
+ 917 0090 0134     		adds	r4, r4, #1
+ 918              	.LVL92:
+ 919              	.L72:
+ 290:main.c        ****         }
+ 291:main.c        ****         
+ 292:main.c        ****         // Handle digit input during password mode
+ 293:main.c        ****         if(password_mode == 1) {
+ 920              		.loc 1 293 0
+ 921 0092 384B     		ldr	r3, .L104+12
+ 922 0094 1B79     		ldrb	r3, [r3, #4]
+ 923 0096 012B     		cmp	r3, #1
+ 924 0098 61D1     		bne	.L74
+ 925 009a 5DE0     		b	.L91
+ 926              	.LVL93:
+ 927              	.L86:
+ 928              	.LBB20:
+ 929              	.LBB21:
+ 930              	.LBB22:
+ 294:main.c        ****             // Check digits 0-9
+ 295:main.c        ****             for(int row = 0; row < 4; row++) {
+ 296:main.c        ****                 for(int col = 0; col < 3; col++) {
+ 297:main.c        ****                     uint8_t key_value = keys[row][col];
+ 931              		.loc 1 297 0
+ 932 009c 5A00     		lsls	r2, r3, #1
+ 933 009e D218     		adds	r2, r2, r3
+ 934 00a0 3348     		ldr	r0, .L104+8
+ 935 00a2 8218     		adds	r2, r0, r2
+ 936 00a4 5218     		adds	r2, r2, r1
+ 937 00a6 127A     		ldrb	r2, [r2, #8]
+ 938              	.LVL94:
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 24
+
+
+ 298:main.c        ****                     uint8_t button_number;
+ 299:main.c        ****                     
+ 300:main.c        ****                     if(row == 0 && col == 0) button_number = 1;
+ 939              		.loc 1 300 0
+ 940 00a8 1800     		movs	r0, r3
+ 941 00aa 0843     		orrs	r0, r1
+ 942 00ac 25D0     		beq	.L92
+ 301:main.c        ****                     else if(row == 0 && col == 1) button_number = 2;
+ 943              		.loc 1 301 0
+ 944 00ae 002B     		cmp	r3, #0
+ 945 00b0 01D1     		bne	.L76
+ 946              		.loc 1 301 0 is_stmt 0 discriminator 1
+ 947 00b2 0129     		cmp	r1, #1
+ 948 00b4 23D0     		beq	.L93
+ 949              	.L76:
+ 302:main.c        ****                     else if(row == 0 && col == 2) button_number = 3;
+ 950              		.loc 1 302 0 is_stmt 1
+ 951 00b6 002B     		cmp	r3, #0
+ 952 00b8 01D1     		bne	.L77
+ 953              		.loc 1 302 0 is_stmt 0 discriminator 1
+ 954 00ba 0229     		cmp	r1, #2
+ 955 00bc 21D0     		beq	.L94
+ 956              	.L77:
+ 303:main.c        ****                     else if(row == 1 && col == 0) button_number = 4;
+ 957              		.loc 1 303 0 is_stmt 1
+ 958 00be 012B     		cmp	r3, #1
+ 959 00c0 01D1     		bne	.L78
+ 960              		.loc 1 303 0 is_stmt 0 discriminator 1
+ 961 00c2 0029     		cmp	r1, #0
+ 962 00c4 1FD0     		beq	.L95
+ 963              	.L78:
+ 304:main.c        ****                     else if(row == 1 && col == 1) button_number = 5;
+ 964              		.loc 1 304 0 is_stmt 1
+ 965 00c6 012B     		cmp	r3, #1
+ 966 00c8 01D1     		bne	.L79
+ 967              		.loc 1 304 0 is_stmt 0 discriminator 1
+ 968 00ca 0129     		cmp	r1, #1
+ 969 00cc 1DD0     		beq	.L96
+ 970              	.L79:
+ 305:main.c        ****                     else if(row == 1 && col == 2) button_number = 6;
+ 971              		.loc 1 305 0 is_stmt 1
+ 972 00ce 012B     		cmp	r3, #1
+ 973 00d0 01D1     		bne	.L80
+ 974              		.loc 1 305 0 is_stmt 0 discriminator 1
+ 975 00d2 0229     		cmp	r1, #2
+ 976 00d4 1BD0     		beq	.L97
+ 977              	.L80:
+ 306:main.c        ****                     else if(row == 2 && col == 0) button_number = 7;
+ 978              		.loc 1 306 0 is_stmt 1
+ 979 00d6 022B     		cmp	r3, #2
+ 980 00d8 01D1     		bne	.L81
+ 981              		.loc 1 306 0 is_stmt 0 discriminator 1
+ 982 00da 0029     		cmp	r1, #0
+ 983 00dc 19D0     		beq	.L98
+ 984              	.L81:
+ 307:main.c        ****                     else if(row == 2 && col == 1) button_number = 8;
+ 985              		.loc 1 307 0 is_stmt 1
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 25
+
+
+ 986 00de 022B     		cmp	r3, #2
+ 987 00e0 01D1     		bne	.L82
+ 988              		.loc 1 307 0 is_stmt 0 discriminator 1
+ 989 00e2 0129     		cmp	r1, #1
+ 990 00e4 17D0     		beq	.L99
+ 991              	.L82:
+ 308:main.c        ****                     else if(row == 2 && col == 2) button_number = 9;
+ 992              		.loc 1 308 0 is_stmt 1
+ 993 00e6 022B     		cmp	r3, #2
+ 994 00e8 01D1     		bne	.L83
+ 995              		.loc 1 308 0 is_stmt 0 discriminator 1
+ 996 00ea 0229     		cmp	r1, #2
+ 997 00ec 15D0     		beq	.L100
+ 998              	.L83:
+ 309:main.c        ****                     else if(row == 3 && col == 1) button_number = 0;
+ 999              		.loc 1 309 0 is_stmt 1
+ 1000 00ee 032B     		cmp	r3, #3
+ 1001 00f0 2BD1     		bne	.L84
+ 1002              		.loc 1 309 0 is_stmt 0 discriminator 1
+ 1003 00f2 0129     		cmp	r1, #1
+ 1004 00f4 29D1     		bne	.L84
+ 1005              		.loc 1 309 0
+ 1006 00f6 0020     		movs	r0, #0
+ 1007 00f8 10E0     		b	.L75
+ 1008              	.L92:
+ 300:main.c        ****                     else if(row == 0 && col == 1) button_number = 2;
+ 1009              		.loc 1 300 0 is_stmt 1
+ 1010 00fa 0120     		movs	r0, #1
+ 1011 00fc 0EE0     		b	.L75
+ 1012              	.L93:
+ 301:main.c        ****                     else if(row == 0 && col == 2) button_number = 3;
+ 1013              		.loc 1 301 0
+ 1014 00fe 0220     		movs	r0, #2
+ 1015 0100 0CE0     		b	.L75
+ 1016              	.L94:
+ 302:main.c        ****                     else if(row == 1 && col == 0) button_number = 4;
+ 1017              		.loc 1 302 0
+ 1018 0102 0320     		movs	r0, #3
+ 1019 0104 0AE0     		b	.L75
+ 1020              	.L95:
+ 303:main.c        ****                     else if(row == 1 && col == 1) button_number = 5;
+ 1021              		.loc 1 303 0
+ 1022 0106 0420     		movs	r0, #4
+ 1023 0108 08E0     		b	.L75
+ 1024              	.L96:
+ 304:main.c        ****                     else if(row == 1 && col == 2) button_number = 6;
+ 1025              		.loc 1 304 0
+ 1026 010a 0520     		movs	r0, #5
+ 1027 010c 06E0     		b	.L75
+ 1028              	.L97:
+ 305:main.c        ****                     else if(row == 2 && col == 0) button_number = 7;
+ 1029              		.loc 1 305 0
+ 1030 010e 0620     		movs	r0, #6
+ 1031 0110 04E0     		b	.L75
+ 1032              	.L98:
+ 306:main.c        ****                     else if(row == 2 && col == 1) button_number = 8;
+ 1033              		.loc 1 306 0
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 26
+
+
+ 1034 0112 0720     		movs	r0, #7
+ 1035 0114 02E0     		b	.L75
+ 1036              	.L99:
+ 307:main.c        ****                     else if(row == 2 && col == 2) button_number = 9;
+ 1037              		.loc 1 307 0
+ 1038 0116 0820     		movs	r0, #8
+ 1039 0118 00E0     		b	.L75
+ 1040              	.L100:
+ 308:main.c        ****                     else if(row == 3 && col == 1) button_number = 0;
+ 1041              		.loc 1 308 0
+ 1042 011a 0920     		movs	r0, #9
+ 1043              	.L75:
+ 1044              	.LVL95:
+ 310:main.c        ****                     else continue;  // Skip * and #
+ 311:main.c        ****                     
+ 312:main.c        ****                     if(key_value == 0 && last_state != button_number) {
+ 1045              		.loc 1 312 0
+ 1046 011c 002A     		cmp	r2, #0
+ 1047 011e 0FD1     		bne	.L85
+ 1048              		.loc 1 312 0 is_stmt 0 discriminator 1
+ 1049 0120 8442     		cmp	r4, r0
+ 1050 0122 0DD0     		beq	.L85
+ 1051              	.LVL96:
+ 313:main.c        ****                         last_state = button_number;
+ 314:main.c        ****                         
+ 315:main.c        ****                         if(password_index < PASSWORD_LENGTH) {
+ 1052              		.loc 1 315 0 is_stmt 1
+ 1053 0124 134C     		ldr	r4, .L104+12
+ 1054 0126 247B     		ldrb	r4, [r4, #12]
+ 1055 0128 032C     		cmp	r4, #3
+ 1056 012a 08D8     		bhi	.L101
+ 316:main.c        ****                             entered_password[password_index] = button_number;
+ 1057              		.loc 1 316 0
+ 1058 012c 114D     		ldr	r5, .L104+12
+ 1059 012e 2E19     		adds	r6, r5, r4
+ 1060 0130 3072     		strb	r0, [r6, #8]
+ 317:main.c        ****                             display_buffer[password_index] = button_number;
+ 1061              		.loc 1 317 0
+ 1062 0132 0F4E     		ldr	r6, .L104+8
+ 1063 0134 3055     		strb	r0, [r6, r4]
+ 318:main.c        ****                             password_index++;
+ 1064              		.loc 1 318 0
+ 1065 0136 0134     		adds	r4, r4, #1
+ 1066 0138 2C73     		strb	r4, [r5, #12]
+ 313:main.c        ****                         
+ 1067              		.loc 1 313 0
+ 1068 013a 0400     		movs	r4, r0
+ 1069 013c 00E0     		b	.L85
+ 1070              	.L101:
+ 1071 013e 0400     		movs	r4, r0
+ 1072              	.LVL97:
+ 1073              	.L85:
+ 319:main.c        ****                         }
+ 320:main.c        ****                     }
+ 321:main.c        ****                     if(key_value == 1 && last_state == button_number) {
+ 1074              		.loc 1 321 0
+ 1075 0140 012A     		cmp	r2, #1
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 27
+
+
+ 1076 0142 02D1     		bne	.L84
+ 1077              		.loc 1 321 0 is_stmt 0 discriminator 1
+ 1078 0144 8442     		cmp	r4, r0
+ 1079 0146 00D1     		bne	.L84
+ 322:main.c        ****                         last_state = 12;
+ 1080              		.loc 1 322 0 is_stmt 1
+ 1081 0148 0C24     		movs	r4, #12
+ 1082              	.LVL98:
+ 1083              	.L84:
+ 1084              	.LBE22:
+ 296:main.c        ****                     uint8_t key_value = keys[row][col];
+ 1085              		.loc 1 296 0 discriminator 2
+ 1086 014a 0131     		adds	r1, r1, #1
+ 1087              	.LVL99:
+ 1088 014c 00E0     		b	.L87
+ 1089              	.LVL100:
+ 1090              	.L103:
+ 1091              	.LBE21:
+ 1092 014e 0021     		movs	r1, #0
+ 1093              	.L87:
+ 1094              	.LVL101:
+ 1095              	.LBB23:
+ 296:main.c        ****                     uint8_t key_value = keys[row][col];
+ 1096              		.loc 1 296 0 is_stmt 0 discriminator 1
+ 1097 0150 0229     		cmp	r1, #2
+ 1098 0152 A3DD     		ble	.L86
+ 1099              	.LBE23:
+ 295:main.c        ****                 for(int col = 0; col < 3; col++) {
+ 1100              		.loc 1 295 0 is_stmt 1 discriminator 2
+ 1101 0154 0133     		adds	r3, r3, #1
+ 1102              	.LVL102:
+ 1103 0156 00E0     		b	.L73
+ 1104              	.LVL103:
+ 1105              	.L91:
+ 1106              	.LBE20:
+ 1107 0158 0023     		movs	r3, #0
+ 1108              	.L73:
+ 1109              	.LVL104:
+ 1110              	.LBB24:
+ 295:main.c        ****                 for(int col = 0; col < 3; col++) {
+ 1111              		.loc 1 295 0 is_stmt 0 discriminator 1
+ 1112 015a 032B     		cmp	r3, #3
+ 1113 015c F7DD     		ble	.L103
+ 1114              	.LVL105:
+ 1115              	.L74:
+ 1116              	.LBE24:
+ 323:main.c        ****                     }
+ 324:main.c        ****                 }
+ 325:main.c        ****             }
+ 326:main.c        ****         }
+ 327:main.c        ****         
+ 328:main.c        ****         CyDelay(10);  // Small delay for debouncing
+ 1117              		.loc 1 328 0 is_stmt 1
+ 1118 015e 0A20     		movs	r0, #10
+ 1119 0160 FFF7FEFF 		bl	CyDelay
+ 1120              	.LVL106:
+ 329:main.c        ****     } 
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 28
+
+
+ 1121              		.loc 1 329 0
+ 1122 0164 61E7     		b	.L88
+ 1123              	.L105:
+ 1124 0166 C046     		.align	2
+ 1125              	.L104:
+ 1126 0168 00000000 		.word	Timer_Int_Handler2
+ 1127 016c 00000000 		.word	.LANCHOR2
+ 1128 0170 00000000 		.word	.LANCHOR0
+ 1129 0174 00000000 		.word	.LANCHOR1
+ 1130              		.cfi_endproc
+ 1131              	.LFE41:
+ 1132              		.size	main, .-main
+ 1133              		.section	.rodata
+ 1134              		.align	2
+ 1135              		.set	.LANCHOR2,. + 0
+ 1136              		.type	cyclic_pattern, %object
+ 1137              		.size	cyclic_pattern, 8
+ 1138              	cyclic_pattern:
+ 1139 0000 08       		.byte	8
+ 1140 0001 0B       		.byte	11
+ 1141 0002 0C       		.byte	12
+ 1142 0003 0D       		.byte	13
+ 1143 0004 0E       		.byte	14
+ 1144 0005 0F       		.byte	15
+ 1145 0006 0A       		.byte	10
+ 1146 0007 11       		.byte	17
+ 1147              		.type	COLUMN_x_SetDriveMode, %object
+ 1148              		.size	COLUMN_x_SetDriveMode, 12
+ 1149              	COLUMN_x_SetDriveMode:
+ 1150 0008 00000000 		.word	COLUMN_0_SetDriveMode
+ 1151 000c 00000000 		.word	COLUMN_1_SetDriveMode
+ 1152 0010 00000000 		.word	COLUMN_2_SetDriveMode
+ 1153              		.type	COLUMN_x_Write, %object
+ 1154              		.size	COLUMN_x_Write, 12
+ 1155              	COLUMN_x_Write:
+ 1156 0014 00000000 		.word	COLUMN_0_Write
+ 1157 0018 00000000 		.word	COLUMN_1_Write
+ 1158 001c 00000000 		.word	COLUMN_2_Write
+ 1159              		.type	ROW_x_Read, %object
+ 1160              		.size	ROW_x_Read, 16
+ 1161              	ROW_x_Read:
+ 1162 0020 00000000 		.word	ROW_0_Read
+ 1163 0024 00000000 		.word	ROW_1_Read
+ 1164 0028 00000000 		.word	ROW_2_Read
+ 1165 002c 00000000 		.word	ROW_3_Read
+ 1166              		.type	LED_NUM, %object
+ 1167              		.size	LED_NUM, 18
+ 1168              	LED_NUM:
+ 1169 0030 C0       		.byte	-64
+ 1170 0031 F9       		.byte	-7
+ 1171 0032 A4       		.byte	-92
+ 1172 0033 B0       		.byte	-80
+ 1173 0034 99       		.byte	-103
+ 1174 0035 92       		.byte	-110
+ 1175 0036 82       		.byte	-126
+ 1176 0037 F8       		.byte	-8
+ 1177 0038 80       		.byte	-128
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 29
+
+
+ 1178 0039 90       		.byte	-112
+ 1179 003a BF       		.byte	-65
+ 1180 003b 88       		.byte	-120
+ 1181 003c 83       		.byte	-125
+ 1182 003d C6       		.byte	-58
+ 1183 003e A1       		.byte	-95
+ 1184 003f 86       		.byte	-122
+ 1185 0040 8E       		.byte	-114
+ 1186 0041 FF       		.byte	-1
+ 1187 0042 0000     		.space	2
+ 1188              	.LC0:
+ 1189 0044 01       		.byte	1
+ 1190 0045 02       		.byte	2
+ 1191 0046 03       		.byte	3
+ 1192 0047 04       		.byte	4
+ 1193              		.data
+ 1194              		.align	2
+ 1195              		.set	.LANCHOR0,. + 0
+ 1196              		.type	display_buffer, %object
+ 1197              		.size	display_buffer, 8
+ 1198              	display_buffer:
+ 1199 0000 07       		.byte	7
+ 1200 0001 06       		.byte	6
+ 1201 0002 05       		.byte	5
+ 1202 0003 04       		.byte	4
+ 1203 0004 03       		.byte	3
+ 1204 0005 02       		.byte	2
+ 1205 0006 01       		.byte	1
+ 1206 0007 00       		.byte	0
+ 1207              		.type	keys, %object
+ 1208              		.size	keys, 12
+ 1209              	keys:
+ 1210 0008 01       		.byte	1
+ 1211 0009 02       		.byte	2
+ 1212 000a 03       		.byte	3
+ 1213 000b 04       		.byte	4
+ 1214 000c 05       		.byte	5
+ 1215 000d 06       		.byte	6
+ 1216 000e 07       		.byte	7
+ 1217 000f 08       		.byte	8
+ 1218 0010 09       		.byte	9
+ 1219 0011 0A       		.byte	10
+ 1220 0012 00       		.byte	0
+ 1221 0013 0B       		.byte	11
+ 1222              		.bss
+ 1223              		.align	2
+ 1224              		.set	.LANCHOR1,. + 0
+ 1225              		.type	cyclic_index, %object
+ 1226              		.size	cyclic_index, 1
+ 1227              	cyclic_index:
+ 1228 0000 00       		.space	1
+ 1229              		.type	led_counter, %object
+ 1230              		.size	led_counter, 1
+ 1231              	led_counter:
+ 1232 0001 00       		.space	1
+ 1233              		.type	cyclic_counter, %object
+ 1234              		.size	cyclic_counter, 2
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 30
+
+
+ 1235              	cyclic_counter:
+ 1236 0002 0000     		.space	2
+ 1237              		.type	password_mode, %object
+ 1238              		.size	password_mode, 1
+ 1239              	password_mode:
+ 1240 0004 00       		.space	1
+ 1241 0005 000000   		.space	3
+ 1242              		.type	entered_password, %object
+ 1243              		.size	entered_password, 4
+ 1244              	entered_password:
+ 1245 0008 00000000 		.space	4
+ 1246              		.type	password_index, %object
+ 1247              		.size	password_index, 1
+ 1248              	password_index:
+ 1249 000c 00       		.space	1
+ 1250              		.text
+ 1251              	.Letext0:
+ 1252              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1253              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1254              		.file 4 "Generated_Source\\PSoC4/cytypes.h"
+ 1255              		.file 5 "Generated_Source\\PSoC4/Pin_DO.h"
+ 1256              		.file 6 "Generated_Source\\PSoC4/Pin_CLK.h"
+ 1257              		.file 7 "Generated_Source\\PSoC4/Pin_Latch.h"
+ 1258              		.file 8 "Generated_Source\\PSoC4/CyLib.h"
+ 1259              		.file 9 "Generated_Source\\PSoC4/Timer.h"
+ 1260              		.file 10 "Generated_Source\\PSoC4/Timer_Int.h"
+ 1261              		.section	.debug_info,"",%progbits
+ 1262              	.Ldebug_info0:
+ 1263 0000 E8070000 		.4byte	0x7e8
+ 1264 0004 0400     		.2byte	0x4
+ 1265 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1266 000a 04       		.byte	0x4
+ 1267 000b 01       		.uleb128 0x1
+ 1268 000c 57000000 		.4byte	.LASF59
+ 1269 0010 0C       		.byte	0xc
+ 1270 0011 F0010000 		.4byte	.LASF60
+ 1271 0015 13000000 		.4byte	.LASF61
+ 1272 0019 78000000 		.4byte	.Ldebug_ranges0+0x78
+ 1273 001d 00000000 		.4byte	0
+ 1274 0021 00000000 		.4byte	.Ldebug_line0
+ 1275 0025 02       		.uleb128 0x2
+ 1276 0026 01       		.byte	0x1
+ 1277 0027 06       		.byte	0x6
+ 1278 0028 0A010000 		.4byte	.LASF0
+ 1279 002c 03       		.uleb128 0x3
+ 1280 002d 4D000000 		.4byte	.LASF3
+ 1281 0031 02       		.byte	0x2
+ 1282 0032 1D       		.byte	0x1d
+ 1283 0033 37000000 		.4byte	0x37
+ 1284 0037 02       		.uleb128 0x2
+ 1285 0038 01       		.byte	0x1
+ 1286 0039 08       		.byte	0x8
+ 1287 003a 8A020000 		.4byte	.LASF1
+ 1288 003e 02       		.uleb128 0x2
+ 1289 003f 02       		.byte	0x2
+ 1290 0040 05       		.byte	0x5
+ 1291 0041 98020000 		.4byte	.LASF2
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 31
+
+
+ 1292 0045 03       		.uleb128 0x3
+ 1293 0046 FE020000 		.4byte	.LASF4
+ 1294 004a 02       		.byte	0x2
+ 1295 004b 2B       		.byte	0x2b
+ 1296 004c 50000000 		.4byte	0x50
+ 1297 0050 02       		.uleb128 0x2
+ 1298 0051 02       		.byte	0x2
+ 1299 0052 07       		.byte	0x7
+ 1300 0053 DD010000 		.4byte	.LASF5
+ 1301 0057 02       		.uleb128 0x2
+ 1302 0058 04       		.byte	0x4
+ 1303 0059 05       		.byte	0x5
+ 1304 005a 2B010000 		.4byte	.LASF6
+ 1305 005e 02       		.uleb128 0x2
+ 1306 005f 04       		.byte	0x4
+ 1307 0060 07       		.byte	0x7
+ 1308 0061 B8010000 		.4byte	.LASF7
+ 1309 0065 02       		.uleb128 0x2
+ 1310 0066 08       		.byte	0x8
+ 1311 0067 05       		.byte	0x5
+ 1312 0068 FC000000 		.4byte	.LASF8
+ 1313 006c 02       		.uleb128 0x2
+ 1314 006d 08       		.byte	0x8
+ 1315 006e 07       		.byte	0x7
+ 1316 006f E5000000 		.4byte	.LASF9
+ 1317 0073 04       		.uleb128 0x4
+ 1318 0074 04       		.byte	0x4
+ 1319 0075 05       		.byte	0x5
+ 1320 0076 696E7400 		.ascii	"int\000"
+ 1321 007a 02       		.uleb128 0x2
+ 1322 007b 04       		.byte	0x4
+ 1323 007c 07       		.byte	0x7
+ 1324 007d 96010000 		.4byte	.LASF10
+ 1325 0081 03       		.uleb128 0x3
+ 1326 0082 96030000 		.4byte	.LASF11
+ 1327 0086 03       		.byte	0x3
+ 1328 0087 18       		.byte	0x18
+ 1329 0088 2C000000 		.4byte	0x2c
+ 1330 008c 03       		.uleb128 0x3
+ 1331 008d 52010000 		.4byte	.LASF12
+ 1332 0091 03       		.byte	0x3
+ 1333 0092 24       		.byte	0x24
+ 1334 0093 45000000 		.4byte	0x45
+ 1335 0097 05       		.uleb128 0x5
+ 1336 0098 4C010000 		.4byte	.LASF13
+ 1337 009c 04       		.byte	0x4
+ 1338 009d FB01     		.2byte	0x1fb
+ 1339 009f 37000000 		.4byte	0x37
+ 1340 00a3 02       		.uleb128 0x2
+ 1341 00a4 04       		.byte	0x4
+ 1342 00a5 04       		.byte	0x4
+ 1343 00a6 74020000 		.4byte	.LASF14
+ 1344 00aa 02       		.uleb128 0x2
+ 1345 00ab 08       		.byte	0x8
+ 1346 00ac 04       		.byte	0x4
+ 1347 00ad 5B010000 		.4byte	.LASF15
+ 1348 00b1 02       		.uleb128 0x2
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 32
+
+
+ 1349 00b2 01       		.byte	0x1
+ 1350 00b3 08       		.byte	0x8
+ 1351 00b4 EB020000 		.4byte	.LASF16
+ 1352 00b8 02       		.uleb128 0x2
+ 1353 00b9 08       		.byte	0x8
+ 1354 00ba 04       		.byte	0x4
+ 1355 00bb 2D020000 		.4byte	.LASF17
+ 1356 00bf 02       		.uleb128 0x2
+ 1357 00c0 04       		.byte	0x4
+ 1358 00c1 07       		.byte	0x7
+ 1359 00c2 13020000 		.4byte	.LASF18
+ 1360 00c6 06       		.uleb128 0x6
+ 1361 00c7 35030000 		.4byte	.LASF19
+ 1362 00cb 01       		.byte	0x1
+ 1363 00cc 64       		.byte	0x64
+ 1364 00cd 00000000 		.4byte	.LFB35
+ 1365 00d1 3C000000 		.4byte	.LFE35-.LFB35
+ 1366 00d5 01       		.uleb128 0x1
+ 1367 00d6 9C       		.byte	0x9c
+ 1368 00d7 F3000000 		.4byte	0xf3
+ 1369 00db 07       		.uleb128 0x7
+ 1370 00dc 00000000 		.4byte	.LBB2
+ 1371 00e0 12000000 		.4byte	.LBE2-.LBB2
+ 1372 00e4 08       		.uleb128 0x8
+ 1373 00e5 6900     		.ascii	"i\000"
+ 1374 00e7 01       		.byte	0x1
+ 1375 00e8 66       		.byte	0x66
+ 1376 00e9 73000000 		.4byte	0x73
+ 1377 00ed 00000000 		.4byte	.LLST0
+ 1378 00f1 00       		.byte	0
+ 1379 00f2 00       		.byte	0
+ 1380 00f3 06       		.uleb128 0x6
+ 1381 00f4 85030000 		.4byte	.LASF20
+ 1382 00f8 01       		.byte	0x1
+ 1383 00f9 8E       		.byte	0x8e
+ 1384 00fa 00000000 		.4byte	.LFB36
+ 1385 00fe 20000000 		.4byte	.LFE36-.LFB36
+ 1386 0102 01       		.uleb128 0x1
+ 1387 0103 9C       		.byte	0x9c
+ 1388 0104 39010000 		.4byte	0x139
+ 1389 0108 07       		.uleb128 0x7
+ 1390 0109 02000000 		.4byte	.LBB3
+ 1391 010d 16000000 		.4byte	.LBE3-.LBB3
+ 1392 0111 09       		.uleb128 0x9
+ 1393 0112 9E030000 		.4byte	.LASF21
+ 1394 0116 01       		.byte	0x1
+ 1395 0117 90       		.byte	0x90
+ 1396 0118 73000000 		.4byte	0x73
+ 1397 011c 35000000 		.4byte	.LLST1
+ 1398 0120 0A       		.uleb128 0xa
+ 1399 0121 12000000 		.4byte	.LVL7
+ 1400 0125 0B       		.uleb128 0xb
+ 1401 0126 74       		.byte	0x74
+ 1402 0127 00       		.sleb128 0
+ 1403 0128 32       		.byte	0x32
+ 1404 0129 24       		.byte	0x24
+ 1405 012a 03       		.byte	0x3
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 33
+
+
+ 1406 012b 08000000 		.4byte	.LANCHOR2+8
+ 1407 012f 22       		.byte	0x22
+ 1408 0130 06       		.byte	0x6
+ 1409 0131 0B       		.uleb128 0xb
+ 1410 0132 01       		.uleb128 0x1
+ 1411 0133 50       		.byte	0x50
+ 1412 0134 01       		.uleb128 0x1
+ 1413 0135 31       		.byte	0x31
+ 1414 0136 00       		.byte	0
+ 1415 0137 00       		.byte	0
+ 1416 0138 00       		.byte	0
+ 1417 0139 06       		.uleb128 0x6
+ 1418 013a 4A030000 		.4byte	.LASF22
+ 1419 013e 01       		.byte	0x1
+ 1420 013f 96       		.byte	0x96
+ 1421 0140 00000000 		.4byte	.LFB37
+ 1422 0144 54000000 		.4byte	.LFE37-.LFB37
+ 1423 0148 01       		.uleb128 0x1
+ 1424 0149 9C       		.byte	0x9c
+ 1425 014a EB010000 		.4byte	0x1eb
+ 1426 014e 0C       		.uleb128 0xc
+ 1427 014f 5D030000 		.4byte	.LASF23
+ 1428 0153 01       		.byte	0x1
+ 1429 0154 98       		.byte	0x98
+ 1430 0155 81000000 		.4byte	0x81
+ 1431 0159 04       		.byte	0x4
+ 1432 015a 0C       		.uleb128 0xc
+ 1433 015b 1C010000 		.4byte	.LASF24
+ 1434 015f 01       		.byte	0x1
+ 1435 0160 99       		.byte	0x99
+ 1436 0161 81000000 		.4byte	0x81
+ 1437 0165 03       		.byte	0x3
+ 1438 0166 07       		.uleb128 0x7
+ 1439 0167 02000000 		.4byte	.LBB4
+ 1440 016b 48000000 		.4byte	.LBE4-.LBB4
+ 1441 016f 09       		.uleb128 0x9
+ 1442 0170 9E030000 		.4byte	.LASF21
+ 1443 0174 01       		.byte	0x1
+ 1444 0175 9B       		.byte	0x9b
+ 1445 0176 73000000 		.4byte	0x73
+ 1446 017a 54000000 		.4byte	.LLST2
+ 1447 017e 0D       		.uleb128 0xd
+ 1448 017f 18000000 		.4byte	.LBB5
+ 1449 0183 20000000 		.4byte	.LBE5-.LBB5
+ 1450 0187 AC010000 		.4byte	0x1ac
+ 1451 018b 09       		.uleb128 0x9
+ 1452 018c AB030000 		.4byte	.LASF25
+ 1453 0190 01       		.byte	0x1
+ 1454 0191 9F       		.byte	0x9f
+ 1455 0192 73000000 		.4byte	0x73
+ 1456 0196 73000000 		.4byte	.LLST3
+ 1457 019a 0E       		.uleb128 0xe
+ 1458 019b 26000000 		.4byte	.LVL15
+ 1459 019f 0B       		.uleb128 0xb
+ 1460 01a0 74       		.byte	0x74
+ 1461 01a1 00       		.sleb128 0
+ 1462 01a2 32       		.byte	0x32
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 34
+
+
+ 1463 01a3 24       		.byte	0x24
+ 1464 01a4 03       		.byte	0x3
+ 1465 01a5 20000000 		.4byte	.LANCHOR2+32
+ 1466 01a9 22       		.byte	0x22
+ 1467 01aa 06       		.byte	0x6
+ 1468 01ab 00       		.byte	0
+ 1469 01ac 0F       		.uleb128 0xf
+ 1470 01ad 12000000 		.4byte	.LVL12
+ 1471 01b1 03       		.uleb128 0x3
+ 1472 01b2 74       		.byte	0x74
+ 1473 01b3 08       		.sleb128 8
+ 1474 01b4 06       		.byte	0x6
+ 1475 01b5 BF010000 		.4byte	0x1bf
+ 1476 01b9 0B       		.uleb128 0xb
+ 1477 01ba 01       		.uleb128 0x1
+ 1478 01bb 50       		.byte	0x50
+ 1479 01bc 01       		.uleb128 0x1
+ 1480 01bd 36       		.byte	0x36
+ 1481 01be 00       		.byte	0
+ 1482 01bf 0F       		.uleb128 0xf
+ 1483 01c0 18000000 		.4byte	.LVL13
+ 1484 01c4 03       		.uleb128 0x3
+ 1485 01c5 74       		.byte	0x74
+ 1486 01c6 14       		.sleb128 20
+ 1487 01c7 06       		.byte	0x6
+ 1488 01c8 D2010000 		.4byte	0x1d2
+ 1489 01cc 0B       		.uleb128 0xb
+ 1490 01cd 01       		.uleb128 0x1
+ 1491 01ce 50       		.byte	0x50
+ 1492 01cf 01       		.uleb128 0x1
+ 1493 01d0 30       		.byte	0x30
+ 1494 01d1 00       		.byte	0
+ 1495 01d2 0A       		.uleb128 0xa
+ 1496 01d3 44000000 		.4byte	.LVL17
+ 1497 01d7 0B       		.uleb128 0xb
+ 1498 01d8 75       		.byte	0x75
+ 1499 01d9 00       		.sleb128 0
+ 1500 01da 32       		.byte	0x32
+ 1501 01db 24       		.byte	0x24
+ 1502 01dc 03       		.byte	0x3
+ 1503 01dd 08000000 		.4byte	.LANCHOR2+8
+ 1504 01e1 22       		.byte	0x22
+ 1505 01e2 06       		.byte	0x6
+ 1506 01e3 0B       		.uleb128 0xb
+ 1507 01e4 01       		.uleb128 0x1
+ 1508 01e5 50       		.byte	0x50
+ 1509 01e6 01       		.uleb128 0x1
+ 1510 01e7 31       		.byte	0x31
+ 1511 01e8 00       		.byte	0
+ 1512 01e9 00       		.byte	0
+ 1513 01ea 00       		.byte	0
+ 1514 01eb 06       		.uleb128 0x6
+ 1515 01ec 1B030000 		.4byte	.LASF26
+ 1516 01f0 01       		.byte	0x1
+ 1517 01f1 45       		.byte	0x45
+ 1518 01f2 00000000 		.4byte	.LFB33
+ 1519 01f6 34000000 		.4byte	.LFE33-.LFB33
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 35
+
+
+ 1520 01fa 01       		.uleb128 0x1
+ 1521 01fb 9C       		.byte	0x9c
+ 1522 01fc 6F020000 		.4byte	0x26f
+ 1523 0200 10       		.uleb128 0x10
+ 1524 0201 CA010000 		.4byte	.LASF28
+ 1525 0205 01       		.byte	0x1
+ 1526 0206 45       		.byte	0x45
+ 1527 0207 81000000 		.4byte	0x81
+ 1528 020b 92000000 		.4byte	.LLST4
+ 1529 020f 07       		.uleb128 0x7
+ 1530 0210 04000000 		.4byte	.LBB6
+ 1531 0214 2E000000 		.4byte	.LBE6-.LBB6
+ 1532 0218 08       		.uleb128 0x8
+ 1533 0219 6900     		.ascii	"i\000"
+ 1534 021b 01       		.byte	0x1
+ 1535 021c 46       		.byte	0x46
+ 1536 021d 81000000 		.4byte	0x81
+ 1537 0221 B3000000 		.4byte	.LLST5
+ 1538 0225 11       		.uleb128 0x11
+ 1539 0226 16000000 		.4byte	.LVL23
+ 1540 022a A0070000 		.4byte	0x7a0
+ 1541 022e 38020000 		.4byte	0x238
+ 1542 0232 0B       		.uleb128 0xb
+ 1543 0233 01       		.uleb128 0x1
+ 1544 0234 50       		.byte	0x50
+ 1545 0235 01       		.uleb128 0x1
+ 1546 0236 31       		.byte	0x31
+ 1547 0237 00       		.byte	0
+ 1548 0238 11       		.uleb128 0x11
+ 1549 0239 1E000000 		.4byte	.LVL24
+ 1550 023d A0070000 		.4byte	0x7a0
+ 1551 0241 4B020000 		.4byte	0x24b
+ 1552 0245 0B       		.uleb128 0xb
+ 1553 0246 01       		.uleb128 0x1
+ 1554 0247 50       		.byte	0x50
+ 1555 0248 01       		.uleb128 0x1
+ 1556 0249 30       		.byte	0x30
+ 1557 024a 00       		.byte	0
+ 1558 024b 11       		.uleb128 0x11
+ 1559 024c 24000000 		.4byte	.LVL25
+ 1560 0250 AB070000 		.4byte	0x7ab
+ 1561 0254 5E020000 		.4byte	0x25e
+ 1562 0258 0B       		.uleb128 0xb
+ 1563 0259 01       		.uleb128 0x1
+ 1564 025a 50       		.byte	0x50
+ 1565 025b 01       		.uleb128 0x1
+ 1566 025c 31       		.byte	0x31
+ 1567 025d 00       		.byte	0
+ 1568 025e 12       		.uleb128 0x12
+ 1569 025f 2A000000 		.4byte	.LVL26
+ 1570 0263 AB070000 		.4byte	0x7ab
+ 1571 0267 0B       		.uleb128 0xb
+ 1572 0268 01       		.uleb128 0x1
+ 1573 0269 50       		.byte	0x50
+ 1574 026a 01       		.uleb128 0x1
+ 1575 026b 30       		.byte	0x30
+ 1576 026c 00       		.byte	0
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 36
+
+
+ 1577 026d 00       		.byte	0
+ 1578 026e 00       		.byte	0
+ 1579 026f 06       		.uleb128 0x6
+ 1580 0270 78010000 		.4byte	.LASF27
+ 1581 0274 01       		.byte	0x1
+ 1582 0275 52       		.byte	0x52
+ 1583 0276 00000000 		.4byte	.LFB34
+ 1584 027a 58000000 		.4byte	.LFE34-.LFB34
+ 1585 027e 01       		.uleb128 0x1
+ 1586 027f 9C       		.byte	0x9c
+ 1587 0280 34030000 		.4byte	0x334
+ 1588 0284 10       		.uleb128 0x10
+ 1589 0285 AF010000 		.4byte	.LASF29
+ 1590 0289 01       		.byte	0x1
+ 1591 028a 52       		.byte	0x52
+ 1592 028b 81000000 		.4byte	0x81
+ 1593 028f DD000000 		.4byte	.LLST6
+ 1594 0293 10       		.uleb128 0x10
+ 1595 0294 16010000 		.4byte	.LASF30
+ 1596 0298 01       		.byte	0x1
+ 1597 0299 52       		.byte	0x52
+ 1598 029a 81000000 		.4byte	0x81
+ 1599 029e 17010000 		.4byte	.LLST7
+ 1600 02a2 13       		.uleb128 0x13
+ 1601 02a3 646F7400 		.ascii	"dot\000"
+ 1602 02a7 01       		.byte	0x1
+ 1603 02a8 52       		.byte	0x52
+ 1604 02a9 81000000 		.4byte	0x81
+ 1605 02ad 51010000 		.4byte	.LLST8
+ 1606 02b1 11       		.uleb128 0x11
+ 1607 02b2 10000000 		.4byte	.LVL32
+ 1608 02b6 EB010000 		.4byte	0x1eb
+ 1609 02ba C5020000 		.4byte	0x2c5
+ 1610 02be 0B       		.uleb128 0xb
+ 1611 02bf 01       		.uleb128 0x1
+ 1612 02c0 50       		.byte	0x50
+ 1613 02c1 02       		.uleb128 0x2
+ 1614 02c2 09       		.byte	0x9
+ 1615 02c3 FF       		.byte	0xff
+ 1616 02c4 00       		.byte	0
+ 1617 02c5 11       		.uleb128 0x11
+ 1618 02c6 16000000 		.4byte	.LVL33
+ 1619 02ca EB010000 		.4byte	0x1eb
+ 1620 02ce D9020000 		.4byte	0x2d9
+ 1621 02d2 0B       		.uleb128 0xb
+ 1622 02d3 01       		.uleb128 0x1
+ 1623 02d4 50       		.byte	0x50
+ 1624 02d5 02       		.uleb128 0x2
+ 1625 02d6 09       		.byte	0x9
+ 1626 02d7 FF       		.byte	0xff
+ 1627 02d8 00       		.byte	0
+ 1628 02d9 14       		.uleb128 0x14
+ 1629 02da 24000000 		.4byte	.LVL36
+ 1630 02de EB010000 		.4byte	0x1eb
+ 1631 02e2 11       		.uleb128 0x11
+ 1632 02e3 38000000 		.4byte	.LVL37
+ 1633 02e7 EB010000 		.4byte	0x1eb
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 37
+
+
+ 1634 02eb FB020000 		.4byte	0x2fb
+ 1635 02ef 0B       		.uleb128 0xb
+ 1636 02f0 01       		.uleb128 0x1
+ 1637 02f1 50       		.byte	0x50
+ 1638 02f2 07       		.uleb128 0x7
+ 1639 02f3 74       		.byte	0x74
+ 1640 02f4 30       		.sleb128 48
+ 1641 02f5 94       		.byte	0x94
+ 1642 02f6 01       		.byte	0x1
+ 1643 02f7 08       		.byte	0x8
+ 1644 02f8 7F       		.byte	0x7f
+ 1645 02f9 1A       		.byte	0x1a
+ 1646 02fa 00       		.byte	0
+ 1647 02fb 11       		.uleb128 0x11
+ 1648 02fc 46000000 		.4byte	.LVL38
+ 1649 0300 EB010000 		.4byte	0x1eb
+ 1650 0304 11030000 		.4byte	0x311
+ 1651 0308 0B       		.uleb128 0xb
+ 1652 0309 01       		.uleb128 0x1
+ 1653 030a 50       		.byte	0x50
+ 1654 030b 04       		.uleb128 0x4
+ 1655 030c 74       		.byte	0x74
+ 1656 030d 30       		.sleb128 48
+ 1657 030e 94       		.byte	0x94
+ 1658 030f 01       		.byte	0x1
+ 1659 0310 00       		.byte	0
+ 1660 0311 11       		.uleb128 0x11
+ 1661 0312 4C000000 		.4byte	.LVL39
+ 1662 0316 B6070000 		.4byte	0x7b6
+ 1663 031a 24030000 		.4byte	0x324
+ 1664 031e 0B       		.uleb128 0xb
+ 1665 031f 01       		.uleb128 0x1
+ 1666 0320 50       		.byte	0x50
+ 1667 0321 01       		.uleb128 0x1
+ 1668 0322 31       		.byte	0x31
+ 1669 0323 00       		.byte	0
+ 1670 0324 12       		.uleb128 0x12
+ 1671 0325 52000000 		.4byte	.LVL40
+ 1672 0329 B6070000 		.4byte	0x7b6
+ 1673 032d 0B       		.uleb128 0xb
+ 1674 032e 01       		.uleb128 0x1
+ 1675 032f 50       		.byte	0x50
+ 1676 0330 01       		.uleb128 0x1
+ 1677 0331 30       		.byte	0x30
+ 1678 0332 00       		.byte	0
+ 1679 0333 00       		.byte	0
+ 1680 0334 15       		.uleb128 0x15
+ 1681 0335 00000000 		.4byte	.LASF62
+ 1682 0339 01       		.byte	0x1
+ 1683 033a 34       		.byte	0x34
+ 1684 033b 00000000 		.4byte	.LFB32
+ 1685 033f 50000000 		.4byte	.LFE32-.LFB32
+ 1686 0343 01       		.uleb128 0x1
+ 1687 0344 9C       		.byte	0x9c
+ 1688 0345 66030000 		.4byte	0x366
+ 1689 0349 11       		.uleb128 0x11
+ 1690 034a 10000000 		.4byte	.LVL41
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 38
+
+
+ 1691 034e 6F020000 		.4byte	0x26f
+ 1692 0352 5C030000 		.4byte	0x35c
+ 1693 0356 0B       		.uleb128 0xb
+ 1694 0357 01       		.uleb128 0x1
+ 1695 0358 52       		.byte	0x52
+ 1696 0359 01       		.uleb128 0x1
+ 1697 035a 30       		.byte	0x30
+ 1698 035b 00       		.byte	0
+ 1699 035c 14       		.uleb128 0x14
+ 1700 035d 44000000 		.4byte	.LVL42
+ 1701 0361 C6000000 		.4byte	0xc6
+ 1702 0365 00       		.byte	0
+ 1703 0366 06       		.uleb128 0x6
+ 1704 0367 C8020000 		.4byte	.LASF31
+ 1705 036b 01       		.byte	0x1
+ 1706 036c C0       		.byte	0xc0
+ 1707 036d 00000000 		.4byte	.LFB39
+ 1708 0371 60000000 		.4byte	.LFE39-.LFB39
+ 1709 0375 01       		.uleb128 0x1
+ 1710 0376 9C       		.byte	0x9c
+ 1711 0377 EA030000 		.4byte	0x3ea
+ 1712 037b 0D       		.uleb128 0xd
+ 1713 037c 02000000 		.4byte	.LBB7
+ 1714 0380 14000000 		.4byte	.LBE7-.LBB7
+ 1715 0384 96030000 		.4byte	0x396
+ 1716 0388 08       		.uleb128 0x8
+ 1717 0389 6900     		.ascii	"i\000"
+ 1718 038b 01       		.byte	0x1
+ 1719 038c C2       		.byte	0xc2
+ 1720 038d 73000000 		.4byte	0x73
+ 1721 0391 8B010000 		.4byte	.LLST9
+ 1722 0395 00       		.byte	0
+ 1723 0396 0D       		.uleb128 0xd
+ 1724 0397 16000000 		.4byte	.LBB8
+ 1725 039b 20000000 		.4byte	.LBE8-.LBB8
+ 1726 039f D8030000 		.4byte	0x3d8
+ 1727 03a3 09       		.uleb128 0x9
+ 1728 03a4 90030000 		.4byte	.LASF32
+ 1729 03a8 01       		.byte	0x1
+ 1730 03a9 C7       		.byte	0xc7
+ 1731 03aa 73000000 		.4byte	0x73
+ 1732 03ae AA010000 		.4byte	.LLST10
+ 1733 03b2 16       		.uleb128 0x16
+ 1734 03b3 00000000 		.4byte	.Ldebug_ranges0+0
+ 1735 03b7 08       		.uleb128 0x8
+ 1736 03b8 706F7300 		.ascii	"pos\000"
+ 1737 03bc 01       		.byte	0x1
+ 1738 03bd C8       		.byte	0xc8
+ 1739 03be 73000000 		.4byte	0x73
+ 1740 03c2 BD010000 		.4byte	.LLST11
+ 1741 03c6 12       		.uleb128 0x12
+ 1742 03c7 22000000 		.4byte	.LVL47
+ 1743 03cb C1070000 		.4byte	0x7c1
+ 1744 03cf 0B       		.uleb128 0xb
+ 1745 03d0 01       		.uleb128 0x1
+ 1746 03d1 50       		.byte	0x50
+ 1747 03d2 02       		.uleb128 0x2
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 39
+
+
+ 1748 03d3 08       		.byte	0x8
+ 1749 03d4 64       		.byte	0x64
+ 1750 03d5 00       		.byte	0
+ 1751 03d6 00       		.byte	0
+ 1752 03d7 00       		.byte	0
+ 1753 03d8 12       		.uleb128 0x12
+ 1754 03d9 58000000 		.4byte	.LVL52
+ 1755 03dd C1070000 		.4byte	0x7c1
+ 1756 03e1 0B       		.uleb128 0xb
+ 1757 03e2 01       		.uleb128 0x1
+ 1758 03e3 50       		.byte	0x50
+ 1759 03e4 03       		.uleb128 0x3
+ 1760 03e5 0A       		.byte	0xa
+ 1761 03e6 D007     		.2byte	0x7d0
+ 1762 03e8 00       		.byte	0
+ 1763 03e9 00       		.byte	0
+ 1764 03ea 06       		.uleb128 0x6
+ 1765 03eb 69030000 		.4byte	.LASF33
+ 1766 03ef 01       		.byte	0x1
+ 1767 03f0 DC       		.byte	0xdc
+ 1768 03f1 00000000 		.4byte	.LFB40
+ 1769 03f5 64000000 		.4byte	.LFE40-.LFB40
+ 1770 03f9 01       		.uleb128 0x1
+ 1771 03fa 9C       		.byte	0x9c
+ 1772 03fb 82040000 		.4byte	0x482
+ 1773 03ff 0D       		.uleb128 0xd
+ 1774 0400 02000000 		.4byte	.LBB11
+ 1775 0404 36000000 		.4byte	.LBE11-.LBB11
+ 1776 0408 70040000 		.4byte	0x470
+ 1777 040c 08       		.uleb128 0x8
+ 1778 040d 6900     		.ascii	"i\000"
+ 1779 040f 01       		.byte	0x1
+ 1780 0410 DE       		.byte	0xde
+ 1781 0411 73000000 		.4byte	0x73
+ 1782 0415 DB010000 		.4byte	.LLST12
+ 1783 0419 17       		.uleb128 0x17
+ 1784 041a 18000000 		.4byte	.Ldebug_ranges0+0x18
+ 1785 041e 30040000 		.4byte	0x430
+ 1786 0422 08       		.uleb128 0x8
+ 1787 0423 6A00     		.ascii	"j\000"
+ 1788 0425 01       		.byte	0x1
+ 1789 0426 E0       		.byte	0xe0
+ 1790 0427 73000000 		.4byte	0x73
+ 1791 042b FA010000 		.4byte	.LLST13
+ 1792 042f 00       		.byte	0
+ 1793 0430 0D       		.uleb128 0xd
+ 1794 0431 1C000000 		.4byte	.LBB14
+ 1795 0435 10000000 		.4byte	.LBE14-.LBB14
+ 1796 0439 4B040000 		.4byte	0x44b
+ 1797 043d 08       		.uleb128 0x8
+ 1798 043e 6A00     		.ascii	"j\000"
+ 1799 0440 01       		.byte	0x1
+ 1800 0441 E6       		.byte	0xe6
+ 1801 0442 73000000 		.4byte	0x73
+ 1802 0446 18020000 		.4byte	.LLST14
+ 1803 044a 00       		.byte	0
+ 1804 044b 11       		.uleb128 0x11
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 40
+
+
+ 1805 044c 1C000000 		.4byte	.LVL59
+ 1806 0450 C1070000 		.4byte	0x7c1
+ 1807 0454 5F040000 		.4byte	0x45f
+ 1808 0458 0B       		.uleb128 0xb
+ 1809 0459 01       		.uleb128 0x1
+ 1810 045a 50       		.byte	0x50
+ 1811 045b 02       		.uleb128 0x2
+ 1812 045c 08       		.byte	0x8
+ 1813 045d C8       		.byte	0xc8
+ 1814 045e 00       		.byte	0
+ 1815 045f 12       		.uleb128 0x12
+ 1816 0460 32000000 		.4byte	.LVL62
+ 1817 0464 C1070000 		.4byte	0x7c1
+ 1818 0468 0B       		.uleb128 0xb
+ 1819 0469 01       		.uleb128 0x1
+ 1820 046a 50       		.byte	0x50
+ 1821 046b 02       		.uleb128 0x2
+ 1822 046c 08       		.byte	0x8
+ 1823 046d C8       		.byte	0xc8
+ 1824 046e 00       		.byte	0
+ 1825 046f 00       		.byte	0
+ 1826 0470 12       		.uleb128 0x12
+ 1827 0471 5C000000 		.4byte	.LVL64
+ 1828 0475 C1070000 		.4byte	0x7c1
+ 1829 0479 0B       		.uleb128 0xb
+ 1830 047a 01       		.uleb128 0x1
+ 1831 047b 50       		.byte	0x50
+ 1832 047c 03       		.uleb128 0x3
+ 1833 047d 0A       		.byte	0xa
+ 1834 047e D007     		.2byte	0x7d0
+ 1835 0480 00       		.byte	0
+ 1836 0481 00       		.byte	0
+ 1837 0482 06       		.uleb128 0x6
+ 1838 0483 B5030000 		.4byte	.LASF34
+ 1839 0487 01       		.byte	0x1
+ 1840 0488 A8       		.byte	0xa8
+ 1841 0489 00000000 		.4byte	.LFB38
+ 1842 048d 54000000 		.4byte	.LFE38-.LFB38
+ 1843 0491 01       		.uleb128 0x1
+ 1844 0492 9C       		.byte	0x9c
+ 1845 0493 00050000 		.4byte	0x500
+ 1846 0497 18       		.uleb128 0x18
+ 1847 0498 39020000 		.4byte	.LASF35
+ 1848 049c 01       		.byte	0x1
+ 1849 049d A9       		.byte	0xa9
+ 1850 049e 00050000 		.4byte	0x500
+ 1851 04a2 02       		.uleb128 0x2
+ 1852 04a3 91       		.byte	0x91
+ 1853 04a4 74       		.sleb128 -12
+ 1854 04a5 09       		.uleb128 0x9
+ 1855 04a6 34010000 		.4byte	.LASF36
+ 1856 04aa 01       		.byte	0x1
+ 1857 04ab AA       		.byte	0xaa
+ 1858 04ac 81000000 		.4byte	0x81
+ 1859 04b0 37020000 		.4byte	.LLST15
+ 1860 04b4 17       		.uleb128 0x17
+ 1861 04b5 30000000 		.4byte	.Ldebug_ranges0+0x30
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 41
+
+
+ 1862 04b9 CB040000 		.4byte	0x4cb
+ 1863 04bd 08       		.uleb128 0x8
+ 1864 04be 6900     		.ascii	"i\000"
+ 1865 04c0 01       		.byte	0x1
+ 1866 04c1 AC       		.byte	0xac
+ 1867 04c2 73000000 		.4byte	0x73
+ 1868 04c6 61020000 		.4byte	.LLST16
+ 1869 04ca 00       		.byte	0
+ 1870 04cb 11       		.uleb128 0x11
+ 1871 04cc 10000000 		.4byte	.LVL66
+ 1872 04d0 CC070000 		.4byte	0x7cc
+ 1873 04d4 ED040000 		.4byte	0x4ed
+ 1874 04d8 0B       		.uleb128 0xb
+ 1875 04d9 01       		.uleb128 0x1
+ 1876 04da 50       		.byte	0x50
+ 1877 04db 02       		.uleb128 0x2
+ 1878 04dc 91       		.byte	0x91
+ 1879 04dd 74       		.sleb128 -12
+ 1880 04de 0B       		.uleb128 0xb
+ 1881 04df 01       		.uleb128 0x1
+ 1882 04e0 51       		.byte	0x51
+ 1883 04e1 05       		.uleb128 0x5
+ 1884 04e2 03       		.byte	0x3
+ 1885 04e3 44000000 		.4byte	.LANCHOR2+68
+ 1886 04e7 0B       		.uleb128 0xb
+ 1887 04e8 01       		.uleb128 0x1
+ 1888 04e9 52       		.byte	0x52
+ 1889 04ea 01       		.uleb128 0x1
+ 1890 04eb 34       		.byte	0x34
+ 1891 04ec 00       		.byte	0
+ 1892 04ed 14       		.uleb128 0x14
+ 1893 04ee 36000000 		.4byte	.LVL72
+ 1894 04f2 66030000 		.4byte	0x366
+ 1895 04f6 14       		.uleb128 0x14
+ 1896 04f7 3C000000 		.4byte	.LVL74
+ 1897 04fb EA030000 		.4byte	0x3ea
+ 1898 04ff 00       		.byte	0
+ 1899 0500 19       		.uleb128 0x19
+ 1900 0501 81000000 		.4byte	0x81
+ 1901 0505 10050000 		.4byte	0x510
+ 1902 0509 1A       		.uleb128 0x1a
+ 1903 050a BF000000 		.4byte	0xbf
+ 1904 050e 03       		.byte	0x3
+ 1905 050f 00       		.byte	0
+ 1906 0510 1B       		.uleb128 0x1b
+ 1907 0511 D2030000 		.4byte	.LASF63
+ 1908 0515 01       		.byte	0x1
+ 1909 0516 F8       		.byte	0xf8
+ 1910 0517 73000000 		.4byte	0x73
+ 1911 051b 00000000 		.4byte	.LFB41
+ 1912 051f 78010000 		.4byte	.LFE41-.LFB41
+ 1913 0523 01       		.uleb128 0x1
+ 1914 0524 9C       		.byte	0x9c
+ 1915 0525 32060000 		.4byte	0x632
+ 1916 0529 1C       		.uleb128 0x1c
+ 1917 052a 4A020000 		.4byte	.LASF37
+ 1918 052e 01       		.byte	0x1
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 42
+
+
+ 1919 052f 0001     		.2byte	0x100
+ 1920 0531 81000000 		.4byte	0x81
+ 1921 0535 8B020000 		.4byte	.LLST17
+ 1922 0539 0D       		.uleb128 0xd
+ 1923 053a 12000000 		.4byte	.LBB17
+ 1924 053e 18000000 		.4byte	.LBE17-.LBB17
+ 1925 0542 55050000 		.4byte	0x555
+ 1926 0546 1D       		.uleb128 0x1d
+ 1927 0547 6900     		.ascii	"i\000"
+ 1928 0549 01       		.byte	0x1
+ 1929 054a 0301     		.2byte	0x103
+ 1930 054c 73000000 		.4byte	0x73
+ 1931 0550 D7020000 		.4byte	.LLST18
+ 1932 0554 00       		.byte	0
+ 1933 0555 0D       		.uleb128 0xd
+ 1934 0556 4C000000 		.4byte	.LBB18
+ 1935 055a 14000000 		.4byte	.LBE18-.LBB18
+ 1936 055e 71050000 		.4byte	0x571
+ 1937 0562 1D       		.uleb128 0x1d
+ 1938 0563 6900     		.ascii	"i\000"
+ 1939 0565 01       		.byte	0x1
+ 1940 0566 1301     		.2byte	0x113
+ 1941 0568 73000000 		.4byte	0x73
+ 1942 056c F6020000 		.4byte	.LLST19
+ 1943 0570 00       		.byte	0
+ 1944 0571 0D       		.uleb128 0xd
+ 1945 0572 60000000 		.4byte	.LBB19
+ 1946 0576 0C000000 		.4byte	.LBE19-.LBB19
+ 1947 057a 8D050000 		.4byte	0x58d
+ 1948 057e 1D       		.uleb128 0x1d
+ 1949 057f 6900     		.ascii	"i\000"
+ 1950 0581 01       		.byte	0x1
+ 1951 0582 1701     		.2byte	0x117
+ 1952 0584 73000000 		.4byte	0x73
+ 1953 0588 15030000 		.4byte	.LLST20
+ 1954 058c 00       		.byte	0
+ 1955 058d 17       		.uleb128 0x17
+ 1956 058e 48000000 		.4byte	.Ldebug_ranges0+0x48
+ 1957 0592 E7050000 		.4byte	0x5e7
+ 1958 0596 1D       		.uleb128 0x1d
+ 1959 0597 726F7700 		.ascii	"row\000"
+ 1960 059b 01       		.byte	0x1
+ 1961 059c 2701     		.2byte	0x127
+ 1962 059e 73000000 		.4byte	0x73
+ 1963 05a2 28030000 		.4byte	.LLST21
+ 1964 05a6 16       		.uleb128 0x16
+ 1965 05a7 60000000 		.4byte	.Ldebug_ranges0+0x60
+ 1966 05ab 1D       		.uleb128 0x1d
+ 1967 05ac 636F6C00 		.ascii	"col\000"
+ 1968 05b0 01       		.byte	0x1
+ 1969 05b1 2801     		.2byte	0x128
+ 1970 05b3 73000000 		.4byte	0x73
+ 1971 05b7 46030000 		.4byte	.LLST22
+ 1972 05bb 07       		.uleb128 0x7
+ 1973 05bc 9C000000 		.4byte	.LBB22
+ 1974 05c0 AE000000 		.4byte	.LBE22-.LBB22
+ 1975 05c4 1C       		.uleb128 0x1c
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 43
+
+
+ 1976 05c5 7B030000 		.4byte	.LASF38
+ 1977 05c9 01       		.byte	0x1
+ 1978 05ca 2901     		.2byte	0x129
+ 1979 05cc 81000000 		.4byte	0x81
+ 1980 05d0 64030000 		.4byte	.LLST23
+ 1981 05d4 1C       		.uleb128 0x1c
+ 1982 05d5 DD020000 		.4byte	.LASF39
+ 1983 05d9 01       		.byte	0x1
+ 1984 05da 2A01     		.2byte	0x12a
+ 1985 05dc 81000000 		.4byte	0x81
+ 1986 05e0 77030000 		.4byte	.LLST24
+ 1987 05e4 00       		.byte	0
+ 1988 05e5 00       		.byte	0
+ 1989 05e6 00       		.byte	0
+ 1990 05e7 14       		.uleb128 0x14
+ 1991 05e8 08000000 		.4byte	.LVL75
+ 1992 05ec D5070000 		.4byte	0x7d5
+ 1993 05f0 11       		.uleb128 0x11
+ 1994 05f1 0E000000 		.4byte	.LVL76
+ 1995 05f5 E0070000 		.4byte	0x7e0
+ 1996 05f9 07060000 		.4byte	0x607
+ 1997 05fd 0B       		.uleb128 0xb
+ 1998 05fe 01       		.uleb128 0x1
+ 1999 05ff 50       		.byte	0x50
+ 2000 0600 05       		.uleb128 0x5
+ 2001 0601 03       		.byte	0x3
+ 2002 0602 00000000 		.4byte	Timer_Int_Handler2
+ 2003 0606 00       		.byte	0
+ 2004 0607 14       		.uleb128 0x14
+ 2005 0608 12000000 		.4byte	.LVL77
+ 2006 060c F3000000 		.4byte	0xf3
+ 2007 0610 14       		.uleb128 0x14
+ 2008 0611 2E000000 		.4byte	.LVL81
+ 2009 0615 39010000 		.4byte	0x139
+ 2010 0619 14       		.uleb128 0x14
+ 2011 061a 7E000000 		.4byte	.LVL90
+ 2012 061e 82040000 		.4byte	0x482
+ 2013 0622 12       		.uleb128 0x12
+ 2014 0623 64010000 		.4byte	.LVL106
+ 2015 0627 C1070000 		.4byte	0x7c1
+ 2016 062b 0B       		.uleb128 0xb
+ 2017 062c 01       		.uleb128 0x1
+ 2018 062d 50       		.byte	0x50
+ 2019 062e 01       		.uleb128 0x1
+ 2020 062f 3A       		.byte	0x3a
+ 2021 0630 00       		.byte	0
+ 2022 0631 00       		.byte	0
+ 2023 0632 19       		.uleb128 0x19
+ 2024 0633 81000000 		.4byte	0x81
+ 2025 0637 42060000 		.4byte	0x642
+ 2026 063b 1A       		.uleb128 0x1a
+ 2027 063c BF000000 		.4byte	0xbf
+ 2028 0640 11       		.byte	0x11
+ 2029 0641 00       		.byte	0
+ 2030 0642 18       		.uleb128 0x18
+ 2031 0643 C0020000 		.4byte	.LASF40
+ 2032 0647 01       		.byte	0x1
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 44
+
+
+ 2033 0648 0E       		.byte	0xe
+ 2034 0649 53060000 		.4byte	0x653
+ 2035 064d 05       		.uleb128 0x5
+ 2036 064e 03       		.byte	0x3
+ 2037 064f 30000000 		.4byte	LED_NUM
+ 2038 0653 1E       		.uleb128 0x1e
+ 2039 0654 32060000 		.4byte	0x632
+ 2040 0658 18       		.uleb128 0x18
+ 2041 0659 D7030000 		.4byte	.LASF41
+ 2042 065d 01       		.byte	0x1
+ 2043 065e 24       		.byte	0x24
+ 2044 065f 81000000 		.4byte	0x81
+ 2045 0663 05       		.uleb128 0x5
+ 2046 0664 03       		.byte	0x3
+ 2047 0665 01000000 		.4byte	led_counter
+ 2048 0669 19       		.uleb128 0x19
+ 2049 066a 81000000 		.4byte	0x81
+ 2050 066e 79060000 		.4byte	0x679
+ 2051 0672 1A       		.uleb128 0x1a
+ 2052 0673 BF000000 		.4byte	0xbf
+ 2053 0677 07       		.byte	0x7
+ 2054 0678 00       		.byte	0
+ 2055 0679 18       		.uleb128 0x18
+ 2056 067a A2020000 		.4byte	.LASF42
+ 2057 067e 01       		.byte	0x1
+ 2058 067f 25       		.byte	0x25
+ 2059 0680 69060000 		.4byte	0x669
+ 2060 0684 05       		.uleb128 0x5
+ 2061 0685 03       		.byte	0x3
+ 2062 0686 00000000 		.4byte	display_buffer
+ 2063 068a 18       		.uleb128 0x18
+ 2064 068b 1C020000 		.4byte	.LASF43
+ 2065 068f 01       		.byte	0x1
+ 2066 0690 2A       		.byte	0x2a
+ 2067 0691 00050000 		.4byte	0x500
+ 2068 0695 05       		.uleb128 0x5
+ 2069 0696 03       		.byte	0x3
+ 2070 0697 08000000 		.4byte	entered_password
+ 2071 069b 18       		.uleb128 0x18
+ 2072 069c C3030000 		.4byte	.LASF44
+ 2073 06a0 01       		.byte	0x1
+ 2074 06a1 2B       		.byte	0x2b
+ 2075 06a2 81000000 		.4byte	0x81
+ 2076 06a6 05       		.uleb128 0x5
+ 2077 06a7 03       		.byte	0x3
+ 2078 06a8 0C000000 		.4byte	password_index
+ 2079 06ac 18       		.uleb128 0x18
+ 2080 06ad CF010000 		.4byte	.LASF45
+ 2081 06b1 01       		.byte	0x1
+ 2082 06b2 2C       		.byte	0x2c
+ 2083 06b3 81000000 		.4byte	0x81
+ 2084 06b7 05       		.uleb128 0x5
+ 2085 06b8 03       		.byte	0x3
+ 2086 06b9 04000000 		.4byte	password_mode
+ 2087 06bd 18       		.uleb128 0x18
+ 2088 06be 04020000 		.4byte	.LASF46
+ 2089 06c2 01       		.byte	0x1
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 45
+
+
+ 2090 06c3 2F       		.byte	0x2f
+ 2091 06c4 CE060000 		.4byte	0x6ce
+ 2092 06c8 05       		.uleb128 0x5
+ 2093 06c9 03       		.byte	0x3
+ 2094 06ca 00000000 		.4byte	cyclic_pattern
+ 2095 06ce 1E       		.uleb128 0x1e
+ 2096 06cf 69060000 		.4byte	0x669
+ 2097 06d3 18       		.uleb128 0x18
+ 2098 06d4 F7010000 		.4byte	.LASF47
+ 2099 06d8 01       		.byte	0x1
+ 2100 06d9 30       		.byte	0x30
+ 2101 06da 81000000 		.4byte	0x81
+ 2102 06de 05       		.uleb128 0x5
+ 2103 06df 03       		.byte	0x3
+ 2104 06e0 00000000 		.4byte	cyclic_index
+ 2105 06e4 18       		.uleb128 0x18
+ 2106 06e5 60020000 		.4byte	.LASF48
+ 2107 06e9 01       		.byte	0x1
+ 2108 06ea 31       		.byte	0x31
+ 2109 06eb 8C000000 		.4byte	0x8c
+ 2110 06ef 05       		.uleb128 0x5
+ 2111 06f0 03       		.byte	0x3
+ 2112 06f1 02000000 		.4byte	cyclic_counter
+ 2113 06f5 19       		.uleb128 0x19
+ 2114 06f6 81000000 		.4byte	0x81
+ 2115 06fa 0B070000 		.4byte	0x70b
+ 2116 06fe 1A       		.uleb128 0x1a
+ 2117 06ff BF000000 		.4byte	0xbf
+ 2118 0703 03       		.byte	0x3
+ 2119 0704 1A       		.uleb128 0x1a
+ 2120 0705 BF000000 		.4byte	0xbf
+ 2121 0709 02       		.byte	0x2
+ 2122 070a 00       		.byte	0
+ 2123 070b 18       		.uleb128 0x18
+ 2124 070c 6F020000 		.4byte	.LASF49
+ 2125 0710 01       		.byte	0x1
+ 2126 0711 72       		.byte	0x72
+ 2127 0712 F5060000 		.4byte	0x6f5
+ 2128 0716 05       		.uleb128 0x5
+ 2129 0717 03       		.byte	0x3
+ 2130 0718 08000000 		.4byte	keys
+ 2131 071c 19       		.uleb128 0x19
+ 2132 071d 2C070000 		.4byte	0x72c
+ 2133 0721 2C070000 		.4byte	0x72c
+ 2134 0725 1A       		.uleb128 0x1a
+ 2135 0726 BF000000 		.4byte	0xbf
+ 2136 072a 02       		.byte	0x2
+ 2137 072b 00       		.byte	0
+ 2138 072c 1F       		.uleb128 0x1f
+ 2139 072d 04       		.byte	0x4
+ 2140 072e 32070000 		.4byte	0x732
+ 2141 0732 20       		.uleb128 0x20
+ 2142 0733 3D070000 		.4byte	0x73d
+ 2143 0737 21       		.uleb128 0x21
+ 2144 0738 81000000 		.4byte	0x81
+ 2145 073c 00       		.byte	0
+ 2146 073d 18       		.uleb128 0x18
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 46
+
+
+ 2147 073e 62010000 		.4byte	.LASF50
+ 2148 0742 01       		.byte	0x1
+ 2149 0743 7A       		.byte	0x7a
+ 2150 0744 4E070000 		.4byte	0x74e
+ 2151 0748 05       		.uleb128 0x5
+ 2152 0749 03       		.byte	0x3
+ 2153 074a 08000000 		.4byte	COLUMN_x_SetDriveMode
+ 2154 074e 1E       		.uleb128 0x1e
+ 2155 074f 1C070000 		.4byte	0x71c
+ 2156 0753 18       		.uleb128 0x18
+ 2157 0754 B1020000 		.4byte	.LASF51
+ 2158 0758 01       		.byte	0x1
+ 2159 0759 80       		.byte	0x80
+ 2160 075a 64070000 		.4byte	0x764
+ 2161 075e 05       		.uleb128 0x5
+ 2162 075f 03       		.byte	0x3
+ 2163 0760 14000000 		.4byte	COLUMN_x_Write
+ 2164 0764 1E       		.uleb128 0x1e
+ 2165 0765 1C070000 		.4byte	0x71c
+ 2166 0769 19       		.uleb128 0x19
+ 2167 076a 79070000 		.4byte	0x779
+ 2168 076e 79070000 		.4byte	0x779
+ 2169 0772 1A       		.uleb128 0x1a
+ 2170 0773 BF000000 		.4byte	0xbf
+ 2171 0777 03       		.byte	0x3
+ 2172 0778 00       		.byte	0
+ 2173 0779 1F       		.uleb128 0x1f
+ 2174 077a 04       		.byte	0x4
+ 2175 077b 7F070000 		.4byte	0x77f
+ 2176 077f 22       		.uleb128 0x22
+ 2177 0780 97000000 		.4byte	0x97
+ 2178 0784 8A070000 		.4byte	0x78a
+ 2179 0788 23       		.uleb128 0x23
+ 2180 0789 00       		.byte	0
+ 2181 078a 18       		.uleb128 0x18
+ 2182 078b 55020000 		.4byte	.LASF52
+ 2183 078f 01       		.byte	0x1
+ 2184 0790 86       		.byte	0x86
+ 2185 0791 9B070000 		.4byte	0x79b
+ 2186 0795 05       		.uleb128 0x5
+ 2187 0796 03       		.byte	0x3
+ 2188 0797 20000000 		.4byte	ROW_x_Read
+ 2189 079b 1E       		.uleb128 0x1e
+ 2190 079c 69070000 		.4byte	0x769
+ 2191 07a0 24       		.uleb128 0x24
+ 2192 07a1 3F010000 		.4byte	.LASF53
+ 2193 07a5 3F010000 		.4byte	.LASF53
+ 2194 07a9 05       		.byte	0x5
+ 2195 07aa 33       		.byte	0x33
+ 2196 07ab 24       		.uleb128 0x24
+ 2197 07ac F0020000 		.4byte	.LASF54
+ 2198 07b0 F0020000 		.4byte	.LASF54
+ 2199 07b4 06       		.byte	0x6
+ 2200 07b5 33       		.byte	0x33
+ 2201 07b6 24       		.uleb128 0x24
+ 2202 07b7 7A020000 		.4byte	.LASF55
+ 2203 07bb 7A020000 		.4byte	.LASF55
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 47
+
+
+ 2204 07bf 07       		.byte	0x7
+ 2205 07c0 33       		.byte	0x33
+ 2206 07c1 24       		.uleb128 0x24
+ 2207 07c2 55030000 		.4byte	.LASF56
+ 2208 07c6 55030000 		.4byte	.LASF56
+ 2209 07ca 08       		.byte	0x8
+ 2210 07cb EC       		.byte	0xec
+ 2211 07cc 25       		.uleb128 0x25
+ 2212 07cd 43030000 		.4byte	.LASF64
+ 2213 07d1 43030000 		.4byte	.LASF64
+ 2214 07d5 24       		.uleb128 0x24
+ 2215 07d6 A3010000 		.4byte	.LASF57
+ 2216 07da A3010000 		.4byte	.LASF57
+ 2217 07de 09       		.byte	0x9
+ 2218 07df 5A       		.byte	0x5a
+ 2219 07e0 24       		.uleb128 0x24
+ 2220 07e1 09030000 		.4byte	.LASF58
+ 2221 07e5 09030000 		.4byte	.LASF58
+ 2222 07e9 0A       		.byte	0xa
+ 2223 07ea 18       		.byte	0x18
+ 2224 07eb 00       		.byte	0
+ 2225              		.section	.debug_abbrev,"",%progbits
+ 2226              	.Ldebug_abbrev0:
+ 2227 0000 01       		.uleb128 0x1
+ 2228 0001 11       		.uleb128 0x11
+ 2229 0002 01       		.byte	0x1
+ 2230 0003 25       		.uleb128 0x25
+ 2231 0004 0E       		.uleb128 0xe
+ 2232 0005 13       		.uleb128 0x13
+ 2233 0006 0B       		.uleb128 0xb
+ 2234 0007 03       		.uleb128 0x3
+ 2235 0008 0E       		.uleb128 0xe
+ 2236 0009 1B       		.uleb128 0x1b
+ 2237 000a 0E       		.uleb128 0xe
+ 2238 000b 55       		.uleb128 0x55
+ 2239 000c 17       		.uleb128 0x17
+ 2240 000d 11       		.uleb128 0x11
+ 2241 000e 01       		.uleb128 0x1
+ 2242 000f 10       		.uleb128 0x10
+ 2243 0010 17       		.uleb128 0x17
+ 2244 0011 00       		.byte	0
+ 2245 0012 00       		.byte	0
+ 2246 0013 02       		.uleb128 0x2
+ 2247 0014 24       		.uleb128 0x24
+ 2248 0015 00       		.byte	0
+ 2249 0016 0B       		.uleb128 0xb
+ 2250 0017 0B       		.uleb128 0xb
+ 2251 0018 3E       		.uleb128 0x3e
+ 2252 0019 0B       		.uleb128 0xb
+ 2253 001a 03       		.uleb128 0x3
+ 2254 001b 0E       		.uleb128 0xe
+ 2255 001c 00       		.byte	0
+ 2256 001d 00       		.byte	0
+ 2257 001e 03       		.uleb128 0x3
+ 2258 001f 16       		.uleb128 0x16
+ 2259 0020 00       		.byte	0
+ 2260 0021 03       		.uleb128 0x3
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 48
+
+
+ 2261 0022 0E       		.uleb128 0xe
+ 2262 0023 3A       		.uleb128 0x3a
+ 2263 0024 0B       		.uleb128 0xb
+ 2264 0025 3B       		.uleb128 0x3b
+ 2265 0026 0B       		.uleb128 0xb
+ 2266 0027 49       		.uleb128 0x49
+ 2267 0028 13       		.uleb128 0x13
+ 2268 0029 00       		.byte	0
+ 2269 002a 00       		.byte	0
+ 2270 002b 04       		.uleb128 0x4
+ 2271 002c 24       		.uleb128 0x24
+ 2272 002d 00       		.byte	0
+ 2273 002e 0B       		.uleb128 0xb
+ 2274 002f 0B       		.uleb128 0xb
+ 2275 0030 3E       		.uleb128 0x3e
+ 2276 0031 0B       		.uleb128 0xb
+ 2277 0032 03       		.uleb128 0x3
+ 2278 0033 08       		.uleb128 0x8
+ 2279 0034 00       		.byte	0
+ 2280 0035 00       		.byte	0
+ 2281 0036 05       		.uleb128 0x5
+ 2282 0037 16       		.uleb128 0x16
+ 2283 0038 00       		.byte	0
+ 2284 0039 03       		.uleb128 0x3
+ 2285 003a 0E       		.uleb128 0xe
+ 2286 003b 3A       		.uleb128 0x3a
+ 2287 003c 0B       		.uleb128 0xb
+ 2288 003d 3B       		.uleb128 0x3b
+ 2289 003e 05       		.uleb128 0x5
+ 2290 003f 49       		.uleb128 0x49
+ 2291 0040 13       		.uleb128 0x13
+ 2292 0041 00       		.byte	0
+ 2293 0042 00       		.byte	0
+ 2294 0043 06       		.uleb128 0x6
+ 2295 0044 2E       		.uleb128 0x2e
+ 2296 0045 01       		.byte	0x1
+ 2297 0046 03       		.uleb128 0x3
+ 2298 0047 0E       		.uleb128 0xe
+ 2299 0048 3A       		.uleb128 0x3a
+ 2300 0049 0B       		.uleb128 0xb
+ 2301 004a 3B       		.uleb128 0x3b
+ 2302 004b 0B       		.uleb128 0xb
+ 2303 004c 27       		.uleb128 0x27
+ 2304 004d 19       		.uleb128 0x19
+ 2305 004e 11       		.uleb128 0x11
+ 2306 004f 01       		.uleb128 0x1
+ 2307 0050 12       		.uleb128 0x12
+ 2308 0051 06       		.uleb128 0x6
+ 2309 0052 40       		.uleb128 0x40
+ 2310 0053 18       		.uleb128 0x18
+ 2311 0054 9742     		.uleb128 0x2117
+ 2312 0056 19       		.uleb128 0x19
+ 2313 0057 01       		.uleb128 0x1
+ 2314 0058 13       		.uleb128 0x13
+ 2315 0059 00       		.byte	0
+ 2316 005a 00       		.byte	0
+ 2317 005b 07       		.uleb128 0x7
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 49
+
+
+ 2318 005c 0B       		.uleb128 0xb
+ 2319 005d 01       		.byte	0x1
+ 2320 005e 11       		.uleb128 0x11
+ 2321 005f 01       		.uleb128 0x1
+ 2322 0060 12       		.uleb128 0x12
+ 2323 0061 06       		.uleb128 0x6
+ 2324 0062 00       		.byte	0
+ 2325 0063 00       		.byte	0
+ 2326 0064 08       		.uleb128 0x8
+ 2327 0065 34       		.uleb128 0x34
+ 2328 0066 00       		.byte	0
+ 2329 0067 03       		.uleb128 0x3
+ 2330 0068 08       		.uleb128 0x8
+ 2331 0069 3A       		.uleb128 0x3a
+ 2332 006a 0B       		.uleb128 0xb
+ 2333 006b 3B       		.uleb128 0x3b
+ 2334 006c 0B       		.uleb128 0xb
+ 2335 006d 49       		.uleb128 0x49
+ 2336 006e 13       		.uleb128 0x13
+ 2337 006f 02       		.uleb128 0x2
+ 2338 0070 17       		.uleb128 0x17
+ 2339 0071 00       		.byte	0
+ 2340 0072 00       		.byte	0
+ 2341 0073 09       		.uleb128 0x9
+ 2342 0074 34       		.uleb128 0x34
+ 2343 0075 00       		.byte	0
+ 2344 0076 03       		.uleb128 0x3
+ 2345 0077 0E       		.uleb128 0xe
+ 2346 0078 3A       		.uleb128 0x3a
+ 2347 0079 0B       		.uleb128 0xb
+ 2348 007a 3B       		.uleb128 0x3b
+ 2349 007b 0B       		.uleb128 0xb
+ 2350 007c 49       		.uleb128 0x49
+ 2351 007d 13       		.uleb128 0x13
+ 2352 007e 02       		.uleb128 0x2
+ 2353 007f 17       		.uleb128 0x17
+ 2354 0080 00       		.byte	0
+ 2355 0081 00       		.byte	0
+ 2356 0082 0A       		.uleb128 0xa
+ 2357 0083 898201   		.uleb128 0x4109
+ 2358 0086 01       		.byte	0x1
+ 2359 0087 11       		.uleb128 0x11
+ 2360 0088 01       		.uleb128 0x1
+ 2361 0089 9342     		.uleb128 0x2113
+ 2362 008b 18       		.uleb128 0x18
+ 2363 008c 00       		.byte	0
+ 2364 008d 00       		.byte	0
+ 2365 008e 0B       		.uleb128 0xb
+ 2366 008f 8A8201   		.uleb128 0x410a
+ 2367 0092 00       		.byte	0
+ 2368 0093 02       		.uleb128 0x2
+ 2369 0094 18       		.uleb128 0x18
+ 2370 0095 9142     		.uleb128 0x2111
+ 2371 0097 18       		.uleb128 0x18
+ 2372 0098 00       		.byte	0
+ 2373 0099 00       		.byte	0
+ 2374 009a 0C       		.uleb128 0xc
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 50
+
+
+ 2375 009b 34       		.uleb128 0x34
+ 2376 009c 00       		.byte	0
+ 2377 009d 03       		.uleb128 0x3
+ 2378 009e 0E       		.uleb128 0xe
+ 2379 009f 3A       		.uleb128 0x3a
+ 2380 00a0 0B       		.uleb128 0xb
+ 2381 00a1 3B       		.uleb128 0x3b
+ 2382 00a2 0B       		.uleb128 0xb
+ 2383 00a3 49       		.uleb128 0x49
+ 2384 00a4 13       		.uleb128 0x13
+ 2385 00a5 1C       		.uleb128 0x1c
+ 2386 00a6 0B       		.uleb128 0xb
+ 2387 00a7 00       		.byte	0
+ 2388 00a8 00       		.byte	0
+ 2389 00a9 0D       		.uleb128 0xd
+ 2390 00aa 0B       		.uleb128 0xb
+ 2391 00ab 01       		.byte	0x1
+ 2392 00ac 11       		.uleb128 0x11
+ 2393 00ad 01       		.uleb128 0x1
+ 2394 00ae 12       		.uleb128 0x12
+ 2395 00af 06       		.uleb128 0x6
+ 2396 00b0 01       		.uleb128 0x1
+ 2397 00b1 13       		.uleb128 0x13
+ 2398 00b2 00       		.byte	0
+ 2399 00b3 00       		.byte	0
+ 2400 00b4 0E       		.uleb128 0xe
+ 2401 00b5 898201   		.uleb128 0x4109
+ 2402 00b8 00       		.byte	0
+ 2403 00b9 11       		.uleb128 0x11
+ 2404 00ba 01       		.uleb128 0x1
+ 2405 00bb 9342     		.uleb128 0x2113
+ 2406 00bd 18       		.uleb128 0x18
+ 2407 00be 00       		.byte	0
+ 2408 00bf 00       		.byte	0
+ 2409 00c0 0F       		.uleb128 0xf
+ 2410 00c1 898201   		.uleb128 0x4109
+ 2411 00c4 01       		.byte	0x1
+ 2412 00c5 11       		.uleb128 0x11
+ 2413 00c6 01       		.uleb128 0x1
+ 2414 00c7 9342     		.uleb128 0x2113
+ 2415 00c9 18       		.uleb128 0x18
+ 2416 00ca 01       		.uleb128 0x1
+ 2417 00cb 13       		.uleb128 0x13
+ 2418 00cc 00       		.byte	0
+ 2419 00cd 00       		.byte	0
+ 2420 00ce 10       		.uleb128 0x10
+ 2421 00cf 05       		.uleb128 0x5
+ 2422 00d0 00       		.byte	0
+ 2423 00d1 03       		.uleb128 0x3
+ 2424 00d2 0E       		.uleb128 0xe
+ 2425 00d3 3A       		.uleb128 0x3a
+ 2426 00d4 0B       		.uleb128 0xb
+ 2427 00d5 3B       		.uleb128 0x3b
+ 2428 00d6 0B       		.uleb128 0xb
+ 2429 00d7 49       		.uleb128 0x49
+ 2430 00d8 13       		.uleb128 0x13
+ 2431 00d9 02       		.uleb128 0x2
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 51
+
+
+ 2432 00da 17       		.uleb128 0x17
+ 2433 00db 00       		.byte	0
+ 2434 00dc 00       		.byte	0
+ 2435 00dd 11       		.uleb128 0x11
+ 2436 00de 898201   		.uleb128 0x4109
+ 2437 00e1 01       		.byte	0x1
+ 2438 00e2 11       		.uleb128 0x11
+ 2439 00e3 01       		.uleb128 0x1
+ 2440 00e4 31       		.uleb128 0x31
+ 2441 00e5 13       		.uleb128 0x13
+ 2442 00e6 01       		.uleb128 0x1
+ 2443 00e7 13       		.uleb128 0x13
+ 2444 00e8 00       		.byte	0
+ 2445 00e9 00       		.byte	0
+ 2446 00ea 12       		.uleb128 0x12
+ 2447 00eb 898201   		.uleb128 0x4109
+ 2448 00ee 01       		.byte	0x1
+ 2449 00ef 11       		.uleb128 0x11
+ 2450 00f0 01       		.uleb128 0x1
+ 2451 00f1 31       		.uleb128 0x31
+ 2452 00f2 13       		.uleb128 0x13
+ 2453 00f3 00       		.byte	0
+ 2454 00f4 00       		.byte	0
+ 2455 00f5 13       		.uleb128 0x13
+ 2456 00f6 05       		.uleb128 0x5
+ 2457 00f7 00       		.byte	0
+ 2458 00f8 03       		.uleb128 0x3
+ 2459 00f9 08       		.uleb128 0x8
+ 2460 00fa 3A       		.uleb128 0x3a
+ 2461 00fb 0B       		.uleb128 0xb
+ 2462 00fc 3B       		.uleb128 0x3b
+ 2463 00fd 0B       		.uleb128 0xb
+ 2464 00fe 49       		.uleb128 0x49
+ 2465 00ff 13       		.uleb128 0x13
+ 2466 0100 02       		.uleb128 0x2
+ 2467 0101 17       		.uleb128 0x17
+ 2468 0102 00       		.byte	0
+ 2469 0103 00       		.byte	0
+ 2470 0104 14       		.uleb128 0x14
+ 2471 0105 898201   		.uleb128 0x4109
+ 2472 0108 00       		.byte	0
+ 2473 0109 11       		.uleb128 0x11
+ 2474 010a 01       		.uleb128 0x1
+ 2475 010b 31       		.uleb128 0x31
+ 2476 010c 13       		.uleb128 0x13
+ 2477 010d 00       		.byte	0
+ 2478 010e 00       		.byte	0
+ 2479 010f 15       		.uleb128 0x15
+ 2480 0110 2E       		.uleb128 0x2e
+ 2481 0111 01       		.byte	0x1
+ 2482 0112 3F       		.uleb128 0x3f
+ 2483 0113 19       		.uleb128 0x19
+ 2484 0114 03       		.uleb128 0x3
+ 2485 0115 0E       		.uleb128 0xe
+ 2486 0116 3A       		.uleb128 0x3a
+ 2487 0117 0B       		.uleb128 0xb
+ 2488 0118 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 52
+
+
+ 2489 0119 0B       		.uleb128 0xb
+ 2490 011a 27       		.uleb128 0x27
+ 2491 011b 19       		.uleb128 0x19
+ 2492 011c 11       		.uleb128 0x11
+ 2493 011d 01       		.uleb128 0x1
+ 2494 011e 12       		.uleb128 0x12
+ 2495 011f 06       		.uleb128 0x6
+ 2496 0120 40       		.uleb128 0x40
+ 2497 0121 18       		.uleb128 0x18
+ 2498 0122 9742     		.uleb128 0x2117
+ 2499 0124 19       		.uleb128 0x19
+ 2500 0125 01       		.uleb128 0x1
+ 2501 0126 13       		.uleb128 0x13
+ 2502 0127 00       		.byte	0
+ 2503 0128 00       		.byte	0
+ 2504 0129 16       		.uleb128 0x16
+ 2505 012a 0B       		.uleb128 0xb
+ 2506 012b 01       		.byte	0x1
+ 2507 012c 55       		.uleb128 0x55
+ 2508 012d 17       		.uleb128 0x17
+ 2509 012e 00       		.byte	0
+ 2510 012f 00       		.byte	0
+ 2511 0130 17       		.uleb128 0x17
+ 2512 0131 0B       		.uleb128 0xb
+ 2513 0132 01       		.byte	0x1
+ 2514 0133 55       		.uleb128 0x55
+ 2515 0134 17       		.uleb128 0x17
+ 2516 0135 01       		.uleb128 0x1
+ 2517 0136 13       		.uleb128 0x13
+ 2518 0137 00       		.byte	0
+ 2519 0138 00       		.byte	0
+ 2520 0139 18       		.uleb128 0x18
+ 2521 013a 34       		.uleb128 0x34
+ 2522 013b 00       		.byte	0
+ 2523 013c 03       		.uleb128 0x3
+ 2524 013d 0E       		.uleb128 0xe
+ 2525 013e 3A       		.uleb128 0x3a
+ 2526 013f 0B       		.uleb128 0xb
+ 2527 0140 3B       		.uleb128 0x3b
+ 2528 0141 0B       		.uleb128 0xb
+ 2529 0142 49       		.uleb128 0x49
+ 2530 0143 13       		.uleb128 0x13
+ 2531 0144 02       		.uleb128 0x2
+ 2532 0145 18       		.uleb128 0x18
+ 2533 0146 00       		.byte	0
+ 2534 0147 00       		.byte	0
+ 2535 0148 19       		.uleb128 0x19
+ 2536 0149 01       		.uleb128 0x1
+ 2537 014a 01       		.byte	0x1
+ 2538 014b 49       		.uleb128 0x49
+ 2539 014c 13       		.uleb128 0x13
+ 2540 014d 01       		.uleb128 0x1
+ 2541 014e 13       		.uleb128 0x13
+ 2542 014f 00       		.byte	0
+ 2543 0150 00       		.byte	0
+ 2544 0151 1A       		.uleb128 0x1a
+ 2545 0152 21       		.uleb128 0x21
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 53
+
+
+ 2546 0153 00       		.byte	0
+ 2547 0154 49       		.uleb128 0x49
+ 2548 0155 13       		.uleb128 0x13
+ 2549 0156 2F       		.uleb128 0x2f
+ 2550 0157 0B       		.uleb128 0xb
+ 2551 0158 00       		.byte	0
+ 2552 0159 00       		.byte	0
+ 2553 015a 1B       		.uleb128 0x1b
+ 2554 015b 2E       		.uleb128 0x2e
+ 2555 015c 01       		.byte	0x1
+ 2556 015d 3F       		.uleb128 0x3f
+ 2557 015e 19       		.uleb128 0x19
+ 2558 015f 03       		.uleb128 0x3
+ 2559 0160 0E       		.uleb128 0xe
+ 2560 0161 3A       		.uleb128 0x3a
+ 2561 0162 0B       		.uleb128 0xb
+ 2562 0163 3B       		.uleb128 0x3b
+ 2563 0164 0B       		.uleb128 0xb
+ 2564 0165 27       		.uleb128 0x27
+ 2565 0166 19       		.uleb128 0x19
+ 2566 0167 49       		.uleb128 0x49
+ 2567 0168 13       		.uleb128 0x13
+ 2568 0169 8701     		.uleb128 0x87
+ 2569 016b 19       		.uleb128 0x19
+ 2570 016c 11       		.uleb128 0x11
+ 2571 016d 01       		.uleb128 0x1
+ 2572 016e 12       		.uleb128 0x12
+ 2573 016f 06       		.uleb128 0x6
+ 2574 0170 40       		.uleb128 0x40
+ 2575 0171 18       		.uleb128 0x18
+ 2576 0172 9742     		.uleb128 0x2117
+ 2577 0174 19       		.uleb128 0x19
+ 2578 0175 01       		.uleb128 0x1
+ 2579 0176 13       		.uleb128 0x13
+ 2580 0177 00       		.byte	0
+ 2581 0178 00       		.byte	0
+ 2582 0179 1C       		.uleb128 0x1c
+ 2583 017a 34       		.uleb128 0x34
+ 2584 017b 00       		.byte	0
+ 2585 017c 03       		.uleb128 0x3
+ 2586 017d 0E       		.uleb128 0xe
+ 2587 017e 3A       		.uleb128 0x3a
+ 2588 017f 0B       		.uleb128 0xb
+ 2589 0180 3B       		.uleb128 0x3b
+ 2590 0181 05       		.uleb128 0x5
+ 2591 0182 49       		.uleb128 0x49
+ 2592 0183 13       		.uleb128 0x13
+ 2593 0184 02       		.uleb128 0x2
+ 2594 0185 17       		.uleb128 0x17
+ 2595 0186 00       		.byte	0
+ 2596 0187 00       		.byte	0
+ 2597 0188 1D       		.uleb128 0x1d
+ 2598 0189 34       		.uleb128 0x34
+ 2599 018a 00       		.byte	0
+ 2600 018b 03       		.uleb128 0x3
+ 2601 018c 08       		.uleb128 0x8
+ 2602 018d 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 54
+
+
+ 2603 018e 0B       		.uleb128 0xb
+ 2604 018f 3B       		.uleb128 0x3b
+ 2605 0190 05       		.uleb128 0x5
+ 2606 0191 49       		.uleb128 0x49
+ 2607 0192 13       		.uleb128 0x13
+ 2608 0193 02       		.uleb128 0x2
+ 2609 0194 17       		.uleb128 0x17
+ 2610 0195 00       		.byte	0
+ 2611 0196 00       		.byte	0
+ 2612 0197 1E       		.uleb128 0x1e
+ 2613 0198 26       		.uleb128 0x26
+ 2614 0199 00       		.byte	0
+ 2615 019a 49       		.uleb128 0x49
+ 2616 019b 13       		.uleb128 0x13
+ 2617 019c 00       		.byte	0
+ 2618 019d 00       		.byte	0
+ 2619 019e 1F       		.uleb128 0x1f
+ 2620 019f 0F       		.uleb128 0xf
+ 2621 01a0 00       		.byte	0
+ 2622 01a1 0B       		.uleb128 0xb
+ 2623 01a2 0B       		.uleb128 0xb
+ 2624 01a3 49       		.uleb128 0x49
+ 2625 01a4 13       		.uleb128 0x13
+ 2626 01a5 00       		.byte	0
+ 2627 01a6 00       		.byte	0
+ 2628 01a7 20       		.uleb128 0x20
+ 2629 01a8 15       		.uleb128 0x15
+ 2630 01a9 01       		.byte	0x1
+ 2631 01aa 27       		.uleb128 0x27
+ 2632 01ab 19       		.uleb128 0x19
+ 2633 01ac 01       		.uleb128 0x1
+ 2634 01ad 13       		.uleb128 0x13
+ 2635 01ae 00       		.byte	0
+ 2636 01af 00       		.byte	0
+ 2637 01b0 21       		.uleb128 0x21
+ 2638 01b1 05       		.uleb128 0x5
+ 2639 01b2 00       		.byte	0
+ 2640 01b3 49       		.uleb128 0x49
+ 2641 01b4 13       		.uleb128 0x13
+ 2642 01b5 00       		.byte	0
+ 2643 01b6 00       		.byte	0
+ 2644 01b7 22       		.uleb128 0x22
+ 2645 01b8 15       		.uleb128 0x15
+ 2646 01b9 01       		.byte	0x1
+ 2647 01ba 49       		.uleb128 0x49
+ 2648 01bb 13       		.uleb128 0x13
+ 2649 01bc 01       		.uleb128 0x1
+ 2650 01bd 13       		.uleb128 0x13
+ 2651 01be 00       		.byte	0
+ 2652 01bf 00       		.byte	0
+ 2653 01c0 23       		.uleb128 0x23
+ 2654 01c1 18       		.uleb128 0x18
+ 2655 01c2 00       		.byte	0
+ 2656 01c3 00       		.byte	0
+ 2657 01c4 00       		.byte	0
+ 2658 01c5 24       		.uleb128 0x24
+ 2659 01c6 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 55
+
+
+ 2660 01c7 00       		.byte	0
+ 2661 01c8 3F       		.uleb128 0x3f
+ 2662 01c9 19       		.uleb128 0x19
+ 2663 01ca 3C       		.uleb128 0x3c
+ 2664 01cb 19       		.uleb128 0x19
+ 2665 01cc 6E       		.uleb128 0x6e
+ 2666 01cd 0E       		.uleb128 0xe
+ 2667 01ce 03       		.uleb128 0x3
+ 2668 01cf 0E       		.uleb128 0xe
+ 2669 01d0 3A       		.uleb128 0x3a
+ 2670 01d1 0B       		.uleb128 0xb
+ 2671 01d2 3B       		.uleb128 0x3b
+ 2672 01d3 0B       		.uleb128 0xb
+ 2673 01d4 00       		.byte	0
+ 2674 01d5 00       		.byte	0
+ 2675 01d6 25       		.uleb128 0x25
+ 2676 01d7 2E       		.uleb128 0x2e
+ 2677 01d8 00       		.byte	0
+ 2678 01d9 3F       		.uleb128 0x3f
+ 2679 01da 19       		.uleb128 0x19
+ 2680 01db 3C       		.uleb128 0x3c
+ 2681 01dc 19       		.uleb128 0x19
+ 2682 01dd 6E       		.uleb128 0x6e
+ 2683 01de 0E       		.uleb128 0xe
+ 2684 01df 03       		.uleb128 0x3
+ 2685 01e0 0E       		.uleb128 0xe
+ 2686 01e1 00       		.byte	0
+ 2687 01e2 00       		.byte	0
+ 2688 01e3 00       		.byte	0
+ 2689              		.section	.debug_loc,"",%progbits
+ 2690              	.Ldebug_loc0:
+ 2691              	.LLST0:
+ 2692 0000 00000000 		.4byte	.LVL0
+ 2693 0004 04000000 		.4byte	.LVL1
+ 2694 0008 0200     		.2byte	0x2
+ 2695 000a 30       		.byte	0x30
+ 2696 000b 9F       		.byte	0x9f
+ 2697 000c 04000000 		.4byte	.LVL1
+ 2698 0010 0C000000 		.4byte	.LVL2
+ 2699 0014 0100     		.2byte	0x1
+ 2700 0016 53       		.byte	0x53
+ 2701 0017 0C000000 		.4byte	.LVL2
+ 2702 001b 0E000000 		.4byte	.LVL3
+ 2703 001f 0100     		.2byte	0x1
+ 2704 0021 52       		.byte	0x52
+ 2705 0022 0E000000 		.4byte	.LVL3
+ 2706 0026 16000000 		.4byte	.LVL4
+ 2707 002a 0100     		.2byte	0x1
+ 2708 002c 53       		.byte	0x53
+ 2709 002d 00000000 		.4byte	0
+ 2710 0031 00000000 		.4byte	0
+ 2711              	.LLST1:
+ 2712 0035 02000000 		.4byte	.LVL5
+ 2713 0039 06000000 		.4byte	.LVL6
+ 2714 003d 0200     		.2byte	0x2
+ 2715 003f 30       		.byte	0x30
+ 2716 0040 9F       		.byte	0x9f
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 56
+
+
+ 2717 0041 06000000 		.4byte	.LVL6
+ 2718 0045 18000000 		.4byte	.LVL9
+ 2719 0049 0100     		.2byte	0x1
+ 2720 004b 54       		.byte	0x54
+ 2721 004c 00000000 		.4byte	0
+ 2722 0050 00000000 		.4byte	0
+ 2723              	.LLST2:
+ 2724 0054 02000000 		.4byte	.LVL10
+ 2725 0058 06000000 		.4byte	.LVL11
+ 2726 005c 0200     		.2byte	0x2
+ 2727 005e 30       		.byte	0x30
+ 2728 005f 9F       		.byte	0x9f
+ 2729 0060 06000000 		.4byte	.LVL11
+ 2730 0064 4A000000 		.4byte	.LVL19
+ 2731 0068 0100     		.2byte	0x1
+ 2732 006a 55       		.byte	0x55
+ 2733 006b 00000000 		.4byte	0
+ 2734 006f 00000000 		.4byte	0
+ 2735              	.LLST3:
+ 2736 0073 18000000 		.4byte	.LVL13
+ 2737 0077 1C000000 		.4byte	.LVL14
+ 2738 007b 0200     		.2byte	0x2
+ 2739 007d 30       		.byte	0x30
+ 2740 007e 9F       		.byte	0x9f
+ 2741 007f 1C000000 		.4byte	.LVL14
+ 2742 0083 46000000 		.4byte	.LVL18
+ 2743 0087 0100     		.2byte	0x1
+ 2744 0089 54       		.byte	0x54
+ 2745 008a 00000000 		.4byte	0
+ 2746 008e 00000000 		.4byte	0
+ 2747              	.LLST4:
+ 2748 0092 00000000 		.4byte	.LVL20
+ 2749 0096 08000000 		.4byte	.LVL22
+ 2750 009a 0100     		.2byte	0x1
+ 2751 009c 50       		.byte	0x50
+ 2752 009d 08000000 		.4byte	.LVL22
+ 2753 00a1 34000000 		.4byte	.LFE33
+ 2754 00a5 0400     		.2byte	0x4
+ 2755 00a7 F3       		.byte	0xf3
+ 2756 00a8 01       		.uleb128 0x1
+ 2757 00a9 50       		.byte	0x50
+ 2758 00aa 9F       		.byte	0x9f
+ 2759 00ab 00000000 		.4byte	0
+ 2760 00af 00000000 		.4byte	0
+ 2761              	.LLST5:
+ 2762 00b3 04000000 		.4byte	.LVL21
+ 2763 00b7 08000000 		.4byte	.LVL22
+ 2764 00bb 0200     		.2byte	0x2
+ 2765 00bd 30       		.byte	0x30
+ 2766 00be 9F       		.byte	0x9f
+ 2767 00bf 08000000 		.4byte	.LVL22
+ 2768 00c3 2C000000 		.4byte	.LVL27
+ 2769 00c7 0100     		.2byte	0x1
+ 2770 00c9 54       		.byte	0x54
+ 2771 00ca 2E000000 		.4byte	.LVL28
+ 2772 00ce 32000000 		.4byte	.LVL29
+ 2773 00d2 0100     		.2byte	0x1
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 57
+
+
+ 2774 00d4 54       		.byte	0x54
+ 2775 00d5 00000000 		.4byte	0
+ 2776 00d9 00000000 		.4byte	0
+ 2777              	.LLST6:
+ 2778 00dd 00000000 		.4byte	.LVL30
+ 2779 00e1 0C000000 		.4byte	.LVL31
+ 2780 00e5 0100     		.2byte	0x1
+ 2781 00e7 50       		.byte	0x50
+ 2782 00e8 0C000000 		.4byte	.LVL31
+ 2783 00ec 18000000 		.4byte	.LVL34
+ 2784 00f0 0400     		.2byte	0x4
+ 2785 00f2 F3       		.byte	0xf3
+ 2786 00f3 01       		.uleb128 0x1
+ 2787 00f4 50       		.byte	0x50
+ 2788 00f5 9F       		.byte	0x9f
+ 2789 00f6 18000000 		.4byte	.LVL34
+ 2790 00fa 1E000000 		.4byte	.LVL35
+ 2791 00fe 0100     		.2byte	0x1
+ 2792 0100 50       		.byte	0x50
+ 2793 0101 1E000000 		.4byte	.LVL35
+ 2794 0105 58000000 		.4byte	.LFE34
+ 2795 0109 0400     		.2byte	0x4
+ 2796 010b F3       		.byte	0xf3
+ 2797 010c 01       		.uleb128 0x1
+ 2798 010d 50       		.byte	0x50
+ 2799 010e 9F       		.byte	0x9f
+ 2800 010f 00000000 		.4byte	0
+ 2801 0113 00000000 		.4byte	0
+ 2802              	.LLST7:
+ 2803 0117 00000000 		.4byte	.LVL30
+ 2804 011b 0F000000 		.4byte	.LVL32-1
+ 2805 011f 0100     		.2byte	0x1
+ 2806 0121 51       		.byte	0x51
+ 2807 0122 0F000000 		.4byte	.LVL32-1
+ 2808 0126 18000000 		.4byte	.LVL34
+ 2809 012a 0400     		.2byte	0x4
+ 2810 012c F3       		.byte	0xf3
+ 2811 012d 01       		.uleb128 0x1
+ 2812 012e 51       		.byte	0x51
+ 2813 012f 9F       		.byte	0x9f
+ 2814 0130 18000000 		.4byte	.LVL34
+ 2815 0134 23000000 		.4byte	.LVL36-1
+ 2816 0138 0100     		.2byte	0x1
+ 2817 013a 51       		.byte	0x51
+ 2818 013b 23000000 		.4byte	.LVL36-1
+ 2819 013f 58000000 		.4byte	.LFE34
+ 2820 0143 0400     		.2byte	0x4
+ 2821 0145 F3       		.byte	0xf3
+ 2822 0146 01       		.uleb128 0x1
+ 2823 0147 51       		.byte	0x51
+ 2824 0148 9F       		.byte	0x9f
+ 2825 0149 00000000 		.4byte	0
+ 2826 014d 00000000 		.4byte	0
+ 2827              	.LLST8:
+ 2828 0151 00000000 		.4byte	.LVL30
+ 2829 0155 0F000000 		.4byte	.LVL32-1
+ 2830 0159 0100     		.2byte	0x1
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 58
+
+
+ 2831 015b 52       		.byte	0x52
+ 2832 015c 0F000000 		.4byte	.LVL32-1
+ 2833 0160 18000000 		.4byte	.LVL34
+ 2834 0164 0400     		.2byte	0x4
+ 2835 0166 F3       		.byte	0xf3
+ 2836 0167 01       		.uleb128 0x1
+ 2837 0168 52       		.byte	0x52
+ 2838 0169 9F       		.byte	0x9f
+ 2839 016a 18000000 		.4byte	.LVL34
+ 2840 016e 23000000 		.4byte	.LVL36-1
+ 2841 0172 0100     		.2byte	0x1
+ 2842 0174 52       		.byte	0x52
+ 2843 0175 23000000 		.4byte	.LVL36-1
+ 2844 0179 58000000 		.4byte	.LFE34
+ 2845 017d 0400     		.2byte	0x4
+ 2846 017f F3       		.byte	0xf3
+ 2847 0180 01       		.uleb128 0x1
+ 2848 0181 52       		.byte	0x52
+ 2849 0182 9F       		.byte	0x9f
+ 2850 0183 00000000 		.4byte	0
+ 2851 0187 00000000 		.4byte	0
+ 2852              	.LLST9:
+ 2853 018b 02000000 		.4byte	.LVL43
+ 2854 018f 06000000 		.4byte	.LVL44
+ 2855 0193 0200     		.2byte	0x2
+ 2856 0195 30       		.byte	0x30
+ 2857 0196 9F       		.byte	0x9f
+ 2858 0197 06000000 		.4byte	.LVL44
+ 2859 019b 16000000 		.4byte	.LVL46
+ 2860 019f 0100     		.2byte	0x1
+ 2861 01a1 53       		.byte	0x53
+ 2862 01a2 00000000 		.4byte	0
+ 2863 01a6 00000000 		.4byte	0
+ 2864              	.LLST10:
+ 2865 01aa 16000000 		.4byte	.LVL46
+ 2866 01ae 58000000 		.4byte	.LVL53
+ 2867 01b2 0100     		.2byte	0x1
+ 2868 01b4 56       		.byte	0x56
+ 2869 01b5 00000000 		.4byte	0
+ 2870 01b9 00000000 		.4byte	0
+ 2871              	.LLST11:
+ 2872 01bd 16000000 		.4byte	.LVL46
+ 2873 01c1 2A000000 		.4byte	.LVL49
+ 2874 01c5 0100     		.2byte	0x1
+ 2875 01c7 54       		.byte	0x54
+ 2876 01c8 2C000000 		.4byte	.LVL50
+ 2877 01cc 32000000 		.4byte	.LVL51
+ 2878 01d0 0100     		.2byte	0x1
+ 2879 01d2 54       		.byte	0x54
+ 2880 01d3 00000000 		.4byte	0
+ 2881 01d7 00000000 		.4byte	0
+ 2882              	.LLST12:
+ 2883 01db 02000000 		.4byte	.LVL54
+ 2884 01df 06000000 		.4byte	.LVL55
+ 2885 01e3 0200     		.2byte	0x2
+ 2886 01e5 30       		.byte	0x30
+ 2887 01e6 9F       		.byte	0x9f
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 59
+
+
+ 2888 01e7 06000000 		.4byte	.LVL55
+ 2889 01eb 5C000000 		.4byte	.LVL65
+ 2890 01ef 0100     		.2byte	0x1
+ 2891 01f1 54       		.byte	0x54
+ 2892 01f2 00000000 		.4byte	0
+ 2893 01f6 00000000 		.4byte	0
+ 2894              	.LLST13:
+ 2895 01fa 06000000 		.4byte	.LVL55
+ 2896 01fe 10000000 		.4byte	.LVL57
+ 2897 0202 0100     		.2byte	0x1
+ 2898 0204 53       		.byte	0x53
+ 2899 0205 12000000 		.4byte	.LVL58
+ 2900 0209 1B000000 		.4byte	.LVL59-1
+ 2901 020d 0100     		.2byte	0x1
+ 2902 020f 53       		.byte	0x53
+ 2903 0210 00000000 		.4byte	0
+ 2904 0214 00000000 		.4byte	0
+ 2905              	.LLST14:
+ 2906 0218 1C000000 		.4byte	.LVL59
+ 2907 021c 20000000 		.4byte	.LVL60
+ 2908 0220 0200     		.2byte	0x2
+ 2909 0222 30       		.byte	0x30
+ 2910 0223 9F       		.byte	0x9f
+ 2911 0224 20000000 		.4byte	.LVL60
+ 2912 0228 31000000 		.4byte	.LVL62-1
+ 2913 022c 0100     		.2byte	0x1
+ 2914 022e 53       		.byte	0x53
+ 2915 022f 00000000 		.4byte	0
+ 2916 0233 00000000 		.4byte	0
+ 2917              	.LLST15:
+ 2918 0237 10000000 		.4byte	.LVL66
+ 2919 023b 2E000000 		.4byte	.LVL71
+ 2920 023f 0200     		.2byte	0x2
+ 2921 0241 31       		.byte	0x31
+ 2922 0242 9F       		.byte	0x9f
+ 2923 0243 2E000000 		.4byte	.LVL71
+ 2924 0247 35000000 		.4byte	.LVL72-1
+ 2925 024b 0100     		.2byte	0x1
+ 2926 024d 53       		.byte	0x53
+ 2927 024e 38000000 		.4byte	.LVL73
+ 2928 0252 3B000000 		.4byte	.LVL74-1
+ 2929 0256 0100     		.2byte	0x1
+ 2930 0258 53       		.byte	0x53
+ 2931 0259 00000000 		.4byte	0
+ 2932 025d 00000000 		.4byte	0
+ 2933              	.LLST16:
+ 2934 0261 10000000 		.4byte	.LVL66
+ 2935 0265 14000000 		.4byte	.LVL67
+ 2936 0269 0200     		.2byte	0x2
+ 2937 026b 30       		.byte	0x30
+ 2938 026c 9F       		.byte	0x9f
+ 2939 026d 14000000 		.4byte	.LVL67
+ 2940 0271 2A000000 		.4byte	.LVL69
+ 2941 0275 0100     		.2byte	0x1
+ 2942 0277 53       		.byte	0x53
+ 2943 0278 2C000000 		.4byte	.LVL70
+ 2944 027c 2E000000 		.4byte	.LVL71
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 60
+
+
+ 2945 0280 0100     		.2byte	0x1
+ 2946 0282 53       		.byte	0x53
+ 2947 0283 00000000 		.4byte	0
+ 2948 0287 00000000 		.4byte	0
+ 2949              	.LLST17:
+ 2950 028b 12000000 		.4byte	.LVL77
+ 2951 028f 2A000000 		.4byte	.LVL80
+ 2952 0293 0200     		.2byte	0x2
+ 2953 0295 3C       		.byte	0x3c
+ 2954 0296 9F       		.byte	0x9f
+ 2955 0297 2A000000 		.4byte	.LVL80
+ 2956 029b 3A000000 		.4byte	.LVL82
+ 2957 029f 0100     		.2byte	0x1
+ 2958 02a1 54       		.byte	0x54
+ 2959 02a2 3A000000 		.4byte	.LVL82
+ 2960 02a6 84000000 		.4byte	.LVL91
+ 2961 02aa 0200     		.2byte	0x2
+ 2962 02ac 3B       		.byte	0x3b
+ 2963 02ad 9F       		.byte	0x9f
+ 2964 02ae 84000000 		.4byte	.LVL91
+ 2965 02b2 24010000 		.4byte	.LVL96
+ 2966 02b6 0100     		.2byte	0x1
+ 2967 02b8 54       		.byte	0x54
+ 2968 02b9 24010000 		.4byte	.LVL96
+ 2969 02bd 40010000 		.4byte	.LVL97
+ 2970 02c1 0100     		.2byte	0x1
+ 2971 02c3 50       		.byte	0x50
+ 2972 02c4 40010000 		.4byte	.LVL97
+ 2973 02c8 78010000 		.4byte	.LFE41
+ 2974 02cc 0100     		.2byte	0x1
+ 2975 02ce 54       		.byte	0x54
+ 2976 02cf 00000000 		.4byte	0
+ 2977 02d3 00000000 		.4byte	0
+ 2978              	.LLST18:
+ 2979 02d7 12000000 		.4byte	.LVL77
+ 2980 02db 16000000 		.4byte	.LVL78
+ 2981 02df 0200     		.2byte	0x2
+ 2982 02e1 30       		.byte	0x30
+ 2983 02e2 9F       		.byte	0x9f
+ 2984 02e3 16000000 		.4byte	.LVL78
+ 2985 02e7 2A000000 		.4byte	.LVL80
+ 2986 02eb 0100     		.2byte	0x1
+ 2987 02ed 53       		.byte	0x53
+ 2988 02ee 00000000 		.4byte	0
+ 2989 02f2 00000000 		.4byte	0
+ 2990              	.LLST19:
+ 2991 02f6 4C000000 		.4byte	.LVL83
+ 2992 02fa 50000000 		.4byte	.LVL84
+ 2993 02fe 0200     		.2byte	0x2
+ 2994 0300 30       		.byte	0x30
+ 2995 0301 9F       		.byte	0x9f
+ 2996 0302 50000000 		.4byte	.LVL84
+ 2997 0306 5E000000 		.4byte	.LVL86
+ 2998 030a 0100     		.2byte	0x1
+ 2999 030c 53       		.byte	0x53
+ 3000 030d 00000000 		.4byte	0
+ 3001 0311 00000000 		.4byte	0
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 61
+
+
+ 3002              	.LLST20:
+ 3003 0315 60000000 		.4byte	.LVL87
+ 3004 0319 70000000 		.4byte	.LVL89
+ 3005 031d 0100     		.2byte	0x1
+ 3006 031f 53       		.byte	0x53
+ 3007 0320 00000000 		.4byte	0
+ 3008 0324 00000000 		.4byte	0
+ 3009              	.LLST21:
+ 3010 0328 9C000000 		.4byte	.LVL93
+ 3011 032c 58010000 		.4byte	.LVL103
+ 3012 0330 0100     		.2byte	0x1
+ 3013 0332 53       		.byte	0x53
+ 3014 0333 5A010000 		.4byte	.LVL104
+ 3015 0337 5E010000 		.4byte	.LVL105
+ 3016 033b 0100     		.2byte	0x1
+ 3017 033d 53       		.byte	0x53
+ 3018 033e 00000000 		.4byte	0
+ 3019 0342 00000000 		.4byte	0
+ 3020              	.LLST22:
+ 3021 0346 9C000000 		.4byte	.LVL93
+ 3022 034a 4E010000 		.4byte	.LVL100
+ 3023 034e 0100     		.2byte	0x1
+ 3024 0350 51       		.byte	0x51
+ 3025 0351 50010000 		.4byte	.LVL101
+ 3026 0355 58010000 		.4byte	.LVL103
+ 3027 0359 0100     		.2byte	0x1
+ 3028 035b 51       		.byte	0x51
+ 3029 035c 00000000 		.4byte	0
+ 3030 0360 00000000 		.4byte	0
+ 3031              	.LLST23:
+ 3032 0364 A8000000 		.4byte	.LVL94
+ 3033 0368 4E010000 		.4byte	.LVL100
+ 3034 036c 0100     		.2byte	0x1
+ 3035 036e 52       		.byte	0x52
+ 3036 036f 00000000 		.4byte	0
+ 3037 0373 00000000 		.4byte	0
+ 3038              	.LLST24:
+ 3039 0377 1C010000 		.4byte	.LVL95
+ 3040 037b 4A010000 		.4byte	.LVL98
+ 3041 037f 0100     		.2byte	0x1
+ 3042 0381 50       		.byte	0x50
+ 3043 0382 00000000 		.4byte	0
+ 3044 0386 00000000 		.4byte	0
+ 3045              		.section	.debug_aranges,"",%progbits
+ 3046 0000 64000000 		.4byte	0x64
+ 3047 0004 0200     		.2byte	0x2
+ 3048 0006 00000000 		.4byte	.Ldebug_info0
+ 3049 000a 04       		.byte	0x4
+ 3050 000b 00       		.byte	0
+ 3051 000c 0000     		.2byte	0
+ 3052 000e 0000     		.2byte	0
+ 3053 0010 00000000 		.4byte	.LFB35
+ 3054 0014 3C000000 		.4byte	.LFE35-.LFB35
+ 3055 0018 00000000 		.4byte	.LFB36
+ 3056 001c 20000000 		.4byte	.LFE36-.LFB36
+ 3057 0020 00000000 		.4byte	.LFB37
+ 3058 0024 54000000 		.4byte	.LFE37-.LFB37
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 62
+
+
+ 3059 0028 00000000 		.4byte	.LFB33
+ 3060 002c 34000000 		.4byte	.LFE33-.LFB33
+ 3061 0030 00000000 		.4byte	.LFB34
+ 3062 0034 58000000 		.4byte	.LFE34-.LFB34
+ 3063 0038 00000000 		.4byte	.LFB32
+ 3064 003c 50000000 		.4byte	.LFE32-.LFB32
+ 3065 0040 00000000 		.4byte	.LFB39
+ 3066 0044 60000000 		.4byte	.LFE39-.LFB39
+ 3067 0048 00000000 		.4byte	.LFB40
+ 3068 004c 64000000 		.4byte	.LFE40-.LFB40
+ 3069 0050 00000000 		.4byte	.LFB38
+ 3070 0054 54000000 		.4byte	.LFE38-.LFB38
+ 3071 0058 00000000 		.4byte	.LFB41
+ 3072 005c 78010000 		.4byte	.LFE41-.LFB41
+ 3073 0060 00000000 		.4byte	0
+ 3074 0064 00000000 		.4byte	0
+ 3075              		.section	.debug_ranges,"",%progbits
+ 3076              	.Ldebug_ranges0:
+ 3077 0000 16000000 		.4byte	.LBB9
+ 3078 0004 2A000000 		.4byte	.LBE9
+ 3079 0008 2C000000 		.4byte	.LBB10
+ 3080 000c 30000000 		.4byte	.LBE10
+ 3081 0010 00000000 		.4byte	0
+ 3082 0014 00000000 		.4byte	0
+ 3083 0018 06000000 		.4byte	.LBB12
+ 3084 001c 10000000 		.4byte	.LBE12
+ 3085 0020 12000000 		.4byte	.LBB13
+ 3086 0024 16000000 		.4byte	.LBE13
+ 3087 0028 00000000 		.4byte	0
+ 3088 002c 00000000 		.4byte	0
+ 3089 0030 10000000 		.4byte	.LBB15
+ 3090 0034 28000000 		.4byte	.LBE15
+ 3091 0038 2A000000 		.4byte	.LBB16
+ 3092 003c 2E000000 		.4byte	.LBE16
+ 3093 0040 00000000 		.4byte	0
+ 3094 0044 00000000 		.4byte	0
+ 3095 0048 9C000000 		.4byte	.LBB20
+ 3096 004c 58010000 		.4byte	.LBE20
+ 3097 0050 5A010000 		.4byte	.LBB24
+ 3098 0054 5E010000 		.4byte	.LBE24
+ 3099 0058 00000000 		.4byte	0
+ 3100 005c 00000000 		.4byte	0
+ 3101 0060 9C000000 		.4byte	.LBB21
+ 3102 0064 4E010000 		.4byte	.LBE21
+ 3103 0068 50010000 		.4byte	.LBB23
+ 3104 006c 54010000 		.4byte	.LBE23
+ 3105 0070 00000000 		.4byte	0
+ 3106 0074 00000000 		.4byte	0
+ 3107 0078 00000000 		.4byte	.LFB35
+ 3108 007c 3C000000 		.4byte	.LFE35
+ 3109 0080 00000000 		.4byte	.LFB36
+ 3110 0084 20000000 		.4byte	.LFE36
+ 3111 0088 00000000 		.4byte	.LFB37
+ 3112 008c 54000000 		.4byte	.LFE37
+ 3113 0090 00000000 		.4byte	.LFB33
+ 3114 0094 34000000 		.4byte	.LFE33
+ 3115 0098 00000000 		.4byte	.LFB34
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 63
+
+
+ 3116 009c 58000000 		.4byte	.LFE34
+ 3117 00a0 00000000 		.4byte	.LFB32
+ 3118 00a4 50000000 		.4byte	.LFE32
+ 3119 00a8 00000000 		.4byte	.LFB39
+ 3120 00ac 60000000 		.4byte	.LFE39
+ 3121 00b0 00000000 		.4byte	.LFB40
+ 3122 00b4 64000000 		.4byte	.LFE40
+ 3123 00b8 00000000 		.4byte	.LFB38
+ 3124 00bc 54000000 		.4byte	.LFE38
+ 3125 00c0 00000000 		.4byte	.LFB41
+ 3126 00c4 78010000 		.4byte	.LFE41
+ 3127 00c8 00000000 		.4byte	0
+ 3128 00cc 00000000 		.4byte	0
+ 3129              		.section	.debug_line,"",%progbits
+ 3130              	.Ldebug_line0:
+ 3131 0000 46040000 		.section	.debug_str,"MS",%progbits,1
+ 3131      02008B01 
+ 3131      00000201 
+ 3131      FB0E0D00 
+ 3131      01010101 
+ 3132              	.LASF62:
+ 3133 0000 54696D65 		.ascii	"Timer_Int_Handler2\000"
+ 3133      725F496E 
+ 3133      745F4861 
+ 3133      6E646C65 
+ 3133      723200
+ 3134              	.LASF61:
+ 3135 0013 433A5C55 		.ascii	"C:\\Users\\Maks\\Documents\\PSoC Creator\\CSN_UzhNU"
+ 3135      73657273 
+ 3135      5C4D616B 
+ 3135      735C446F 
+ 3135      63756D65 
+ 3136 0041 5C4C574F 		.ascii	"\\LWO5.cydsn\000"
+ 3136      352E6379 
+ 3136      64736E00 
+ 3137              	.LASF3:
+ 3138 004d 5F5F7569 		.ascii	"__uint8_t\000"
+ 3138      6E74385F 
+ 3138      7400
+ 3139              	.LASF59:
+ 3140 0057 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 3140      43313120 
+ 3140      352E342E 
+ 3140      31203230 
+ 3140      31363036 
+ 3141 008a 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 3141      20726576 
+ 3141      6973696F 
+ 3141      6E203233 
+ 3141      37373135 
+ 3142 00bd 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 3142      66756E63 
+ 3142      74696F6E 
+ 3142      2D736563 
+ 3142      74696F6E 
+ 3143              	.LASF9:
+ 3144 00e5 6C6F6E67 		.ascii	"long long unsigned int\000"
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 64
+
+
+ 3144      206C6F6E 
+ 3144      6720756E 
+ 3144      7369676E 
+ 3144      65642069 
+ 3145              	.LASF8:
+ 3146 00fc 6C6F6E67 		.ascii	"long long int\000"
+ 3146      206C6F6E 
+ 3146      6720696E 
+ 3146      7400
+ 3147              	.LASF0:
+ 3148 010a 7369676E 		.ascii	"signed char\000"
+ 3148      65642063 
+ 3148      68617200 
+ 3149              	.LASF30:
+ 3150 0116 64696769 		.ascii	"digit\000"
+ 3150      7400
+ 3151              	.LASF24:
+ 3152 011c 636F6C75 		.ascii	"column_counter\000"
+ 3152      6D6E5F63 
+ 3152      6F756E74 
+ 3152      657200
+ 3153              	.LASF6:
+ 3154 012b 6C6F6E67 		.ascii	"long int\000"
+ 3154      20696E74 
+ 3154      00
+ 3155              	.LASF36:
+ 3156 0134 69735F63 		.ascii	"is_correct\000"
+ 3156      6F727265 
+ 3156      637400
+ 3157              	.LASF53:
+ 3158 013f 50696E5F 		.ascii	"Pin_DO_Write\000"
+ 3158      444F5F57 
+ 3158      72697465 
+ 3158      00
+ 3159              	.LASF13:
+ 3160 014c 75696E74 		.ascii	"uint8\000"
+ 3160      3800
+ 3161              	.LASF12:
+ 3162 0152 75696E74 		.ascii	"uint16_t\000"
+ 3162      31365F74 
+ 3162      00
+ 3163              	.LASF15:
+ 3164 015b 646F7562 		.ascii	"double\000"
+ 3164      6C6500
+ 3165              	.LASF50:
+ 3166 0162 434F4C55 		.ascii	"COLUMN_x_SetDriveMode\000"
+ 3166      4D4E5F78 
+ 3166      5F536574 
+ 3166      44726976 
+ 3166      654D6F64 
+ 3167              	.LASF27:
+ 3168 0178 466F7572 		.ascii	"FourDigit74HC595_sendOneDigit\000"
+ 3168      44696769 
+ 3168      74373448 
+ 3168      43353935 
+ 3168      5F73656E 
+ 3169              	.LASF10:
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 65
+
+
+ 3170 0196 756E7369 		.ascii	"unsigned int\000"
+ 3170      676E6564 
+ 3170      20696E74 
+ 3170      00
+ 3171              	.LASF57:
+ 3172 01a3 54696D65 		.ascii	"Timer_Start\000"
+ 3172      725F5374 
+ 3172      61727400 
+ 3173              	.LASF29:
+ 3174 01af 706F7369 		.ascii	"position\000"
+ 3174      74696F6E 
+ 3174      00
+ 3175              	.LASF7:
+ 3176 01b8 6C6F6E67 		.ascii	"long unsigned int\000"
+ 3176      20756E73 
+ 3176      69676E65 
+ 3176      6420696E 
+ 3176      7400
+ 3177              	.LASF28:
+ 3178 01ca 64617461 		.ascii	"data\000"
+ 3178      00
+ 3179              	.LASF45:
+ 3180 01cf 70617373 		.ascii	"password_mode\000"
+ 3180      776F7264 
+ 3180      5F6D6F64 
+ 3180      6500
+ 3181              	.LASF5:
+ 3182 01dd 73686F72 		.ascii	"short unsigned int\000"
+ 3182      7420756E 
+ 3182      7369676E 
+ 3182      65642069 
+ 3182      6E7400
+ 3183              	.LASF60:
+ 3184 01f0 6D61696E 		.ascii	"main.c\000"
+ 3184      2E6300
+ 3185              	.LASF47:
+ 3186 01f7 6379636C 		.ascii	"cyclic_index\000"
+ 3186      69635F69 
+ 3186      6E646578 
+ 3186      00
+ 3187              	.LASF46:
+ 3188 0204 6379636C 		.ascii	"cyclic_pattern\000"
+ 3188      69635F70 
+ 3188      61747465 
+ 3188      726E00
+ 3189              	.LASF18:
+ 3190 0213 73697A65 		.ascii	"sizetype\000"
+ 3190      74797065 
+ 3190      00
+ 3191              	.LASF43:
+ 3192 021c 656E7465 		.ascii	"entered_password\000"
+ 3192      7265645F 
+ 3192      70617373 
+ 3192      776F7264 
+ 3192      00
+ 3193              	.LASF17:
+ 3194 022d 6C6F6E67 		.ascii	"long double\000"
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 66
+
+
+ 3194      20646F75 
+ 3194      626C6500 
+ 3195              	.LASF35:
+ 3196 0239 636F7272 		.ascii	"correct_password\000"
+ 3196      6563745F 
+ 3196      70617373 
+ 3196      776F7264 
+ 3196      00
+ 3197              	.LASF37:
+ 3198 024a 6C617374 		.ascii	"last_state\000"
+ 3198      5F737461 
+ 3198      746500
+ 3199              	.LASF52:
+ 3200 0255 524F575F 		.ascii	"ROW_x_Read\000"
+ 3200      785F5265 
+ 3200      616400
+ 3201              	.LASF48:
+ 3202 0260 6379636C 		.ascii	"cyclic_counter\000"
+ 3202      69635F63 
+ 3202      6F756E74 
+ 3202      657200
+ 3203              	.LASF49:
+ 3204 026f 6B657973 		.ascii	"keys\000"
+ 3204      00
+ 3205              	.LASF14:
+ 3206 0274 666C6F61 		.ascii	"float\000"
+ 3206      7400
+ 3207              	.LASF55:
+ 3208 027a 50696E5F 		.ascii	"Pin_Latch_Write\000"
+ 3208      4C617463 
+ 3208      685F5772 
+ 3208      69746500 
+ 3209              	.LASF1:
+ 3210 028a 756E7369 		.ascii	"unsigned char\000"
+ 3210      676E6564 
+ 3210      20636861 
+ 3210      7200
+ 3211              	.LASF2:
+ 3212 0298 73686F72 		.ascii	"short int\000"
+ 3212      7420696E 
+ 3212      7400
+ 3213              	.LASF42:
+ 3214 02a2 64697370 		.ascii	"display_buffer\000"
+ 3214      6C61795F 
+ 3214      62756666 
+ 3214      657200
+ 3215              	.LASF51:
+ 3216 02b1 434F4C55 		.ascii	"COLUMN_x_Write\000"
+ 3216      4D4E5F78 
+ 3216      5F577269 
+ 3216      746500
+ 3217              	.LASF40:
+ 3218 02c0 4C45445F 		.ascii	"LED_NUM\000"
+ 3218      4E554D00 
+ 3219              	.LASF31:
+ 3220 02c8 73686F77 		.ascii	"showSuccessAnimation\000"
+ 3220      53756363 
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 67
+
+
+ 3220      65737341 
+ 3220      6E696D61 
+ 3220      74696F6E 
+ 3221              	.LASF39:
+ 3222 02dd 62757474 		.ascii	"button_number\000"
+ 3222      6F6E5F6E 
+ 3222      756D6265 
+ 3222      7200
+ 3223              	.LASF16:
+ 3224 02eb 63686172 		.ascii	"char\000"
+ 3224      00
+ 3225              	.LASF54:
+ 3226 02f0 50696E5F 		.ascii	"Pin_CLK_Write\000"
+ 3226      434C4B5F 
+ 3226      57726974 
+ 3226      6500
+ 3227              	.LASF4:
+ 3228 02fe 5F5F7569 		.ascii	"__uint16_t\000"
+ 3228      6E743136 
+ 3228      5F7400
+ 3229              	.LASF58:
+ 3230 0309 54696D65 		.ascii	"Timer_Int_StartEx\000"
+ 3230      725F496E 
+ 3230      745F5374 
+ 3230      61727445 
+ 3230      7800
+ 3231              	.LASF26:
+ 3232 031b 466F7572 		.ascii	"FourDigit74HC595_sendData\000"
+ 3232      44696769 
+ 3232      74373448 
+ 3232      43353935 
+ 3232      5F73656E 
+ 3233              	.LASF19:
+ 3234 0335 6379636C 		.ascii	"cyclicDisplay\000"
+ 3234      69634469 
+ 3234      73706C61 
+ 3234      7900
+ 3235              	.LASF64:
+ 3236 0343 6D656D63 		.ascii	"memcpy\000"
+ 3236      707900
+ 3237              	.LASF22:
+ 3238 034a 72656164 		.ascii	"readMatrix\000"
+ 3238      4D617472 
+ 3238      697800
+ 3239              	.LASF56:
+ 3240 0355 43794465 		.ascii	"CyDelay\000"
+ 3240      6C617900 
+ 3241              	.LASF23:
+ 3242 035d 726F775F 		.ascii	"row_counter\000"
+ 3242      636F756E 
+ 3242      74657200 
+ 3243              	.LASF33:
+ 3244 0369 73686F77 		.ascii	"showFailAnimation\000"
+ 3244      4661696C 
+ 3244      416E696D 
+ 3244      6174696F 
+ 3244      6E00
+ARM GAS  C:\Users\Maks\AppData\Local\Temp\cceSr4rh.s 			page 68
+
+
+ 3245              	.LASF38:
+ 3246 037b 6B65795F 		.ascii	"key_value\000"
+ 3246      76616C75 
+ 3246      6500
+ 3247              	.LASF20:
+ 3248 0385 696E6974 		.ascii	"initMatrix\000"
+ 3248      4D617472 
+ 3248      697800
+ 3249              	.LASF32:
+ 3250 0390 6379636C 		.ascii	"cycle\000"
+ 3250      6500
+ 3251              	.LASF11:
+ 3252 0396 75696E74 		.ascii	"uint8_t\000"
+ 3252      385F7400 
+ 3253              	.LASF21:
+ 3254 039e 636F6C75 		.ascii	"column_index\000"
+ 3254      6D6E5F69 
+ 3254      6E646578 
+ 3254      00
+ 3255              	.LASF25:
+ 3256 03ab 726F775F 		.ascii	"row_index\000"
+ 3256      696E6465 
+ 3256      7800
+ 3257              	.LASF34:
+ 3258 03b5 63686563 		.ascii	"checkPassword\000"
+ 3258      6B506173 
+ 3258      73776F72 
+ 3258      6400
+ 3259              	.LASF44:
+ 3260 03c3 70617373 		.ascii	"password_index\000"
+ 3260      776F7264 
+ 3260      5F696E64 
+ 3260      657800
+ 3261              	.LASF63:
+ 3262 03d2 6D61696E 		.ascii	"main\000"
+ 3262      00
+ 3263              	.LASF41:
+ 3264 03d7 6C65645F 		.ascii	"led_counter\000"
+ 3264      636F756E 
+ 3264      74657200 
+ 3265              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

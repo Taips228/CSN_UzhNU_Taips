@@ -1,0 +1,58 @@
+C:/projects/lab22.cydsn/CortexM0/ARM_GCC_541/Debug/main.o : C:/projects/lab22.cydsn/Generated_Source/PSoC4/Button.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/Button_aliases.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/CyFlash.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/CyLFClk.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/CyLib.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/LED_B.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/LED_B_aliases.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/LED_G.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/LED_G_aliases.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/LED_R.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/LED_R_aliases.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/SW_Tx_UART.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/SW_Tx_UART_PVT.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/cmsis_armcc.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/cmsis_compiler.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/cmsis_gcc.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/core_cm0.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/core_cm0_psoc4.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/cyPm.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/cy_em_eeprom.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/cydevice_trm.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/cydisabledsheets.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/cyfitter.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/cyfitter_cfg.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/cypins.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/cytypes.h C:/projects/lab22.cydsn/Generated_Source/PSoC4/project.h C:/projects/lab22.cydsn/main.c 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/Button.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/Button_aliases.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/CyFlash.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/CyLFClk.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/CyLib.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/LED_B.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/LED_B_aliases.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/LED_G.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/LED_G_aliases.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/LED_R.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/LED_R_aliases.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/SW_Tx_UART.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/SW_Tx_UART_PVT.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/cmsis_armcc.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/cmsis_compiler.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/cmsis_gcc.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/core_cm0.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/core_cm0_psoc4.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/cyPm.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/cy_em_eeprom.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/cydevice_trm.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/cydisabledsheets.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/cyfitter.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/cyfitter_cfg.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/cypins.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/cytypes.h : 
+
+C:/projects/lab22.cydsn/Generated_Source/PSoC4/project.h : 
+
+C:/projects/lab22.cydsn/main.c : 
+

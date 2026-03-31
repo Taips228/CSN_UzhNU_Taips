@@ -1,0 +1,12 @@
+C:/Program\ Files\ (x86)/Cypress/PSoC\ Creator/4.4/PSoC\ Creator/1/LWO4.cydsn/CortexM0/ARM_GCC_541/Debug/CyBootAsmGnu.o : C:/Program\ Files\ (x86)/Cypress/PSoC\ Creator/4.4/PSoC\ Creator/1/LWO4.cydsn/Generated_Source/PSoC4/CyBootAsmGnu.s C:/Program\ Files\ (x86)/Cypress/PSoC\ Creator/4.4/PSoC\ Creator/1/LWO4.cydsn/Generated_Source/PSoC4/cydevicegnu_trm.inc C:/Program\ Files\ (x86)/Cypress/PSoC\ Creator/4.4/PSoC\ Creator/1/LWO4.cydsn/Generated_Source/PSoC4/cyfittergnu.inc 
+
+C:/Program\ Files\ (x86)/Cypress/PSoC\ Creator/4.4/PSoC\ Creator/1/LWO4.cydsn/Generated_Source/PSoC4/CyBootAsmGnu.s : 
+
+C:/Program\ Files\ (x86)/Cypress/PSoC\ Creator/4.4/PSoC\ Creator/1/LWO4.cydsn/Generated_Source/PSoC4/cydevicegnu_trm.inc : 
+
+C:/Program\ Files\ (x86)/Cypress/PSoC\ Creator/4.4/PSoC\ Creator/1/LWO4.cydsn/Generated_Source/PSoC4/cyfittergnu.inc : 
+
+C:/Program\ Files\ (x86)/Cypress/PSoC\ Creator/4.4/PSoC\ Creator/1/LWO4.cydsn/CortexM0/ARM_GCC_541/Debug/SW_Tx_UART_AsmGnu.o : C:/Program\ Files\ (x86)/Cypress/PSoC\ Creator/4.4/PSoC\ Creator/1/LWO4.cydsn/Generated_Source/PSoC4/SW_Tx_UART_AsmGnu.s C:/Program\ Files\ (x86)/Cypress/PSoC\ Creator/4.4/PSoC\ Creator/1/LWO4.cydsn/Generated_Source/PSoC4/cydevicegnu_trm.inc C:/Program\ Files\ (x86)/Cypress/PSoC\ Creator/4.4/PSoC\ Creator/1/LWO4.cydsn/Generated_Source/PSoC4/cyfittergnu.inc 
+
+C:/Program\ Files\ (x86)/Cypress/PSoC\ Creator/4.4/PSoC\ Creator/1/LWO4.cydsn/Generated_Source/PSoC4/SW_Tx_UART_AsmGnu.s : 
+

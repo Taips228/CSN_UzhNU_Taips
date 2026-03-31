@@ -1,0 +1,646 @@
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccdSdM4w.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"COLUMN_0_PM.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.COLUMN_0_Sleep,"ax",%progbits
+  20              		.align	2
+  21              		.global	COLUMN_0_Sleep
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	COLUMN_0_Sleep, %function
+  25              	COLUMN_0_Sleep:
+  26              	.LFB0:
+  27              		.file 1 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\LWO4.cydsn\\Generat
+   1:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** /*******************************************************************************
+   2:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * File Name: COLUMN_0.c  
+   3:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * Version 2.20
+   4:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *
+   5:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * Description:
+   6:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *  This file contains APIs to set up the Pins component for low power modes.
+   7:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *
+   8:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * Note:
+   9:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *
+  10:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** ********************************************************************************
+  11:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * Copyright 2015, Cypress Semiconductor Corporation.  All rights reserved.
+  12:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  13:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  14:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * the software package with which this file was provided.
+  15:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *******************************************************************************/
+  16:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** 
+  17:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** #include "cytypes.h"
+  18:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** #include "COLUMN_0.h"
+  19:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** 
+  20:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** static COLUMN_0_BACKUP_STRUCT  COLUMN_0_backup = {0u, 0u, 0u};
+  21:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** 
+  22:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** 
+  23:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** /*******************************************************************************
+  24:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * Function Name: COLUMN_0_Sleep
+  25:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** ****************************************************************************//**
+  26:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *
+  27:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * \brief Stores the pin configuration and prepares the pin for entering chip 
+  28:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *  deep-sleep/hibernate modes. This function applies only to SIO and USBIO pins.
+  29:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *  It should not be called for GPIO or GPIO_OVT pins.
+  30:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccdSdM4w.s 			page 2
+
+
+  31:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * <b>Note</b> This function is available in PSoC 4 only.
+  32:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *
+  33:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * \return 
+  34:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *  None 
+  35:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *  
+  36:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * \sideeffect
+  37:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *  For SIO pins, this function configures the pin input threshold to CMOS and
+  38:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *  drive level to Vddio. This is needed for SIO pins when in device 
+  39:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *  deep-sleep/hibernate modes.
+  40:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *
+  41:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * \funcusage
+  42:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *  \snippet COLUMN_0_SUT.c usage_COLUMN_0_Sleep_Wakeup
+  43:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *******************************************************************************/
+  44:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** void COLUMN_0_Sleep(void)
+  45:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** {
+  28              		.loc 1 45 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  46:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****     #if defined(COLUMN_0__PC)
+  47:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****         COLUMN_0_backup.pcState = COLUMN_0_PC;
+  33              		.loc 1 47 0
+  34 0000 024B     		ldr	r3, .L2
+  35 0002 1A68     		ldr	r2, [r3]
+  36 0004 024B     		ldr	r3, .L2+4
+  37 0006 1A60     		str	r2, [r3]
+  48:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****     #else
+  49:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****         #if (CY_PSOC4_4200L)
+  50:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****             /* Save the regulator state and put the PHY into suspend mode */
+  51:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****             COLUMN_0_backup.usbState = COLUMN_0_CR1_REG;
+  52:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****             COLUMN_0_USB_POWER_REG |= COLUMN_0_USBIO_ENTER_SLEEP;
+  53:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****             COLUMN_0_CR1_REG &= COLUMN_0_USBIO_CR1_OFF;
+  54:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****         #endif
+  55:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****     #endif
+  56:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****     #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(COLUMN_0__SIO)
+  57:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****         COLUMN_0_backup.sioState = COLUMN_0_SIO_REG;
+  58:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****         /* SIO requires unregulated output buffer and single ended input buffer */
+  59:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****         COLUMN_0_SIO_REG &= (uint32)(~COLUMN_0_SIO_LPM_MASK);
+  60:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****     #endif  
+  61:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** }
+  38              		.loc 1 61 0
+  39              		@ sp needed
+  40 0008 7047     		bx	lr
+  41              	.L3:
+  42 000a C046     		.align	2
+  43              	.L2:
+  44 000c 08000440 		.word	1074003976
+  45 0010 00000000 		.word	.LANCHOR0
+  46              		.cfi_endproc
+  47              	.LFE0:
+  48              		.size	COLUMN_0_Sleep, .-COLUMN_0_Sleep
+  49              		.section	.text.COLUMN_0_Wakeup,"ax",%progbits
+  50              		.align	2
+  51              		.global	COLUMN_0_Wakeup
+  52              		.code	16
+  53              		.thumb_func
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccdSdM4w.s 			page 3
+
+
+  54              		.type	COLUMN_0_Wakeup, %function
+  55              	COLUMN_0_Wakeup:
+  56              	.LFB1:
+  62:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** 
+  63:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** 
+  64:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** /*******************************************************************************
+  65:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * Function Name: COLUMN_0_Wakeup
+  66:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** ****************************************************************************//**
+  67:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *
+  68:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * \brief Restores the pin configuration that was saved during Pin_Sleep(). This 
+  69:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * function applies only to SIO and USBIO pins. It should not be called for
+  70:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * GPIO or GPIO_OVT pins.
+  71:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *
+  72:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * For USBIO pins, the wakeup is only triggered for falling edge interrupts.
+  73:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *
+  74:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * <b>Note</b> This function is available in PSoC 4 only.
+  75:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *
+  76:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * \return 
+  77:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *  None
+  78:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *  
+  79:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** * \funcusage
+  80:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *  Refer to COLUMN_0_Sleep() for an example usage.
+  81:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** *******************************************************************************/
+  82:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** void COLUMN_0_Wakeup(void)
+  83:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** {
+  57              		.loc 1 83 0
+  58              		.cfi_startproc
+  59              		@ args = 0, pretend = 0, frame = 0
+  60              		@ frame_needed = 0, uses_anonymous_args = 0
+  61              		@ link register save eliminated.
+  84:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****     #if defined(COLUMN_0__PC)
+  85:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****         COLUMN_0_PC = COLUMN_0_backup.pcState;
+  62              		.loc 1 85 0
+  63 0000 024B     		ldr	r3, .L5
+  64 0002 1A68     		ldr	r2, [r3]
+  65 0004 024B     		ldr	r3, .L5+4
+  66 0006 1A60     		str	r2, [r3]
+  86:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****     #else
+  87:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****         #if (CY_PSOC4_4200L)
+  88:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****             /* Restore the regulator state and come out of suspend mode */
+  89:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****             COLUMN_0_USB_POWER_REG &= COLUMN_0_USBIO_EXIT_SLEEP_PH1;
+  90:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****             COLUMN_0_CR1_REG = COLUMN_0_backup.usbState;
+  91:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****             COLUMN_0_USB_POWER_REG &= COLUMN_0_USBIO_EXIT_SLEEP_PH2;
+  92:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****         #endif
+  93:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****     #endif
+  94:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****     #if defined(CYIPBLOCK_m0s8ioss_VERSION) && defined(COLUMN_0__SIO)
+  95:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****         COLUMN_0_SIO_REG = COLUMN_0_backup.sioState;
+  96:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c ****     #endif
+  97:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\COLUMN_0_PM.c **** }
+  67              		.loc 1 97 0
+  68              		@ sp needed
+  69 0008 7047     		bx	lr
+  70              	.L6:
+  71 000a C046     		.align	2
+  72              	.L5:
+  73 000c 00000000 		.word	.LANCHOR0
+  74 0010 08000440 		.word	1074003976
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccdSdM4w.s 			page 4
+
+
+  75              		.cfi_endproc
+  76              	.LFE1:
+  77              		.size	COLUMN_0_Wakeup, .-COLUMN_0_Wakeup
+  78              		.bss
+  79              		.align	2
+  80              		.set	.LANCHOR0,. + 0
+  81              		.type	COLUMN_0_backup, %object
+  82              		.size	COLUMN_0_backup, 12
+  83              	COLUMN_0_backup:
+  84 0000 00000000 		.space	12
+  84      00000000 
+  84      00000000 
+  85              		.text
+  86              	.Letext0:
+  87              		.file 2 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\LWO4.cydsn\\Generat
+  88              		.file 3 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\LWO4.cydsn\\Generat
+  89              		.section	.debug_info,"",%progbits
+  90              	.Ldebug_info0:
+  91 0000 01010000 		.4byte	0x101
+  92 0004 0400     		.2byte	0x4
+  93 0006 00000000 		.4byte	.Ldebug_abbrev0
+  94 000a 04       		.byte	0x4
+  95 000b 01       		.uleb128 0x1
+  96 000c 2F010000 		.4byte	.LASF20
+  97 0010 0C       		.byte	0xc
+  98 0011 2E000000 		.4byte	.LASF21
+  99 0015 00000000 		.4byte	.Ldebug_ranges0+0
+ 100 0019 00000000 		.4byte	0
+ 101 001d 00000000 		.4byte	.Ldebug_line0
+ 102 0021 02       		.uleb128 0x2
+ 103 0022 01       		.byte	0x1
+ 104 0023 06       		.byte	0x6
+ 105 0024 F4010000 		.4byte	.LASF0
+ 106 0028 02       		.uleb128 0x2
+ 107 0029 01       		.byte	0x1
+ 108 002a 08       		.byte	0x8
+ 109 002b B3000000 		.4byte	.LASF1
+ 110 002f 02       		.uleb128 0x2
+ 111 0030 02       		.byte	0x2
+ 112 0031 05       		.byte	0x5
+ 113 0032 D9010000 		.4byte	.LASF2
+ 114 0036 02       		.uleb128 0x2
+ 115 0037 02       		.byte	0x2
+ 116 0038 07       		.byte	0x7
+ 117 0039 D3000000 		.4byte	.LASF3
+ 118 003d 02       		.uleb128 0x2
+ 119 003e 04       		.byte	0x4
+ 120 003f 05       		.byte	0x5
+ 121 0040 EB010000 		.4byte	.LASF4
+ 122 0044 02       		.uleb128 0x2
+ 123 0045 04       		.byte	0x4
+ 124 0046 07       		.byte	0x7
+ 125 0047 C1000000 		.4byte	.LASF5
+ 126 004b 02       		.uleb128 0x2
+ 127 004c 08       		.byte	0x8
+ 128 004d 05       		.byte	0x5
+ 129 004e C6010000 		.4byte	.LASF6
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccdSdM4w.s 			page 5
+
+
+ 130 0052 02       		.uleb128 0x2
+ 131 0053 08       		.byte	0x8
+ 132 0054 07       		.byte	0x7
+ 133 0055 18010000 		.4byte	.LASF7
+ 134 0059 03       		.uleb128 0x3
+ 135 005a 04       		.byte	0x4
+ 136 005b 05       		.byte	0x5
+ 137 005c 696E7400 		.ascii	"int\000"
+ 138 0060 02       		.uleb128 0x2
+ 139 0061 04       		.byte	0x4
+ 140 0062 07       		.byte	0x7
+ 141 0063 0B010000 		.4byte	.LASF8
+ 142 0067 04       		.uleb128 0x4
+ 143 0068 04010000 		.4byte	.LASF12
+ 144 006c 02       		.byte	0x2
+ 145 006d FD01     		.2byte	0x1fd
+ 146 006f 44000000 		.4byte	0x44
+ 147 0073 02       		.uleb128 0x2
+ 148 0074 04       		.byte	0x4
+ 149 0075 04       		.byte	0x4
+ 150 0076 9D000000 		.4byte	.LASF9
+ 151 007a 02       		.uleb128 0x2
+ 152 007b 08       		.byte	0x8
+ 153 007c 04       		.byte	0x4
+ 154 007d FD000000 		.4byte	.LASF10
+ 155 0081 02       		.uleb128 0x2
+ 156 0082 01       		.byte	0x1
+ 157 0083 08       		.byte	0x8
+ 158 0084 D4010000 		.4byte	.LASF11
+ 159 0088 04       		.uleb128 0x4
+ 160 0089 00000000 		.4byte	.LASF13
+ 161 008d 02       		.byte	0x2
+ 162 008e A702     		.2byte	0x2a7
+ 163 0090 94000000 		.4byte	0x94
+ 164 0094 05       		.uleb128 0x5
+ 165 0095 67000000 		.4byte	0x67
+ 166 0099 06       		.uleb128 0x6
+ 167 009a 0C       		.byte	0xc
+ 168 009b 03       		.byte	0x3
+ 169 009c 21       		.byte	0x21
+ 170 009d C6000000 		.4byte	0xc6
+ 171 00a1 07       		.uleb128 0x7
+ 172 00a2 E3010000 		.4byte	.LASF14
+ 173 00a6 03       		.byte	0x3
+ 174 00a7 23       		.byte	0x23
+ 175 00a8 67000000 		.4byte	0x67
+ 176 00ac 00       		.byte	0
+ 177 00ad 07       		.uleb128 0x7
+ 178 00ae BD010000 		.4byte	.LASF15
+ 179 00b2 03       		.byte	0x3
+ 180 00b3 24       		.byte	0x24
+ 181 00b4 67000000 		.4byte	0x67
+ 182 00b8 04       		.byte	0x4
+ 183 00b9 07       		.uleb128 0x7
+ 184 00ba 06000000 		.4byte	.LASF16
+ 185 00be 03       		.byte	0x3
+ 186 00bf 25       		.byte	0x25
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccdSdM4w.s 			page 6
+
+
+ 187 00c0 67000000 		.4byte	0x67
+ 188 00c4 08       		.byte	0x8
+ 189 00c5 00       		.byte	0
+ 190 00c6 08       		.uleb128 0x8
+ 191 00c7 E6000000 		.4byte	.LASF17
+ 192 00cb 03       		.byte	0x3
+ 193 00cc 26       		.byte	0x26
+ 194 00cd 99000000 		.4byte	0x99
+ 195 00d1 09       		.uleb128 0x9
+ 196 00d2 0F000000 		.4byte	.LASF18
+ 197 00d6 01       		.byte	0x1
+ 198 00d7 2C       		.byte	0x2c
+ 199 00d8 00000000 		.4byte	.LFB0
+ 200 00dc 14000000 		.4byte	.LFE0-.LFB0
+ 201 00e0 01       		.uleb128 0x1
+ 202 00e1 9C       		.byte	0x9c
+ 203 00e2 09       		.uleb128 0x9
+ 204 00e3 A3000000 		.4byte	.LASF19
+ 205 00e7 01       		.byte	0x1
+ 206 00e8 52       		.byte	0x52
+ 207 00e9 00000000 		.4byte	.LFB1
+ 208 00ed 14000000 		.4byte	.LFE1-.LFB1
+ 209 00f1 01       		.uleb128 0x1
+ 210 00f2 9C       		.byte	0x9c
+ 211 00f3 0A       		.uleb128 0xa
+ 212 00f4 1E000000 		.4byte	.LASF22
+ 213 00f8 01       		.byte	0x1
+ 214 00f9 14       		.byte	0x14
+ 215 00fa C6000000 		.4byte	0xc6
+ 216 00fe 05       		.uleb128 0x5
+ 217 00ff 03       		.byte	0x3
+ 218 0100 00000000 		.4byte	COLUMN_0_backup
+ 219 0104 00       		.byte	0
+ 220              		.section	.debug_abbrev,"",%progbits
+ 221              	.Ldebug_abbrev0:
+ 222 0000 01       		.uleb128 0x1
+ 223 0001 11       		.uleb128 0x11
+ 224 0002 01       		.byte	0x1
+ 225 0003 25       		.uleb128 0x25
+ 226 0004 0E       		.uleb128 0xe
+ 227 0005 13       		.uleb128 0x13
+ 228 0006 0B       		.uleb128 0xb
+ 229 0007 03       		.uleb128 0x3
+ 230 0008 0E       		.uleb128 0xe
+ 231 0009 55       		.uleb128 0x55
+ 232 000a 17       		.uleb128 0x17
+ 233 000b 11       		.uleb128 0x11
+ 234 000c 01       		.uleb128 0x1
+ 235 000d 10       		.uleb128 0x10
+ 236 000e 17       		.uleb128 0x17
+ 237 000f 00       		.byte	0
+ 238 0010 00       		.byte	0
+ 239 0011 02       		.uleb128 0x2
+ 240 0012 24       		.uleb128 0x24
+ 241 0013 00       		.byte	0
+ 242 0014 0B       		.uleb128 0xb
+ 243 0015 0B       		.uleb128 0xb
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccdSdM4w.s 			page 7
+
+
+ 244 0016 3E       		.uleb128 0x3e
+ 245 0017 0B       		.uleb128 0xb
+ 246 0018 03       		.uleb128 0x3
+ 247 0019 0E       		.uleb128 0xe
+ 248 001a 00       		.byte	0
+ 249 001b 00       		.byte	0
+ 250 001c 03       		.uleb128 0x3
+ 251 001d 24       		.uleb128 0x24
+ 252 001e 00       		.byte	0
+ 253 001f 0B       		.uleb128 0xb
+ 254 0020 0B       		.uleb128 0xb
+ 255 0021 3E       		.uleb128 0x3e
+ 256 0022 0B       		.uleb128 0xb
+ 257 0023 03       		.uleb128 0x3
+ 258 0024 08       		.uleb128 0x8
+ 259 0025 00       		.byte	0
+ 260 0026 00       		.byte	0
+ 261 0027 04       		.uleb128 0x4
+ 262 0028 16       		.uleb128 0x16
+ 263 0029 00       		.byte	0
+ 264 002a 03       		.uleb128 0x3
+ 265 002b 0E       		.uleb128 0xe
+ 266 002c 3A       		.uleb128 0x3a
+ 267 002d 0B       		.uleb128 0xb
+ 268 002e 3B       		.uleb128 0x3b
+ 269 002f 05       		.uleb128 0x5
+ 270 0030 49       		.uleb128 0x49
+ 271 0031 13       		.uleb128 0x13
+ 272 0032 00       		.byte	0
+ 273 0033 00       		.byte	0
+ 274 0034 05       		.uleb128 0x5
+ 275 0035 35       		.uleb128 0x35
+ 276 0036 00       		.byte	0
+ 277 0037 49       		.uleb128 0x49
+ 278 0038 13       		.uleb128 0x13
+ 279 0039 00       		.byte	0
+ 280 003a 00       		.byte	0
+ 281 003b 06       		.uleb128 0x6
+ 282 003c 13       		.uleb128 0x13
+ 283 003d 01       		.byte	0x1
+ 284 003e 0B       		.uleb128 0xb
+ 285 003f 0B       		.uleb128 0xb
+ 286 0040 3A       		.uleb128 0x3a
+ 287 0041 0B       		.uleb128 0xb
+ 288 0042 3B       		.uleb128 0x3b
+ 289 0043 0B       		.uleb128 0xb
+ 290 0044 01       		.uleb128 0x1
+ 291 0045 13       		.uleb128 0x13
+ 292 0046 00       		.byte	0
+ 293 0047 00       		.byte	0
+ 294 0048 07       		.uleb128 0x7
+ 295 0049 0D       		.uleb128 0xd
+ 296 004a 00       		.byte	0
+ 297 004b 03       		.uleb128 0x3
+ 298 004c 0E       		.uleb128 0xe
+ 299 004d 3A       		.uleb128 0x3a
+ 300 004e 0B       		.uleb128 0xb
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccdSdM4w.s 			page 8
+
+
+ 301 004f 3B       		.uleb128 0x3b
+ 302 0050 0B       		.uleb128 0xb
+ 303 0051 49       		.uleb128 0x49
+ 304 0052 13       		.uleb128 0x13
+ 305 0053 38       		.uleb128 0x38
+ 306 0054 0B       		.uleb128 0xb
+ 307 0055 00       		.byte	0
+ 308 0056 00       		.byte	0
+ 309 0057 08       		.uleb128 0x8
+ 310 0058 16       		.uleb128 0x16
+ 311 0059 00       		.byte	0
+ 312 005a 03       		.uleb128 0x3
+ 313 005b 0E       		.uleb128 0xe
+ 314 005c 3A       		.uleb128 0x3a
+ 315 005d 0B       		.uleb128 0xb
+ 316 005e 3B       		.uleb128 0x3b
+ 317 005f 0B       		.uleb128 0xb
+ 318 0060 49       		.uleb128 0x49
+ 319 0061 13       		.uleb128 0x13
+ 320 0062 00       		.byte	0
+ 321 0063 00       		.byte	0
+ 322 0064 09       		.uleb128 0x9
+ 323 0065 2E       		.uleb128 0x2e
+ 324 0066 00       		.byte	0
+ 325 0067 3F       		.uleb128 0x3f
+ 326 0068 19       		.uleb128 0x19
+ 327 0069 03       		.uleb128 0x3
+ 328 006a 0E       		.uleb128 0xe
+ 329 006b 3A       		.uleb128 0x3a
+ 330 006c 0B       		.uleb128 0xb
+ 331 006d 3B       		.uleb128 0x3b
+ 332 006e 0B       		.uleb128 0xb
+ 333 006f 27       		.uleb128 0x27
+ 334 0070 19       		.uleb128 0x19
+ 335 0071 11       		.uleb128 0x11
+ 336 0072 01       		.uleb128 0x1
+ 337 0073 12       		.uleb128 0x12
+ 338 0074 06       		.uleb128 0x6
+ 339 0075 40       		.uleb128 0x40
+ 340 0076 18       		.uleb128 0x18
+ 341 0077 9742     		.uleb128 0x2117
+ 342 0079 19       		.uleb128 0x19
+ 343 007a 00       		.byte	0
+ 344 007b 00       		.byte	0
+ 345 007c 0A       		.uleb128 0xa
+ 346 007d 34       		.uleb128 0x34
+ 347 007e 00       		.byte	0
+ 348 007f 03       		.uleb128 0x3
+ 349 0080 0E       		.uleb128 0xe
+ 350 0081 3A       		.uleb128 0x3a
+ 351 0082 0B       		.uleb128 0xb
+ 352 0083 3B       		.uleb128 0x3b
+ 353 0084 0B       		.uleb128 0xb
+ 354 0085 49       		.uleb128 0x49
+ 355 0086 13       		.uleb128 0x13
+ 356 0087 02       		.uleb128 0x2
+ 357 0088 18       		.uleb128 0x18
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccdSdM4w.s 			page 9
+
+
+ 358 0089 00       		.byte	0
+ 359 008a 00       		.byte	0
+ 360 008b 00       		.byte	0
+ 361              		.section	.debug_aranges,"",%progbits
+ 362 0000 24000000 		.4byte	0x24
+ 363 0004 0200     		.2byte	0x2
+ 364 0006 00000000 		.4byte	.Ldebug_info0
+ 365 000a 04       		.byte	0x4
+ 366 000b 00       		.byte	0
+ 367 000c 0000     		.2byte	0
+ 368 000e 0000     		.2byte	0
+ 369 0010 00000000 		.4byte	.LFB0
+ 370 0014 14000000 		.4byte	.LFE0-.LFB0
+ 371 0018 00000000 		.4byte	.LFB1
+ 372 001c 14000000 		.4byte	.LFE1-.LFB1
+ 373 0020 00000000 		.4byte	0
+ 374 0024 00000000 		.4byte	0
+ 375              		.section	.debug_ranges,"",%progbits
+ 376              	.Ldebug_ranges0:
+ 377 0000 00000000 		.4byte	.LFB0
+ 378 0004 14000000 		.4byte	.LFE0
+ 379 0008 00000000 		.4byte	.LFB1
+ 380 000c 14000000 		.4byte	.LFE1
+ 381 0010 00000000 		.4byte	0
+ 382 0014 00000000 		.4byte	0
+ 383              		.section	.debug_line,"",%progbits
+ 384              	.Ldebug_line0:
+ 385 0000 CD000000 		.section	.debug_str,"MS",%progbits,1
+ 385      0200A000 
+ 385      00000201 
+ 385      FB0E0D00 
+ 385      01010101 
+ 386              	.LASF13:
+ 387 0000 72656733 		.ascii	"reg32\000"
+ 387      3200
+ 388              	.LASF16:
+ 389 0006 75736253 		.ascii	"usbState\000"
+ 389      74617465 
+ 389      00
+ 390              	.LASF18:
+ 391 000f 434F4C55 		.ascii	"COLUMN_0_Sleep\000"
+ 391      4D4E5F30 
+ 391      5F536C65 
+ 391      657000
+ 392              	.LASF22:
+ 393 001e 434F4C55 		.ascii	"COLUMN_0_backup\000"
+ 393      4D4E5F30 
+ 393      5F626163 
+ 393      6B757000 
+ 394              	.LASF21:
+ 395 002e 433A5C50 		.ascii	"C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4"
+ 395      726F6772 
+ 395      616D2046 
+ 395      696C6573 
+ 395      20287838 
+ 396 005d 5C50536F 		.ascii	"\\PSoC Creator\\1\\LWO4.cydsn\\Generated_Source\\PS"
+ 396      43204372 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccdSdM4w.s 			page 10
+
+
+ 396      6561746F 
+ 396      725C315C 
+ 396      4C574F34 
+ 397 008b 6F43345C 		.ascii	"oC4\\COLUMN_0_PM.c\000"
+ 397      434F4C55 
+ 397      4D4E5F30 
+ 397      5F504D2E 
+ 397      6300
+ 398              	.LASF9:
+ 399 009d 666C6F61 		.ascii	"float\000"
+ 399      7400
+ 400              	.LASF19:
+ 401 00a3 434F4C55 		.ascii	"COLUMN_0_Wakeup\000"
+ 401      4D4E5F30 
+ 401      5F57616B 
+ 401      65757000 
+ 402              	.LASF1:
+ 403 00b3 756E7369 		.ascii	"unsigned char\000"
+ 403      676E6564 
+ 403      20636861 
+ 403      7200
+ 404              	.LASF5:
+ 405 00c1 6C6F6E67 		.ascii	"long unsigned int\000"
+ 405      20756E73 
+ 405      69676E65 
+ 405      6420696E 
+ 405      7400
+ 406              	.LASF3:
+ 407 00d3 73686F72 		.ascii	"short unsigned int\000"
+ 407      7420756E 
+ 407      7369676E 
+ 407      65642069 
+ 407      6E7400
+ 408              	.LASF17:
+ 409 00e6 434F4C55 		.ascii	"COLUMN_0_BACKUP_STRUCT\000"
+ 409      4D4E5F30 
+ 409      5F424143 
+ 409      4B55505F 
+ 409      53545255 
+ 410              	.LASF10:
+ 411 00fd 646F7562 		.ascii	"double\000"
+ 411      6C6500
+ 412              	.LASF12:
+ 413 0104 75696E74 		.ascii	"uint32\000"
+ 413      333200
+ 414              	.LASF8:
+ 415 010b 756E7369 		.ascii	"unsigned int\000"
+ 415      676E6564 
+ 415      20696E74 
+ 415      00
+ 416              	.LASF7:
+ 417 0118 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 417      206C6F6E 
+ 417      6720756E 
+ 417      7369676E 
+ 417      65642069 
+ 418              	.LASF20:
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccdSdM4w.s 			page 11
+
+
+ 419 012f 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 419      43313120 
+ 419      352E342E 
+ 419      31203230 
+ 419      31363036 
+ 420 0162 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 420      20726576 
+ 420      6973696F 
+ 420      6E203233 
+ 420      37373135 
+ 421 0195 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 421      66756E63 
+ 421      74696F6E 
+ 421      2D736563 
+ 421      74696F6E 
+ 422              	.LASF15:
+ 423 01bd 73696F53 		.ascii	"sioState\000"
+ 423      74617465 
+ 423      00
+ 424              	.LASF6:
+ 425 01c6 6C6F6E67 		.ascii	"long long int\000"
+ 425      206C6F6E 
+ 425      6720696E 
+ 425      7400
+ 426              	.LASF11:
+ 427 01d4 63686172 		.ascii	"char\000"
+ 427      00
+ 428              	.LASF2:
+ 429 01d9 73686F72 		.ascii	"short int\000"
+ 429      7420696E 
+ 429      7400
+ 430              	.LASF14:
+ 431 01e3 70635374 		.ascii	"pcState\000"
+ 431      61746500 
+ 432              	.LASF4:
+ 433 01eb 6C6F6E67 		.ascii	"long int\000"
+ 433      20696E74 
+ 433      00
+ 434              	.LASF0:
+ 435 01f4 7369676E 		.ascii	"signed char\000"
+ 435      65642063 
+ 435      68617200 
+ 436              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

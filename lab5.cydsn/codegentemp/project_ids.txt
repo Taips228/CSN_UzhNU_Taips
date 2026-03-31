@@ -1,0 +1,11 @@
+C:\Users\Maks\Documents\PSoC Creator\CSN_UzhNU\LWO1.cydsn\LWO1.cyprj|afc433e4-eeec-431b-a610-c1bd2a6e5a03
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|9de35b62-08be-4ac3-8a4a-4e5b9a60f2ca
+C:\Users\Maks\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|9aecfbe0-10ce-40fe-9665-b3b0164af7a2
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|062b0a95-9eb6-47c0-9a43-50f22619e364
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|442b446b-926a-4e8c-af03-bebef206e3b9
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|8ff9c8b2-70d6-46a8-a3fa-9be113fb8695
+C:\Users\Maks\Documents\PSoC Creator\CSN_UzhNU\CapSense_CSD_P4_Design01.cydsn\CapSense_CSD_P4_Design01.cyprj|833b174f-3006-403b-984f-eb15a1731016
+C:\Users\Maks\Documents\PSoC Creator\CSN_UzhNU\LWO2.cydsn\LWO2.cyprj|40ab8e60-9ca3-4922-b82c-b584f89fbed0
+C:\Users\Maks\Documents\PSoC Creator\CSN_UzhNU\LWO3.cydsn\LWO3.cyprj|299dc696-ea42-41eb-9f62-ee3fba410cb0
+C:\Users\Maks\Documents\PSoC Creator\CSN_UzhNU\LWO4.cydsn\LWO4.cyprj|973aa085-aa34-4e5d-9ac0-8706e5a0e49c
+C:\Users\Maks\Documents\PSoC Creator\CSN_UzhNU\LWO5.cydsn\LWO5.cyprj|8b6abd49-40b1-468b-b3cc-5f27ee89c27b

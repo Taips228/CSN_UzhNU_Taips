@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CyXmlSerializer>
+<!--This file is machine generated and read. It is not intended to be edited by hand.-->
+<!--Due to this, there is no schema for this file.-->
+<CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspcCustomData" version="4">
+<CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997 type_name="CyDesigner.Common.Base.CyCustomData" version="2">
+<userData>
+<dataGuid v="1b906a0f-a7b6-4e4d-a428-82f98b53cb35">
+<CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35 type_name="CyDesigner.Common.ProjMgmt.GUI.CyExplorerWindow+CyExplorerWindowState" version="3" SelectedTab="Source">
+<TreeKeys>
+<v>Source</v>
+<v>Components</v>
+<v>Output</v>
+</TreeKeys>
+<TreeStates>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="CSN_UzhNU\LWO1\LWO1.cydwr">
+<ExpandedNodeIds>
+<v>CSN_UzhNU</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TopDesign</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CapSense_CSD_P4_Design01.cydwr</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CapSense_CSD_P4_Design01.cydwr\Pins</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CapSense_CSD_P4_Design01.cydwr\Analog</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CapSense_CSD_P4_Design01.cydwr\Clocks</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CapSense_CSD_P4_Design01.cydwr\Interrupts</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CapSense_CSD_P4_Design01.cydwr\System</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CapSense_CSD_P4_Design01.cydwr\Directives</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CapSense_CSD_P4_Design01.cydwr\Flash Security</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\Header Files</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\Header Files\cyapicallbacks.h</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\Source Files</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\Source Files\main.c</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CapSense_CSD_P4_Design.pdf</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\Generated_Source</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\Generated_Source\PSoC4\CapSense_CSD</v>
+<v>CSN_UzhNU\LWO1\TopDesign</v>
+<v>CSN_UzhNU\LWO1\LWO1.cydwr\Pins</v>
+<v>CSN_UzhNU\LWO1\LWO1.cydwr\Analog</v>
+<v>CSN_UzhNU\LWO1\LWO1.cydwr\Clocks</v>
+<v>CSN_UzhNU\LWO1\LWO1.cydwr\Interrupts</v>
+<v>CSN_UzhNU\LWO1\LWO1.cydwr\System</v>
+<v>CSN_UzhNU\LWO1\LWO1.cydwr\Directives</v>
+<v>CSN_UzhNU\LWO1\LWO1.cydwr\Flash Security</v>
+<v>CSN_UzhNU\LWO1\Header Files</v>
+<v>CSN_UzhNU\LWO1\Header Files\cyapicallbacks.h</v>
+<v>CSN_UzhNU\LWO1\Source Files</v>
+<v>CSN_UzhNU\LWO1\Source Files\main.c</v>
+<v>CSN_UzhNU\LWO1\Generated_Source\PSoC4</v>
+<v>CSN_UzhNU\LWO2</v>
+<v>CSN_UzhNU\LWO2\LWO2.cydwr</v>
+<v>CSN_UzhNU\LWO2\LWO2.cydwr\Pins</v>
+<v>CSN_UzhNU\LWO2\LWO2.cydwr\Analog</v>
+<v>CSN_UzhNU\LWO2\LWO2.cydwr\Clocks</v>
+<v>CSN_UzhNU\LWO2\LWO2.cydwr\Interrupts</v>
+<v>CSN_UzhNU\LWO2\LWO2.cydwr\System</v>
+<v>CSN_UzhNU\LWO2\LWO2.cydwr\Directives</v>
+<v>CSN_UzhNU\LWO2\LWO2.cydwr\Flash Security</v>
+<v>CSN_UzhNU\LWO2\Header Files</v>
+<v>CSN_UzhNU\LWO2\Header Files\cyapicallbacks.h</v>
+<v>CSN_UzhNU\LWO2\Source Files</v>
+<v>CSN_UzhNU\LWO2\Source Files\main.c</v>
+<v>CSN_UzhNU\LWO2\Generated_Source\PSoC4</v>
+<v>CSN_UzhNU\LWO3\LWO3.cydwr</v>
+<v>CSN_UzhNU\LWO3\LWO3.cydwr\Pins</v>
+<v>CSN_UzhNU\LWO3\LWO3.cydwr\Analog</v>
+<v>CSN_UzhNU\LWO3\LWO3.cydwr\Clocks</v>
+<v>CSN_UzhNU\LWO3\LWO3.cydwr\Interrupts</v>
+<v>CSN_UzhNU\LWO3\LWO3.cydwr\System</v>
+<v>CSN_UzhNU\LWO3\LWO3.cydwr\Directives</v>
+<v>CSN_UzhNU\LWO3\LWO3.cydwr\Flash Security</v>
+<v>CSN_UzhNU\LWO3\Header Files</v>
+<v>CSN_UzhNU\LWO3\Header Files\cyapicallbacks.h</v>
+<v>CSN_UzhNU\LWO3\Source Files</v>
+<v>CSN_UzhNU\LWO3\Source Files\main.c</v>
+<v>CSN_UzhNU\LWO3\Generated_Source\PSoC4</v>
+<v>CSN_UzhNU\LWO4\LWO4.cydwr</v>
+<v>CSN_UzhNU\LWO4\LWO4.cydwr\Pins</v>
+<v>CSN_UzhNU\LWO4\LWO4.cydwr\Analog</v>
+<v>CSN_UzhNU\LWO4\LWO4.cydwr\Clocks</v>
+<v>CSN_UzhNU\LWO4\LWO4.cydwr\Interrupts</v>
+<v>CSN_UzhNU\LWO4\LWO4.cydwr\System</v>
+<v>CSN_UzhNU\LWO4\LWO4.cydwr\Directives</v>
+<v>CSN_UzhNU\LWO4\LWO4.cydwr\Flash Security</v>
+<v>CSN_UzhNU\LWO4\Header Files</v>
+<v>CSN_UzhNU\LWO4\Header Files\cyapicallbacks.h</v>
+<v>CSN_UzhNU\LWO4\Source Files</v>
+<v>CSN_UzhNU\LWO4\Source Files\main.c</v>
+<v>CSN_UzhNU\LWO4\Generated_Source\PSoC4</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>CSN_UzhNU</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01</v>
+<v>CSN_UzhNU\LWO1</v>
+<v>CSN_UzhNU\LWO2</v>
+<v>CSN_UzhNU\LWO2\LWO2.cydwr</v>
+<v>CSN_UzhNU\LWO2\LWO2.cydwr\Pins</v>
+<v>CSN_UzhNU\LWO2\LWO2.cydwr\Analog</v>
+<v>CSN_UzhNU\LWO2\LWO2.cydwr\Clocks</v>
+<v>CSN_UzhNU\LWO2\LWO2.cydwr\Interrupts</v>
+<v>CSN_UzhNU\LWO2\LWO2.cydwr\System</v>
+<v>CSN_UzhNU\LWO2\LWO2.cydwr\Directives</v>
+<v>CSN_UzhNU\LWO2\LWO2.cydwr\Flash Security</v>
+<v>CSN_UzhNU\LWO2\Header Files</v>
+<v>CSN_UzhNU\LWO2\Header Files\cyapicallbacks.h</v>
+<v>CSN_UzhNU\LWO2\Source Files</v>
+<v>CSN_UzhNU\LWO2\Source Files\main.c</v>
+<v>CSN_UzhNU\LWO2\Generated_Source</v>
+<v>CSN_UzhNU\LWO3</v>
+<v>CSN_UzhNU\LWO4</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="CSN_UzhNU">
+<ExpandedNodeIds>
+<v>CSN_UzhNU</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TopDesign</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TopDesign\PSoC4</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TopDesign\PSoC4\PSoC 4000</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TopDesign\PSoC4\PSoC 4000\TopDesign.ctl</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TopDesign\PSoC4\PSoC 4200</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TopDesign\PSoC4\PSoC 4200\TopDesign.ctl</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TopDesign\PSoC4\PSoC 4200 BLE</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TopDesign\PSoC4\PSoC 4200 BLE\TopDesign.ctl</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TopDesign\TopDesign.cysch</v>
+<v>CSN_UzhNU\LWO1</v>
+<v>CSN_UzhNU\LWO1\TopDesign</v>
+<v>CSN_UzhNU\LWO1\TopDesign\TopDesign.cysch</v>
+<v>CSN_UzhNU\LWO2</v>
+<v>CSN_UzhNU\LWO3</v>
+<v>CSN_UzhNU\LWO4</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>CSN_UzhNU</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TopDesign</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TopDesign\PSoC4</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TopDesign\PSoC4\PSoC 4000</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TopDesign\PSoC4\PSoC 4000\TopDesign.ctl</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TopDesign\PSoC4\PSoC 4200</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TopDesign\PSoC4\PSoC 4200\TopDesign.ctl</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TopDesign\PSoC4\PSoC 4200 BLE</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TopDesign\PSoC4\PSoC 4200 BLE\TopDesign.ctl</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TopDesign\TopDesign.cysch</v>
+<v>CSN_UzhNU\LWO1</v>
+<v>CSN_UzhNU\LWO1\TopDesign</v>
+<v>CSN_UzhNU\LWO1\TopDesign\TopDesign.cysch</v>
+<v>CSN_UzhNU\LWO2</v>
+<v>CSN_UzhNU\LWO3</v>
+<v>CSN_UzhNU\LWO4</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>CSN_UzhNU</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_CSD.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_CSD_CSHL.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_CSD_INT.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_CSD_PM.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_CSD_SampleClk.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_CSD_SenseClk.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_CSD_SMS.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_CSD_TunerHelper.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_PWM.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Cm0Start.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLFClk.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_1.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_1_PM.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_2.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_2_PM.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_CONTROL.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_CONTROL_PM.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\CapSense_CSD_P4_Design01.elf</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\CapSense_CSD_P4_Design01.hex</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\CapSense_CSD_P4_Design01.map</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CapSense_CSD_P4_Design01.gpdsc</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CapSense_CSD_P4_Design01.rpt</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CapSense_CSD_P4_Design01_timing.html</v>
+<v>CSN_UzhNU\LWO1</v>
+<v>CSN_UzhNU\LWO1\CortexM0</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\Button.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\Button_PM.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\Cm0Start.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLFClk.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_B.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_B_PM.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_G.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_G_PM.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_R.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_R_PM.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\SW_Tx_UART.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\SW_Tx_UART_AsmGnu.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\LWO1.elf</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\LWO1.hex</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\LWO1.map</v>
+<v>CSN_UzhNU\LWO1\LWO1.gpdsc</v>
+<v>CSN_UzhNU\LWO1\LWO1.rpt</v>
+<v>CSN_UzhNU\LWO1\LWO1_timing.html</v>
+<v>CSN_UzhNU\LWO2</v>
+<v>CSN_UzhNU\LWO2\CortexM0</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\Button.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\Button_PM.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\Cm0Start.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLFClk.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_B.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_B_PM.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_G.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_G_PM.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_R.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_R_PM.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\SW_Tx_UART.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\Listing Files\SW_Tx_UART_AsmGnu.lst</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\LWO2.elf</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\LWO2.hex</v>
+<v>CSN_UzhNU\LWO2\CortexM0\ARM_GCC_541\Debug\LWO2.map</v>
+<v>CSN_UzhNU\LWO2\LWO2.gpdsc</v>
+<v>CSN_UzhNU\LWO2\LWO2.rpt</v>
+<v>CSN_UzhNU\LWO2\LWO2_timing.html</v>
+<v>CSN_UzhNU\LWO3</v>
+<v>CSN_UzhNU\LWO3\CortexM0</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\Button.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\Button_PM.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\Cm0Start.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\COLUMN_0.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\COLUMN_0_PM.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\COLUMN_1.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\COLUMN_1_PM.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\COLUMN_2.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\COLUMN_2_PM.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLFClk.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_B.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_B_PM.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_G.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_G_PM.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_R.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_R_PM.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\ROW_0.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\ROW_0_PM.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\ROW_1.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\ROW_1_PM.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\ROW_2.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\ROW_2_PM.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\ROW_3.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\ROW_3_PM.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\SW_Tx_UART.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\Listing Files\SW_Tx_UART_AsmGnu.lst</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\LWO3.elf</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\LWO3.hex</v>
+<v>CSN_UzhNU\LWO3\CortexM0\ARM_GCC_541\Debug\LWO3.map</v>
+<v>CSN_UzhNU\LWO3\LWO3.gpdsc</v>
+<v>CSN_UzhNU\LWO3\LWO3.rpt</v>
+<v>CSN_UzhNU\LWO3\LWO3_timing.html</v>
+<v>CSN_UzhNU\LWO4</v>
+<v>CSN_UzhNU\LWO4\CortexM0</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\Button.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\Button_PM.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\Cm0Start.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\COLUMN_0.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\COLUMN_0_PM.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\COLUMN_1.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\COLUMN_1_PM.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\COLUMN_2.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\COLUMN_2_PM.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLFClk.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_B.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_B_PM.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_G.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_G_PM.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_R.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_R_PM.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_CLK.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_CLK_PM.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_DO.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_DO_PM.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Latch.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_Latch_PM.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\ROW_0.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\ROW_0_PM.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\ROW_1.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\ROW_1_PM.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\ROW_2.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\ROW_2_PM.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\ROW_3.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\ROW_3_PM.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\SW_Tx_UART.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\Listing Files\SW_Tx_UART_AsmGnu.lst</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\LWO4.elf</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\LWO4.hex</v>
+<v>CSN_UzhNU\LWO4\CortexM0\ARM_GCC_541\Debug\LWO4.map</v>
+<v>CSN_UzhNU\LWO4\LWO4.gpdsc</v>
+<v>CSN_UzhNU\LWO4\LWO4.rpt</v>
+<v>CSN_UzhNU\LWO4\LWO4_timing.html</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>CSN_UzhNU</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_CSD.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_CSD_CSHL.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_CSD_INT.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_CSD_PM.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_CSD_SampleClk.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_CSD_SenseClk.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_CSD_SMS.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_CSD_TunerHelper.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_PWM.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\Cm0Start.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLFClk.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_1.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_1_PM.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_2.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_2_PM.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_CONTROL.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_CONTROL_PM.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\CapSense_CSD_P4_Design01.elf</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\CapSense_CSD_P4_Design01.hex</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CortexM0\ARM_GCC_541\Debug\CapSense_CSD_P4_Design01.map</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CapSense_CSD_P4_Design01.gpdsc</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CapSense_CSD_P4_Design01.rpt</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CapSense_CSD_P4_Design01_timing.html</v>
+<v>CSN_UzhNU\LWO1</v>
+<v>CSN_UzhNU\LWO1\CortexM0</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\Button.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\Button_PM.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\Cm0Start.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLFClk.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_B.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_B_PM.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_G.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_G_PM.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_R.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\LED_R_PM.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\SW_Tx_UART.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\Listing Files\SW_Tx_UART_AsmGnu.lst</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\LWO1.elf</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\LWO1.hex</v>
+<v>CSN_UzhNU\LWO1\CortexM0\ARM_GCC_541\Debug\LWO1.map</v>
+<v>CSN_UzhNU\LWO1\LWO1.gpdsc</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStates>
+<TreeKeysV2>
+<v>Datasheet</v>
+</TreeKeysV2>
+<TreeStatesV2>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>CSN_UzhNU</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\PSoC 4 Architecture TRM</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\PSoC 4200 Family Datasheet</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\System Reference Guides</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\System Reference Guides\cy_boot_v5_60</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\System Reference Guides\cy_lfclk_v1_20</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CapSense_CSD_P4_v2_60.pdf</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\cy_clock_v2_20.pdf</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\cy_pins_v2_20</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\LED_v1_0</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\LED_v1_0\LED_v1_0.pdf</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\Power_v1_0</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\Power_v1_0\Power_v1_0.pdf</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\Resistor_v1_0</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\Resistor_v1_0\Resistor_v1_0.pdf</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TCPWM_P4_v2_10.pdf</v>
+<v>CSN_UzhNU\LWO1</v>
+<v>CSN_UzhNU\LWO1\PSoC 4 Architecture TRM</v>
+<v>CSN_UzhNU\LWO1\PSoC 4200 Family Datasheet</v>
+<v>CSN_UzhNU\LWO1\System Reference Guides</v>
+<v>CSN_UzhNU\LWO1\System Reference Guides\cy_boot_v6_0</v>
+<v>CSN_UzhNU\LWO1\System Reference Guides\cy_lfclk_v1_20</v>
+<v>CSN_UzhNU\LWO1\cy_pins_v2_20</v>
+<v>CSN_UzhNU\LWO1\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>CSN_UzhNU\LWO1\SW_Tx_UART_v1_50.pdf</v>
+<v>CSN_UzhNU\LWO2</v>
+<v>CSN_UzhNU\LWO2\PSoC 4 Architecture TRM</v>
+<v>CSN_UzhNU\LWO2\PSoC 4200 Family Datasheet</v>
+<v>CSN_UzhNU\LWO2\System Reference Guides</v>
+<v>CSN_UzhNU\LWO3</v>
+<v>CSN_UzhNU\LWO3\PSoC 4 Architecture TRM</v>
+<v>CSN_UzhNU\LWO3\PSoC 4200 Family Datasheet</v>
+<v>CSN_UzhNU\LWO3\System Reference Guides</v>
+<v>CSN_UzhNU\LWO4</v>
+<v>CSN_UzhNU\LWO4\PSoC 4 Architecture TRM</v>
+<v>CSN_UzhNU\LWO4\PSoC 4200 Family Datasheet</v>
+<v>CSN_UzhNU\LWO4\System Reference Guides</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>CSN_UzhNU</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\PSoC 4 Architecture TRM</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\PSoC 4200 Family Datasheet</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\System Reference Guides</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\System Reference Guides\cy_boot_v5_60</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\System Reference Guides\cy_lfclk_v1_20</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\CapSense_CSD_P4_v2_60.pdf</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\cy_clock_v2_20.pdf</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\cy_pins_v2_20</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\LED_v1_0</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\LED_v1_0\LED_v1_0.pdf</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\Power_v1_0</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\Power_v1_0\Power_v1_0.pdf</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\Resistor_v1_0</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\Resistor_v1_0\Resistor_v1_0.pdf</v>
+<v>CSN_UzhNU\CapSense_CSD_P4_Design01\TCPWM_P4_v2_10.pdf</v>
+<v>CSN_UzhNU\LWO1</v>
+<v>CSN_UzhNU\LWO1\PSoC 4 Architecture TRM</v>
+<v>CSN_UzhNU\LWO1\PSoC 4200 Family Datasheet</v>
+<v>CSN_UzhNU\LWO1\System Reference Guides</v>
+<v>CSN_UzhNU\LWO1\System Reference Guides\cy_boot_v6_0</v>
+<v>CSN_UzhNU\LWO1\System Reference Guides\cy_lfclk_v1_20</v>
+<v>CSN_UzhNU\LWO1\cy_pins_v2_20</v>
+<v>CSN_UzhNU\LWO1\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>CSN_UzhNU\LWO1\SW_Tx_UART_v1_50.pdf</v>
+<v>CSN_UzhNU\LWO2</v>
+<v>CSN_UzhNU\LWO2\PSoC 4 Architecture TRM</v>
+<v>CSN_UzhNU\LWO2\PSoC 4200 Family Datasheet</v>
+<v>CSN_UzhNU\LWO2\System Reference Guides</v>
+<v>CSN_UzhNU\LWO3</v>
+<v>CSN_UzhNU\LWO3\PSoC 4 Architecture TRM</v>
+<v>CSN_UzhNU\LWO3\PSoC 4200 Family Datasheet</v>
+<v>CSN_UzhNU\LWO3\System Reference Guides</v>
+<v>CSN_UzhNU\LWO4</v>
+<v>CSN_UzhNU\LWO4\PSoC 4 Architecture TRM</v>
+<v>CSN_UzhNU\LWO4\PSoC 4200 Family Datasheet</v>
+<v>CSN_UzhNU\LWO4\System Reference Guides</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStatesV2>
+</CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
+</dataGuid>
+</userData>
+</CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
+<Unloaded />
+<OpenDocs>
+<name v=".\LWO1.cydsn\TopDesign\TopDesign.cysch" />
+<name v=".\LWO1.cydsn\LWO1.cydwr" />
+<name v=".\LWO1.cydsn\cyapicallbacks.h" />
+<name v=".\LWO1.cydsn\main.c" />
+<name v=".\LWO2.cydsn\cyapicallbacks.h" />
+<name v=".\LWO2.cydsn\main.c" />
+</OpenDocs>
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="2102, 1063" SelectedTabbedMdiWindow="e01e7fe2-dc4f-49fb-b85e-318565a2458f"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="3f6b3c6b-9ef4-477f-9aa6-e01ad4377e71" /><DocumentWindow Key="C:\projects\LWO1.cydsn\TopDesign\TopDesign.cysch" Guid="9ba76606-efe3-4130-9480-6334a3dd1630" /><DocumentWindow Key="C:\projects\LWO1.cydsn\LWO1.cydwr" Guid="8ddcb9a6-9c3a-4826-afbb-fc29b81c0f93" /><DocumentWindow Key="C:\projects\LWO1.cydsn\cyapicallbacks.h" Guid="cf4102fb-b75b-4a69-8485-cd42517135a1" /><DocumentWindow Key="C:\projects\LWO1.cydsn\main.c" Guid="e6711414-45f6-40a7-ab06-1112f61265b9" /><DocumentWindow Key="C:\projects\LWO2.cydsn\cyapicallbacks.h" Guid="3a00e358-8b72-4841-8be3-b22c2a7686f9" /><DocumentWindow Key="C:\projects\LWO2.cydsn\main.c" Guid="e01e7fe2-dc4f-49fb-b85e-318565a2458f" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+<config v="" />
+<AutoUpdate v="true" />
+</CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
+</CyXmlSerializer>

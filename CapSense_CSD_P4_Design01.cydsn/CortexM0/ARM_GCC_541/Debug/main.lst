@@ -1,0 +1,687 @@
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cc3P7wUp.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.comm	curPos,2,2
+  20              		.comm	oldPos,2,2
+  21              		.section	.text.main,"ax",%progbits
+  22              		.align	2
+  23              		.global	main
+  24              		.code	16
+  25              		.thumb_func
+  26              		.type	main, %function
+  27              	main:
+  28              	.LFB32:
+  29              		.file 1 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\CapSense_CSD_P4_Des
+   1:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** /*******************************************************************************
+   2:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** * File Name: main.c
+   3:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *
+   4:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** * Version: 1.30
+   5:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *
+   6:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** * Description:
+   7:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *  The project explains the usage of CapSense CSD component. The 2 buttons and
+   8:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *  linear sliders are used as sensing elements. LED displays buttons active
+   9:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *  state and slider position is shown on LCD.
+  10:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *
+  11:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** ********************************************************************************
+  12:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** * Copyright 2013, Cypress Semiconductor Corporation. All rights reserved.
+  13:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** * This software is owned by Cypress Semiconductor Corporation and is protected
+  14:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** * by and subject to worldwide patent and copyright laws and treaties.
+  15:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** * Therefore, you may use this software only as provided in the license agreement
+  16:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** * accompanying the software package from which you obtained this software.
+  17:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** * CYPRESS AND ITS SUPPLIERS MAKE NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+  18:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** * WITH REGARD TO THIS SOFTWARE, INCLUDING, BUT NOT LIMITED TO, NONINFRINGEMENT,
+  19:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+  20:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *******************************************************************************/
+  21:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** 
+  22:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** #include "project.h"
+  23:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** 
+  24:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** /* CapSense Slider resoluton is set to 127 (7 bits).
+  25:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *  Since PWM has 16 bit resolution, slider position value should be shifted left
+  26:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *  by 9 bits.
+  27:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** */
+  28:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** #define SLIDER_POS_TO_COMPARE_SHIFT    (9u)
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cc3P7wUp.s 			page 2
+
+
+  29:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** 
+  30:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** void CapSense_DisplayState(void);
+  31:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** 
+  32:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** uint16 curPos, oldPos;
+  33:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** 
+  34:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** /*******************************************************************************
+  35:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** * Function Name: main
+  36:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** ********************************************************************************
+  37:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** * Summary:
+  38:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *  Main function performs following functions:
+  39:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *   1. Enable global interrupts.
+  40:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *   2. Initialize CapSense CSD and Start the sensor scanning loop.
+  41:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *   3. Process scanning results and display it on with LEDs.
+  42:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *
+  43:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** * Parameters:
+  44:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *  None
+  45:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *
+  46:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** * Return:
+  47:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *  None
+  48:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *
+  49:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *******************************************************************************/
+  50:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** int main()
+  51:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** {
+  30              		.loc 1 51 0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 1, uses_anonymous_args = 0
+  34 0000 80B5     		push	{r7, lr}
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 7, -8
+  37              		.cfi_offset 14, -4
+  38 0002 00AF     		add	r7, sp, #0
+  39              		.cfi_def_cfa_register 7
+  52:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****     /* Enable global interrupts */
+  53:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****     CyGlobalIntEnable;
+  40              		.loc 1 53 0
+  41              		.syntax divided
+  42              	@ 53 "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn
+  43 0004 62B6     		CPSIE   i
+  44              	@ 0 "" 2
+  54:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** 
+  55:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****     /* Start PWM and CapSense components */
+  56:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****     LED_CONTROL_Start();
+  45              		.loc 1 56 0
+  46              		.thumb
+  47              		.syntax unified
+  48 0006 FFF7FEFF 		bl	LED_CONTROL_Start
+  57:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** 
+  58:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****     CapSense_CSD_Start();
+  49              		.loc 1 58 0
+  50 000a FFF7FEFF 		bl	CapSense_CSD_Start
+  59:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** 
+  60:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****     /* Initialize baselines */
+  61:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****     CapSense_CSD_InitializeAllBaselines();
+  51              		.loc 1 61 0
+  52 000e FFF7FEFF 		bl	CapSense_CSD_InitializeAllBaselines
+  53              	.L3:
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cc3P7wUp.s 			page 3
+
+
+  62:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** 
+  63:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****     while(1u)
+  64:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****     {
+  65:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****         /* Check whether the scanning of all enabled widgets is completed. */
+  66:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****         if(0u == CapSense_CSD_IsBusy())
+  54              		.loc 1 66 0
+  55 0012 FFF7FEFF 		bl	CapSense_CSD_IsBusy
+  56 0016 031E     		subs	r3, r0, #0
+  57 0018 03D1     		bne	.L2
+  67:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****         {
+  68:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****             /* Update all baselines */
+  69:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****             CapSense_CSD_UpdateEnabledBaselines();
+  58              		.loc 1 69 0
+  59 001a FFF7FEFF 		bl	CapSense_CSD_UpdateEnabledBaselines
+  70:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** 
+  71:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****             /* Start scanning all enabled sensors */
+  72:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****             CapSense_CSD_ScanEnabledWidgets();
+  60              		.loc 1 72 0
+  61 001e FFF7FEFF 		bl	CapSense_CSD_ScanEnabledWidgets
+  62              	.L2:
+  73:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****         }
+  74:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** 
+  75:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****         /* Display CapSense state using LEDs */
+  76:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****         CapSense_DisplayState();
+  63              		.loc 1 76 0
+  64 0022 FFF7FEFF 		bl	CapSense_DisplayState
+  77:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****     }
+  65              		.loc 1 77 0
+  66 0026 F4E7     		b	.L3
+  67              		.cfi_endproc
+  68              	.LFE32:
+  69              		.size	main, .-main
+  70              		.section	.text.CapSense_DisplayState,"ax",%progbits
+  71              		.align	2
+  72              		.global	CapSense_DisplayState
+  73              		.code	16
+  74              		.thumb_func
+  75              		.type	CapSense_DisplayState, %function
+  76              	CapSense_DisplayState:
+  77              	.LFB33:
+  78:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** }
+  79:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** 
+  80:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** /*******************************************************************************
+  81:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** * Function Name: CapSense_DisplayState
+  82:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** ********************************************************************************
+  83:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** * Summary:
+  84:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *  Changes LEDs brightness by changing the duty cycle of PWM signals.
+  85:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *
+  86:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** * Parameters:
+  87:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *  None
+  88:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *
+  89:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** * Return:
+  90:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *  None
+  91:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *
+  92:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** *******************************************************************************/
+  93:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** void CapSense_DisplayState(void)
+  94:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** {
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cc3P7wUp.s 			page 4
+
+
+  78              		.loc 1 94 0
+  79              		.cfi_startproc
+  80              		@ args = 0, pretend = 0, frame = 0
+  81              		@ frame_needed = 1, uses_anonymous_args = 0
+  82 0000 80B5     		push	{r7, lr}
+  83              		.cfi_def_cfa_offset 8
+  84              		.cfi_offset 7, -8
+  85              		.cfi_offset 14, -4
+  86 0002 00AF     		add	r7, sp, #0
+  87              		.cfi_def_cfa_register 7
+  95:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****     /* Find Slider Position */
+  96:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****     curPos = CapSense_CSD_GetCentroidPos(CapSense_CSD_LINEARSLIDER0__LS);
+  88              		.loc 1 96 0
+  89 0004 0020     		movs	r0, #0
+  90 0006 FFF7FEFF 		bl	CapSense_CSD_GetCentroidPos
+  91 000a 0300     		movs	r3, r0
+  92 000c 1A00     		movs	r2, r3
+  93 000e 104B     		ldr	r3, .L8
+  94 0010 1A80     		strh	r2, [r3]
+  97:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** 
+  98:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****     /* Reset position */
+  99:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****     if(curPos == 0xFFFFu)
+  95              		.loc 1 99 0
+  96 0012 0F4B     		ldr	r3, .L8
+  97 0014 1B88     		ldrh	r3, [r3]
+  98 0016 0F4A     		ldr	r2, .L8+4
+  99 0018 9342     		cmp	r3, r2
+ 100 001a 02D1     		bne	.L5
+ 100:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****     {
+ 101:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****         curPos = 0u;
+ 101              		.loc 1 101 0
+ 102 001c 0C4B     		ldr	r3, .L8
+ 103 001e 0022     		movs	r2, #0
+ 104 0020 1A80     		strh	r2, [r3]
+ 105              	.L5:
+ 102:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****     }
+ 103:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** 
+ 104:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****     /* Move bargraph */
+ 105:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****     if (curPos != oldPos)
+ 106              		.loc 1 105 0
+ 107 0022 0B4B     		ldr	r3, .L8
+ 108 0024 1A88     		ldrh	r2, [r3]
+ 109 0026 0C4B     		ldr	r3, .L8+8
+ 110 0028 1B88     		ldrh	r3, [r3]
+ 111 002a 9A42     		cmp	r2, r3
+ 112 002c 0DD0     		beq	.L7
+ 106:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****     {
+ 107:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****         oldPos = curPos;
+ 113              		.loc 1 107 0
+ 114 002e 084B     		ldr	r3, .L8
+ 115 0030 1A88     		ldrh	r2, [r3]
+ 116 0032 094B     		ldr	r3, .L8+8
+ 117 0034 1A80     		strh	r2, [r3]
+ 108:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****         /* Display Slider bargraph */
+ 109:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****         if (curPos != 0u)
+ 118              		.loc 1 109 0
+ 119 0036 064B     		ldr	r3, .L8
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cc3P7wUp.s 			page 5
+
+
+ 120 0038 1B88     		ldrh	r3, [r3]
+ 121 003a 002B     		cmp	r3, #0
+ 122 003c 05D0     		beq	.L7
+ 110:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****         {
+ 111:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****             LED_CONTROL_WriteCompare((uint32)curPos << SLIDER_POS_TO_COMPARE_SHIFT);
+ 123              		.loc 1 111 0
+ 124 003e 044B     		ldr	r3, .L8
+ 125 0040 1B88     		ldrh	r3, [r3]
+ 126 0042 5B02     		lsls	r3, r3, #9
+ 127 0044 1800     		movs	r0, r3
+ 128 0046 FFF7FEFF 		bl	LED_CONTROL_WriteCompare
+ 129              	.L7:
+ 112:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****         }
+ 113:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c ****     }
+ 114:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\main.c **** }
+ 130              		.loc 1 114 0
+ 131 004a C046     		nop
+ 132 004c BD46     		mov	sp, r7
+ 133              		@ sp needed
+ 134 004e 80BD     		pop	{r7, pc}
+ 135              	.L9:
+ 136              		.align	2
+ 137              	.L8:
+ 138 0050 00000000 		.word	curPos
+ 139 0054 FFFF0000 		.word	65535
+ 140 0058 00000000 		.word	oldPos
+ 141              		.cfi_endproc
+ 142              	.LFE33:
+ 143              		.size	CapSense_DisplayState, .-CapSense_DisplayState
+ 144              		.text
+ 145              	.Letext0:
+ 146              		.file 2 "Generated_Source\\PSoC4/cytypes.h"
+ 147              		.section	.debug_info,"",%progbits
+ 148              	.Ldebug_info0:
+ 149 0000 EB000000 		.4byte	0xeb
+ 150 0004 0400     		.2byte	0x4
+ 151 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 152 000a 04       		.byte	0x4
+ 153 000b 01       		.uleb128 0x1
+ 154 000c 30000000 		.4byte	.LASF20
+ 155 0010 0C       		.byte	0xc
+ 156 0011 8D010000 		.4byte	.LASF21
+ 157 0015 10010000 		.4byte	.LASF22
+ 158 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 159 001d 00000000 		.4byte	0
+ 160 0021 00000000 		.4byte	.Ldebug_line0
+ 161 0025 02       		.uleb128 0x2
+ 162 0026 01       		.byte	0x1
+ 163 0027 06       		.byte	0x6
+ 164 0028 81010000 		.4byte	.LASF0
+ 165 002c 02       		.uleb128 0x2
+ 166 002d 01       		.byte	0x1
+ 167 002e 08       		.byte	0x8
+ 168 002f ED000000 		.4byte	.LASF1
+ 169 0033 02       		.uleb128 0x2
+ 170 0034 02       		.byte	0x2
+ 171 0035 05       		.byte	0x5
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cc3P7wUp.s 			page 6
+
+
+ 172 0036 03020000 		.4byte	.LASF2
+ 173 003a 02       		.uleb128 0x2
+ 174 003b 02       		.byte	0x2
+ 175 003c 07       		.byte	0x7
+ 176 003d 6E010000 		.4byte	.LASF3
+ 177 0041 02       		.uleb128 0x2
+ 178 0042 04       		.byte	0x4
+ 179 0043 05       		.byte	0x5
+ 180 0044 00010000 		.4byte	.LASF4
+ 181 0048 02       		.uleb128 0x2
+ 182 0049 04       		.byte	0x4
+ 183 004a 07       		.byte	0x7
+ 184 004b BE000000 		.4byte	.LASF5
+ 185 004f 02       		.uleb128 0x2
+ 186 0050 08       		.byte	0x8
+ 187 0051 05       		.byte	0x5
+ 188 0052 00000000 		.4byte	.LASF6
+ 189 0056 02       		.uleb128 0x2
+ 190 0057 08       		.byte	0x8
+ 191 0058 07       		.byte	0x7
+ 192 0059 D0000000 		.4byte	.LASF7
+ 193 005d 03       		.uleb128 0x3
+ 194 005e 04       		.byte	0x4
+ 195 005f 05       		.byte	0x5
+ 196 0060 696E7400 		.ascii	"int\000"
+ 197 0064 02       		.uleb128 0x2
+ 198 0065 04       		.byte	0x4
+ 199 0066 07       		.byte	0x7
+ 200 0067 15000000 		.4byte	.LASF8
+ 201 006b 04       		.uleb128 0x4
+ 202 006c 0D020000 		.4byte	.LASF9
+ 203 0070 02       		.byte	0x2
+ 204 0071 D301     		.2byte	0x1d3
+ 205 0073 3A000000 		.4byte	0x3a
+ 206 0077 04       		.uleb128 0x4
+ 207 0078 0E000000 		.4byte	.LASF10
+ 208 007c 02       		.byte	0x2
+ 209 007d D401     		.2byte	0x1d4
+ 210 007f 48000000 		.4byte	0x48
+ 211 0083 02       		.uleb128 0x2
+ 212 0084 04       		.byte	0x4
+ 213 0085 04       		.byte	0x4
+ 214 0086 E7000000 		.4byte	.LASF11
+ 215 008a 02       		.uleb128 0x2
+ 216 008b 08       		.byte	0x8
+ 217 008c 04       		.byte	0x4
+ 218 008d 09010000 		.4byte	.LASF12
+ 219 0091 02       		.uleb128 0x2
+ 220 0092 01       		.byte	0x1
+ 221 0093 08       		.byte	0x8
+ 222 0094 FB000000 		.4byte	.LASF13
+ 223 0098 02       		.uleb128 0x2
+ 224 0099 04       		.byte	0x4
+ 225 009a 07       		.byte	0x7
+ 226 009b 2A020000 		.4byte	.LASF14
+ 227 009f 02       		.uleb128 0x2
+ 228 00a0 08       		.byte	0x8
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cc3P7wUp.s 			page 7
+
+
+ 229 00a1 04       		.byte	0x4
+ 230 00a2 F7010000 		.4byte	.LASF15
+ 231 00a6 05       		.uleb128 0x5
+ 232 00a7 F2010000 		.4byte	.LASF16
+ 233 00ab 01       		.byte	0x1
+ 234 00ac 32       		.byte	0x32
+ 235 00ad 5D000000 		.4byte	0x5d
+ 236 00b1 00000000 		.4byte	.LFB32
+ 237 00b5 28000000 		.4byte	.LFE32-.LFB32
+ 238 00b9 01       		.uleb128 0x1
+ 239 00ba 9C       		.byte	0x9c
+ 240 00bb 06       		.uleb128 0x6
+ 241 00bc 14020000 		.4byte	.LASF17
+ 242 00c0 01       		.byte	0x1
+ 243 00c1 5D       		.byte	0x5d
+ 244 00c2 00000000 		.4byte	.LFB33
+ 245 00c6 5C000000 		.4byte	.LFE33-.LFB33
+ 246 00ca 01       		.uleb128 0x1
+ 247 00cb 9C       		.byte	0x9c
+ 248 00cc 07       		.uleb128 0x7
+ 249 00cd 29000000 		.4byte	.LASF18
+ 250 00d1 01       		.byte	0x1
+ 251 00d2 20       		.byte	0x20
+ 252 00d3 6B000000 		.4byte	0x6b
+ 253 00d7 05       		.uleb128 0x5
+ 254 00d8 03       		.byte	0x3
+ 255 00d9 00000000 		.4byte	curPos
+ 256 00dd 07       		.uleb128 0x7
+ 257 00de 22000000 		.4byte	.LASF19
+ 258 00e2 01       		.byte	0x1
+ 259 00e3 20       		.byte	0x20
+ 260 00e4 6B000000 		.4byte	0x6b
+ 261 00e8 05       		.uleb128 0x5
+ 262 00e9 03       		.byte	0x3
+ 263 00ea 00000000 		.4byte	oldPos
+ 264 00ee 00       		.byte	0
+ 265              		.section	.debug_abbrev,"",%progbits
+ 266              	.Ldebug_abbrev0:
+ 267 0000 01       		.uleb128 0x1
+ 268 0001 11       		.uleb128 0x11
+ 269 0002 01       		.byte	0x1
+ 270 0003 25       		.uleb128 0x25
+ 271 0004 0E       		.uleb128 0xe
+ 272 0005 13       		.uleb128 0x13
+ 273 0006 0B       		.uleb128 0xb
+ 274 0007 03       		.uleb128 0x3
+ 275 0008 0E       		.uleb128 0xe
+ 276 0009 1B       		.uleb128 0x1b
+ 277 000a 0E       		.uleb128 0xe
+ 278 000b 55       		.uleb128 0x55
+ 279 000c 17       		.uleb128 0x17
+ 280 000d 11       		.uleb128 0x11
+ 281 000e 01       		.uleb128 0x1
+ 282 000f 10       		.uleb128 0x10
+ 283 0010 17       		.uleb128 0x17
+ 284 0011 00       		.byte	0
+ 285 0012 00       		.byte	0
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cc3P7wUp.s 			page 8
+
+
+ 286 0013 02       		.uleb128 0x2
+ 287 0014 24       		.uleb128 0x24
+ 288 0015 00       		.byte	0
+ 289 0016 0B       		.uleb128 0xb
+ 290 0017 0B       		.uleb128 0xb
+ 291 0018 3E       		.uleb128 0x3e
+ 292 0019 0B       		.uleb128 0xb
+ 293 001a 03       		.uleb128 0x3
+ 294 001b 0E       		.uleb128 0xe
+ 295 001c 00       		.byte	0
+ 296 001d 00       		.byte	0
+ 297 001e 03       		.uleb128 0x3
+ 298 001f 24       		.uleb128 0x24
+ 299 0020 00       		.byte	0
+ 300 0021 0B       		.uleb128 0xb
+ 301 0022 0B       		.uleb128 0xb
+ 302 0023 3E       		.uleb128 0x3e
+ 303 0024 0B       		.uleb128 0xb
+ 304 0025 03       		.uleb128 0x3
+ 305 0026 08       		.uleb128 0x8
+ 306 0027 00       		.byte	0
+ 307 0028 00       		.byte	0
+ 308 0029 04       		.uleb128 0x4
+ 309 002a 16       		.uleb128 0x16
+ 310 002b 00       		.byte	0
+ 311 002c 03       		.uleb128 0x3
+ 312 002d 0E       		.uleb128 0xe
+ 313 002e 3A       		.uleb128 0x3a
+ 314 002f 0B       		.uleb128 0xb
+ 315 0030 3B       		.uleb128 0x3b
+ 316 0031 05       		.uleb128 0x5
+ 317 0032 49       		.uleb128 0x49
+ 318 0033 13       		.uleb128 0x13
+ 319 0034 00       		.byte	0
+ 320 0035 00       		.byte	0
+ 321 0036 05       		.uleb128 0x5
+ 322 0037 2E       		.uleb128 0x2e
+ 323 0038 00       		.byte	0
+ 324 0039 3F       		.uleb128 0x3f
+ 325 003a 19       		.uleb128 0x19
+ 326 003b 03       		.uleb128 0x3
+ 327 003c 0E       		.uleb128 0xe
+ 328 003d 3A       		.uleb128 0x3a
+ 329 003e 0B       		.uleb128 0xb
+ 330 003f 3B       		.uleb128 0x3b
+ 331 0040 0B       		.uleb128 0xb
+ 332 0041 49       		.uleb128 0x49
+ 333 0042 13       		.uleb128 0x13
+ 334 0043 11       		.uleb128 0x11
+ 335 0044 01       		.uleb128 0x1
+ 336 0045 12       		.uleb128 0x12
+ 337 0046 06       		.uleb128 0x6
+ 338 0047 40       		.uleb128 0x40
+ 339 0048 18       		.uleb128 0x18
+ 340 0049 9642     		.uleb128 0x2116
+ 341 004b 19       		.uleb128 0x19
+ 342 004c 00       		.byte	0
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cc3P7wUp.s 			page 9
+
+
+ 343 004d 00       		.byte	0
+ 344 004e 06       		.uleb128 0x6
+ 345 004f 2E       		.uleb128 0x2e
+ 346 0050 00       		.byte	0
+ 347 0051 3F       		.uleb128 0x3f
+ 348 0052 19       		.uleb128 0x19
+ 349 0053 03       		.uleb128 0x3
+ 350 0054 0E       		.uleb128 0xe
+ 351 0055 3A       		.uleb128 0x3a
+ 352 0056 0B       		.uleb128 0xb
+ 353 0057 3B       		.uleb128 0x3b
+ 354 0058 0B       		.uleb128 0xb
+ 355 0059 27       		.uleb128 0x27
+ 356 005a 19       		.uleb128 0x19
+ 357 005b 11       		.uleb128 0x11
+ 358 005c 01       		.uleb128 0x1
+ 359 005d 12       		.uleb128 0x12
+ 360 005e 06       		.uleb128 0x6
+ 361 005f 40       		.uleb128 0x40
+ 362 0060 18       		.uleb128 0x18
+ 363 0061 9642     		.uleb128 0x2116
+ 364 0063 19       		.uleb128 0x19
+ 365 0064 00       		.byte	0
+ 366 0065 00       		.byte	0
+ 367 0066 07       		.uleb128 0x7
+ 368 0067 34       		.uleb128 0x34
+ 369 0068 00       		.byte	0
+ 370 0069 03       		.uleb128 0x3
+ 371 006a 0E       		.uleb128 0xe
+ 372 006b 3A       		.uleb128 0x3a
+ 373 006c 0B       		.uleb128 0xb
+ 374 006d 3B       		.uleb128 0x3b
+ 375 006e 0B       		.uleb128 0xb
+ 376 006f 49       		.uleb128 0x49
+ 377 0070 13       		.uleb128 0x13
+ 378 0071 3F       		.uleb128 0x3f
+ 379 0072 19       		.uleb128 0x19
+ 380 0073 02       		.uleb128 0x2
+ 381 0074 18       		.uleb128 0x18
+ 382 0075 00       		.byte	0
+ 383 0076 00       		.byte	0
+ 384 0077 00       		.byte	0
+ 385              		.section	.debug_aranges,"",%progbits
+ 386 0000 24000000 		.4byte	0x24
+ 387 0004 0200     		.2byte	0x2
+ 388 0006 00000000 		.4byte	.Ldebug_info0
+ 389 000a 04       		.byte	0x4
+ 390 000b 00       		.byte	0
+ 391 000c 0000     		.2byte	0
+ 392 000e 0000     		.2byte	0
+ 393 0010 00000000 		.4byte	.LFB32
+ 394 0014 28000000 		.4byte	.LFE32-.LFB32
+ 395 0018 00000000 		.4byte	.LFB33
+ 396 001c 5C000000 		.4byte	.LFE33-.LFB33
+ 397 0020 00000000 		.4byte	0
+ 398 0024 00000000 		.4byte	0
+ 399              		.section	.debug_ranges,"",%progbits
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cc3P7wUp.s 			page 10
+
+
+ 400              	.Ldebug_ranges0:
+ 401 0000 00000000 		.4byte	.LFB32
+ 402 0004 28000000 		.4byte	.LFE32
+ 403 0008 00000000 		.4byte	.LFB33
+ 404 000c 5C000000 		.4byte	.LFE33
+ 405 0010 00000000 		.4byte	0
+ 406 0014 00000000 		.4byte	0
+ 407              		.section	.debug_line,"",%progbits
+ 408              	.Ldebug_line0:
+ 409 0000 D5000000 		.section	.debug_str,"MS",%progbits,1
+ 409      02009F00 
+ 409      00000201 
+ 409      FB0E0D00 
+ 409      01010101 
+ 410              	.LASF6:
+ 411 0000 6C6F6E67 		.ascii	"long long int\000"
+ 411      206C6F6E 
+ 411      6720696E 
+ 411      7400
+ 412              	.LASF10:
+ 413 000e 75696E74 		.ascii	"uint32\000"
+ 413      333200
+ 414              	.LASF8:
+ 415 0015 756E7369 		.ascii	"unsigned int\000"
+ 415      676E6564 
+ 415      20696E74 
+ 415      00
+ 416              	.LASF19:
+ 417 0022 6F6C6450 		.ascii	"oldPos\000"
+ 417      6F7300
+ 418              	.LASF18:
+ 419 0029 63757250 		.ascii	"curPos\000"
+ 419      6F7300
+ 420              	.LASF20:
+ 421 0030 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 421      43313120 
+ 421      352E342E 
+ 421      31203230 
+ 421      31363036 
+ 422 0063 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 422      20726576 
+ 422      6973696F 
+ 422      6E203233 
+ 422      37373135 
+ 423 0096 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 423      66756E63 
+ 423      74696F6E 
+ 423      2D736563 
+ 423      74696F6E 
+ 424              	.LASF5:
+ 425 00be 6C6F6E67 		.ascii	"long unsigned int\000"
+ 425      20756E73 
+ 425      69676E65 
+ 425      6420696E 
+ 425      7400
+ 426              	.LASF7:
+ 427 00d0 6C6F6E67 		.ascii	"long long unsigned int\000"
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cc3P7wUp.s 			page 11
+
+
+ 427      206C6F6E 
+ 427      6720756E 
+ 427      7369676E 
+ 427      65642069 
+ 428              	.LASF11:
+ 429 00e7 666C6F61 		.ascii	"float\000"
+ 429      7400
+ 430              	.LASF1:
+ 431 00ed 756E7369 		.ascii	"unsigned char\000"
+ 431      676E6564 
+ 431      20636861 
+ 431      7200
+ 432              	.LASF13:
+ 433 00fb 63686172 		.ascii	"char\000"
+ 433      00
+ 434              	.LASF4:
+ 435 0100 6C6F6E67 		.ascii	"long int\000"
+ 435      20696E74 
+ 435      00
+ 436              	.LASF12:
+ 437 0109 646F7562 		.ascii	"double\000"
+ 437      6C6500
+ 438              	.LASF22:
+ 439 0110 433A5C50 		.ascii	"C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4"
+ 439      726F6772 
+ 439      616D2046 
+ 439      696C6573 
+ 439      20287838 
+ 440 013f 5C50536F 		.ascii	"\\PSoC Creator\\1\\CapSense_CSD_P4_Design01.cydsn\000"
+ 440      43204372 
+ 440      6561746F 
+ 440      725C315C 
+ 440      43617053 
+ 441              	.LASF3:
+ 442 016e 73686F72 		.ascii	"short unsigned int\000"
+ 442      7420756E 
+ 442      7369676E 
+ 442      65642069 
+ 442      6E7400
+ 443              	.LASF0:
+ 444 0181 7369676E 		.ascii	"signed char\000"
+ 444      65642063 
+ 444      68617200 
+ 445              	.LASF21:
+ 446 018d 433A5C50 		.ascii	"C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4"
+ 446      726F6772 
+ 446      616D2046 
+ 446      696C6573 
+ 446      20287838 
+ 447 01bc 5C50536F 		.ascii	"\\PSoC Creator\\1\\CapSense_CSD_P4_Design01.cydsn\\"
+ 447      43204372 
+ 447      6561746F 
+ 447      725C315C 
+ 447      43617053 
+ 448 01eb 6D61696E 		.ascii	"main.c\000"
+ 448      2E6300
+ 449              	.LASF16:
+ARM GAS  C:\Users\taips\AppData\Local\Temp\cc3P7wUp.s 			page 12
+
+
+ 450 01f2 6D61696E 		.ascii	"main\000"
+ 450      00
+ 451              	.LASF15:
+ 452 01f7 6C6F6E67 		.ascii	"long double\000"
+ 452      20646F75 
+ 452      626C6500 
+ 453              	.LASF2:
+ 454 0203 73686F72 		.ascii	"short int\000"
+ 454      7420696E 
+ 454      7400
+ 455              	.LASF9:
+ 456 020d 75696E74 		.ascii	"uint16\000"
+ 456      313600
+ 457              	.LASF17:
+ 458 0214 43617053 		.ascii	"CapSense_DisplayState\000"
+ 458      656E7365 
+ 458      5F446973 
+ 458      706C6179 
+ 458      53746174 
+ 459              	.LASF14:
+ 460 022a 73697A65 		.ascii	"sizetype\000"
+ 460      74797065 
+ 460      00
+ 461              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

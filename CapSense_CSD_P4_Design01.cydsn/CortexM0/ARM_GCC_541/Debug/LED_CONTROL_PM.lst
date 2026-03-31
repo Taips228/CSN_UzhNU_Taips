@@ -1,0 +1,822 @@
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccFiHd1c.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"LED_CONTROL_PM.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.bss
+  20              		.align	2
+  21              	LED_CONTROL_backup:
+  22 0000 00       		.space	1
+  23              		.section	.text.LED_CONTROL_SaveConfig,"ax",%progbits
+  24              		.align	2
+  25              		.global	LED_CONTROL_SaveConfig
+  26              		.code	16
+  27              		.thumb_func
+  28              		.type	LED_CONTROL_SaveConfig, %function
+  29              	LED_CONTROL_SaveConfig:
+  30              	.LFB0:
+  31              		.file 1 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\CapSense_CSD_P4_Des
+   1:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** /*******************************************************************************
+   2:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * File Name: LED_CONTROL_PM.c
+   3:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * Version 2.10
+   4:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *
+   5:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * Description:
+   6:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *  This file contains the setup, control, and status commands to support
+   7:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *  the component operations in the low power mode.
+   8:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *
+   9:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * Note:
+  10:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *  None
+  11:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *
+  12:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** ********************************************************************************
+  13:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * Copyright 2013-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  14:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * You may use this file only in accordance with the license, terms, conditions,
+  15:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  16:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * the software package with which this file was provided.
+  17:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *******************************************************************************/
+  18:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** 
+  19:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** #include "LED_CONTROL.h"
+  20:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** 
+  21:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** static LED_CONTROL_BACKUP_STRUCT LED_CONTROL_backup;
+  22:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** 
+  23:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** 
+  24:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** /*******************************************************************************
+  25:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * Function Name: LED_CONTROL_SaveConfig
+  26:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** ********************************************************************************
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccFiHd1c.s 			page 2
+
+
+  27:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *
+  28:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * Summary:
+  29:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *  All configuration registers are retention. Nothing to save here.
+  30:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *
+  31:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * Parameters:
+  32:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *  None
+  33:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *
+  34:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * Return:
+  35:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *  None
+  36:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *
+  37:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *******************************************************************************/
+  38:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** void LED_CONTROL_SaveConfig(void)
+  39:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** {
+  32              		.loc 1 39 0
+  33              		.cfi_startproc
+  34              		@ args = 0, pretend = 0, frame = 0
+  35              		@ frame_needed = 1, uses_anonymous_args = 0
+  36 0000 80B5     		push	{r7, lr}
+  37              		.cfi_def_cfa_offset 8
+  38              		.cfi_offset 7, -8
+  39              		.cfi_offset 14, -4
+  40 0002 00AF     		add	r7, sp, #0
+  41              		.cfi_def_cfa_register 7
+  40:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** 
+  41:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** }
+  42              		.loc 1 41 0
+  43 0004 C046     		nop
+  44 0006 BD46     		mov	sp, r7
+  45              		@ sp needed
+  46 0008 80BD     		pop	{r7, pc}
+  47              		.cfi_endproc
+  48              	.LFE0:
+  49              		.size	LED_CONTROL_SaveConfig, .-LED_CONTROL_SaveConfig
+  50 000a C046     		.section	.text.LED_CONTROL_Sleep,"ax",%progbits
+  51              		.align	2
+  52              		.global	LED_CONTROL_Sleep
+  53              		.code	16
+  54              		.thumb_func
+  55              		.type	LED_CONTROL_Sleep, %function
+  56              	LED_CONTROL_Sleep:
+  57              	.LFB1:
+  42:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** 
+  43:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** 
+  44:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** /*******************************************************************************
+  45:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * Function Name: LED_CONTROL_Sleep
+  46:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** ********************************************************************************
+  47:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *
+  48:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * Summary:
+  49:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *  Stops the component operation and saves the user configuration.
+  50:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *
+  51:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * Parameters:
+  52:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *  None
+  53:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *
+  54:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * Return:
+  55:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *  None
+  56:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *
+  57:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *******************************************************************************/
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccFiHd1c.s 			page 3
+
+
+  58:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** void LED_CONTROL_Sleep(void)
+  59:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** {
+  58              		.loc 1 59 0
+  59              		.cfi_startproc
+  60              		@ args = 0, pretend = 0, frame = 0
+  61              		@ frame_needed = 1, uses_anonymous_args = 0
+  62 0000 80B5     		push	{r7, lr}
+  63              		.cfi_def_cfa_offset 8
+  64              		.cfi_offset 7, -8
+  65              		.cfi_offset 14, -4
+  66 0002 00AF     		add	r7, sp, #0
+  67              		.cfi_def_cfa_register 7
+  60:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c ****     if(0u != (LED_CONTROL_BLOCK_CONTROL_REG & LED_CONTROL_MASK))
+  68              		.loc 1 60 0
+  69 0004 094B     		ldr	r3, .L5
+  70 0006 1B68     		ldr	r3, [r3]
+  71 0008 0122     		movs	r2, #1
+  72 000a 1340     		ands	r3, r2
+  73 000c 03D0     		beq	.L3
+  61:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c ****     {
+  62:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c ****         LED_CONTROL_backup.enableState = 1u;
+  74              		.loc 1 62 0
+  75 000e 084B     		ldr	r3, .L5+4
+  76 0010 0122     		movs	r2, #1
+  77 0012 1A70     		strb	r2, [r3]
+  78 0014 02E0     		b	.L4
+  79              	.L3:
+  63:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c ****     }
+  64:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c ****     else
+  65:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c ****     {
+  66:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c ****         LED_CONTROL_backup.enableState = 0u;
+  80              		.loc 1 66 0
+  81 0016 064B     		ldr	r3, .L5+4
+  82 0018 0022     		movs	r2, #0
+  83 001a 1A70     		strb	r2, [r3]
+  84              	.L4:
+  67:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c ****     }
+  68:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** 
+  69:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c ****     LED_CONTROL_Stop();
+  85              		.loc 1 69 0
+  86 001c FFF7FEFF 		bl	LED_CONTROL_Stop
+  70:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c ****     LED_CONTROL_SaveConfig();
+  87              		.loc 1 70 0
+  88 0020 FFF7FEFF 		bl	LED_CONTROL_SaveConfig
+  71:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** }
+  89              		.loc 1 71 0
+  90 0024 C046     		nop
+  91 0026 BD46     		mov	sp, r7
+  92              		@ sp needed
+  93 0028 80BD     		pop	{r7, pc}
+  94              	.L6:
+  95 002a C046     		.align	2
+  96              	.L5:
+  97 002c 00000540 		.word	1074069504
+  98 0030 00000000 		.word	LED_CONTROL_backup
+  99              		.cfi_endproc
+ 100              	.LFE1:
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccFiHd1c.s 			page 4
+
+
+ 101              		.size	LED_CONTROL_Sleep, .-LED_CONTROL_Sleep
+ 102              		.section	.text.LED_CONTROL_RestoreConfig,"ax",%progbits
+ 103              		.align	2
+ 104              		.global	LED_CONTROL_RestoreConfig
+ 105              		.code	16
+ 106              		.thumb_func
+ 107              		.type	LED_CONTROL_RestoreConfig, %function
+ 108              	LED_CONTROL_RestoreConfig:
+ 109              	.LFB2:
+  72:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** 
+  73:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** 
+  74:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** /*******************************************************************************
+  75:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * Function Name: LED_CONTROL_RestoreConfig
+  76:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** ********************************************************************************
+  77:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *
+  78:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * Summary:
+  79:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *  All configuration registers are retention. Nothing to restore here.
+  80:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *
+  81:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * Parameters:
+  82:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *  None
+  83:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *
+  84:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * Return:
+  85:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *  None
+  86:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *
+  87:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *******************************************************************************/
+  88:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** void LED_CONTROL_RestoreConfig(void)
+  89:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** {
+ 110              		.loc 1 89 0
+ 111              		.cfi_startproc
+ 112              		@ args = 0, pretend = 0, frame = 0
+ 113              		@ frame_needed = 1, uses_anonymous_args = 0
+ 114 0000 80B5     		push	{r7, lr}
+ 115              		.cfi_def_cfa_offset 8
+ 116              		.cfi_offset 7, -8
+ 117              		.cfi_offset 14, -4
+ 118 0002 00AF     		add	r7, sp, #0
+ 119              		.cfi_def_cfa_register 7
+  90:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** 
+  91:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** }
+ 120              		.loc 1 91 0
+ 121 0004 C046     		nop
+ 122 0006 BD46     		mov	sp, r7
+ 123              		@ sp needed
+ 124 0008 80BD     		pop	{r7, pc}
+ 125              		.cfi_endproc
+ 126              	.LFE2:
+ 127              		.size	LED_CONTROL_RestoreConfig, .-LED_CONTROL_RestoreConfig
+ 128              		.section	.text.LED_CONTROL_Wakeup,"ax",%progbits
+ 129              		.align	2
+ 130              		.global	LED_CONTROL_Wakeup
+ 131              		.code	16
+ 132              		.thumb_func
+ 133              		.type	LED_CONTROL_Wakeup, %function
+ 134              	LED_CONTROL_Wakeup:
+ 135              	.LFB3:
+  92:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** 
+  93:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccFiHd1c.s 			page 5
+
+
+  94:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** /*******************************************************************************
+  95:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * Function Name: LED_CONTROL_Wakeup
+  96:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** ********************************************************************************
+  97:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *
+  98:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * Summary:
+  99:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *  Restores the user configuration and restores the enable state.
+ 100:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *
+ 101:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * Parameters:
+ 102:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *  None
+ 103:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *
+ 104:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** * Return:
+ 105:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *  None
+ 106:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *
+ 107:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** *******************************************************************************/
+ 108:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** void LED_CONTROL_Wakeup(void)
+ 109:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** {
+ 136              		.loc 1 109 0
+ 137              		.cfi_startproc
+ 138              		@ args = 0, pretend = 0, frame = 0
+ 139              		@ frame_needed = 1, uses_anonymous_args = 0
+ 140 0000 80B5     		push	{r7, lr}
+ 141              		.cfi_def_cfa_offset 8
+ 142              		.cfi_offset 7, -8
+ 143              		.cfi_offset 14, -4
+ 144 0002 00AF     		add	r7, sp, #0
+ 145              		.cfi_def_cfa_register 7
+ 110:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c ****     LED_CONTROL_RestoreConfig();
+ 146              		.loc 1 110 0
+ 147 0004 FFF7FEFF 		bl	LED_CONTROL_RestoreConfig
+ 111:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** 
+ 112:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c ****     if(0u != LED_CONTROL_backup.enableState)
+ 148              		.loc 1 112 0
+ 149 0008 044B     		ldr	r3, .L11
+ 150 000a 1B78     		ldrb	r3, [r3]
+ 151 000c 002B     		cmp	r3, #0
+ 152 000e 01D0     		beq	.L10
+ 113:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c ****     {
+ 114:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c ****         LED_CONTROL_Enable();
+ 153              		.loc 1 114 0
+ 154 0010 FFF7FEFF 		bl	LED_CONTROL_Enable
+ 155              	.L10:
+ 115:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c ****     }
+ 116:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\LED_CONTROL_PM.c **** }
+ 156              		.loc 1 116 0
+ 157 0014 C046     		nop
+ 158 0016 BD46     		mov	sp, r7
+ 159              		@ sp needed
+ 160 0018 80BD     		pop	{r7, pc}
+ 161              	.L12:
+ 162 001a C046     		.align	2
+ 163              	.L11:
+ 164 001c 00000000 		.word	LED_CONTROL_backup
+ 165              		.cfi_endproc
+ 166              	.LFE3:
+ 167              		.size	LED_CONTROL_Wakeup, .-LED_CONTROL_Wakeup
+ 168              		.text
+ 169              	.Letext0:
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccFiHd1c.s 			page 6
+
+
+ 170              		.file 2 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\CapSense_CSD_P4_Des
+ 171              		.file 3 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\CapSense_CSD_P4_Des
+ 172              		.section	.debug_info,"",%progbits
+ 173              	.Ldebug_info0:
+ 174 0000 25010000 		.4byte	0x125
+ 175 0004 0400     		.2byte	0x4
+ 176 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 177 000a 04       		.byte	0x4
+ 178 000b 01       		.uleb128 0x1
+ 179 000c AA010000 		.4byte	.LASF22
+ 180 0010 0C       		.byte	0xc
+ 181 0011 AC000000 		.4byte	.LASF23
+ 182 0015 00000000 		.4byte	.Ldebug_ranges0+0
+ 183 0019 00000000 		.4byte	0
+ 184 001d 00000000 		.4byte	.Ldebug_line0
+ 185 0021 02       		.uleb128 0x2
+ 186 0022 01       		.byte	0x1
+ 187 0023 06       		.byte	0x6
+ 188 0024 52010000 		.4byte	.LASF0
+ 189 0028 02       		.uleb128 0x2
+ 190 0029 01       		.byte	0x1
+ 191 002a 08       		.byte	0x8
+ 192 002b 7D000000 		.4byte	.LASF1
+ 193 002f 02       		.uleb128 0x2
+ 194 0030 02       		.byte	0x2
+ 195 0031 05       		.byte	0x5
+ 196 0032 A0010000 		.4byte	.LASF2
+ 197 0036 02       		.uleb128 0x2
+ 198 0037 02       		.byte	0x2
+ 199 0038 07       		.byte	0x7
+ 200 0039 3F010000 		.4byte	.LASF3
+ 201 003d 02       		.uleb128 0x2
+ 202 003e 04       		.byte	0x4
+ 203 003f 05       		.byte	0x5
+ 204 0040 A3000000 		.4byte	.LASF4
+ 205 0044 02       		.uleb128 0x2
+ 206 0045 04       		.byte	0x4
+ 207 0046 07       		.byte	0x7
+ 208 0047 34000000 		.4byte	.LASF5
+ 209 004b 02       		.uleb128 0x2
+ 210 004c 08       		.byte	0x8
+ 211 004d 05       		.byte	0x5
+ 212 004e 00000000 		.4byte	.LASF6
+ 213 0052 02       		.uleb128 0x2
+ 214 0053 08       		.byte	0x8
+ 215 0054 07       		.byte	0x7
+ 216 0055 46000000 		.4byte	.LASF7
+ 217 0059 03       		.uleb128 0x3
+ 218 005a 04       		.byte	0x4
+ 219 005b 05       		.byte	0x5
+ 220 005c 696E7400 		.ascii	"int\000"
+ 221 0060 02       		.uleb128 0x2
+ 222 0061 04       		.byte	0x4
+ 223 0062 07       		.byte	0x7
+ 224 0063 21000000 		.4byte	.LASF8
+ 225 0067 04       		.uleb128 0x4
+ 226 0068 2E000000 		.4byte	.LASF9
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccFiHd1c.s 			page 7
+
+
+ 227 006c 02       		.byte	0x2
+ 228 006d D201     		.2byte	0x1d2
+ 229 006f 28000000 		.4byte	0x28
+ 230 0073 04       		.uleb128 0x4
+ 231 0074 0E000000 		.4byte	.LASF10
+ 232 0078 02       		.byte	0x2
+ 233 0079 D401     		.2byte	0x1d4
+ 234 007b 44000000 		.4byte	0x44
+ 235 007f 02       		.uleb128 0x2
+ 236 0080 04       		.byte	0x4
+ 237 0081 04       		.byte	0x4
+ 238 0082 5D000000 		.4byte	.LASF11
+ 239 0086 02       		.uleb128 0x2
+ 240 0087 08       		.byte	0x8
+ 241 0088 04       		.byte	0x4
+ 242 0089 32010000 		.4byte	.LASF12
+ 243 008d 02       		.uleb128 0x2
+ 244 008e 01       		.byte	0x1
+ 245 008f 08       		.byte	0x8
+ 246 0090 8B000000 		.4byte	.LASF13
+ 247 0094 04       		.uleb128 0x4
+ 248 0095 39010000 		.4byte	.LASF14
+ 249 0099 02       		.byte	0x2
+ 250 009a 7E02     		.2byte	0x27e
+ 251 009c A0000000 		.4byte	0xa0
+ 252 00a0 05       		.uleb128 0x5
+ 253 00a1 73000000 		.4byte	0x73
+ 254 00a5 02       		.uleb128 0x2
+ 255 00a6 08       		.byte	0x8
+ 256 00a7 04       		.byte	0x4
+ 257 00a8 5E010000 		.4byte	.LASF15
+ 258 00ac 02       		.uleb128 0x2
+ 259 00ad 04       		.byte	0x4
+ 260 00ae 07       		.byte	0x7
+ 261 00af 97010000 		.4byte	.LASF16
+ 262 00b3 06       		.uleb128 0x6
+ 263 00b4 01       		.byte	0x1
+ 264 00b5 03       		.byte	0x3
+ 265 00b6 21       		.byte	0x21
+ 266 00b7 C8000000 		.4byte	0xc8
+ 267 00bb 07       		.uleb128 0x7
+ 268 00bc 15000000 		.4byte	.LASF24
+ 269 00c0 03       		.byte	0x3
+ 270 00c1 23       		.byte	0x23
+ 271 00c2 67000000 		.4byte	0x67
+ 272 00c6 00       		.byte	0
+ 273 00c7 00       		.byte	0
+ 274 00c8 08       		.uleb128 0x8
+ 275 00c9 63000000 		.4byte	.LASF17
+ 276 00cd 03       		.byte	0x3
+ 277 00ce 24       		.byte	0x24
+ 278 00cf B3000000 		.4byte	0xb3
+ 279 00d3 09       		.uleb128 0x9
+ 280 00d4 38020000 		.4byte	.LASF18
+ 281 00d8 01       		.byte	0x1
+ 282 00d9 26       		.byte	0x26
+ 283 00da 00000000 		.4byte	.LFB0
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccFiHd1c.s 			page 8
+
+
+ 284 00de 0A000000 		.4byte	.LFE0-.LFB0
+ 285 00e2 01       		.uleb128 0x1
+ 286 00e3 9C       		.byte	0x9c
+ 287 00e4 0A       		.uleb128 0xa
+ 288 00e5 4F020000 		.4byte	.LASF19
+ 289 00e9 01       		.byte	0x1
+ 290 00ea 3A       		.byte	0x3a
+ 291 00eb 00000000 		.4byte	.LFB1
+ 292 00ef 34000000 		.4byte	.LFE1-.LFB1
+ 293 00f3 01       		.uleb128 0x1
+ 294 00f4 9C       		.byte	0x9c
+ 295 00f5 09       		.uleb128 0x9
+ 296 00f6 6A010000 		.4byte	.LASF20
+ 297 00fa 01       		.byte	0x1
+ 298 00fb 58       		.byte	0x58
+ 299 00fc 00000000 		.4byte	.LFB2
+ 300 0100 0A000000 		.4byte	.LFE2-.LFB2
+ 301 0104 01       		.uleb128 0x1
+ 302 0105 9C       		.byte	0x9c
+ 303 0106 0A       		.uleb128 0xa
+ 304 0107 84010000 		.4byte	.LASF21
+ 305 010b 01       		.byte	0x1
+ 306 010c 6C       		.byte	0x6c
+ 307 010d 00000000 		.4byte	.LFB3
+ 308 0111 20000000 		.4byte	.LFE3-.LFB3
+ 309 0115 01       		.uleb128 0x1
+ 310 0116 9C       		.byte	0x9c
+ 311 0117 0B       		.uleb128 0xb
+ 312 0118 90000000 		.4byte	.LASF25
+ 313 011c 01       		.byte	0x1
+ 314 011d 15       		.byte	0x15
+ 315 011e C8000000 		.4byte	0xc8
+ 316 0122 05       		.uleb128 0x5
+ 317 0123 03       		.byte	0x3
+ 318 0124 00000000 		.4byte	LED_CONTROL_backup
+ 319 0128 00       		.byte	0
+ 320              		.section	.debug_abbrev,"",%progbits
+ 321              	.Ldebug_abbrev0:
+ 322 0000 01       		.uleb128 0x1
+ 323 0001 11       		.uleb128 0x11
+ 324 0002 01       		.byte	0x1
+ 325 0003 25       		.uleb128 0x25
+ 326 0004 0E       		.uleb128 0xe
+ 327 0005 13       		.uleb128 0x13
+ 328 0006 0B       		.uleb128 0xb
+ 329 0007 03       		.uleb128 0x3
+ 330 0008 0E       		.uleb128 0xe
+ 331 0009 55       		.uleb128 0x55
+ 332 000a 17       		.uleb128 0x17
+ 333 000b 11       		.uleb128 0x11
+ 334 000c 01       		.uleb128 0x1
+ 335 000d 10       		.uleb128 0x10
+ 336 000e 17       		.uleb128 0x17
+ 337 000f 00       		.byte	0
+ 338 0010 00       		.byte	0
+ 339 0011 02       		.uleb128 0x2
+ 340 0012 24       		.uleb128 0x24
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccFiHd1c.s 			page 9
+
+
+ 341 0013 00       		.byte	0
+ 342 0014 0B       		.uleb128 0xb
+ 343 0015 0B       		.uleb128 0xb
+ 344 0016 3E       		.uleb128 0x3e
+ 345 0017 0B       		.uleb128 0xb
+ 346 0018 03       		.uleb128 0x3
+ 347 0019 0E       		.uleb128 0xe
+ 348 001a 00       		.byte	0
+ 349 001b 00       		.byte	0
+ 350 001c 03       		.uleb128 0x3
+ 351 001d 24       		.uleb128 0x24
+ 352 001e 00       		.byte	0
+ 353 001f 0B       		.uleb128 0xb
+ 354 0020 0B       		.uleb128 0xb
+ 355 0021 3E       		.uleb128 0x3e
+ 356 0022 0B       		.uleb128 0xb
+ 357 0023 03       		.uleb128 0x3
+ 358 0024 08       		.uleb128 0x8
+ 359 0025 00       		.byte	0
+ 360 0026 00       		.byte	0
+ 361 0027 04       		.uleb128 0x4
+ 362 0028 16       		.uleb128 0x16
+ 363 0029 00       		.byte	0
+ 364 002a 03       		.uleb128 0x3
+ 365 002b 0E       		.uleb128 0xe
+ 366 002c 3A       		.uleb128 0x3a
+ 367 002d 0B       		.uleb128 0xb
+ 368 002e 3B       		.uleb128 0x3b
+ 369 002f 05       		.uleb128 0x5
+ 370 0030 49       		.uleb128 0x49
+ 371 0031 13       		.uleb128 0x13
+ 372 0032 00       		.byte	0
+ 373 0033 00       		.byte	0
+ 374 0034 05       		.uleb128 0x5
+ 375 0035 35       		.uleb128 0x35
+ 376 0036 00       		.byte	0
+ 377 0037 49       		.uleb128 0x49
+ 378 0038 13       		.uleb128 0x13
+ 379 0039 00       		.byte	0
+ 380 003a 00       		.byte	0
+ 381 003b 06       		.uleb128 0x6
+ 382 003c 13       		.uleb128 0x13
+ 383 003d 01       		.byte	0x1
+ 384 003e 0B       		.uleb128 0xb
+ 385 003f 0B       		.uleb128 0xb
+ 386 0040 3A       		.uleb128 0x3a
+ 387 0041 0B       		.uleb128 0xb
+ 388 0042 3B       		.uleb128 0x3b
+ 389 0043 0B       		.uleb128 0xb
+ 390 0044 01       		.uleb128 0x1
+ 391 0045 13       		.uleb128 0x13
+ 392 0046 00       		.byte	0
+ 393 0047 00       		.byte	0
+ 394 0048 07       		.uleb128 0x7
+ 395 0049 0D       		.uleb128 0xd
+ 396 004a 00       		.byte	0
+ 397 004b 03       		.uleb128 0x3
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccFiHd1c.s 			page 10
+
+
+ 398 004c 0E       		.uleb128 0xe
+ 399 004d 3A       		.uleb128 0x3a
+ 400 004e 0B       		.uleb128 0xb
+ 401 004f 3B       		.uleb128 0x3b
+ 402 0050 0B       		.uleb128 0xb
+ 403 0051 49       		.uleb128 0x49
+ 404 0052 13       		.uleb128 0x13
+ 405 0053 38       		.uleb128 0x38
+ 406 0054 0B       		.uleb128 0xb
+ 407 0055 00       		.byte	0
+ 408 0056 00       		.byte	0
+ 409 0057 08       		.uleb128 0x8
+ 410 0058 16       		.uleb128 0x16
+ 411 0059 00       		.byte	0
+ 412 005a 03       		.uleb128 0x3
+ 413 005b 0E       		.uleb128 0xe
+ 414 005c 3A       		.uleb128 0x3a
+ 415 005d 0B       		.uleb128 0xb
+ 416 005e 3B       		.uleb128 0x3b
+ 417 005f 0B       		.uleb128 0xb
+ 418 0060 49       		.uleb128 0x49
+ 419 0061 13       		.uleb128 0x13
+ 420 0062 00       		.byte	0
+ 421 0063 00       		.byte	0
+ 422 0064 09       		.uleb128 0x9
+ 423 0065 2E       		.uleb128 0x2e
+ 424 0066 00       		.byte	0
+ 425 0067 3F       		.uleb128 0x3f
+ 426 0068 19       		.uleb128 0x19
+ 427 0069 03       		.uleb128 0x3
+ 428 006a 0E       		.uleb128 0xe
+ 429 006b 3A       		.uleb128 0x3a
+ 430 006c 0B       		.uleb128 0xb
+ 431 006d 3B       		.uleb128 0x3b
+ 432 006e 0B       		.uleb128 0xb
+ 433 006f 27       		.uleb128 0x27
+ 434 0070 19       		.uleb128 0x19
+ 435 0071 11       		.uleb128 0x11
+ 436 0072 01       		.uleb128 0x1
+ 437 0073 12       		.uleb128 0x12
+ 438 0074 06       		.uleb128 0x6
+ 439 0075 40       		.uleb128 0x40
+ 440 0076 18       		.uleb128 0x18
+ 441 0077 9742     		.uleb128 0x2117
+ 442 0079 19       		.uleb128 0x19
+ 443 007a 00       		.byte	0
+ 444 007b 00       		.byte	0
+ 445 007c 0A       		.uleb128 0xa
+ 446 007d 2E       		.uleb128 0x2e
+ 447 007e 00       		.byte	0
+ 448 007f 3F       		.uleb128 0x3f
+ 449 0080 19       		.uleb128 0x19
+ 450 0081 03       		.uleb128 0x3
+ 451 0082 0E       		.uleb128 0xe
+ 452 0083 3A       		.uleb128 0x3a
+ 453 0084 0B       		.uleb128 0xb
+ 454 0085 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccFiHd1c.s 			page 11
+
+
+ 455 0086 0B       		.uleb128 0xb
+ 456 0087 27       		.uleb128 0x27
+ 457 0088 19       		.uleb128 0x19
+ 458 0089 11       		.uleb128 0x11
+ 459 008a 01       		.uleb128 0x1
+ 460 008b 12       		.uleb128 0x12
+ 461 008c 06       		.uleb128 0x6
+ 462 008d 40       		.uleb128 0x40
+ 463 008e 18       		.uleb128 0x18
+ 464 008f 9642     		.uleb128 0x2116
+ 465 0091 19       		.uleb128 0x19
+ 466 0092 00       		.byte	0
+ 467 0093 00       		.byte	0
+ 468 0094 0B       		.uleb128 0xb
+ 469 0095 34       		.uleb128 0x34
+ 470 0096 00       		.byte	0
+ 471 0097 03       		.uleb128 0x3
+ 472 0098 0E       		.uleb128 0xe
+ 473 0099 3A       		.uleb128 0x3a
+ 474 009a 0B       		.uleb128 0xb
+ 475 009b 3B       		.uleb128 0x3b
+ 476 009c 0B       		.uleb128 0xb
+ 477 009d 49       		.uleb128 0x49
+ 478 009e 13       		.uleb128 0x13
+ 479 009f 02       		.uleb128 0x2
+ 480 00a0 18       		.uleb128 0x18
+ 481 00a1 00       		.byte	0
+ 482 00a2 00       		.byte	0
+ 483 00a3 00       		.byte	0
+ 484              		.section	.debug_aranges,"",%progbits
+ 485 0000 34000000 		.4byte	0x34
+ 486 0004 0200     		.2byte	0x2
+ 487 0006 00000000 		.4byte	.Ldebug_info0
+ 488 000a 04       		.byte	0x4
+ 489 000b 00       		.byte	0
+ 490 000c 0000     		.2byte	0
+ 491 000e 0000     		.2byte	0
+ 492 0010 00000000 		.4byte	.LFB0
+ 493 0014 0A000000 		.4byte	.LFE0-.LFB0
+ 494 0018 00000000 		.4byte	.LFB1
+ 495 001c 34000000 		.4byte	.LFE1-.LFB1
+ 496 0020 00000000 		.4byte	.LFB2
+ 497 0024 0A000000 		.4byte	.LFE2-.LFB2
+ 498 0028 00000000 		.4byte	.LFB3
+ 499 002c 20000000 		.4byte	.LFE3-.LFB3
+ 500 0030 00000000 		.4byte	0
+ 501 0034 00000000 		.4byte	0
+ 502              		.section	.debug_ranges,"",%progbits
+ 503              	.Ldebug_ranges0:
+ 504 0000 00000000 		.4byte	.LFB0
+ 505 0004 0A000000 		.4byte	.LFE0
+ 506 0008 00000000 		.4byte	.LFB1
+ 507 000c 34000000 		.4byte	.LFE1
+ 508 0010 00000000 		.4byte	.LFB2
+ 509 0014 0A000000 		.4byte	.LFE2
+ 510 0018 00000000 		.4byte	.LFB3
+ 511 001c 20000000 		.4byte	.LFE3
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccFiHd1c.s 			page 12
+
+
+ 512 0020 00000000 		.4byte	0
+ 513 0024 00000000 		.4byte	0
+ 514              		.section	.debug_line,"",%progbits
+ 515              	.Ldebug_line0:
+ 516 0000 0A010000 		.section	.debug_str,"MS",%progbits,1
+ 516      0200BA00 
+ 516      00000201 
+ 516      FB0E0D00 
+ 516      01010101 
+ 517              	.LASF6:
+ 518 0000 6C6F6E67 		.ascii	"long long int\000"
+ 518      206C6F6E 
+ 518      6720696E 
+ 518      7400
+ 519              	.LASF10:
+ 520 000e 75696E74 		.ascii	"uint32\000"
+ 520      333200
+ 521              	.LASF24:
+ 522 0015 656E6162 		.ascii	"enableState\000"
+ 522      6C655374 
+ 522      61746500 
+ 523              	.LASF8:
+ 524 0021 756E7369 		.ascii	"unsigned int\000"
+ 524      676E6564 
+ 524      20696E74 
+ 524      00
+ 525              	.LASF9:
+ 526 002e 75696E74 		.ascii	"uint8\000"
+ 526      3800
+ 527              	.LASF5:
+ 528 0034 6C6F6E67 		.ascii	"long unsigned int\000"
+ 528      20756E73 
+ 528      69676E65 
+ 528      6420696E 
+ 528      7400
+ 529              	.LASF7:
+ 530 0046 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 530      206C6F6E 
+ 530      6720756E 
+ 530      7369676E 
+ 530      65642069 
+ 531              	.LASF11:
+ 532 005d 666C6F61 		.ascii	"float\000"
+ 532      7400
+ 533              	.LASF17:
+ 534 0063 4C45445F 		.ascii	"LED_CONTROL_BACKUP_STRUCT\000"
+ 534      434F4E54 
+ 534      524F4C5F 
+ 534      4241434B 
+ 534      55505F53 
+ 535              	.LASF1:
+ 536 007d 756E7369 		.ascii	"unsigned char\000"
+ 536      676E6564 
+ 536      20636861 
+ 536      7200
+ 537              	.LASF13:
+ 538 008b 63686172 		.ascii	"char\000"
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccFiHd1c.s 			page 13
+
+
+ 538      00
+ 539              	.LASF25:
+ 540 0090 4C45445F 		.ascii	"LED_CONTROL_backup\000"
+ 540      434F4E54 
+ 540      524F4C5F 
+ 540      6261636B 
+ 540      757000
+ 541              	.LASF4:
+ 542 00a3 6C6F6E67 		.ascii	"long int\000"
+ 542      20696E74 
+ 542      00
+ 543              	.LASF23:
+ 544 00ac 433A5C50 		.ascii	"C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4"
+ 544      726F6772 
+ 544      616D2046 
+ 544      696C6573 
+ 544      20287838 
+ 545 00db 5C50536F 		.ascii	"\\PSoC Creator\\1\\CapSense_CSD_P4_Design01.cydsn\\"
+ 545      43204372 
+ 545      6561746F 
+ 545      725C315C 
+ 545      43617053 
+ 546 010a 47656E65 		.ascii	"Generated_Source\\PSoC4\\LED_CONTROL_PM.c\000"
+ 546      72617465 
+ 546      645F536F 
+ 546      75726365 
+ 546      5C50536F 
+ 547              	.LASF12:
+ 548 0132 646F7562 		.ascii	"double\000"
+ 548      6C6500
+ 549              	.LASF14:
+ 550 0139 72656733 		.ascii	"reg32\000"
+ 550      3200
+ 551              	.LASF3:
+ 552 013f 73686F72 		.ascii	"short unsigned int\000"
+ 552      7420756E 
+ 552      7369676E 
+ 552      65642069 
+ 552      6E7400
+ 553              	.LASF0:
+ 554 0152 7369676E 		.ascii	"signed char\000"
+ 554      65642063 
+ 554      68617200 
+ 555              	.LASF15:
+ 556 015e 6C6F6E67 		.ascii	"long double\000"
+ 556      20646F75 
+ 556      626C6500 
+ 557              	.LASF20:
+ 558 016a 4C45445F 		.ascii	"LED_CONTROL_RestoreConfig\000"
+ 558      434F4E54 
+ 558      524F4C5F 
+ 558      52657374 
+ 558      6F726543 
+ 559              	.LASF21:
+ 560 0184 4C45445F 		.ascii	"LED_CONTROL_Wakeup\000"
+ 560      434F4E54 
+ 560      524F4C5F 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccFiHd1c.s 			page 14
+
+
+ 560      57616B65 
+ 560      757000
+ 561              	.LASF16:
+ 562 0197 73697A65 		.ascii	"sizetype\000"
+ 562      74797065 
+ 562      00
+ 563              	.LASF2:
+ 564 01a0 73686F72 		.ascii	"short int\000"
+ 564      7420696E 
+ 564      7400
+ 565              	.LASF22:
+ 566 01aa 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 566      43313120 
+ 566      352E342E 
+ 566      31203230 
+ 566      31363036 
+ 567 01dd 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 567      20726576 
+ 567      6973696F 
+ 567      6E203233 
+ 567      37373135 
+ 568 0210 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 568      66756E63 
+ 568      74696F6E 
+ 568      2D736563 
+ 568      74696F6E 
+ 569              	.LASF18:
+ 570 0238 4C45445F 		.ascii	"LED_CONTROL_SaveConfig\000"
+ 570      434F4E54 
+ 570      524F4C5F 
+ 570      53617665 
+ 570      436F6E66 
+ 571              	.LASF19:
+ 572 024f 4C45445F 		.ascii	"LED_CONTROL_Sleep\000"
+ 572      434F4E54 
+ 572      524F4C5F 
+ 572      536C6565 
+ 572      7000
+ 573              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

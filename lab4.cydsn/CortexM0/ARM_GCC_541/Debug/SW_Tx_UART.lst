@@ -1,0 +1,1597 @@
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"SW_Tx_UART.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.SW_Tx_UART_Start,"ax",%progbits
+  20              		.align	2
+  21              		.global	SW_Tx_UART_Start
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	SW_Tx_UART_Start, %function
+  25              	SW_Tx_UART_Start:
+  26              	.LFB0:
+  27              		.file 1 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\LWO4.cydsn\\Generat
+   1:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** /*******************************************************************************
+   2:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * File Name: SW_Tx_UART.c
+   3:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Version 1.50
+   4:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+   5:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Description:
+   6:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  This file provides the source code to the API for the Software Transmit UART.
+   7:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+   8:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** ********************************************************************************
+   9:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Copyright 2013-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  10:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * You may use this file only in accordance with the license, terms, conditions,
+  11:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  12:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * the software package with which this file was provided.
+  13:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *******************************************************************************/
+  14:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+  15:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** #include "SW_Tx_UART_PVT.h"
+  16:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+  17:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** #if(SW_Tx_UART_PIN_STATIC_MODE == 1u)
+  18:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     uint32 SW_Tx_UART_pinNumber = SW_Tx_UART_PIN_NUMBER;
+  19:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     uint32 SW_Tx_UART_pinPortNumber = SW_Tx_UART_PIN_PORT_NUMBER;
+  20:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     #if(CY_PSOC3)
+  21:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****         uint32 pdata SW_Tx_UART_pinDrAdress = SW_Tx_UART_PIN_DR;
+  22:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     #else
+  23:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****         uint32 SW_Tx_UART_pinDrAdress = SW_Tx_UART_PIN_DR;
+  24:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     #endif /* (CY_PSOC3) */
+  25:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** #else
+  26:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     uint32 SW_Tx_UART_pinNumber;
+  27:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     uint32 SW_Tx_UART_pinPortNumber;
+  28:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     #if(CY_PSOC3)
+  29:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****         uint32 pdata SW_Tx_UART_pinDrAdress;
+  30:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     #else
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 2
+
+
+  31:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****         uint32 SW_Tx_UART_pinDrAdress;
+  32:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     #endif /* (CY_PSOC3) */
+  33:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** #endif /* (SW_Tx_UART_PIN_STATIC_MODE == 1u) */
+  34:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+  35:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+  36:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** #if(SW_Tx_UART_PIN_STATIC_MODE == 1u)
+  37:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     /*******************************************************************************
+  38:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     * Function Name: SW_Tx_UART_Start
+  39:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     ********************************************************************************
+  40:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *
+  41:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     * Summary:
+  42:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *  Empty function. Included for consistency with other
+  43:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *  components. This API is not available when PinAssignmentMethod
+  44:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *  is set to Dynamic.
+  45:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *
+  46:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     * Parameters:
+  47:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *  None
+  48:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *
+  49:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     * Return:
+  50:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *  None
+  51:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *
+  52:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *******************************************************************************/
+  53:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     void SW_Tx_UART_Start(void) 
+  54:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     {
+  28              		.loc 1 54 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  55:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+  56:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     }
+  33              		.loc 1 56 0
+  34              		@ sp needed
+  35 0000 7047     		bx	lr
+  36              		.cfi_endproc
+  37              	.LFE0:
+  38              		.size	SW_Tx_UART_Start, .-SW_Tx_UART_Start
+  39 0002 C046     		.section	.text.SW_Tx_UART_Stop,"ax",%progbits
+  40              		.align	2
+  41              		.global	SW_Tx_UART_Stop
+  42              		.code	16
+  43              		.thumb_func
+  44              		.type	SW_Tx_UART_Stop, %function
+  45              	SW_Tx_UART_Stop:
+  46              	.LFB1:
+  57:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** #else
+  58:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     /*******************************************************************************
+  59:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     * Function Name: SW_Tx_UART_StartEx
+  60:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     ********************************************************************************
+  61:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *
+  62:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     * Summary:
+  63:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *  Configures the SW Tx UART to use the pin specified
+  64:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *  by the parameters. This API is only available when
+  65:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *  PinAssignmentMethod is set to Dynamic.
+  66:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *
+  67:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     * Parameters:
+  68:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *  port:  Port number for dynamic pin assignment
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 3
+
+
+  69:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *  pin:   Pin number for dynamic pin assignment
+  70:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *
+  71:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     * Return:
+  72:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *  None
+  73:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *
+  74:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     *******************************************************************************/
+  75:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     void SW_Tx_UART_StartEx(uint8 port, uint8 pin) 
+  76:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     {
+  77:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****         uint32 portConfigAddr;
+  78:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+  79:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****         #if (CY_PSOC4)
+  80:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****             uint32 portDataRegAddr;
+  81:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****         #endif /* (CY_PSOC4) */
+  82:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+  83:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****         if ((pin <= SW_Tx_UART_MAX_PIN_NUMBER) && (port <= SW_Tx_UART_MAX_PORT_NUMBER))
+  84:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****         {
+  85:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****             #if (!CY_PSOC4)
+  86:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****                 portConfigAddr = SW_Tx_UART_PORT_CNF_BASE;
+  87:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****                 portConfigAddr += ((uint32)port * (SW_Tx_UART_MAX_PIN_NUMBER + 1u)) + pin;
+  88:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****                 CyPins_SetPinDriveMode(portConfigAddr, CY_PINS_DM_STRONG);
+  89:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****                 CyPins_SetPin(portConfigAddr);
+  90:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****                 SW_Tx_UART_pinDrAdress = portConfigAddr;
+  91:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****             #else
+  92:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****                 portConfigAddr = SW_Tx_UART_PORT_CNF_BASE + (SW_Tx_UART_PORT_CNF_SIZE * port) +
+  93:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****                                                                                 SW_Tx_UART_PORT_CNF
+  94:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****                 CY_SYS_PINS_SET_DRIVE_MODE(portConfigAddr, pin, CY_SYS_PINS_DM_STRONG);
+  95:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****                 portDataRegAddr = SW_Tx_UART_PORT_CNF_BASE + (SW_Tx_UART_PORT_CNF_SIZE * port) +
+  96:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****                                                                                 SW_Tx_UART_PORT_CNF
+  97:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****                 CY_SYS_PINS_SET_PIN(portDataRegAddr, pin);
+  98:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****                 SW_Tx_UART_pinDrAdress = portDataRegAddr;
+  99:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****             #endif /* (!CY_PSOC4) */
+ 100:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****             SW_Tx_UART_pinNumber = pin;
+ 101:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****             SW_Tx_UART_pinPortNumber = port;
+ 102:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****         }
+ 103:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     }
+ 104:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** #endif /* (SW_Tx_UART_PIN_STATIC_MODE == 1u) */
+ 105:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+ 106:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+ 107:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** /*******************************************************************************
+ 108:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Function Name: SW_Tx_UART_Stop
+ 109:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** ********************************************************************************
+ 110:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 111:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Summary:
+ 112:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  Empty function. Included for consistency with other components.
+ 113:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 114:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Parameters:
+ 115:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  None
+ 116:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 117:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Return:
+ 118:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  None
+ 119:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 120:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *******************************************************************************/
+ 121:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** void SW_Tx_UART_Stop(void) 
+ 122:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** {
+  47              		.loc 1 122 0
+  48              		.cfi_startproc
+  49              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 4
+
+
+  50              		@ frame_needed = 0, uses_anonymous_args = 0
+  51              		@ link register save eliminated.
+ 123:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+ 124:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** }
+  52              		.loc 1 124 0
+  53              		@ sp needed
+  54 0000 7047     		bx	lr
+  55              		.cfi_endproc
+  56              	.LFE1:
+  57              		.size	SW_Tx_UART_Stop, .-SW_Tx_UART_Stop
+  58 0002 C046     		.section	.text.SW_Tx_UART_PutString,"ax",%progbits
+  59              		.align	2
+  60              		.global	SW_Tx_UART_PutString
+  61              		.code	16
+  62              		.thumb_func
+  63              		.type	SW_Tx_UART_PutString, %function
+  64              	SW_Tx_UART_PutString:
+  65              	.LFB2:
+ 125:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+ 126:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+ 127:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** /*******************************************************************************
+ 128:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Function Name: SW_Tx_UART_PutString
+ 129:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** ********************************************************************************
+ 130:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 131:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Summary:
+ 132:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  Sends a NULL terminated string via the Tx pin.
+ 133:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 134:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Parameters:
+ 135:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  string: Pointer to the null terminated string to send
+ 136:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 137:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Return:
+ 138:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  None
+ 139:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 140:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *******************************************************************************/
+ 141:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** void SW_Tx_UART_PutString(const char8 string[]) 
+ 142:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** {
+  66              		.loc 1 142 0
+  67              		.cfi_startproc
+  68              		@ args = 0, pretend = 0, frame = 0
+  69              		@ frame_needed = 0, uses_anonymous_args = 0
+  70              	.LVL0:
+  71 0000 70B5     		push	{r4, r5, r6, lr}
+  72              		.cfi_def_cfa_offset 16
+  73              		.cfi_offset 4, -16
+  74              		.cfi_offset 5, -12
+  75              		.cfi_offset 6, -8
+  76              		.cfi_offset 14, -4
+  77 0002 0500     		movs	r5, r0
+  78              	.LVL1:
+ 143:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     uint8 stringIndex = 1u;
+ 144:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     char8 current = *string;
+  79              		.loc 1 144 0
+  80 0004 0078     		ldrb	r0, [r0]
+  81              	.LVL2:
+ 143:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     uint8 stringIndex = 1u;
+  82              		.loc 1 143 0
+  83 0006 0124     		movs	r4, #1
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 5
+
+
+ 145:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+ 146:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     /* Until null is reached, print next character */
+ 147:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     while((char8) '\0' != current)
+  84              		.loc 1 147 0
+  85 0008 04E0     		b	.L4
+  86              	.LVL3:
+  87              	.L5:
+ 148:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     {
+ 149:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****         SW_Tx_UART_PutChar((uint8)current);
+  88              		.loc 1 149 0
+  89 000a FFF7FEFF 		bl	SW_Tx_UART_PutChar
+  90              	.LVL4:
+ 150:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****         current = string[stringIndex];
+  91              		.loc 1 150 0
+  92 000e 285D     		ldrb	r0, [r5, r4]
+  93              	.LVL5:
+ 151:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****         stringIndex++;
+  94              		.loc 1 151 0
+  95 0010 0134     		adds	r4, r4, #1
+  96              	.LVL6:
+  97 0012 E4B2     		uxtb	r4, r4
+  98              	.LVL7:
+  99              	.L4:
+ 147:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     {
+ 100              		.loc 1 147 0
+ 101 0014 0028     		cmp	r0, #0
+ 102 0016 F8D1     		bne	.L5
+ 152:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     }
+ 153:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** }
+ 103              		.loc 1 153 0
+ 104              		@ sp needed
+ 105              	.LVL8:
+ 106              	.LVL9:
+ 107 0018 70BD     		pop	{r4, r5, r6, pc}
+ 108              		.cfi_endproc
+ 109              	.LFE2:
+ 110              		.size	SW_Tx_UART_PutString, .-SW_Tx_UART_PutString
+ 111 001a C046     		.section	.text.SW_Tx_UART_PutArray,"ax",%progbits
+ 112              		.align	2
+ 113              		.global	SW_Tx_UART_PutArray
+ 114              		.code	16
+ 115              		.thumb_func
+ 116              		.type	SW_Tx_UART_PutArray, %function
+ 117              	SW_Tx_UART_PutArray:
+ 118              	.LFB3:
+ 154:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+ 155:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+ 156:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** /*******************************************************************************
+ 157:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Function Name: SW_Tx_UART_PutArray
+ 158:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** ********************************************************************************
+ 159:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 160:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Summary:
+ 161:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  Sends byteCount bytes from a memory array via the Tx pin.
+ 162:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 163:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Parameters:
+ 164:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  data: Pointer to the memory array
+ 165:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  byteCount: Number of bytes to be transmitted
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 6
+
+
+ 166:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 167:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Return:
+ 168:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  None
+ 169:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 170:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *******************************************************************************/
+ 171:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** void SW_Tx_UART_PutArray(const uint8 array[], uint32 byteCount) 
+ 172:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** {
+ 119              		.loc 1 172 0
+ 120              		.cfi_startproc
+ 121              		@ args = 0, pretend = 0, frame = 0
+ 122              		@ frame_needed = 0, uses_anonymous_args = 0
+ 123              	.LVL10:
+ 124 0000 70B5     		push	{r4, r5, r6, lr}
+ 125              		.cfi_def_cfa_offset 16
+ 126              		.cfi_offset 4, -16
+ 127              		.cfi_offset 5, -12
+ 128              		.cfi_offset 6, -8
+ 129              		.cfi_offset 14, -4
+ 130 0002 0600     		movs	r6, r0
+ 131 0004 0D00     		movs	r5, r1
+ 132              	.LVL11:
+ 173:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     uint32 arrayIndex;
+ 174:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+ 175:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     for (arrayIndex = 0u; arrayIndex < byteCount; arrayIndex++)
+ 133              		.loc 1 175 0
+ 134 0006 0024     		movs	r4, #0
+ 135 0008 03E0     		b	.L7
+ 136              	.LVL12:
+ 137              	.L8:
+ 176:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     {
+ 177:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****         SW_Tx_UART_PutChar(array[arrayIndex]);
+ 138              		.loc 1 177 0 discriminator 3
+ 139 000a 305D     		ldrb	r0, [r6, r4]
+ 140 000c FFF7FEFF 		bl	SW_Tx_UART_PutChar
+ 141              	.LVL13:
+ 175:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     {
+ 142              		.loc 1 175 0 discriminator 3
+ 143 0010 0134     		adds	r4, r4, #1
+ 144              	.LVL14:
+ 145              	.L7:
+ 175:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     {
+ 146              		.loc 1 175 0 is_stmt 0 discriminator 1
+ 147 0012 AC42     		cmp	r4, r5
+ 148 0014 F9D3     		bcc	.L8
+ 178:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     }
+ 179:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** }
+ 149              		.loc 1 179 0 is_stmt 1
+ 150              		@ sp needed
+ 151              	.LVL15:
+ 152              	.LVL16:
+ 153              	.LVL17:
+ 154 0016 70BD     		pop	{r4, r5, r6, pc}
+ 155              		.cfi_endproc
+ 156              	.LFE3:
+ 157              		.size	SW_Tx_UART_PutArray, .-SW_Tx_UART_PutArray
+ 158              		.section	.text.SW_Tx_UART_PutHexByte,"ax",%progbits
+ 159              		.align	2
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 7
+
+
+ 160              		.global	SW_Tx_UART_PutHexByte
+ 161              		.code	16
+ 162              		.thumb_func
+ 163              		.type	SW_Tx_UART_PutHexByte, %function
+ 164              	SW_Tx_UART_PutHexByte:
+ 165              	.LFB4:
+ 180:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+ 181:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+ 182:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** /*******************************************************************************
+ 183:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Function Name: SW_Tx_UART_PutHexByte
+ 184:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** ********************************************************************************
+ 185:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 186:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Summary:
+ 187:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  Sends a byte in Hex representation (two characters, uppercase for A-F) via
+ 188:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  the Tx pin.
+ 189:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 190:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Parameters:
+ 191:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  TxHexByte: The byte to be converted to ASCII characters and
+ 192:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *             sent via the Tx pin.
+ 193:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 194:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Return:
+ 195:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  None
+ 196:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 197:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *******************************************************************************/
+ 198:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** void SW_Tx_UART_PutHexByte(uint8 txHexByte) 
+ 199:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** {
+ 166              		.loc 1 199 0
+ 167              		.cfi_startproc
+ 168              		@ args = 0, pretend = 0, frame = 0
+ 169              		@ frame_needed = 0, uses_anonymous_args = 0
+ 170              	.LVL18:
+ 171 0000 70B5     		push	{r4, r5, r6, lr}
+ 172              		.cfi_def_cfa_offset 16
+ 173              		.cfi_offset 4, -16
+ 174              		.cfi_offset 5, -12
+ 175              		.cfi_offset 6, -8
+ 176              		.cfi_offset 14, -4
+ 177 0002 0400     		movs	r4, r0
+ 200:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     static char8 const CYCODE SW_Tx_UART_hex[] = "0123456789ABCDEF";
+ 201:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+ 202:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     SW_Tx_UART_PutChar((uint8) SW_Tx_UART_hex[txHexByte >> SW_Tx_UART_BYTE_UPPER_NIBBLE_SHIFT]);
+ 178              		.loc 1 202 0
+ 179 0004 0309     		lsrs	r3, r0, #4
+ 180 0006 054D     		ldr	r5, .L10
+ 181 0008 E85C     		ldrb	r0, [r5, r3]
+ 182              	.LVL19:
+ 183 000a FFF7FEFF 		bl	SW_Tx_UART_PutChar
+ 184              	.LVL20:
+ 203:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     SW_Tx_UART_PutChar((uint8) SW_Tx_UART_hex[txHexByte & SW_Tx_UART_BYTE_LOWER_NIBBLE_MASK]);
+ 185              		.loc 1 203 0
+ 186 000e 0F23     		movs	r3, #15
+ 187 0010 1C40     		ands	r4, r3
+ 188 0012 285D     		ldrb	r0, [r5, r4]
+ 189 0014 FFF7FEFF 		bl	SW_Tx_UART_PutChar
+ 190              	.LVL21:
+ 204:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** }
+ 191              		.loc 1 204 0
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 8
+
+
+ 192              		@ sp needed
+ 193 0018 70BD     		pop	{r4, r5, r6, pc}
+ 194              	.L11:
+ 195 001a C046     		.align	2
+ 196              	.L10:
+ 197 001c 00000000 		.word	.LANCHOR0
+ 198              		.cfi_endproc
+ 199              	.LFE4:
+ 200              		.size	SW_Tx_UART_PutHexByte, .-SW_Tx_UART_PutHexByte
+ 201              		.section	.text.SW_Tx_UART_PutHexInt,"ax",%progbits
+ 202              		.align	2
+ 203              		.global	SW_Tx_UART_PutHexInt
+ 204              		.code	16
+ 205              		.thumb_func
+ 206              		.type	SW_Tx_UART_PutHexInt, %function
+ 207              	SW_Tx_UART_PutHexInt:
+ 208              	.LFB5:
+ 205:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+ 206:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+ 207:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** /*******************************************************************************
+ 208:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Function Name: SW_Tx_UART_PutHexInt
+ 209:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** ********************************************************************************
+ 210:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 211:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Summary:
+ 212:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  Sends a 16-bit unsigned integer in Hex representation (four characters,
+ 213:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  uppercase for A-F) via the Tx pin.
+ 214:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 215:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Parameters:
+ 216:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  TxHexInt: The uint16 to be converted to ASCII characters and sent via
+ 217:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *            the Tx pin.
+ 218:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 219:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Return:
+ 220:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  None
+ 221:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 222:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *******************************************************************************/
+ 223:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** void SW_Tx_UART_PutHexInt(uint16 txHexInt) 
+ 224:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** {
+ 209              		.loc 1 224 0
+ 210              		.cfi_startproc
+ 211              		@ args = 0, pretend = 0, frame = 0
+ 212              		@ frame_needed = 0, uses_anonymous_args = 0
+ 213              	.LVL22:
+ 214 0000 10B5     		push	{r4, lr}
+ 215              		.cfi_def_cfa_offset 8
+ 216              		.cfi_offset 4, -8
+ 217              		.cfi_offset 14, -4
+ 218 0002 0400     		movs	r4, r0
+ 225:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     SW_Tx_UART_PutHexByte((uint8)(txHexInt >> SW_Tx_UART_U16_UPPER_BYTE_SHIFT));
+ 219              		.loc 1 225 0
+ 220 0004 000A     		lsrs	r0, r0, #8
+ 221              	.LVL23:
+ 222 0006 FFF7FEFF 		bl	SW_Tx_UART_PutHexByte
+ 223              	.LVL24:
+ 226:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     SW_Tx_UART_PutHexByte((uint8)(txHexInt & SW_Tx_UART_U16_LOWER_BYTE_MASK));
+ 224              		.loc 1 226 0
+ 225 000a E0B2     		uxtb	r0, r4
+ 226 000c FFF7FEFF 		bl	SW_Tx_UART_PutHexByte
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 9
+
+
+ 227              	.LVL25:
+ 227:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** }
+ 228              		.loc 1 227 0
+ 229              		@ sp needed
+ 230 0010 10BD     		pop	{r4, pc}
+ 231              		.cfi_endproc
+ 232              	.LFE5:
+ 233              		.size	SW_Tx_UART_PutHexInt, .-SW_Tx_UART_PutHexInt
+ 234 0012 C046     		.section	.text.SW_Tx_UART_PutCRLF,"ax",%progbits
+ 235              		.align	2
+ 236              		.global	SW_Tx_UART_PutCRLF
+ 237              		.code	16
+ 238              		.thumb_func
+ 239              		.type	SW_Tx_UART_PutCRLF, %function
+ 240              	SW_Tx_UART_PutCRLF:
+ 241              	.LFB6:
+ 228:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+ 229:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** 
+ 230:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** /*******************************************************************************
+ 231:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Function Name: SW_Tx_UART_PutCRLF
+ 232:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** ********************************************************************************
+ 233:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 234:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Summary:
+ 235:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  Sends a carriage return (0x0D) and a line feed (0x0A) via the Tx pin.
+ 236:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 237:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Parameters:
+ 238:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  None
+ 239:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 240:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** * Return:
+ 241:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *  None
+ 242:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *
+ 243:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** *******************************************************************************/
+ 244:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** void SW_Tx_UART_PutCRLF(void) 
+ 245:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** {
+ 242              		.loc 1 245 0
+ 243              		.cfi_startproc
+ 244              		@ args = 0, pretend = 0, frame = 0
+ 245              		@ frame_needed = 0, uses_anonymous_args = 0
+ 246 0000 10B5     		push	{r4, lr}
+ 247              		.cfi_def_cfa_offset 8
+ 248              		.cfi_offset 4, -8
+ 249              		.cfi_offset 14, -4
+ 246:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     SW_Tx_UART_PutChar(0x0Du);
+ 250              		.loc 1 246 0
+ 251 0002 0D20     		movs	r0, #13
+ 252 0004 FFF7FEFF 		bl	SW_Tx_UART_PutChar
+ 253              	.LVL26:
+ 247:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c ****     SW_Tx_UART_PutChar(0x0Au);
+ 254              		.loc 1 247 0
+ 255 0008 0A20     		movs	r0, #10
+ 256 000a FFF7FEFF 		bl	SW_Tx_UART_PutChar
+ 257              	.LVL27:
+ 248:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\Generated_Source\PSoC4\SW_Tx_UART.c **** }
+ 258              		.loc 1 248 0
+ 259              		@ sp needed
+ 260 000e 10BD     		pop	{r4, pc}
+ 261              		.cfi_endproc
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 10
+
+
+ 262              	.LFE6:
+ 263              		.size	SW_Tx_UART_PutCRLF, .-SW_Tx_UART_PutCRLF
+ 264              		.global	SW_Tx_UART_pinDrAdress
+ 265              		.global	SW_Tx_UART_pinPortNumber
+ 266              		.global	SW_Tx_UART_pinNumber
+ 267              		.section	.rodata
+ 268              		.align	2
+ 269              		.set	.LANCHOR0,. + 0
+ 270              		.type	SW_Tx_UART_hex.4276, %object
+ 271              		.size	SW_Tx_UART_hex.4276, 17
+ 272              	SW_Tx_UART_hex.4276:
+ 273 0000 30313233 		.ascii	"0123456789ABCDEF\000"
+ 273      34353637 
+ 273      38394142 
+ 273      43444546 
+ 273      00
+ 274              		.data
+ 275              		.align	2
+ 276              		.type	SW_Tx_UART_pinDrAdress, %object
+ 277              		.size	SW_Tx_UART_pinDrAdress, 4
+ 278              	SW_Tx_UART_pinDrAdress:
+ 279 0000 00020440 		.word	1074004480
+ 280              		.type	SW_Tx_UART_pinPortNumber, %object
+ 281              		.size	SW_Tx_UART_pinPortNumber, 4
+ 282              	SW_Tx_UART_pinPortNumber:
+ 283 0004 02000000 		.word	2
+ 284              		.type	SW_Tx_UART_pinNumber, %object
+ 285              		.size	SW_Tx_UART_pinNumber, 4
+ 286              	SW_Tx_UART_pinNumber:
+ 287 0008 07000000 		.word	7
+ 288              		.text
+ 289              	.Letext0:
+ 290              		.file 2 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\LWO4.cydsn\\Generat
+ 291              		.file 3 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\LWO4.cydsn\\Generat
+ 292              		.section	.debug_info,"",%progbits
+ 293              	.Ldebug_info0:
+ 294 0000 BC020000 		.4byte	0x2bc
+ 295 0004 0400     		.2byte	0x4
+ 296 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 297 000a 04       		.byte	0x4
+ 298 000b 01       		.uleb128 0x1
+ 299 000c 67000000 		.4byte	.LASF36
+ 300 0010 0C       		.byte	0xc
+ 301 0011 CE010000 		.4byte	.LASF37
+ 302 0015 00000000 		.4byte	.Ldebug_ranges0+0
+ 303 0019 00000000 		.4byte	0
+ 304 001d 00000000 		.4byte	.Ldebug_line0
+ 305 0021 02       		.uleb128 0x2
+ 306 0022 01       		.byte	0x1
+ 307 0023 06       		.byte	0x6
+ 308 0024 7A010000 		.4byte	.LASF0
+ 309 0028 02       		.uleb128 0x2
+ 310 0029 01       		.byte	0x1
+ 311 002a 08       		.byte	0x8
+ 312 002b 60010000 		.4byte	.LASF1
+ 313 002f 02       		.uleb128 0x2
+ 314 0030 02       		.byte	0x2
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 11
+
+
+ 315 0031 05       		.byte	0x5
+ 316 0032 24000000 		.4byte	.LASF2
+ 317 0036 02       		.uleb128 0x2
+ 318 0037 02       		.byte	0x2
+ 319 0038 07       		.byte	0x7
+ 320 0039 3C020000 		.4byte	.LASF3
+ 321 003d 02       		.uleb128 0x2
+ 322 003e 04       		.byte	0x4
+ 323 003f 05       		.byte	0x5
+ 324 0040 32010000 		.4byte	.LASF4
+ 325 0044 02       		.uleb128 0x2
+ 326 0045 04       		.byte	0x4
+ 327 0046 07       		.byte	0x7
+ 328 0047 9A020000 		.4byte	.LASF5
+ 329 004b 02       		.uleb128 0x2
+ 330 004c 08       		.byte	0x8
+ 331 004d 05       		.byte	0x5
+ 332 004e 14010000 		.4byte	.LASF6
+ 333 0052 02       		.uleb128 0x2
+ 334 0053 08       		.byte	0x8
+ 335 0054 07       		.byte	0x7
+ 336 0055 86010000 		.4byte	.LASF7
+ 337 0059 03       		.uleb128 0x3
+ 338 005a 04       		.byte	0x4
+ 339 005b 05       		.byte	0x5
+ 340 005c 696E7400 		.ascii	"int\000"
+ 341 0060 02       		.uleb128 0x2
+ 342 0061 04       		.byte	0x4
+ 343 0062 07       		.byte	0x7
+ 344 0063 A6010000 		.4byte	.LASF8
+ 345 0067 04       		.uleb128 0x4
+ 346 0068 F5000000 		.4byte	.LASF9
+ 347 006c 02       		.byte	0x2
+ 348 006d FB01     		.2byte	0x1fb
+ 349 006f 28000000 		.4byte	0x28
+ 350 0073 04       		.uleb128 0x4
+ 351 0074 81020000 		.4byte	.LASF10
+ 352 0078 02       		.byte	0x2
+ 353 0079 FC01     		.2byte	0x1fc
+ 354 007b 36000000 		.4byte	0x36
+ 355 007f 04       		.uleb128 0x4
+ 356 0080 93020000 		.4byte	.LASF11
+ 357 0084 02       		.byte	0x2
+ 358 0085 FD01     		.2byte	0x1fd
+ 359 0087 44000000 		.4byte	0x44
+ 360 008b 02       		.uleb128 0x2
+ 361 008c 04       		.byte	0x4
+ 362 008d 04       		.byte	0x4
+ 363 008e 0E010000 		.4byte	.LASF12
+ 364 0092 02       		.uleb128 0x2
+ 365 0093 08       		.byte	0x8
+ 366 0094 04       		.byte	0x4
+ 367 0095 AC020000 		.4byte	.LASF13
+ 368 0099 04       		.uleb128 0x4
+ 369 009a 50000000 		.4byte	.LASF14
+ 370 009e 02       		.byte	0x2
+ 371 009f 0C02     		.2byte	0x20c
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 12
+
+
+ 372 00a1 A5000000 		.4byte	0xa5
+ 373 00a5 02       		.uleb128 0x2
+ 374 00a6 01       		.byte	0x1
+ 375 00a7 08       		.byte	0x8
+ 376 00a8 65020000 		.4byte	.LASF15
+ 377 00ac 05       		.uleb128 0x5
+ 378 00ad 56000000 		.4byte	.LASF16
+ 379 00b1 01       		.byte	0x1
+ 380 00b2 35       		.byte	0x35
+ 381 00b3 00000000 		.4byte	.LFB0
+ 382 00b7 02000000 		.4byte	.LFE0-.LFB0
+ 383 00bb 01       		.uleb128 0x1
+ 384 00bc 9C       		.byte	0x9c
+ 385 00bd 05       		.uleb128 0x5
+ 386 00be 22010000 		.4byte	.LASF17
+ 387 00c2 01       		.byte	0x1
+ 388 00c3 79       		.byte	0x79
+ 389 00c4 00000000 		.4byte	.LFB1
+ 390 00c8 02000000 		.4byte	.LFE1-.LFB1
+ 391 00cc 01       		.uleb128 0x1
+ 392 00cd 9C       		.byte	0x9c
+ 393 00ce 06       		.uleb128 0x6
+ 394 00cf D8020000 		.4byte	.LASF20
+ 395 00d3 01       		.byte	0x1
+ 396 00d4 8D       		.byte	0x8d
+ 397 00d5 00000000 		.4byte	.LFB2
+ 398 00d9 1A000000 		.4byte	.LFE2-.LFB2
+ 399 00dd 01       		.uleb128 0x1
+ 400 00de 9C       		.byte	0x9c
+ 401 00df 1A010000 		.4byte	0x11a
+ 402 00e3 07       		.uleb128 0x7
+ 403 00e4 3B010000 		.4byte	.LASF22
+ 404 00e8 01       		.byte	0x1
+ 405 00e9 8D       		.byte	0x8d
+ 406 00ea 1A010000 		.4byte	0x11a
+ 407 00ee 00000000 		.4byte	.LLST0
+ 408 00f2 08       		.uleb128 0x8
+ 409 00f3 6E010000 		.4byte	.LASF18
+ 410 00f7 01       		.byte	0x1
+ 411 00f8 8F       		.byte	0x8f
+ 412 00f9 67000000 		.4byte	0x67
+ 413 00fd 2C000000 		.4byte	.LLST1
+ 414 0101 08       		.uleb128 0x8
+ 415 0102 B3010000 		.4byte	.LASF19
+ 416 0106 01       		.byte	0x1
+ 417 0107 90       		.byte	0x90
+ 418 0108 99000000 		.4byte	0x99
+ 419 010c 56000000 		.4byte	.LLST2
+ 420 0110 09       		.uleb128 0x9
+ 421 0111 0E000000 		.4byte	.LVL4
+ 422 0115 B4020000 		.4byte	0x2b4
+ 423 0119 00       		.byte	0
+ 424 011a 0A       		.uleb128 0xa
+ 425 011b 04       		.byte	0x4
+ 426 011c 20010000 		.4byte	0x120
+ 427 0120 0B       		.uleb128 0xb
+ 428 0121 99000000 		.4byte	0x99
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 13
+
+
+ 429 0125 06       		.uleb128 0x6
+ 430 0126 4C010000 		.4byte	.LASF21
+ 431 012a 01       		.byte	0x1
+ 432 012b AB       		.byte	0xab
+ 433 012c 00000000 		.4byte	.LFB3
+ 434 0130 18000000 		.4byte	.LFE3-.LFB3
+ 435 0134 01       		.uleb128 0x1
+ 436 0135 9C       		.byte	0x9c
+ 437 0136 71010000 		.4byte	0x171
+ 438 013a 07       		.uleb128 0x7
+ 439 013b B3020000 		.4byte	.LASF23
+ 440 013f 01       		.byte	0x1
+ 441 0140 AB       		.byte	0xab
+ 442 0141 71010000 		.4byte	0x171
+ 443 0145 74000000 		.4byte	.LLST3
+ 444 0149 07       		.uleb128 0x7
+ 445 014a B9020000 		.4byte	.LASF24
+ 446 014e 01       		.byte	0x1
+ 447 014f AB       		.byte	0xab
+ 448 0150 7F000000 		.4byte	0x7f
+ 449 0154 A0000000 		.4byte	.LLST4
+ 450 0158 08       		.uleb128 0x8
+ 451 0159 88020000 		.4byte	.LASF25
+ 452 015d 01       		.byte	0x1
+ 453 015e AD       		.byte	0xad
+ 454 015f 7F000000 		.4byte	0x7f
+ 455 0163 CC000000 		.4byte	.LLST5
+ 456 0167 09       		.uleb128 0x9
+ 457 0168 10000000 		.4byte	.LVL13
+ 458 016c B4020000 		.4byte	0x2b4
+ 459 0170 00       		.byte	0
+ 460 0171 0A       		.uleb128 0xa
+ 461 0172 04       		.byte	0x4
+ 462 0173 77010000 		.4byte	0x177
+ 463 0177 0B       		.uleb128 0xb
+ 464 0178 67000000 		.4byte	0x67
+ 465 017c 06       		.uleb128 0x6
+ 466 017d 4F020000 		.4byte	.LASF26
+ 467 0181 01       		.byte	0x1
+ 468 0182 C6       		.byte	0xc6
+ 469 0183 00000000 		.4byte	.LFB4
+ 470 0187 20000000 		.4byte	.LFE4-.LFB4
+ 471 018b 01       		.uleb128 0x1
+ 472 018c 9C       		.byte	0x9c
+ 473 018d E2010000 		.4byte	0x1e2
+ 474 0191 07       		.uleb128 0x7
+ 475 0192 42010000 		.4byte	.LASF27
+ 476 0196 01       		.byte	0x1
+ 477 0197 C6       		.byte	0xc6
+ 478 0198 67000000 		.4byte	0x67
+ 479 019c EB000000 		.4byte	.LLST6
+ 480 01a0 0C       		.uleb128 0xc
+ 481 01a1 15000000 		.4byte	.LASF28
+ 482 01a5 01       		.byte	0x1
+ 483 01a6 C8       		.byte	0xc8
+ 484 01a7 F9010000 		.4byte	0x1f9
+ 485 01ab 05       		.uleb128 0x5
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 14
+
+
+ 486 01ac 03       		.byte	0x3
+ 487 01ad 00000000 		.4byte	SW_Tx_UART_hex.4276
+ 488 01b1 0D       		.uleb128 0xd
+ 489 01b2 0E000000 		.4byte	.LVL20
+ 490 01b6 B4020000 		.4byte	0x2b4
+ 491 01ba CC010000 		.4byte	0x1cc
+ 492 01be 0E       		.uleb128 0xe
+ 493 01bf 01       		.uleb128 0x1
+ 494 01c0 50       		.byte	0x50
+ 495 01c1 09       		.uleb128 0x9
+ 496 01c2 74       		.byte	0x74
+ 497 01c3 00       		.sleb128 0
+ 498 01c4 34       		.byte	0x34
+ 499 01c5 25       		.byte	0x25
+ 500 01c6 75       		.byte	0x75
+ 501 01c7 00       		.sleb128 0
+ 502 01c8 22       		.byte	0x22
+ 503 01c9 94       		.byte	0x94
+ 504 01ca 01       		.byte	0x1
+ 505 01cb 00       		.byte	0
+ 506 01cc 0F       		.uleb128 0xf
+ 507 01cd 18000000 		.4byte	.LVL21
+ 508 01d1 B4020000 		.4byte	0x2b4
+ 509 01d5 0E       		.uleb128 0xe
+ 510 01d6 01       		.uleb128 0x1
+ 511 01d7 50       		.byte	0x50
+ 512 01d8 07       		.uleb128 0x7
+ 513 01d9 75       		.byte	0x75
+ 514 01da 00       		.sleb128 0
+ 515 01db 74       		.byte	0x74
+ 516 01dc 00       		.sleb128 0
+ 517 01dd 22       		.byte	0x22
+ 518 01de 94       		.byte	0x94
+ 519 01df 01       		.byte	0x1
+ 520 01e0 00       		.byte	0
+ 521 01e1 00       		.byte	0
+ 522 01e2 10       		.uleb128 0x10
+ 523 01e3 20010000 		.4byte	0x120
+ 524 01e7 F2010000 		.4byte	0x1f2
+ 525 01eb 11       		.uleb128 0x11
+ 526 01ec F2010000 		.4byte	0x1f2
+ 527 01f0 10       		.byte	0x10
+ 528 01f1 00       		.byte	0
+ 529 01f2 02       		.uleb128 0x2
+ 530 01f3 04       		.byte	0x4
+ 531 01f4 07       		.byte	0x7
+ 532 01f5 2E000000 		.4byte	.LASF29
+ 533 01f9 0B       		.uleb128 0xb
+ 534 01fa E2010000 		.4byte	0x1e2
+ 535 01fe 06       		.uleb128 0x6
+ 536 01ff C3020000 		.4byte	.LASF30
+ 537 0203 01       		.byte	0x1
+ 538 0204 DF       		.byte	0xdf
+ 539 0205 00000000 		.4byte	.LFB5
+ 540 0209 12000000 		.4byte	.LFE5-.LFB5
+ 541 020d 01       		.uleb128 0x1
+ 542 020e 9C       		.byte	0x9c
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 15
+
+
+ 543 020f 49020000 		.4byte	0x249
+ 544 0213 07       		.uleb128 0x7
+ 545 0214 9D010000 		.4byte	.LASF31
+ 546 0218 01       		.byte	0x1
+ 547 0219 DF       		.byte	0xdf
+ 548 021a 73000000 		.4byte	0x73
+ 549 021e 0C010000 		.4byte	.LLST7
+ 550 0222 0D       		.uleb128 0xd
+ 551 0223 0A000000 		.4byte	.LVL24
+ 552 0227 7C010000 		.4byte	0x17c
+ 553 022b 38020000 		.4byte	0x238
+ 554 022f 0E       		.uleb128 0xe
+ 555 0230 01       		.uleb128 0x1
+ 556 0231 50       		.byte	0x50
+ 557 0232 04       		.uleb128 0x4
+ 558 0233 74       		.byte	0x74
+ 559 0234 00       		.sleb128 0
+ 560 0235 38       		.byte	0x38
+ 561 0236 25       		.byte	0x25
+ 562 0237 00       		.byte	0
+ 563 0238 0F       		.uleb128 0xf
+ 564 0239 10000000 		.4byte	.LVL25
+ 565 023d 7C010000 		.4byte	0x17c
+ 566 0241 0E       		.uleb128 0xe
+ 567 0242 01       		.uleb128 0x1
+ 568 0243 50       		.byte	0x50
+ 569 0244 02       		.uleb128 0x2
+ 570 0245 74       		.byte	0x74
+ 571 0246 00       		.sleb128 0
+ 572 0247 00       		.byte	0
+ 573 0248 00       		.byte	0
+ 574 0249 06       		.uleb128 0x6
+ 575 024a FB000000 		.4byte	.LASF32
+ 576 024e 01       		.byte	0x1
+ 577 024f F4       		.byte	0xf4
+ 578 0250 00000000 		.4byte	.LFB6
+ 579 0254 10000000 		.4byte	.LFE6-.LFB6
+ 580 0258 01       		.uleb128 0x1
+ 581 0259 9C       		.byte	0x9c
+ 582 025a 81020000 		.4byte	0x281
+ 583 025e 0D       		.uleb128 0xd
+ 584 025f 08000000 		.4byte	.LVL26
+ 585 0263 B4020000 		.4byte	0x2b4
+ 586 0267 71020000 		.4byte	0x271
+ 587 026b 0E       		.uleb128 0xe
+ 588 026c 01       		.uleb128 0x1
+ 589 026d 50       		.byte	0x50
+ 590 026e 01       		.uleb128 0x1
+ 591 026f 3D       		.byte	0x3d
+ 592 0270 00       		.byte	0
+ 593 0271 0F       		.uleb128 0xf
+ 594 0272 0E000000 		.4byte	.LVL27
+ 595 0276 B4020000 		.4byte	0x2b4
+ 596 027a 0E       		.uleb128 0xe
+ 597 027b 01       		.uleb128 0x1
+ 598 027c 50       		.byte	0x50
+ 599 027d 01       		.uleb128 0x1
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 16
+
+
+ 600 027e 3A       		.byte	0x3a
+ 601 027f 00       		.byte	0
+ 602 0280 00       		.byte	0
+ 603 0281 12       		.uleb128 0x12
+ 604 0282 00000000 		.4byte	.LASF33
+ 605 0286 01       		.byte	0x1
+ 606 0287 12       		.byte	0x12
+ 607 0288 7F000000 		.4byte	0x7f
+ 608 028c 05       		.uleb128 0x5
+ 609 028d 03       		.byte	0x3
+ 610 028e 00000000 		.4byte	SW_Tx_UART_pinNumber
+ 611 0292 12       		.uleb128 0x12
+ 612 0293 37000000 		.4byte	.LASF34
+ 613 0297 01       		.byte	0x1
+ 614 0298 13       		.byte	0x13
+ 615 0299 7F000000 		.4byte	0x7f
+ 616 029d 05       		.uleb128 0x5
+ 617 029e 03       		.byte	0x3
+ 618 029f 00000000 		.4byte	SW_Tx_UART_pinPortNumber
+ 619 02a3 12       		.uleb128 0x12
+ 620 02a4 6A020000 		.4byte	.LASF35
+ 621 02a8 01       		.byte	0x1
+ 622 02a9 17       		.byte	0x17
+ 623 02aa 7F000000 		.4byte	0x7f
+ 624 02ae 05       		.uleb128 0x5
+ 625 02af 03       		.byte	0x3
+ 626 02b0 00000000 		.4byte	SW_Tx_UART_pinDrAdress
+ 627 02b4 13       		.uleb128 0x13
+ 628 02b5 BB010000 		.4byte	.LASF38
+ 629 02b9 BB010000 		.4byte	.LASF38
+ 630 02bd 03       		.byte	0x3
+ 631 02be 25       		.byte	0x25
+ 632 02bf 00       		.byte	0
+ 633              		.section	.debug_abbrev,"",%progbits
+ 634              	.Ldebug_abbrev0:
+ 635 0000 01       		.uleb128 0x1
+ 636 0001 11       		.uleb128 0x11
+ 637 0002 01       		.byte	0x1
+ 638 0003 25       		.uleb128 0x25
+ 639 0004 0E       		.uleb128 0xe
+ 640 0005 13       		.uleb128 0x13
+ 641 0006 0B       		.uleb128 0xb
+ 642 0007 03       		.uleb128 0x3
+ 643 0008 0E       		.uleb128 0xe
+ 644 0009 55       		.uleb128 0x55
+ 645 000a 17       		.uleb128 0x17
+ 646 000b 11       		.uleb128 0x11
+ 647 000c 01       		.uleb128 0x1
+ 648 000d 10       		.uleb128 0x10
+ 649 000e 17       		.uleb128 0x17
+ 650 000f 00       		.byte	0
+ 651 0010 00       		.byte	0
+ 652 0011 02       		.uleb128 0x2
+ 653 0012 24       		.uleb128 0x24
+ 654 0013 00       		.byte	0
+ 655 0014 0B       		.uleb128 0xb
+ 656 0015 0B       		.uleb128 0xb
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 17
+
+
+ 657 0016 3E       		.uleb128 0x3e
+ 658 0017 0B       		.uleb128 0xb
+ 659 0018 03       		.uleb128 0x3
+ 660 0019 0E       		.uleb128 0xe
+ 661 001a 00       		.byte	0
+ 662 001b 00       		.byte	0
+ 663 001c 03       		.uleb128 0x3
+ 664 001d 24       		.uleb128 0x24
+ 665 001e 00       		.byte	0
+ 666 001f 0B       		.uleb128 0xb
+ 667 0020 0B       		.uleb128 0xb
+ 668 0021 3E       		.uleb128 0x3e
+ 669 0022 0B       		.uleb128 0xb
+ 670 0023 03       		.uleb128 0x3
+ 671 0024 08       		.uleb128 0x8
+ 672 0025 00       		.byte	0
+ 673 0026 00       		.byte	0
+ 674 0027 04       		.uleb128 0x4
+ 675 0028 16       		.uleb128 0x16
+ 676 0029 00       		.byte	0
+ 677 002a 03       		.uleb128 0x3
+ 678 002b 0E       		.uleb128 0xe
+ 679 002c 3A       		.uleb128 0x3a
+ 680 002d 0B       		.uleb128 0xb
+ 681 002e 3B       		.uleb128 0x3b
+ 682 002f 05       		.uleb128 0x5
+ 683 0030 49       		.uleb128 0x49
+ 684 0031 13       		.uleb128 0x13
+ 685 0032 00       		.byte	0
+ 686 0033 00       		.byte	0
+ 687 0034 05       		.uleb128 0x5
+ 688 0035 2E       		.uleb128 0x2e
+ 689 0036 00       		.byte	0
+ 690 0037 3F       		.uleb128 0x3f
+ 691 0038 19       		.uleb128 0x19
+ 692 0039 03       		.uleb128 0x3
+ 693 003a 0E       		.uleb128 0xe
+ 694 003b 3A       		.uleb128 0x3a
+ 695 003c 0B       		.uleb128 0xb
+ 696 003d 3B       		.uleb128 0x3b
+ 697 003e 0B       		.uleb128 0xb
+ 698 003f 27       		.uleb128 0x27
+ 699 0040 19       		.uleb128 0x19
+ 700 0041 11       		.uleb128 0x11
+ 701 0042 01       		.uleb128 0x1
+ 702 0043 12       		.uleb128 0x12
+ 703 0044 06       		.uleb128 0x6
+ 704 0045 40       		.uleb128 0x40
+ 705 0046 18       		.uleb128 0x18
+ 706 0047 9742     		.uleb128 0x2117
+ 707 0049 19       		.uleb128 0x19
+ 708 004a 00       		.byte	0
+ 709 004b 00       		.byte	0
+ 710 004c 06       		.uleb128 0x6
+ 711 004d 2E       		.uleb128 0x2e
+ 712 004e 01       		.byte	0x1
+ 713 004f 3F       		.uleb128 0x3f
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 18
+
+
+ 714 0050 19       		.uleb128 0x19
+ 715 0051 03       		.uleb128 0x3
+ 716 0052 0E       		.uleb128 0xe
+ 717 0053 3A       		.uleb128 0x3a
+ 718 0054 0B       		.uleb128 0xb
+ 719 0055 3B       		.uleb128 0x3b
+ 720 0056 0B       		.uleb128 0xb
+ 721 0057 27       		.uleb128 0x27
+ 722 0058 19       		.uleb128 0x19
+ 723 0059 11       		.uleb128 0x11
+ 724 005a 01       		.uleb128 0x1
+ 725 005b 12       		.uleb128 0x12
+ 726 005c 06       		.uleb128 0x6
+ 727 005d 40       		.uleb128 0x40
+ 728 005e 18       		.uleb128 0x18
+ 729 005f 9742     		.uleb128 0x2117
+ 730 0061 19       		.uleb128 0x19
+ 731 0062 01       		.uleb128 0x1
+ 732 0063 13       		.uleb128 0x13
+ 733 0064 00       		.byte	0
+ 734 0065 00       		.byte	0
+ 735 0066 07       		.uleb128 0x7
+ 736 0067 05       		.uleb128 0x5
+ 737 0068 00       		.byte	0
+ 738 0069 03       		.uleb128 0x3
+ 739 006a 0E       		.uleb128 0xe
+ 740 006b 3A       		.uleb128 0x3a
+ 741 006c 0B       		.uleb128 0xb
+ 742 006d 3B       		.uleb128 0x3b
+ 743 006e 0B       		.uleb128 0xb
+ 744 006f 49       		.uleb128 0x49
+ 745 0070 13       		.uleb128 0x13
+ 746 0071 02       		.uleb128 0x2
+ 747 0072 17       		.uleb128 0x17
+ 748 0073 00       		.byte	0
+ 749 0074 00       		.byte	0
+ 750 0075 08       		.uleb128 0x8
+ 751 0076 34       		.uleb128 0x34
+ 752 0077 00       		.byte	0
+ 753 0078 03       		.uleb128 0x3
+ 754 0079 0E       		.uleb128 0xe
+ 755 007a 3A       		.uleb128 0x3a
+ 756 007b 0B       		.uleb128 0xb
+ 757 007c 3B       		.uleb128 0x3b
+ 758 007d 0B       		.uleb128 0xb
+ 759 007e 49       		.uleb128 0x49
+ 760 007f 13       		.uleb128 0x13
+ 761 0080 02       		.uleb128 0x2
+ 762 0081 17       		.uleb128 0x17
+ 763 0082 00       		.byte	0
+ 764 0083 00       		.byte	0
+ 765 0084 09       		.uleb128 0x9
+ 766 0085 898201   		.uleb128 0x4109
+ 767 0088 00       		.byte	0
+ 768 0089 11       		.uleb128 0x11
+ 769 008a 01       		.uleb128 0x1
+ 770 008b 31       		.uleb128 0x31
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 19
+
+
+ 771 008c 13       		.uleb128 0x13
+ 772 008d 00       		.byte	0
+ 773 008e 00       		.byte	0
+ 774 008f 0A       		.uleb128 0xa
+ 775 0090 0F       		.uleb128 0xf
+ 776 0091 00       		.byte	0
+ 777 0092 0B       		.uleb128 0xb
+ 778 0093 0B       		.uleb128 0xb
+ 779 0094 49       		.uleb128 0x49
+ 780 0095 13       		.uleb128 0x13
+ 781 0096 00       		.byte	0
+ 782 0097 00       		.byte	0
+ 783 0098 0B       		.uleb128 0xb
+ 784 0099 26       		.uleb128 0x26
+ 785 009a 00       		.byte	0
+ 786 009b 49       		.uleb128 0x49
+ 787 009c 13       		.uleb128 0x13
+ 788 009d 00       		.byte	0
+ 789 009e 00       		.byte	0
+ 790 009f 0C       		.uleb128 0xc
+ 791 00a0 34       		.uleb128 0x34
+ 792 00a1 00       		.byte	0
+ 793 00a2 03       		.uleb128 0x3
+ 794 00a3 0E       		.uleb128 0xe
+ 795 00a4 3A       		.uleb128 0x3a
+ 796 00a5 0B       		.uleb128 0xb
+ 797 00a6 3B       		.uleb128 0x3b
+ 798 00a7 0B       		.uleb128 0xb
+ 799 00a8 49       		.uleb128 0x49
+ 800 00a9 13       		.uleb128 0x13
+ 801 00aa 02       		.uleb128 0x2
+ 802 00ab 18       		.uleb128 0x18
+ 803 00ac 00       		.byte	0
+ 804 00ad 00       		.byte	0
+ 805 00ae 0D       		.uleb128 0xd
+ 806 00af 898201   		.uleb128 0x4109
+ 807 00b2 01       		.byte	0x1
+ 808 00b3 11       		.uleb128 0x11
+ 809 00b4 01       		.uleb128 0x1
+ 810 00b5 31       		.uleb128 0x31
+ 811 00b6 13       		.uleb128 0x13
+ 812 00b7 01       		.uleb128 0x1
+ 813 00b8 13       		.uleb128 0x13
+ 814 00b9 00       		.byte	0
+ 815 00ba 00       		.byte	0
+ 816 00bb 0E       		.uleb128 0xe
+ 817 00bc 8A8201   		.uleb128 0x410a
+ 818 00bf 00       		.byte	0
+ 819 00c0 02       		.uleb128 0x2
+ 820 00c1 18       		.uleb128 0x18
+ 821 00c2 9142     		.uleb128 0x2111
+ 822 00c4 18       		.uleb128 0x18
+ 823 00c5 00       		.byte	0
+ 824 00c6 00       		.byte	0
+ 825 00c7 0F       		.uleb128 0xf
+ 826 00c8 898201   		.uleb128 0x4109
+ 827 00cb 01       		.byte	0x1
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 20
+
+
+ 828 00cc 11       		.uleb128 0x11
+ 829 00cd 01       		.uleb128 0x1
+ 830 00ce 31       		.uleb128 0x31
+ 831 00cf 13       		.uleb128 0x13
+ 832 00d0 00       		.byte	0
+ 833 00d1 00       		.byte	0
+ 834 00d2 10       		.uleb128 0x10
+ 835 00d3 01       		.uleb128 0x1
+ 836 00d4 01       		.byte	0x1
+ 837 00d5 49       		.uleb128 0x49
+ 838 00d6 13       		.uleb128 0x13
+ 839 00d7 01       		.uleb128 0x1
+ 840 00d8 13       		.uleb128 0x13
+ 841 00d9 00       		.byte	0
+ 842 00da 00       		.byte	0
+ 843 00db 11       		.uleb128 0x11
+ 844 00dc 21       		.uleb128 0x21
+ 845 00dd 00       		.byte	0
+ 846 00de 49       		.uleb128 0x49
+ 847 00df 13       		.uleb128 0x13
+ 848 00e0 2F       		.uleb128 0x2f
+ 849 00e1 0B       		.uleb128 0xb
+ 850 00e2 00       		.byte	0
+ 851 00e3 00       		.byte	0
+ 852 00e4 12       		.uleb128 0x12
+ 853 00e5 34       		.uleb128 0x34
+ 854 00e6 00       		.byte	0
+ 855 00e7 03       		.uleb128 0x3
+ 856 00e8 0E       		.uleb128 0xe
+ 857 00e9 3A       		.uleb128 0x3a
+ 858 00ea 0B       		.uleb128 0xb
+ 859 00eb 3B       		.uleb128 0x3b
+ 860 00ec 0B       		.uleb128 0xb
+ 861 00ed 49       		.uleb128 0x49
+ 862 00ee 13       		.uleb128 0x13
+ 863 00ef 3F       		.uleb128 0x3f
+ 864 00f0 19       		.uleb128 0x19
+ 865 00f1 02       		.uleb128 0x2
+ 866 00f2 18       		.uleb128 0x18
+ 867 00f3 00       		.byte	0
+ 868 00f4 00       		.byte	0
+ 869 00f5 13       		.uleb128 0x13
+ 870 00f6 2E       		.uleb128 0x2e
+ 871 00f7 00       		.byte	0
+ 872 00f8 3F       		.uleb128 0x3f
+ 873 00f9 19       		.uleb128 0x19
+ 874 00fa 3C       		.uleb128 0x3c
+ 875 00fb 19       		.uleb128 0x19
+ 876 00fc 6E       		.uleb128 0x6e
+ 877 00fd 0E       		.uleb128 0xe
+ 878 00fe 03       		.uleb128 0x3
+ 879 00ff 0E       		.uleb128 0xe
+ 880 0100 3A       		.uleb128 0x3a
+ 881 0101 0B       		.uleb128 0xb
+ 882 0102 3B       		.uleb128 0x3b
+ 883 0103 0B       		.uleb128 0xb
+ 884 0104 00       		.byte	0
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 21
+
+
+ 885 0105 00       		.byte	0
+ 886 0106 00       		.byte	0
+ 887              		.section	.debug_loc,"",%progbits
+ 888              	.Ldebug_loc0:
+ 889              	.LLST0:
+ 890 0000 00000000 		.4byte	.LVL0
+ 891 0004 06000000 		.4byte	.LVL2
+ 892 0008 0100     		.2byte	0x1
+ 893 000a 50       		.byte	0x50
+ 894 000b 06000000 		.4byte	.LVL2
+ 895 000f 18000000 		.4byte	.LVL9
+ 896 0013 0100     		.2byte	0x1
+ 897 0015 55       		.byte	0x55
+ 898 0016 18000000 		.4byte	.LVL9
+ 899 001a 1A000000 		.4byte	.LFE2
+ 900 001e 0400     		.2byte	0x4
+ 901 0020 F3       		.byte	0xf3
+ 902 0021 01       		.uleb128 0x1
+ 903 0022 50       		.byte	0x50
+ 904 0023 9F       		.byte	0x9f
+ 905 0024 00000000 		.4byte	0
+ 906 0028 00000000 		.4byte	0
+ 907              	.LLST1:
+ 908 002c 04000000 		.4byte	.LVL1
+ 909 0030 0A000000 		.4byte	.LVL3
+ 910 0034 0200     		.2byte	0x2
+ 911 0036 31       		.byte	0x31
+ 912 0037 9F       		.byte	0x9f
+ 913 0038 0A000000 		.4byte	.LVL3
+ 914 003c 12000000 		.4byte	.LVL6
+ 915 0040 0100     		.2byte	0x1
+ 916 0042 54       		.byte	0x54
+ 917 0043 14000000 		.4byte	.LVL7
+ 918 0047 18000000 		.4byte	.LVL8
+ 919 004b 0100     		.2byte	0x1
+ 920 004d 54       		.byte	0x54
+ 921 004e 00000000 		.4byte	0
+ 922 0052 00000000 		.4byte	0
+ 923              	.LLST2:
+ 924 0056 06000000 		.4byte	.LVL2
+ 925 005a 0D000000 		.4byte	.LVL4-1
+ 926 005e 0100     		.2byte	0x1
+ 927 0060 50       		.byte	0x50
+ 928 0061 10000000 		.4byte	.LVL5
+ 929 0065 1A000000 		.4byte	.LFE2
+ 930 0069 0100     		.2byte	0x1
+ 931 006b 50       		.byte	0x50
+ 932 006c 00000000 		.4byte	0
+ 933 0070 00000000 		.4byte	0
+ 934              	.LLST3:
+ 935 0074 00000000 		.4byte	.LVL10
+ 936 0078 0A000000 		.4byte	.LVL12
+ 937 007c 0100     		.2byte	0x1
+ 938 007e 50       		.byte	0x50
+ 939 007f 0A000000 		.4byte	.LVL12
+ 940 0083 16000000 		.4byte	.LVL17
+ 941 0087 0100     		.2byte	0x1
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 22
+
+
+ 942 0089 56       		.byte	0x56
+ 943 008a 16000000 		.4byte	.LVL17
+ 944 008e 18000000 		.4byte	.LFE3
+ 945 0092 0400     		.2byte	0x4
+ 946 0094 F3       		.byte	0xf3
+ 947 0095 01       		.uleb128 0x1
+ 948 0096 50       		.byte	0x50
+ 949 0097 9F       		.byte	0x9f
+ 950 0098 00000000 		.4byte	0
+ 951 009c 00000000 		.4byte	0
+ 952              	.LLST4:
+ 953 00a0 00000000 		.4byte	.LVL10
+ 954 00a4 0A000000 		.4byte	.LVL12
+ 955 00a8 0100     		.2byte	0x1
+ 956 00aa 51       		.byte	0x51
+ 957 00ab 0A000000 		.4byte	.LVL12
+ 958 00af 16000000 		.4byte	.LVL16
+ 959 00b3 0100     		.2byte	0x1
+ 960 00b5 55       		.byte	0x55
+ 961 00b6 16000000 		.4byte	.LVL16
+ 962 00ba 18000000 		.4byte	.LFE3
+ 963 00be 0400     		.2byte	0x4
+ 964 00c0 F3       		.byte	0xf3
+ 965 00c1 01       		.uleb128 0x1
+ 966 00c2 51       		.byte	0x51
+ 967 00c3 9F       		.byte	0x9f
+ 968 00c4 00000000 		.4byte	0
+ 969 00c8 00000000 		.4byte	0
+ 970              	.LLST5:
+ 971 00cc 06000000 		.4byte	.LVL11
+ 972 00d0 0A000000 		.4byte	.LVL12
+ 973 00d4 0200     		.2byte	0x2
+ 974 00d6 30       		.byte	0x30
+ 975 00d7 9F       		.byte	0x9f
+ 976 00d8 0A000000 		.4byte	.LVL12
+ 977 00dc 16000000 		.4byte	.LVL15
+ 978 00e0 0100     		.2byte	0x1
+ 979 00e2 54       		.byte	0x54
+ 980 00e3 00000000 		.4byte	0
+ 981 00e7 00000000 		.4byte	0
+ 982              	.LLST6:
+ 983 00eb 00000000 		.4byte	.LVL18
+ 984 00ef 0A000000 		.4byte	.LVL19
+ 985 00f3 0100     		.2byte	0x1
+ 986 00f5 50       		.byte	0x50
+ 987 00f6 0A000000 		.4byte	.LVL19
+ 988 00fa 20000000 		.4byte	.LFE4
+ 989 00fe 0400     		.2byte	0x4
+ 990 0100 F3       		.byte	0xf3
+ 991 0101 01       		.uleb128 0x1
+ 992 0102 50       		.byte	0x50
+ 993 0103 9F       		.byte	0x9f
+ 994 0104 00000000 		.4byte	0
+ 995 0108 00000000 		.4byte	0
+ 996              	.LLST7:
+ 997 010c 00000000 		.4byte	.LVL22
+ 998 0110 06000000 		.4byte	.LVL23
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 23
+
+
+ 999 0114 0100     		.2byte	0x1
+ 1000 0116 50       		.byte	0x50
+ 1001 0117 06000000 		.4byte	.LVL23
+ 1002 011b 12000000 		.4byte	.LFE5
+ 1003 011f 0400     		.2byte	0x4
+ 1004 0121 F3       		.byte	0xf3
+ 1005 0122 01       		.uleb128 0x1
+ 1006 0123 50       		.byte	0x50
+ 1007 0124 9F       		.byte	0x9f
+ 1008 0125 00000000 		.4byte	0
+ 1009 0129 00000000 		.4byte	0
+ 1010              		.section	.debug_aranges,"",%progbits
+ 1011 0000 4C000000 		.4byte	0x4c
+ 1012 0004 0200     		.2byte	0x2
+ 1013 0006 00000000 		.4byte	.Ldebug_info0
+ 1014 000a 04       		.byte	0x4
+ 1015 000b 00       		.byte	0
+ 1016 000c 0000     		.2byte	0
+ 1017 000e 0000     		.2byte	0
+ 1018 0010 00000000 		.4byte	.LFB0
+ 1019 0014 02000000 		.4byte	.LFE0-.LFB0
+ 1020 0018 00000000 		.4byte	.LFB1
+ 1021 001c 02000000 		.4byte	.LFE1-.LFB1
+ 1022 0020 00000000 		.4byte	.LFB2
+ 1023 0024 1A000000 		.4byte	.LFE2-.LFB2
+ 1024 0028 00000000 		.4byte	.LFB3
+ 1025 002c 18000000 		.4byte	.LFE3-.LFB3
+ 1026 0030 00000000 		.4byte	.LFB4
+ 1027 0034 20000000 		.4byte	.LFE4-.LFB4
+ 1028 0038 00000000 		.4byte	.LFB5
+ 1029 003c 12000000 		.4byte	.LFE5-.LFB5
+ 1030 0040 00000000 		.4byte	.LFB6
+ 1031 0044 10000000 		.4byte	.LFE6-.LFB6
+ 1032 0048 00000000 		.4byte	0
+ 1033 004c 00000000 		.4byte	0
+ 1034              		.section	.debug_ranges,"",%progbits
+ 1035              	.Ldebug_ranges0:
+ 1036 0000 00000000 		.4byte	.LFB0
+ 1037 0004 02000000 		.4byte	.LFE0
+ 1038 0008 00000000 		.4byte	.LFB1
+ 1039 000c 02000000 		.4byte	.LFE1
+ 1040 0010 00000000 		.4byte	.LFB2
+ 1041 0014 1A000000 		.4byte	.LFE2
+ 1042 0018 00000000 		.4byte	.LFB3
+ 1043 001c 18000000 		.4byte	.LFE3
+ 1044 0020 00000000 		.4byte	.LFB4
+ 1045 0024 20000000 		.4byte	.LFE4
+ 1046 0028 00000000 		.4byte	.LFB5
+ 1047 002c 12000000 		.4byte	.LFE5
+ 1048 0030 00000000 		.4byte	.LFB6
+ 1049 0034 10000000 		.4byte	.LFE6
+ 1050 0038 00000000 		.4byte	0
+ 1051 003c 00000000 		.4byte	0
+ 1052              		.section	.debug_line,"",%progbits
+ 1053              	.Ldebug_line0:
+ 1054 0000 3C010000 		.section	.debug_str,"MS",%progbits,1
+ 1054      0200A100 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 24
+
+
+ 1054      00000201 
+ 1054      FB0E0D00 
+ 1054      01010101 
+ 1055              	.LASF33:
+ 1056 0000 53575F54 		.ascii	"SW_Tx_UART_pinNumber\000"
+ 1056      785F5541 
+ 1056      52545F70 
+ 1056      696E4E75 
+ 1056      6D626572 
+ 1057              	.LASF28:
+ 1058 0015 53575F54 		.ascii	"SW_Tx_UART_hex\000"
+ 1058      785F5541 
+ 1058      52545F68 
+ 1058      657800
+ 1059              	.LASF2:
+ 1060 0024 73686F72 		.ascii	"short int\000"
+ 1060      7420696E 
+ 1060      7400
+ 1061              	.LASF29:
+ 1062 002e 73697A65 		.ascii	"sizetype\000"
+ 1062      74797065 
+ 1062      00
+ 1063              	.LASF34:
+ 1064 0037 53575F54 		.ascii	"SW_Tx_UART_pinPortNumber\000"
+ 1064      785F5541 
+ 1064      52545F70 
+ 1064      696E506F 
+ 1064      72744E75 
+ 1065              	.LASF14:
+ 1066 0050 63686172 		.ascii	"char8\000"
+ 1066      3800
+ 1067              	.LASF16:
+ 1068 0056 53575F54 		.ascii	"SW_Tx_UART_Start\000"
+ 1068      785F5541 
+ 1068      52545F53 
+ 1068      74617274 
+ 1068      00
+ 1069              	.LASF36:
+ 1070 0067 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1070      43313120 
+ 1070      352E342E 
+ 1070      31203230 
+ 1070      31363036 
+ 1071 009a 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 1071      20726576 
+ 1071      6973696F 
+ 1071      6E203233 
+ 1071      37373135 
+ 1072 00cd 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1072      66756E63 
+ 1072      74696F6E 
+ 1072      2D736563 
+ 1072      74696F6E 
+ 1073              	.LASF9:
+ 1074 00f5 75696E74 		.ascii	"uint8\000"
+ 1074      3800
+ 1075              	.LASF32:
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 25
+
+
+ 1076 00fb 53575F54 		.ascii	"SW_Tx_UART_PutCRLF\000"
+ 1076      785F5541 
+ 1076      52545F50 
+ 1076      75744352 
+ 1076      4C4600
+ 1077              	.LASF12:
+ 1078 010e 666C6F61 		.ascii	"float\000"
+ 1078      7400
+ 1079              	.LASF6:
+ 1080 0114 6C6F6E67 		.ascii	"long long int\000"
+ 1080      206C6F6E 
+ 1080      6720696E 
+ 1080      7400
+ 1081              	.LASF17:
+ 1082 0122 53575F54 		.ascii	"SW_Tx_UART_Stop\000"
+ 1082      785F5541 
+ 1082      52545F53 
+ 1082      746F7000 
+ 1083              	.LASF4:
+ 1084 0132 6C6F6E67 		.ascii	"long int\000"
+ 1084      20696E74 
+ 1084      00
+ 1085              	.LASF22:
+ 1086 013b 73747269 		.ascii	"string\000"
+ 1086      6E6700
+ 1087              	.LASF27:
+ 1088 0142 74784865 		.ascii	"txHexByte\000"
+ 1088      78427974 
+ 1088      6500
+ 1089              	.LASF21:
+ 1090 014c 53575F54 		.ascii	"SW_Tx_UART_PutArray\000"
+ 1090      785F5541 
+ 1090      52545F50 
+ 1090      75744172 
+ 1090      72617900 
+ 1091              	.LASF1:
+ 1092 0160 756E7369 		.ascii	"unsigned char\000"
+ 1092      676E6564 
+ 1092      20636861 
+ 1092      7200
+ 1093              	.LASF18:
+ 1094 016e 73747269 		.ascii	"stringIndex\000"
+ 1094      6E67496E 
+ 1094      64657800 
+ 1095              	.LASF0:
+ 1096 017a 7369676E 		.ascii	"signed char\000"
+ 1096      65642063 
+ 1096      68617200 
+ 1097              	.LASF7:
+ 1098 0186 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1098      206C6F6E 
+ 1098      6720756E 
+ 1098      7369676E 
+ 1098      65642069 
+ 1099              	.LASF31:
+ 1100 019d 74784865 		.ascii	"txHexInt\000"
+ 1100      78496E74 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 26
+
+
+ 1100      00
+ 1101              	.LASF8:
+ 1102 01a6 756E7369 		.ascii	"unsigned int\000"
+ 1102      676E6564 
+ 1102      20696E74 
+ 1102      00
+ 1103              	.LASF19:
+ 1104 01b3 63757272 		.ascii	"current\000"
+ 1104      656E7400 
+ 1105              	.LASF38:
+ 1106 01bb 53575F54 		.ascii	"SW_Tx_UART_PutChar\000"
+ 1106      785F5541 
+ 1106      52545F50 
+ 1106      75744368 
+ 1106      617200
+ 1107              	.LASF37:
+ 1108 01ce 433A5C50 		.ascii	"C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4"
+ 1108      726F6772 
+ 1108      616D2046 
+ 1108      696C6573 
+ 1108      20287838 
+ 1109 01fd 5C50536F 		.ascii	"\\PSoC Creator\\1\\LWO4.cydsn\\Generated_Source\\PS"
+ 1109      43204372 
+ 1109      6561746F 
+ 1109      725C315C 
+ 1109      4C574F34 
+ 1110 022b 6F43345C 		.ascii	"oC4\\SW_Tx_UART.c\000"
+ 1110      53575F54 
+ 1110      785F5541 
+ 1110      52542E63 
+ 1110      00
+ 1111              	.LASF3:
+ 1112 023c 73686F72 		.ascii	"short unsigned int\000"
+ 1112      7420756E 
+ 1112      7369676E 
+ 1112      65642069 
+ 1112      6E7400
+ 1113              	.LASF26:
+ 1114 024f 53575F54 		.ascii	"SW_Tx_UART_PutHexByte\000"
+ 1114      785F5541 
+ 1114      52545F50 
+ 1114      75744865 
+ 1114      78427974 
+ 1115              	.LASF15:
+ 1116 0265 63686172 		.ascii	"char\000"
+ 1116      00
+ 1117              	.LASF35:
+ 1118 026a 53575F54 		.ascii	"SW_Tx_UART_pinDrAdress\000"
+ 1118      785F5541 
+ 1118      52545F70 
+ 1118      696E4472 
+ 1118      41647265 
+ 1119              	.LASF10:
+ 1120 0281 75696E74 		.ascii	"uint16\000"
+ 1120      313600
+ 1121              	.LASF25:
+ 1122 0288 61727261 		.ascii	"arrayIndex\000"
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccr5RLdg.s 			page 27
+
+
+ 1122      79496E64 
+ 1122      657800
+ 1123              	.LASF11:
+ 1124 0293 75696E74 		.ascii	"uint32\000"
+ 1124      333200
+ 1125              	.LASF5:
+ 1126 029a 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1126      20756E73 
+ 1126      69676E65 
+ 1126      6420696E 
+ 1126      7400
+ 1127              	.LASF13:
+ 1128 02ac 646F7562 		.ascii	"double\000"
+ 1128      6C6500
+ 1129              	.LASF23:
+ 1130 02b3 61727261 		.ascii	"array\000"
+ 1130      7900
+ 1131              	.LASF24:
+ 1132 02b9 62797465 		.ascii	"byteCount\000"
+ 1132      436F756E 
+ 1132      7400
+ 1133              	.LASF30:
+ 1134 02c3 53575F54 		.ascii	"SW_Tx_UART_PutHexInt\000"
+ 1134      785F5541 
+ 1134      52545F50 
+ 1134      75744865 
+ 1134      78496E74 
+ 1135              	.LASF20:
+ 1136 02d8 53575F54 		.ascii	"SW_Tx_UART_PutString\000"
+ 1136      785F5541 
+ 1136      52545F50 
+ 1136      75745374 
+ 1136      72696E67 
+ 1137              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,0 +1,10 @@
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO1.cydsn\LWO1.cyprj|31a214f3-e33b-460c-815f-1999d08d9d02
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|18dd97d1-618a-4789-9981-29a538ba9ee9
+C:\Users\taips\OneDrive\Документи\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|13b6cf08-7e77-4585-bc5e-65c0f4bd13db
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|cc233e35-356f-44db-8291-80649fe5ea72
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|21c859b2-d785-48a9-9074-ad28dc6872f4
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|b7ffdb2f-0b60-49bb-8860-a7e19e4cb570
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\CapSense_CSD_P4_Design01.cyprj|f7310b75-6db1-4d99-9e22-cebb85df8d22
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO2.cydsn\LWO2.cyprj|349914b0-c473-4b2c-b280-742cf1ba213f
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO3.cydsn\LWO3.cyprj|cdab1718-38cd-4fe5-93fd-19c3229a3258
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\LWO4.cydsn\LWO4.cyprj|318e196d-cb96-4c36-baba-fdda10dfbd79

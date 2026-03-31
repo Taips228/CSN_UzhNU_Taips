@@ -1,0 +1,701 @@
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccOEVZfp.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"cyutils.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.CySetReg24,"ax",%progbits
+  20              		.align	2
+  21              		.global	CySetReg24
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	CySetReg24, %function
+  25              	CySetReg24:
+  26              	.LFB0:
+  27              		.file 1 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\CapSense_CSD_P4_Des
+   1:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** /***************************************************************************//**
+   2:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** * \file cyutils.c
+   3:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** * \version 5.60
+   4:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** *
+   5:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** * \brief Provides a function to handle 24-bit value writes.
+   6:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** *
+   7:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** ********************************************************************************
+   8:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** * \copyright
+   9:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** * Copyright 2008-2017, Cypress Semiconductor Corporation.  All rights reserved.
+  10:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** * You may use this file only in accordance with the license, terms, conditions,
+  11:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  12:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** * the software package with which this file was provided.
+  13:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** *******************************************************************************/
+  14:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** 
+  15:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** #include "cytypes.h"
+  16:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** 
+  17:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** #if (!CY_PSOC3)
+  18:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** 
+  19:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****     /***************************************************************************
+  20:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****     * Function Name: CySetReg24
+  21:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****     ************************************************************************//**
+  22:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****     *
+  23:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****     * Writes a 24-bit value to the specified register.
+  24:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****     *
+  25:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****     * \param addr The address where data must be written.
+  26:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****     * \param value The data that must be written.
+  27:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****     *
+  28:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****     * \reentrant No
+  29:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****     *
+  30:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****     ***************************************************************************/
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccOEVZfp.s 			page 2
+
+
+  31:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****     void CySetReg24(uint32 volatile * addr, uint32 value)
+  32:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****     {
+  28              		.loc 1 32 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 16
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 7, -8
+  35              		.cfi_offset 14, -4
+  36 0002 84B0     		sub	sp, sp, #16
+  37              		.cfi_def_cfa_offset 24
+  38 0004 00AF     		add	r7, sp, #0
+  39              		.cfi_def_cfa_register 7
+  40 0006 7860     		str	r0, [r7, #4]
+  41 0008 3960     		str	r1, [r7]
+  33:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****         uint8 volatile *tmpAddr;
+  34:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** 
+  35:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****         tmpAddr = (uint8 volatile *) addr;
+  42              		.loc 1 35 0
+  43 000a 7B68     		ldr	r3, [r7, #4]
+  44 000c FB60     		str	r3, [r7, #12]
+  36:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** 
+  37:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****         tmpAddr[0u] = (uint8) value;
+  45              		.loc 1 37 0
+  46 000e 3B68     		ldr	r3, [r7]
+  47 0010 DAB2     		uxtb	r2, r3
+  48 0012 FB68     		ldr	r3, [r7, #12]
+  49 0014 1A70     		strb	r2, [r3]
+  38:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****         tmpAddr[1u] = (uint8) (value >> 8u);
+  50              		.loc 1 38 0
+  51 0016 FB68     		ldr	r3, [r7, #12]
+  52 0018 0133     		adds	r3, r3, #1
+  53 001a 3A68     		ldr	r2, [r7]
+  54 001c 120A     		lsrs	r2, r2, #8
+  55 001e D2B2     		uxtb	r2, r2
+  56 0020 1A70     		strb	r2, [r3]
+  39:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****         tmpAddr[2u] = (uint8) (value >> 16u);
+  57              		.loc 1 39 0
+  58 0022 FB68     		ldr	r3, [r7, #12]
+  59 0024 0233     		adds	r3, r3, #2
+  60 0026 3A68     		ldr	r2, [r7]
+  61 0028 120C     		lsrs	r2, r2, #16
+  62 002a D2B2     		uxtb	r2, r2
+  63 002c 1A70     		strb	r2, [r3]
+  40:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****     }
+  64              		.loc 1 40 0
+  65 002e C046     		nop
+  66 0030 BD46     		mov	sp, r7
+  67 0032 04B0     		add	sp, sp, #16
+  68              		@ sp needed
+  69 0034 80BD     		pop	{r7, pc}
+  70              		.cfi_endproc
+  71              	.LFE0:
+  72              		.size	CySetReg24, .-CySetReg24
+  73 0036 C046     		.section	.text.CyGetReg24,"ax",%progbits
+  74              		.align	2
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccOEVZfp.s 			page 3
+
+
+  75              		.global	CyGetReg24
+  76              		.code	16
+  77              		.thumb_func
+  78              		.type	CyGetReg24, %function
+  79              	CyGetReg24:
+  80              	.LFB1:
+  41:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** 
+  42:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** 
+  43:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****     #if(CY_PSOC4)
+  44:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** 
+  45:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****         /***************************************************************************
+  46:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****         * Function Name: CyGetReg24
+  47:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****         ************************************************************************//**
+  48:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****         *
+  49:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****         * Reads the 24-bit value from the specified register.
+  50:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****         *
+  51:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****         * \param addr The address where data must be read.
+  52:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****         *
+  53:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****         * \reentrant No
+  54:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****         *
+  55:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****         ***************************************************************************/
+  56:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****         uint32 CyGetReg24(uint32 const volatile * addr)
+  57:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****         {
+  81              		.loc 1 57 0
+  82              		.cfi_startproc
+  83              		@ args = 0, pretend = 0, frame = 16
+  84              		@ frame_needed = 1, uses_anonymous_args = 0
+  85 0000 80B5     		push	{r7, lr}
+  86              		.cfi_def_cfa_offset 8
+  87              		.cfi_offset 7, -8
+  88              		.cfi_offset 14, -4
+  89 0002 84B0     		sub	sp, sp, #16
+  90              		.cfi_def_cfa_offset 24
+  91 0004 00AF     		add	r7, sp, #0
+  92              		.cfi_def_cfa_register 7
+  93 0006 7860     		str	r0, [r7, #4]
+  58:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****             uint8 const volatile *tmpAddr;
+  59:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****             uint32 value;
+  60:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** 
+  61:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****             tmpAddr = (uint8 const volatile *) addr;
+  94              		.loc 1 61 0
+  95 0008 7B68     		ldr	r3, [r7, #4]
+  96 000a FB60     		str	r3, [r7, #12]
+  62:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** 
+  63:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****             value  =  (uint32) tmpAddr[0u];
+  97              		.loc 1 63 0
+  98 000c FB68     		ldr	r3, [r7, #12]
+  99 000e 1B78     		ldrb	r3, [r3]
+ 100 0010 DBB2     		uxtb	r3, r3
+ 101 0012 BB60     		str	r3, [r7, #8]
+  64:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****             value |= ((uint32) tmpAddr[1u] << 8u );
+ 102              		.loc 1 64 0
+ 103 0014 FB68     		ldr	r3, [r7, #12]
+ 104 0016 0133     		adds	r3, r3, #1
+ 105 0018 1B78     		ldrb	r3, [r3]
+ 106 001a DBB2     		uxtb	r3, r3
+ 107 001c 1B02     		lsls	r3, r3, #8
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccOEVZfp.s 			page 4
+
+
+ 108 001e BA68     		ldr	r2, [r7, #8]
+ 109 0020 1343     		orrs	r3, r2
+ 110 0022 BB60     		str	r3, [r7, #8]
+  65:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****             value |= ((uint32) tmpAddr[2u] << 16u);
+ 111              		.loc 1 65 0
+ 112 0024 FB68     		ldr	r3, [r7, #12]
+ 113 0026 0233     		adds	r3, r3, #2
+ 114 0028 1B78     		ldrb	r3, [r3]
+ 115 002a DBB2     		uxtb	r3, r3
+ 116 002c 1B04     		lsls	r3, r3, #16
+ 117 002e BA68     		ldr	r2, [r7, #8]
+ 118 0030 1343     		orrs	r3, r2
+ 119 0032 BB60     		str	r3, [r7, #8]
+  66:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c **** 
+  67:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****             return(value);
+ 120              		.loc 1 67 0
+ 121 0034 BB68     		ldr	r3, [r7, #8]
+  68:C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\1\CapSense_CSD_P4_Design01.cydsn\Generated_Source\PSoC4\cyutils.c ****         }
+ 122              		.loc 1 68 0
+ 123 0036 1800     		movs	r0, r3
+ 124 0038 BD46     		mov	sp, r7
+ 125 003a 04B0     		add	sp, sp, #16
+ 126              		@ sp needed
+ 127 003c 80BD     		pop	{r7, pc}
+ 128              		.cfi_endproc
+ 129              	.LFE1:
+ 130              		.size	CyGetReg24, .-CyGetReg24
+ 131 003e C046     		.text
+ 132              	.Letext0:
+ 133              		.file 2 "C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4\\PSoC Creator\\1\\CapSense_CSD_P4_Des
+ 134              		.section	.debug_info,"",%progbits
+ 135              	.Ldebug_info0:
+ 136 0000 41010000 		.4byte	0x141
+ 137 0004 0400     		.2byte	0x4
+ 138 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 139 000a 04       		.byte	0x4
+ 140 000b 01       		.uleb128 0x1
+ 141 000c 62000000 		.4byte	.LASF17
+ 142 0010 0C       		.byte	0xc
+ 143 0011 F7000000 		.4byte	.LASF18
+ 144 0015 00000000 		.4byte	.Ldebug_ranges0+0
+ 145 0019 00000000 		.4byte	0
+ 146 001d 00000000 		.4byte	.Ldebug_line0
+ 147 0021 02       		.uleb128 0x2
+ 148 0022 01       		.byte	0x1
+ 149 0023 06       		.byte	0x6
+ 150 0024 CD010000 		.4byte	.LASF0
+ 151 0028 02       		.uleb128 0x2
+ 152 0029 01       		.byte	0x1
+ 153 002a 08       		.byte	0x8
+ 154 002b 27000000 		.4byte	.LASF1
+ 155 002f 02       		.uleb128 0x2
+ 156 0030 02       		.byte	0x2
+ 157 0031 05       		.byte	0x5
+ 158 0032 B4010000 		.4byte	.LASF2
+ 159 0036 02       		.uleb128 0x2
+ 160 0037 02       		.byte	0x2
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccOEVZfp.s 			page 5
+
+
+ 161 0038 07       		.byte	0x7
+ 162 0039 4F000000 		.4byte	.LASF3
+ 163 003d 02       		.uleb128 0x2
+ 164 003e 04       		.byte	0x4
+ 165 003f 05       		.byte	0x5
+ 166 0040 C4010000 		.4byte	.LASF4
+ 167 0044 02       		.uleb128 0x2
+ 168 0045 04       		.byte	0x4
+ 169 0046 07       		.byte	0x7
+ 170 0047 3D000000 		.4byte	.LASF5
+ 171 004b 02       		.uleb128 0x2
+ 172 004c 08       		.byte	0x8
+ 173 004d 05       		.byte	0x5
+ 174 004e A1010000 		.4byte	.LASF6
+ 175 0052 02       		.uleb128 0x2
+ 176 0053 08       		.byte	0x8
+ 177 0054 07       		.byte	0x7
+ 178 0055 8A010000 		.4byte	.LASF7
+ 179 0059 03       		.uleb128 0x3
+ 180 005a 04       		.byte	0x4
+ 181 005b 05       		.byte	0x5
+ 182 005c 696E7400 		.ascii	"int\000"
+ 183 0060 02       		.uleb128 0x2
+ 184 0061 04       		.byte	0x4
+ 185 0062 07       		.byte	0x7
+ 186 0063 7D010000 		.4byte	.LASF8
+ 187 0067 04       		.uleb128 0x4
+ 188 0068 BE010000 		.4byte	.LASF9
+ 189 006c 02       		.byte	0x2
+ 190 006d D201     		.2byte	0x1d2
+ 191 006f 28000000 		.4byte	0x28
+ 192 0073 04       		.uleb128 0x4
+ 193 0074 76010000 		.4byte	.LASF10
+ 194 0078 02       		.byte	0x2
+ 195 0079 D401     		.2byte	0x1d4
+ 196 007b 44000000 		.4byte	0x44
+ 197 007f 02       		.uleb128 0x2
+ 198 0080 04       		.byte	0x4
+ 199 0081 04       		.byte	0x4
+ 200 0082 21000000 		.4byte	.LASF11
+ 201 0086 02       		.uleb128 0x2
+ 202 0087 08       		.byte	0x8
+ 203 0088 04       		.byte	0x4
+ 204 0089 F0000000 		.4byte	.LASF12
+ 205 008d 02       		.uleb128 0x2
+ 206 008e 01       		.byte	0x1
+ 207 008f 08       		.byte	0x8
+ 208 0090 AF010000 		.4byte	.LASF13
+ 209 0094 05       		.uleb128 0x5
+ 210 0095 67000000 		.4byte	0x67
+ 211 0099 05       		.uleb128 0x5
+ 212 009a 73000000 		.4byte	0x73
+ 213 009e 06       		.uleb128 0x6
+ 214 009f 11000000 		.4byte	.LASF19
+ 215 00a3 01       		.byte	0x1
+ 216 00a4 1F       		.byte	0x1f
+ 217 00a5 00000000 		.4byte	.LFB0
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccOEVZfp.s 			page 6
+
+
+ 218 00a9 36000000 		.4byte	.LFE0-.LFB0
+ 219 00ad 01       		.uleb128 0x1
+ 220 00ae 9C       		.byte	0x9c
+ 221 00af DE000000 		.4byte	0xde
+ 222 00b3 07       		.uleb128 0x7
+ 223 00b4 1C000000 		.4byte	.LASF14
+ 224 00b8 01       		.byte	0x1
+ 225 00b9 1F       		.byte	0x1f
+ 226 00ba DE000000 		.4byte	0xde
+ 227 00be 02       		.uleb128 0x2
+ 228 00bf 91       		.byte	0x91
+ 229 00c0 6C       		.sleb128 -20
+ 230 00c1 07       		.uleb128 0x7
+ 231 00c2 00000000 		.4byte	.LASF15
+ 232 00c6 01       		.byte	0x1
+ 233 00c7 1F       		.byte	0x1f
+ 234 00c8 73000000 		.4byte	0x73
+ 235 00cc 02       		.uleb128 0x2
+ 236 00cd 91       		.byte	0x91
+ 237 00ce 68       		.sleb128 -24
+ 238 00cf 08       		.uleb128 0x8
+ 239 00d0 35000000 		.4byte	.LASF16
+ 240 00d4 01       		.byte	0x1
+ 241 00d5 21       		.byte	0x21
+ 242 00d6 E4000000 		.4byte	0xe4
+ 243 00da 02       		.uleb128 0x2
+ 244 00db 91       		.byte	0x91
+ 245 00dc 74       		.sleb128 -12
+ 246 00dd 00       		.byte	0
+ 247 00de 09       		.uleb128 0x9
+ 248 00df 04       		.byte	0x4
+ 249 00e0 99000000 		.4byte	0x99
+ 250 00e4 09       		.uleb128 0x9
+ 251 00e5 04       		.byte	0x4
+ 252 00e6 94000000 		.4byte	0x94
+ 253 00ea 0A       		.uleb128 0xa
+ 254 00eb 06000000 		.4byte	.LASF20
+ 255 00ef 01       		.byte	0x1
+ 256 00f0 38       		.byte	0x38
+ 257 00f1 73000000 		.4byte	0x73
+ 258 00f5 00000000 		.4byte	.LFB1
+ 259 00f9 3E000000 		.4byte	.LFE1-.LFB1
+ 260 00fd 01       		.uleb128 0x1
+ 261 00fe 9C       		.byte	0x9c
+ 262 00ff 2E010000 		.4byte	0x12e
+ 263 0103 07       		.uleb128 0x7
+ 264 0104 1C000000 		.4byte	.LASF14
+ 265 0108 01       		.byte	0x1
+ 266 0109 38       		.byte	0x38
+ 267 010a 2E010000 		.4byte	0x12e
+ 268 010e 02       		.uleb128 0x2
+ 269 010f 91       		.byte	0x91
+ 270 0110 6C       		.sleb128 -20
+ 271 0111 08       		.uleb128 0x8
+ 272 0112 35000000 		.4byte	.LASF16
+ 273 0116 01       		.byte	0x1
+ 274 0117 3A       		.byte	0x3a
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccOEVZfp.s 			page 7
+
+
+ 275 0118 39010000 		.4byte	0x139
+ 276 011c 02       		.uleb128 0x2
+ 277 011d 91       		.byte	0x91
+ 278 011e 74       		.sleb128 -12
+ 279 011f 08       		.uleb128 0x8
+ 280 0120 00000000 		.4byte	.LASF15
+ 281 0124 01       		.byte	0x1
+ 282 0125 3B       		.byte	0x3b
+ 283 0126 73000000 		.4byte	0x73
+ 284 012a 02       		.uleb128 0x2
+ 285 012b 91       		.byte	0x91
+ 286 012c 70       		.sleb128 -16
+ 287 012d 00       		.byte	0
+ 288 012e 09       		.uleb128 0x9
+ 289 012f 04       		.byte	0x4
+ 290 0130 34010000 		.4byte	0x134
+ 291 0134 0B       		.uleb128 0xb
+ 292 0135 99000000 		.4byte	0x99
+ 293 0139 09       		.uleb128 0x9
+ 294 013a 04       		.byte	0x4
+ 295 013b 3F010000 		.4byte	0x13f
+ 296 013f 0B       		.uleb128 0xb
+ 297 0140 94000000 		.4byte	0x94
+ 298 0144 00       		.byte	0
+ 299              		.section	.debug_abbrev,"",%progbits
+ 300              	.Ldebug_abbrev0:
+ 301 0000 01       		.uleb128 0x1
+ 302 0001 11       		.uleb128 0x11
+ 303 0002 01       		.byte	0x1
+ 304 0003 25       		.uleb128 0x25
+ 305 0004 0E       		.uleb128 0xe
+ 306 0005 13       		.uleb128 0x13
+ 307 0006 0B       		.uleb128 0xb
+ 308 0007 03       		.uleb128 0x3
+ 309 0008 0E       		.uleb128 0xe
+ 310 0009 55       		.uleb128 0x55
+ 311 000a 17       		.uleb128 0x17
+ 312 000b 11       		.uleb128 0x11
+ 313 000c 01       		.uleb128 0x1
+ 314 000d 10       		.uleb128 0x10
+ 315 000e 17       		.uleb128 0x17
+ 316 000f 00       		.byte	0
+ 317 0010 00       		.byte	0
+ 318 0011 02       		.uleb128 0x2
+ 319 0012 24       		.uleb128 0x24
+ 320 0013 00       		.byte	0
+ 321 0014 0B       		.uleb128 0xb
+ 322 0015 0B       		.uleb128 0xb
+ 323 0016 3E       		.uleb128 0x3e
+ 324 0017 0B       		.uleb128 0xb
+ 325 0018 03       		.uleb128 0x3
+ 326 0019 0E       		.uleb128 0xe
+ 327 001a 00       		.byte	0
+ 328 001b 00       		.byte	0
+ 329 001c 03       		.uleb128 0x3
+ 330 001d 24       		.uleb128 0x24
+ 331 001e 00       		.byte	0
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccOEVZfp.s 			page 8
+
+
+ 332 001f 0B       		.uleb128 0xb
+ 333 0020 0B       		.uleb128 0xb
+ 334 0021 3E       		.uleb128 0x3e
+ 335 0022 0B       		.uleb128 0xb
+ 336 0023 03       		.uleb128 0x3
+ 337 0024 08       		.uleb128 0x8
+ 338 0025 00       		.byte	0
+ 339 0026 00       		.byte	0
+ 340 0027 04       		.uleb128 0x4
+ 341 0028 16       		.uleb128 0x16
+ 342 0029 00       		.byte	0
+ 343 002a 03       		.uleb128 0x3
+ 344 002b 0E       		.uleb128 0xe
+ 345 002c 3A       		.uleb128 0x3a
+ 346 002d 0B       		.uleb128 0xb
+ 347 002e 3B       		.uleb128 0x3b
+ 348 002f 05       		.uleb128 0x5
+ 349 0030 49       		.uleb128 0x49
+ 350 0031 13       		.uleb128 0x13
+ 351 0032 00       		.byte	0
+ 352 0033 00       		.byte	0
+ 353 0034 05       		.uleb128 0x5
+ 354 0035 35       		.uleb128 0x35
+ 355 0036 00       		.byte	0
+ 356 0037 49       		.uleb128 0x49
+ 357 0038 13       		.uleb128 0x13
+ 358 0039 00       		.byte	0
+ 359 003a 00       		.byte	0
+ 360 003b 06       		.uleb128 0x6
+ 361 003c 2E       		.uleb128 0x2e
+ 362 003d 01       		.byte	0x1
+ 363 003e 3F       		.uleb128 0x3f
+ 364 003f 19       		.uleb128 0x19
+ 365 0040 03       		.uleb128 0x3
+ 366 0041 0E       		.uleb128 0xe
+ 367 0042 3A       		.uleb128 0x3a
+ 368 0043 0B       		.uleb128 0xb
+ 369 0044 3B       		.uleb128 0x3b
+ 370 0045 0B       		.uleb128 0xb
+ 371 0046 27       		.uleb128 0x27
+ 372 0047 19       		.uleb128 0x19
+ 373 0048 11       		.uleb128 0x11
+ 374 0049 01       		.uleb128 0x1
+ 375 004a 12       		.uleb128 0x12
+ 376 004b 06       		.uleb128 0x6
+ 377 004c 40       		.uleb128 0x40
+ 378 004d 18       		.uleb128 0x18
+ 379 004e 9742     		.uleb128 0x2117
+ 380 0050 19       		.uleb128 0x19
+ 381 0051 01       		.uleb128 0x1
+ 382 0052 13       		.uleb128 0x13
+ 383 0053 00       		.byte	0
+ 384 0054 00       		.byte	0
+ 385 0055 07       		.uleb128 0x7
+ 386 0056 05       		.uleb128 0x5
+ 387 0057 00       		.byte	0
+ 388 0058 03       		.uleb128 0x3
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccOEVZfp.s 			page 9
+
+
+ 389 0059 0E       		.uleb128 0xe
+ 390 005a 3A       		.uleb128 0x3a
+ 391 005b 0B       		.uleb128 0xb
+ 392 005c 3B       		.uleb128 0x3b
+ 393 005d 0B       		.uleb128 0xb
+ 394 005e 49       		.uleb128 0x49
+ 395 005f 13       		.uleb128 0x13
+ 396 0060 02       		.uleb128 0x2
+ 397 0061 18       		.uleb128 0x18
+ 398 0062 00       		.byte	0
+ 399 0063 00       		.byte	0
+ 400 0064 08       		.uleb128 0x8
+ 401 0065 34       		.uleb128 0x34
+ 402 0066 00       		.byte	0
+ 403 0067 03       		.uleb128 0x3
+ 404 0068 0E       		.uleb128 0xe
+ 405 0069 3A       		.uleb128 0x3a
+ 406 006a 0B       		.uleb128 0xb
+ 407 006b 3B       		.uleb128 0x3b
+ 408 006c 0B       		.uleb128 0xb
+ 409 006d 49       		.uleb128 0x49
+ 410 006e 13       		.uleb128 0x13
+ 411 006f 02       		.uleb128 0x2
+ 412 0070 18       		.uleb128 0x18
+ 413 0071 00       		.byte	0
+ 414 0072 00       		.byte	0
+ 415 0073 09       		.uleb128 0x9
+ 416 0074 0F       		.uleb128 0xf
+ 417 0075 00       		.byte	0
+ 418 0076 0B       		.uleb128 0xb
+ 419 0077 0B       		.uleb128 0xb
+ 420 0078 49       		.uleb128 0x49
+ 421 0079 13       		.uleb128 0x13
+ 422 007a 00       		.byte	0
+ 423 007b 00       		.byte	0
+ 424 007c 0A       		.uleb128 0xa
+ 425 007d 2E       		.uleb128 0x2e
+ 426 007e 01       		.byte	0x1
+ 427 007f 3F       		.uleb128 0x3f
+ 428 0080 19       		.uleb128 0x19
+ 429 0081 03       		.uleb128 0x3
+ 430 0082 0E       		.uleb128 0xe
+ 431 0083 3A       		.uleb128 0x3a
+ 432 0084 0B       		.uleb128 0xb
+ 433 0085 3B       		.uleb128 0x3b
+ 434 0086 0B       		.uleb128 0xb
+ 435 0087 27       		.uleb128 0x27
+ 436 0088 19       		.uleb128 0x19
+ 437 0089 49       		.uleb128 0x49
+ 438 008a 13       		.uleb128 0x13
+ 439 008b 11       		.uleb128 0x11
+ 440 008c 01       		.uleb128 0x1
+ 441 008d 12       		.uleb128 0x12
+ 442 008e 06       		.uleb128 0x6
+ 443 008f 40       		.uleb128 0x40
+ 444 0090 18       		.uleb128 0x18
+ 445 0091 9742     		.uleb128 0x2117
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccOEVZfp.s 			page 10
+
+
+ 446 0093 19       		.uleb128 0x19
+ 447 0094 01       		.uleb128 0x1
+ 448 0095 13       		.uleb128 0x13
+ 449 0096 00       		.byte	0
+ 450 0097 00       		.byte	0
+ 451 0098 0B       		.uleb128 0xb
+ 452 0099 26       		.uleb128 0x26
+ 453 009a 00       		.byte	0
+ 454 009b 49       		.uleb128 0x49
+ 455 009c 13       		.uleb128 0x13
+ 456 009d 00       		.byte	0
+ 457 009e 00       		.byte	0
+ 458 009f 00       		.byte	0
+ 459              		.section	.debug_aranges,"",%progbits
+ 460 0000 24000000 		.4byte	0x24
+ 461 0004 0200     		.2byte	0x2
+ 462 0006 00000000 		.4byte	.Ldebug_info0
+ 463 000a 04       		.byte	0x4
+ 464 000b 00       		.byte	0
+ 465 000c 0000     		.2byte	0
+ 466 000e 0000     		.2byte	0
+ 467 0010 00000000 		.4byte	.LFB0
+ 468 0014 36000000 		.4byte	.LFE0-.LFB0
+ 469 0018 00000000 		.4byte	.LFB1
+ 470 001c 3E000000 		.4byte	.LFE1-.LFB1
+ 471 0020 00000000 		.4byte	0
+ 472 0024 00000000 		.4byte	0
+ 473              		.section	.debug_ranges,"",%progbits
+ 474              	.Ldebug_ranges0:
+ 475 0000 00000000 		.4byte	.LFB0
+ 476 0004 36000000 		.4byte	.LFE0
+ 477 0008 00000000 		.4byte	.LFB1
+ 478 000c 3E000000 		.4byte	.LFE1
+ 479 0010 00000000 		.4byte	0
+ 480 0014 00000000 		.4byte	0
+ 481              		.section	.debug_line,"",%progbits
+ 482              	.Ldebug_line0:
+ 483 0000 D1000000 		.section	.debug_str,"MS",%progbits,1
+ 483      0200A200 
+ 483      00000201 
+ 483      FB0E0D00 
+ 483      01010101 
+ 484              	.LASF15:
+ 485 0000 76616C75 		.ascii	"value\000"
+ 485      6500
+ 486              	.LASF20:
+ 487 0006 43794765 		.ascii	"CyGetReg24\000"
+ 487      74526567 
+ 487      323400
+ 488              	.LASF19:
+ 489 0011 43795365 		.ascii	"CySetReg24\000"
+ 489      74526567 
+ 489      323400
+ 490              	.LASF14:
+ 491 001c 61646472 		.ascii	"addr\000"
+ 491      00
+ 492              	.LASF11:
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccOEVZfp.s 			page 11
+
+
+ 493 0021 666C6F61 		.ascii	"float\000"
+ 493      7400
+ 494              	.LASF1:
+ 495 0027 756E7369 		.ascii	"unsigned char\000"
+ 495      676E6564 
+ 495      20636861 
+ 495      7200
+ 496              	.LASF16:
+ 497 0035 746D7041 		.ascii	"tmpAddr\000"
+ 497      64647200 
+ 498              	.LASF5:
+ 499 003d 6C6F6E67 		.ascii	"long unsigned int\000"
+ 499      20756E73 
+ 499      69676E65 
+ 499      6420696E 
+ 499      7400
+ 500              	.LASF3:
+ 501 004f 73686F72 		.ascii	"short unsigned int\000"
+ 501      7420756E 
+ 501      7369676E 
+ 501      65642069 
+ 501      6E7400
+ 502              	.LASF17:
+ 503 0062 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 503      43313120 
+ 503      352E342E 
+ 503      31203230 
+ 503      31363036 
+ 504 0095 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 504      20726576 
+ 504      6973696F 
+ 504      6E203233 
+ 504      37373135 
+ 505 00c8 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 505      66756E63 
+ 505      74696F6E 
+ 505      2D736563 
+ 505      74696F6E 
+ 506              	.LASF12:
+ 507 00f0 646F7562 		.ascii	"double\000"
+ 507      6C6500
+ 508              	.LASF18:
+ 509 00f7 433A5C50 		.ascii	"C:\\Program Files (x86)\\Cypress\\PSoC Creator\\4.4"
+ 509      726F6772 
+ 509      616D2046 
+ 509      696C6573 
+ 509      20287838 
+ 510 0126 5C50536F 		.ascii	"\\PSoC Creator\\1\\CapSense_CSD_P4_Design01.cydsn\\"
+ 510      43204372 
+ 510      6561746F 
+ 510      725C315C 
+ 510      43617053 
+ 511 0155 47656E65 		.ascii	"Generated_Source\\PSoC4\\cyutils.c\000"
+ 511      72617465 
+ 511      645F536F 
+ 511      75726365 
+ 511      5C50536F 
+ARM GAS  C:\Users\taips\AppData\Local\Temp\ccOEVZfp.s 			page 12
+
+
+ 512              	.LASF10:
+ 513 0176 75696E74 		.ascii	"uint32\000"
+ 513      333200
+ 514              	.LASF8:
+ 515 017d 756E7369 		.ascii	"unsigned int\000"
+ 515      676E6564 
+ 515      20696E74 
+ 515      00
+ 516              	.LASF7:
+ 517 018a 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 517      206C6F6E 
+ 517      6720756E 
+ 517      7369676E 
+ 517      65642069 
+ 518              	.LASF6:
+ 519 01a1 6C6F6E67 		.ascii	"long long int\000"
+ 519      206C6F6E 
+ 519      6720696E 
+ 519      7400
+ 520              	.LASF13:
+ 521 01af 63686172 		.ascii	"char\000"
+ 521      00
+ 522              	.LASF2:
+ 523 01b4 73686F72 		.ascii	"short int\000"
+ 523      7420696E 
+ 523      7400
+ 524              	.LASF9:
+ 525 01be 75696E74 		.ascii	"uint8\000"
+ 525      3800
+ 526              	.LASF4:
+ 527 01c4 6C6F6E67 		.ascii	"long int\000"
+ 527      20696E74 
+ 527      00
+ 528              	.LASF0:
+ 529 01cd 7369676E 		.ascii	"signed char\000"
+ 529      65642063 
+ 529      68617200 
+ 530              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
