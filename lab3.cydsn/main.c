@@ -1,5 +1,4 @@
-#include "project.h" 
-#include <string.h>
+#include "project.h"
  
 static void (*COLUMN_x_SetDriveMode[3])(uint8_t mode) = { 
     COLUMN_0_SetDriveMode, 
@@ -43,9 +42,14 @@ static void initMatrix()
     for(int c = 0; c < 3; c++) 
         COLUMN_x_SetDriveMode[c](COLUMN_0_DM_DIG_HIZ); 
 
-    memset(key_state,        1, sizeof(key_state));
-    memset(debounce_counter, 0, sizeof(debounce_counter));
-    memset(password_buffer,  0, sizeof(password_buffer));
+    for(int r = 0; r < 4; r++)
+        for(int c = 0; c < 3; c++)
+        {
+            key_state[r][c]        = 1;
+            debounce_counter[r][c] = 0;
+        }
+    for(int i = 0; i < PASSWORD_LENGTH; i++)
+        password_buffer[i] = 0;
 } 
  
 static uint8_t readMatrixDebounced() 
@@ -117,7 +121,8 @@ static void checkPassword()
     }
     
     password_index = 0;
-    memset(password_buffer, 0, PASSWORD_LENGTH);
+    for(int i = 0; i < PASSWORD_LENGTH; i++)
+        password_buffer[i] = 0;
 }
 
 static void setLEDColor(uint8_t v)
