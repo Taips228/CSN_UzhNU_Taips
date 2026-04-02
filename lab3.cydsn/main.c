@@ -1,7 +1,6 @@
 #include "project.h" 
 #include <string.h>
  
-/* arrays of pointers */ 
 static void (*COLUMN_x_SetDriveMode[3])(uint8_t mode) = { 
     COLUMN_0_SetDriveMode, 
     COLUMN_1_SetDriveMode, 
@@ -18,17 +17,21 @@ static uint8 (*ROW_x_Read[4])() = {
     ROW_2_Read, 
     ROW_3_Read 
 }; 
- 
-/* [ROW][COLUMN] — значення кнопок (НЕ змінюється) */
+
+/* Значення кнопок — константа, не перезаписується */
 static const uint8_t key_values[4][3] = { 
-    {1,  2,  3}, 
-    {4,  5,  6}, 
-    {7,  8,  9}, 
-    {10, 0, 11}, 
+    {1,  2,  3 }, 
+    {4,  5,  6 }, 
+    {7,  8,  9 }, 
+    {10, 0,  11}, 
 };
 
-/* [ROW][COLUMN] — сирий стан пінів (0=натиснута, 1=відпущена) */
+/* Стан пінів після зчитування */
 static uint8_t key_state[4][3];
+
+/* Лічильник дебаунсу для кожної кнопки */
+#define DEBOUNCE_THRESHOLD 3
+static uint8_t debounce_counter[4][3];
 
 /* Password settings */
 #define PASSWORD_LENGTH 3
@@ -37,37 +40,73 @@ static uint8_t password_buffer[PASSWORD_LENGTH];
 static uint8_t password_index  = 0;
 static uint8_t password_locked = 1;
  
-/* matrix initialization */
 static void initMatrix() 
 { 
-    for(int i = 0; i < 3; i++) 
-        COLUMN_x_SetDriveMode[i](COLUMN_0_DM_DIG_HIZ); 
+    for(int c = 0; c < 3; c++) 
+        COLUMN_x_SetDriveMode[c](COLUMN_0_DM_DIG_HIZ); 
 
-    memset(key_state, 1, sizeof(key_state));
+    memset(key_state,        1, sizeof(key_state));
+    memset(debounce_counter, 0, sizeof(debounce_counter));
 } 
  
-/* read matrix — пише в key_state, key_values не чіпає */
-static void readMatrix() 
+/* Зчитування + дебаунс:
+   Повертає значення кнопки (0-11) якщо стабільно натиснута,
+   або 255 якщо жодна не натиснута / ще не стабілізована */
+static uint8_t readMatrixDebounced() 
 { 
-    uint8_t rows = sizeof(ROW_x_Read)    / sizeof(ROW_x_Read[0]); 
-    uint8_t cols = sizeof(COLUMN_x_Write) / sizeof(COLUMN_x_Write[0]);     
+    uint8_t found_value = 255;
 
-    for(int c = 0; c < cols; c++) 
+    for(int col = 0; col < 3; col++) 
     { 
-        COLUMN_x_SetDriveMode[c](COLUMN_0_DM_STRONG); 
-        COLUMN_x_Write[c](0);
-        for(int r = 0; r < rows; r++) 
-            key_state[r][c] = ROW_x_Read[r](); 
-        COLUMN_x_SetDriveMode[c](COLUMN_0_DM_DIG_HIZ); 
-    } 
+        COLUMN_x_SetDriveMode[col](COLUMN_0_DM_STRONG); 
+        COLUMN_x_Write[col](0);
+        CyDelay(1); /* пауза для стабілізації сигналу */
+
+        for(int row = 0; row < 4; row++) 
+        { 
+            key_state[row][col] = ROW_x_Read[row]();
+
+            if(key_state[row][col] == 0) /* потенційно натиснута */
+            {
+                debounce_counter[row][col]++;
+                if(debounce_counter[row][col] >= DEBOUNCE_THRESHOLD)
+                {
+                    debounce_counter[row][col] = DEBOUNCE_THRESHOLD;
+                    found_value = key_values[row][col];
+                }
+            }
+            else /* відпущена — скидаємо лічильник */
+            {
+                debounce_counter[row][col] = 0;
+            }
+        } 
+
+        COLUMN_x_SetDriveMode[col](COLUMN_0_DM_DIG_HIZ); 
+    }
+
+    /* Якщо знайдено більше однієї кнопки — ghost press, ігноруємо */
+    uint8_t count = 0;
+    for(int row = 0; row < 4; row++)
+        for(int col = 0; col < 3; col++)
+            if(debounce_counter[row][col] >= DEBOUNCE_THRESHOLD)
+                count++;
+
+    if(count != 1) return 255;
+
+    return found_value;
 }
 
-/* check entered password */
 static void checkPassword()
 {
     uint8_t correct = 1;
     for(int i = 0; i < PASSWORD_LENGTH; i++)
-        if(password_buffer[i] != PASSWORD[i]) { correct = 0; break; }
+    {
+        if(password_buffer[i] != PASSWORD[i])
+        {
+            correct = 0;
+            break;
+        }
+    }
     
     if(correct)
     {
@@ -88,29 +127,20 @@ static void checkPassword()
     memset(password_buffer, 0, PASSWORD_LENGTH);
 }
 
-/* set LED color */
 static void setLEDColor(uint8_t v)
 {
     switch(v)
     {
-        case 1: case 7:                          // Red
-            LED_R_Write(0); LED_G_Write(1); LED_B_Write(1); break;
-        case 2: case 8:                          // Green
-            LED_R_Write(1); LED_G_Write(0); LED_B_Write(1); break;
-        case 3: case 9:                          // Blue
-            LED_R_Write(1); LED_G_Write(1); LED_B_Write(0); break;
-        case 4: case 10:                         // Yellow
-            LED_R_Write(0); LED_G_Write(0); LED_B_Write(1); break;
-        case 5: case 0:                          // Purple
-            LED_R_Write(0); LED_G_Write(1); LED_B_Write(0); break;
-        case 6: case 11:                         // Cyan
-            LED_R_Write(1); LED_G_Write(0); LED_B_Write(0); break;
-        default:
-            LED_R_Write(1); LED_G_Write(1); LED_B_Write(1); break;
+        case 1: case 7:  LED_R_Write(0); LED_G_Write(1); LED_B_Write(1); break;
+        case 2: case 8:  LED_R_Write(1); LED_G_Write(0); LED_B_Write(1); break;
+        case 3: case 9:  LED_R_Write(1); LED_G_Write(1); LED_B_Write(0); break;
+        case 4: case 10: LED_R_Write(0); LED_G_Write(0); LED_B_Write(1); break;
+        case 5: case 0:  LED_R_Write(0); LED_G_Write(1); LED_B_Write(0); break;
+        case 6: case 11: LED_R_Write(1); LED_G_Write(0); LED_B_Write(0); break;
+        default:         LED_R_Write(1); LED_G_Write(1); LED_B_Write(1); break;
     }
 }
 
-/* print button name to UART */
 static void printButtonName(uint8_t v)
 {
     switch(v)
@@ -140,66 +170,58 @@ int main(void)
     SW_Tx_UART_PutCRLF(); 
     SW_Tx_UART_PutString("Software Transmit UART"); 
     SW_Tx_UART_PutCRLF();
-    SW_Tx_UART_PutString("Enter password to unlock");
+    SW_Tx_UART_PutString("Enter password to unlock:");
     SW_Tx_UART_PutCRLF();
  
     initMatrix();
     
-    uint8_t last_state     = 255;
-    uint8_t button_pressed = 0;
-    
-    /* Початково — білий (заблоковано) */
+    uint8_t last_state = 255;
+
+    /* Заблоковано — білий */
     LED_R_Write(0); LED_G_Write(0); LED_B_Write(0);
     
     for(;;) 
     {      
-        readMatrix();
-        button_pressed = 0;
-        
-        for(int row = 0; row < 4; row++)
+        uint8_t current = readMatrixDebounced();
+
+        if(current != 255) /* є стабільно натиснута кнопка */
         {
-            for(int col = 0; col < 3; col++)
+            if(last_state != current) /* нова кнопка */
             {
-                if(key_state[row][col] == 0) /* натиснута */
+                last_state = current;
+                printButtonName(current);
+                
+                if(password_locked)
                 {
-                    uint8_t button_value = key_values[row][col]; /* беремо з незмінного масиву */
+                    password_buffer[password_index] = current;
+                    password_index++;
                     
-                    if(last_state != button_value)
-                    {
-                        last_state = button_value;
-                        printButtonName(button_value);
-                        
-                        if(password_locked)
-                        {
-                            password_buffer[password_index++] = button_value;
-                            if(password_index >= PASSWORD_LENGTH)
-                                checkPassword();
-                        }
-                        else
-                        {
-                            setLEDColor(button_value);
-                        }
-                    }
-                    button_pressed = 1;
-                    break;
+                    if(password_index >= PASSWORD_LENGTH)
+                        checkPassword();
+                }
+                else
+                {
+                    setLEDColor(current);
                 }
             }
-            if(button_pressed) break;
         }
-        
-        if(!button_pressed && last_state != 255)
+        else /* жодна кнопка не натиснута */
         {
-            last_state = 255;
-            if(password_locked)
+            if(last_state != 255)
             {
-                LED_R_Write(0); LED_G_Write(0); LED_B_Write(0); /* білий */
-            }
-            else
-            {
-                LED_R_Write(1); LED_G_Write(1); LED_B_Write(1); /* вимкнено */
+                last_state = 255;
+
+                if(password_locked)
+                {
+                    LED_R_Write(0); LED_G_Write(0); LED_B_Write(0); /* білий */
+                }
+                else
+                {
+                    LED_R_Write(1); LED_G_Write(1); LED_B_Write(1); /* вимкнено */
+                }
             }
         }
         
-        CyDelay(50); 
+        CyDelay(20); 
     }
 }
